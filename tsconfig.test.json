@@ -1,0 +1,33 @@
+{
+  "compilerOptions": {
+    "moduleResolution": "Node",
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "skipDefaultLibCheck": true,
+    "types": [
+      "vitest/globals"
+    ],
+    "baseUrl": "./",
+    "paths": {
+      "@starter/shared": [
+        "packages/shared/index.ts"
+      ],
+      "@starter/helper": [
+        "packages/helper/index.ts"
+      ]
+    },
+    "composite": true
+  },
+  "include": [
+    "tests",
+    "app/electron/tests",
+    "app/web/tests",
+    "packages"
+  ],
+  "exclude": [
+    "release/app",
+    "node_modules"
+  ]
+}

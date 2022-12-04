@@ -1,0 +1,27 @@
+{
+  "compilerOptions": {
+    "module": "ESNext",
+    "target": "ESNext",
+    "esModuleInterop": true,
+    "moduleResolution": "Node",
+    "resolveJsonModule": true,
+    "allowJs": false,
+    "types": [
+      "node"
+    ],
+    "composite": true
+  },
+  "include": [
+    "app/electron/eevi.config.ts",
+    "vite.config.ts",
+    "./app/web/vite.config.ts",
+    "**/*.json",
+    "alias.ts",
+    "packages",
+    "scripts"
+  ],
+  "exclude": [
+    "release/app",
+    "node_modules"
+  ]
+}

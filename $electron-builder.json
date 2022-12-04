@@ -1,0 +1,132 @@
+{
+  "$schema": "http://json.schemastore.org/electron-builder",
+  "productName": "boilerplate",
+  "appId": "com.electron.starknt",
+  "asar": true,
+  "asarUnpack": "**\\*.{dll, node}",
+  "files": [
+    "dist",
+    "node_modules",
+    "!node_modules/.modules.yaml",
+    "!node_modules/**/.pnpm",
+    "!node_modules/**/.bin",
+    "!node_modules/**/*.d.ts",
+    "!node_modules/**/*.js.map",
+    "!node_modules/**/*.cjs.map",
+    "!node_modules/**/*.mjs.map",
+    "!node_modules/**/*.ts.map",
+    "!node_modules/**/{*.vcxproj,*.vcxproj.filters}",
+    "!node_modules/**/build/Release/{*.lib,*.exp,*.ilk,*.pdb,*.iobj,*.ipdb}",
+    "!node_modules/**/build/Release/obj",
+    "package.json"
+  ],
+  "copyright": "Copyright © 2022 ${author}",
+  "dmg": {
+    "contents": [
+      {
+        "x": 150,
+        "y": 200,
+        "type": "file"
+      },
+      {
+        "x": 450,
+        "y": 200,
+        "type": "link",
+        "path": "/Applications"
+      }
+    ]
+  },
+  "nsis": {
+    "oneClick": false,
+    "createStartMenuShortcut": true,
+    "perMachine": false,
+    "allowToChangeInstallationDirectory": true,
+    "artifactName": "${productName}_win_setup_${arch}_${version}.${ext}",
+    "include": "buildResources/windows/installer.nsh"
+  },
+  "win": {
+    "icon": "buildResources/icons/win/icon.ico",
+    "artifactName": "${productName}-win-${arch}-${version}.${ext}",
+    "target": [
+      {
+        "target": "nsis",
+        "arch": [
+          "x64",
+          "ia32"
+        ]
+      },
+      {
+        "target": "zip",
+        "arch": [
+          "x64",
+          "ia32"
+        ]
+      }
+    ]
+  },
+  "mac": {
+    "icon": "buildResources/icons/mac/icon.icns",
+    "artifactName": "${productName}-mac-${arch}-${version}.${ext}",
+    "target": [
+      {
+        "target": "dmg",
+        "arch": [
+          "x64",
+          "arm64"
+        ]
+      }
+    ],
+    "type": "distribution",
+    "category": "public.app-category.productivity",
+    "gatekeeperAssess": false,
+    "electronLanguages": [
+      "en",
+      "fr",
+      "zh_CN",
+      "de",
+      "ja"
+    ],
+    "hardenedRuntime": true,
+    "entitlements": "./buildResources/entitlements.mac.plist",
+    "entitlementsInherit": "./buildResources/entitlements.mac.plist",
+    "extendInfo": {
+      "ITSAppUsesNonExemptEncryption": false,
+      "CFBundleLocalizations": [],
+      "CFBundleDevelopmentRegion": "en"
+    }
+  },
+  "linux": {
+    "icon": "buildResources/icons/png/256x256.png",
+    "artifactName": "${productName}-linux-${arch}-${version}.${ext}",
+    "category": "Utility",
+    "synopsis": "An electron template based on Vite and Esbuild.",
+    "desktop": {
+      "Name": "Boilerplate",
+      "Type": "Application",
+      "GenericName": "An electron template based on Vite and Esbuild."
+    },
+    "target": [
+      "deb",
+      "AppImage",
+      "rpm",
+      "tar.gz"
+    ]
+  },
+  "directories": {
+    "app": "release/app",
+    "buildResources": "buildResources",
+    "output": "release/build"
+  },
+  "extraResources": [
+    {
+      "from": "assets",
+      "to": "assets"
+    }
+  ],
+  "publish": [
+    {
+      "provider": "github",
+      "releaseType": "release"
+    }
+  ]
+}

@@ -1,0 +1,86 @@
+[
+  {
+    "name": "readme",
+    "ext": [
+      "md",
+      "markdown",
+      "html",
+      "txt"
+    ]
+  },
+  {
+    "name": "license",
+    "ext": [
+      "html",
+      "md",
+      "txt"
+    ]
+  },
+  {
+    "name": "changelog",
+    "ext": [
+      "md",
+      "html"
+    ]
+  },
+  {
+    "name": "history",
+    "ext": [
+      "md",
+      "html"
+    ]
+  },
+  {
+    "name": "security",
+    "ext": [
+      "md",
+      "html",
+      "txt"
+    ]
+  },
+  {
+    "name": ".github",
+    "type": "dir"
+  },
+  {
+    "name": "CONTRIBUTING",
+    "ext": [
+      "md",
+      "html"
+    ]
+  },
+  {
+    "name": "GOVERNANCE",
+    "ext": [
+      "md",
+      "html"
+    ]
+  },
+  {
+    "name": ".travis",
+    "ext": [
+      "yml",
+      "yaml"
+    ]
+  },
+  {
+    "name": "authors?",
+    "ext": [
+      "md",
+      "txt",
+      "html"
+    ]
+  },
+  {
+    "name": "test",
+    "type": "dir"
+  },
+  {
+    "name": "examples?",
+    "type": "dir"
+  },
+  {
+    "name": ".circleci",
+    "type": "dir"
+  }
+]

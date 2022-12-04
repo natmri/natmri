@@ -1,0 +1,40 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "ES2022",
+    "moduleResolution": "Node",
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "jsx": "preserve",
+    "baseUrl": ".",
+    "paths": {
+      "@starter/shared": [
+        "packages/shared/index.ts"
+      ],
+      "@starter/helper": [
+        "packages/helper/index.ts"
+      ]
+    }
+  },
+  "references": [
+    {
+      "path": "./tsconfig.test.json"
+    },
+    {
+      "path": "./tsconfig.node.json"
+    }
+  ],
+  "include": [
+    "app/web",
+    "packages"
+  ],
+  "exclude": [
+    "node_modules",
+    "tests",
+    "app/web/tests",
+    "app/electron/tests",
+    "release/app"
+  ]
+}

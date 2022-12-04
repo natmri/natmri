@@ -1,0 +1,158 @@
+{
+  "name": "@livemoe/monorepo",
+  "type": "module",
+  "version": "0.0.0",
+  "private": true,
+  "packageManager": "pnpm@7.14.2",
+  "description": "",
+  "author": "starknt",
+  "license": "MIT",
+  "keywords": [
+    "electron",
+    "electron-builder",
+    "template",
+    "vite",
+    "vite-electron",
+    "vitest",
+    "hot",
+    "fast"
+  ],
+  "engines": {
+    "node": ">=14.18.0 || >=16.0.0",
+    "npm": ">=7.0.0"
+  },
+  "scripts": {
+    "dev": "vite -c ./app/web/vite.config.ts",
+    "build": "pnpm clean && vite -c ./app/web/vite.config.ts build",
+    "package": "pnpm build && esno ./scripts/make-installer.ts",
+    "release": "bumpp package.json release/app/package.json --commit --push --tag",
+    "sync:alias": "esno ./scripts/sync-alias.ts ./tsconfig.json ./tsconfig.test.json ./app/electron/tsconfig.json ./app/web/tsconfig.json",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "test": "pnpm build && vitest run --passWithNoTests",
+    "test:unit": "vitest run unit --passWithNoTests",
+    "test:e2e": "pnpm build && vitest run e2e --passWithNoTests",
+    "test:watch": "vitest -u",
+    "postinstall": "electron-builder install-app-deps && esno ./scripts/link-modules.ts && esno ./scripts/electron-rebuild.ts",
+    "typecheck:electron": "npx tsc --noEmit -p app/electron/tsconfig.json",
+    "typecheck:web": "vue-tsc --noEmit -p app/web/tsconfig.json",
+    "typecheck": "concurrently \"pnpm typecheck:electron\" \"pnpm typecheck:web\"",
+    "clean": "esno scripts/clean-cli.ts",
+    "prepare": "husky install",
+    "commit": "git cz",
+    "preinstall": "npx only-allow pnpm"
+  },
+  "dependencies": {
+    "@livemoe/core": "^0.1.0",
+    "@livemoe/ipc": "^0.1.0",
+    "@livemoe/utils": "^0.1.0",
+    "chokidar": "^3.5.3",
+    "i18next": "^22.0.6",
+    "minimist": "^1.2.7",
+    "vue": "^3.2.45",
+    "yauzl": "^2.10.0",
+    "yazl": "^2.5.1"
+  },
+  "devDependencies": {
+    "@antfu/eslint-config": "^0.33.1",
+    "@types/better-sqlite3": "^7.6.2",
+    "@types/fs-extra": "^9.0.13",
+    "@types/minimist": "^1.2.2",
+    "@types/node": "^18.11.10",
+    "@types/node-abi": "^3.0.0",
+    "@types/rimraf": "^3.0.2",
+    "@types/yauzl": "^2.10.0",
+    "@types/yazl": "^2.4.2",
+    "@vitejs/plugin-vue": "^3.2.0",
+    "bumpp": "^8.2.1",
+    "commitizen": "^4.2.5",
+    "commitlint-config-cz": "^0.13.3",
+    "concurrently": "^7.6.0",
+    "consola": "^2.15.3",
+    "cz-conventional-changelog": "^3.3.0",
+    "eevi": "^0.5.7",
+    "electron": "^19.0.17",
+    "electron-builder": "^23.6.0",
+    "electron-rebuild": "^3.2.9",
+    "eslint": "^8.28.0",
+    "esno": "^0.16.3",
+    "fs-extra": "^11.1.0",
+    "happy-dom": "^7.7.0",
+    "husky": "^8.0.2",
+    "json-format": "^1.0.1",
+    "lint-staged": "^13.0.4",
+    "node-abi": "^3.30.0",
+    "playwright": "^1.28.1",
+    "pnpm": "7.17.1",
+    "rimraf": "^3.0.2",
+    "typescript": "^4.8.4",
+    "unocss": "^0.47.4",
+    "unplugin-auto-import": "^0.12.0",
+    "unplugin-vue-components": "^0.22.11",
+    "vite": "^3.2.4",
+    "vitest": "^0.25.3",
+    "vue-tsc": "^1.0.10"
+  },
+  "pnpm": {
+    "overrides": {
+      "asar": "npm:@electron/asar@latest"
+    }
+  },
+  "lint-staged": {
+    "*.{ts, tsx, js, jsx}": [
+      "eslint --fix"
+    ],
+    "*.json": [
+      "eslint --fix"
+    ],
+    "*.yml": [
+      "eslint --fix"
+    ]
+  },
+  "config": {
+    "commitizen": {
+      "path": "node_modules/cz-conventional-changelog",
+      "types": {
+        "feat": {
+          "description": "✨  A new feature"
+        },
+        "fix": {
+          "description": "🐛  A bug fix"
+        },
+        "docs": {
+          "description": "📝  Documentation only changes"
+        },
+        "style": {
+          "description": "🌈  Changes that do not affect the meaning of the code (white-space, formatting, missing semi-colons, etc)"
+        },
+        "refactor": {
+          "description": "📦  A code change that neither fixes a bug nor adds a feature"
+        },
+        "perf": {
+          "description": "🚀  A code change that improves performance"
+        },
+        "test": {
+          "description": "✅  Adding missing tests or correcting existing tests"
+        },
+        "build": {
+          "description": "👷  Changes that affect the build system or external dependencies (example scopes: gulp, broccoli, npm)"
+        },
+        "ci": {
+          "description": "💻  Changes to our CI configuration files and scripts (example scopes: Travis, Circle, BrowserStack, SauceLabs)"
+        },
+        "chore": {
+          "description": "🎫  Other changes that don't modify src or test files"
+        },
+        "revert": {
+          "description": "⏪  Reverts a previous commit"
+        }
+      }
+    }
+  },
+  "build": {
+    "directories": {
+      "app": "release/app",
+      "output": "release/build"
+    }
+  }
+}

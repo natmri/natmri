@@ -1,0 +1,15 @@
+{
+  "name": "starter-electron",
+  "version": "0.0.0",
+  "description": "starter-electron boilerplate",
+  "author": {
+    "name": "starknt",
+    "email": "1431880400@qq.com"
+  },
+  "license": "GPL-2.0",
+  "main": "./dist/main.js",
+  "dependencies": {
+    "@livemoe/tools": "^0.2.4",
+    "better-sqlite3": "^7.6.2"
+  }
+}

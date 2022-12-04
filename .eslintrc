@@ -1,0 +1,7 @@
+{
+  "extends": "@antfu",
+  "rules": {
+    "no-template-curly-in-string": "off",
+    "@typescript-eslint/no-redeclare": "off"
+  }
+}
