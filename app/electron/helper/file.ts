@@ -1,4 +1,4 @@
-import { extname, join, relative } from 'path'
+import { basename, extname, join, relative } from 'path'
 import { createCancelablePromise } from '@livemoe/utils'
 import type { IExtractOptions, IFile } from '@starter/helper'
 import { extract, pack } from '@starter/helper'
@@ -115,7 +115,7 @@ export async function zip(filepath: string, zippath: string) {
   if (isFile(filepath)) {
     const file: IFile = {
       localPath: filepath,
-      path: './',
+      path: basename(filepath),
     }
     files.push(file)
   }
