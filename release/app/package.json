@@ -1,10 +1,10 @@
 {
-  "name": "starter-electron",
+  "name": "natmri",
   "version": "0.0.0",
-  "description": "starter-electron boilerplate",
+  "description": "",
   "author": {
     "name": "starknt",
-    "email": "1431880400@qq.com"
+    "email": "starknt.git@qq.com"
   },
   "license": "GPL-2.0",
   "main": "./dist/main.js",

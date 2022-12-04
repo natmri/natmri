@@ -5,7 +5,7 @@ Rewrite this [project](https://github.com/starknt/LiveMoe)
 <br>
 <br>
 <p align="center">
- LiveMoe
+ natmri
 </p>
 
 <p align="center">
@@ -22,12 +22,6 @@ Rewrite this [project](https://github.com/starknt/LiveMoe)
 - 可视化的设置界面
 - 快速创建壁纸(PS: 该功能在完善中)
 
-## 快速开始
-
-### 安装
-
-- Windows 目前该软件仅适配了 Windows 平台, 并且大部分功能为 Windows 独有, 从 [GitHub](https://github.com/SEVEN-1-bit/LiveMoe/releases) 下载 LiveMoe 的安装包。
-
 ## ⌨️ 本地开发
 
 ### 克隆代码
@@ -41,14 +35,6 @@ git clone git@github.com:SEVEN-1-bit/LiveMoe.git
 ```bash
 cd LiveMoe
 yarn
-```
-
-天朝大陆用户建议使用淘宝的 npm 源
-
-```bash
-yarn config set registry 'https://registry.npm.taobao.org'
-npm config set registry 'https://registry.npm.taobao.org'
-export ELECTRON_MIRROR='https://npm.taobao.org/mirrors/electron/'
 ```
 
 > Error: Electron failed to install correctly, please delete node_modules/electron and try installing again

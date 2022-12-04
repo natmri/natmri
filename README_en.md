@@ -1,10 +1,7 @@
 <br>
 <br>
 <p align="center">
- LiveMoe
-</p>
-<p align="center">
- <img height="200" src="./assets/public/icon.png" alt="LiveMoe">
+ natmri
 </p>
 
 <p align="center">

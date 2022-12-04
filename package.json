@@ -1,5 +1,5 @@
 {
-  "name": "@livemoe/monorepo",
+  "name": "@natmri/monorepo",
   "type": "module",
   "version": "0.0.0",
   "private": true,
@@ -13,9 +13,7 @@
     "template",
     "vite",
     "vite-electron",
-    "vitest",
-    "hot",
-    "fast"
+    "vitest"
   ],
   "engines": {
     "node": ">=14.18.0 || >=16.0.0",
