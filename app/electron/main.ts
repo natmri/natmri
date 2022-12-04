@@ -1,14 +1,14 @@
 import { join } from 'path'
 import fs from 'fs'
 import { BrowserWindow, app, ipcMain, protocol, session } from 'electron'
-import { dev } from 'eevi-is'
+// import { dev } from 'eevi-is'
 import { Emitter, Event } from '@livemoe/utils'
-import minimist from 'minimist'
+// import minimist from 'minimist'
 import { rootPath } from 'helper/paths'
 import { resolvePages, resolvePreload } from '~/helper/utils'
 
-const skipArgv = dev() ? 4 : 2
-const argv = minimist(process.argv.slice(skipArgv), { boolean: '--' })
+// const skipArgv = dev() ? 4 : 2
+// const argv = minimist(process.argv.slice(skipArgv), { boolean: '--' })
 
 const getSingleInstanceLock = new Emitter<void>()
 const gotSingleInstanceLock = Event.toPromise(getSingleInstanceLock.event)
