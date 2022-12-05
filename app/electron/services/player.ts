@@ -13,3 +13,31 @@ export interface ILive2DPlayerService extends IPlayerController {
 }
 
 export const ILive2DPlayerService = createDecorator<ILive2DPlayerService>('ILive2DPlayerService')
+
+export class WallpaperPlayerService implements IWallpaperPlayerService {
+  getRepositories(): IRepository[] {
+    throw new Error('Method not implemented.')
+  }
+
+  play(): void {
+    throw new Error('Method not implemented.')
+  }
+
+  pause(): void {
+    throw new Error('Method not implemented.')
+  }
+}
+
+export class Live2DPlayerService implements ILive2DPlayerService {
+  getRepositories(): IRepository[] {
+    throw new Error('Method not implemented.')
+  }
+
+  play(): void {
+    throw new Error('Method not implemented.')
+  }
+
+  pause(): void {
+    throw new Error('Method not implemented.')
+  }
+}
