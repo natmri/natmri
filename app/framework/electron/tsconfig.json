@@ -9,13 +9,8 @@
     "esModuleInterop": true,
     "jsx": "preserve",
     "baseUrl": ".",
-    "paths": {
-      "@starter/shared": [
-        "../../packages/shared/index.ts"
-      ],
-      "@starter/helper": [
-        "../../packages/helper/index.ts"
-      ]
-    }
+    "types": [
+      "eevi/eevi-is"
+    ]
   }
 }
