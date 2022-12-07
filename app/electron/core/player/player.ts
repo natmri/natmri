@@ -3,7 +3,7 @@
  */
 
 import type { BrowserWindow } from 'electron'
-import type { IRepository } from '@starter/shared'
+import type { IRepository } from '@app/compat-common'
 
 /**
  * load resource form repository
@@ -28,10 +28,3 @@ export interface IPlayer<T> {
   ui: BrowserWindow
 }
 
-export interface IWallpaperPlayer extends IPlayer<{}> {
-
-}
-
-export interface ILive2DPlayer extends IPlayer<{}> {
-
-}

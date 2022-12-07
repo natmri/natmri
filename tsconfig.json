@@ -10,11 +10,17 @@
     "jsx": "preserve",
     "baseUrl": ".",
     "paths": {
-      "@starter/shared": [
-        "packages/shared/index.ts"
+      "@app/compat-common": [
+        "app/compat/common/index.ts"
       ],
-      "@starter/helper": [
-        "packages/helper/index.ts"
+      "@app/compat-browser": [
+        "app/compat/browser/index.ts"
+      ],
+      "@app/compat-node": [
+        "app/compat/node/index.ts"
+      ],
+      "@app/compat-i18n": [
+        "app/compat/i18n/index.ts"
       ]
     }
   },
@@ -31,7 +37,10 @@
     "app/web",
     "app/electron/tests",
     "app/web/tests",
-    "packages"
+    "packages",
+    "app/compat/scheme.ts",
+    "app/compat/node/index.ts",
+    "app/compat/common/types.ts"
   ],
   "exclude": [
     "node_modules",

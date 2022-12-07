@@ -19,7 +19,7 @@ if (process.env.NODE_ENV === 'development')
 export default defineConfig({
   entry: 'main.ts',
   outDir: join(appPath, 'dist'),
-  preloadEntriesDir: '../compat/preloads',
+  preloadEntriesDir: '../compat/preload',
   preloadEntries: [
     '*.ts', // eevi v0.3.3
   ],

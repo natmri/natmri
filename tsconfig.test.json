@@ -11,11 +11,17 @@
     ],
     "baseUrl": "./",
     "paths": {
-      "@starter/shared": [
-        "packages/shared/index.ts"
+      "@app/compat-common": [
+        "app/compat/common/index.ts"
       ],
-      "@starter/helper": [
-        "packages/helper/index.ts"
+      "@app/compat-browser": [
+        "app/compat/browser/index.ts"
+      ],
+      "@app/compat-node": [
+        "app/compat/node/index.ts"
+      ],
+      "@app/compat-i18n": [
+        "app/compat/i18n/index.ts"
       ]
     },
     "composite": true
@@ -23,8 +29,7 @@
   "include": [
     "tests",
     "app/electron/tests",
-    "app/web/tests",
-    "packages"
+    "app/web/tests"
   ],
   "exclude": [
     "release/app",
