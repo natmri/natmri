@@ -1,33 +1,52 @@
 import type { ParsedArgs } from 'minimist'
-import { app } from 'electron'
+import { app, dialog, protocol } from 'electron'
 import minimist from 'minimist'
 import { dev } from 'eevi-is'
 import { Emitter, Event } from '@livemoe/utils'
+import { toErrorMessage } from 'utils'
+
+export type FrameworkMode = 'relaunch' | 'self' | 'normal'
 
 export interface IFrameApplicationLifecycle {
+  onAppStaring?: (mode: FrameworkMode) => void
+
   onBeforeReady?: (args: ParsedArgs) => void
   onReady?: (args: ParsedArgs) => void
   onAfterReady?: (args: ParsedArgs) => void
 
   onRequestSingleLock?: (singleInstanceLock: boolean) => boolean
+  onAppSelfStaringUp?: () => void
+  onAppSelfStaringUpChange?: (status: boolean) => void
+  onSecondAppInstance?: (e: Electron.Event, args: string[], workingDirectory: string, additionalData: unknown) => boolean
 
   onBeforeRelaunch?: (options?: Electron.RelaunchOptions) => void
   onRelaunch?: (options?: Electron.RelaunchOptions) => void
   onAfterRelaunch?: (options?: Electron.RelaunchOptions) => void
 
-  onBeforeQuit?: (code: number) => void
-  onQuit?: (code: number) => void
-  onAfterQuit?: (code?: number) => void
+  onBeforeQuit?: (e: Electron.Event) => void
+  onWillQuit?: (e: Electron.Event) => void
+  onQuit?: (e: Electron.Event) => void
+
+  onError?: (error: Error) => void
 }
 
 export interface IFrameApplication extends IFrameApplicationLifecycle {
+  enableSelfStaringUp(options?: Electron.LoginItemSettingsOptions): void
+  disableSelfStaringUp(options?: Electron.LoginItemSettingsOptions): void
+  hasSelfStaringUp(options?: Electron.LoginItemSettingsOptions): boolean
   relaunch(options?: Electron.RelaunchOptions): void
   quit(): void
   exit(code?: number): void
 }
 
+export interface IFrameApplicationProtocol {
+  name: string
+  privileges: Electron.Privileges
+}
+
 export interface IFrameApplicationConfiguration {
   single?: boolean
+  protocols?: IFrameApplicationProtocol[]
 }
 
 export abstract class FrameworkApplication implements IFrameApplication {
@@ -38,6 +57,7 @@ export abstract class FrameworkApplication implements IFrameApplication {
   constructor(options?: IFrameApplicationConfiguration) {
     this.args = minimist(process.argv.slice(this.dev ? 4 : 2))
     this.$parseConfiguration(options ?? {})
+    this.$framework_event()
     this.$framework()
   }
 
@@ -45,11 +65,19 @@ export abstract class FrameworkApplication implements IFrameApplication {
     const _options = {} as Required<IFrameApplicationConfiguration>
 
     _options.single = options.single ?? true
+    _options.protocols = options.protocols ?? []
 
     this.options = _options
   }
 
   private async $framework() {
+    if (this.args['--'].includes(`${app.getName()}Self`))
+      this?.onAppStaring('self')
+    else if (this.args['--'].includes(`${app.getName()}Relaunch`))
+      this?.onAppStaring('relaunch')
+    else
+      this?.onAppStaring('normal')
+
     const getSingleInstanceLock = new Emitter<void>()
     const gotSingleInstanceLock = Event.toPromise(getSingleInstanceLock.event)
     if (this.options.single && !app.hasSingleInstanceLock()) {
@@ -57,45 +85,124 @@ export abstract class FrameworkApplication implements IFrameApplication {
       if (singleInstanceLock)
         getSingleInstanceLock.fire()
       const c = this?.onRequestSingleLock(singleInstanceLock)
-      if (!c)
+      if (!c && this.onRequestSingleLock)
         this.quit()
     }
 
     gotSingleInstanceLock
+      .then(() => this.$framework_before_ready)
       .then(() => this?.onBeforeReady(this.args))
       .then(app.whenReady)
-      .then(() => this?.onReady(this.args))
       .then(() => this.$framework_ready)
+      .then(() => this?.onReady(this.args))
+      .then(() => this.$framework_after_ready)
       .then(() => this?.onAfterReady(this.args))
+  }
+
+  private async $framework_before_ready() {
+    this.$framework_error_hander()
+
+    const schemes: Electron.CustomScheme[] = this.options.protocols.map(v => ({
+      scheme: v.name,
+      privileges: v.privileges,
+    }))
+
+    protocol.registerSchemesAsPrivileged(schemes)
   }
 
   private async $framework_ready() {
 
   }
 
-  private async $framework_event() {
+  private async $framework_after_ready() {
+
   }
 
+  private async $framework_event() {
+    app.on('second-instance', (e, argv, workingDirectory, additionalData) => {
+      this?.onSecondAppInstance(e, argv, workingDirectory, additionalData)
+    })
+
+    app.on('will-quit', e => this?.onWillQuit(e))
+    app.on('before-quit', e => this?.onBeforeQuit(e))
+    app.on('quit', e => this?.onQuit(e))
+  }
+
+  private async $framework_error_hander() {
+    process.on('uncaughtException', (error, _) => {
+      if (this.dev)
+        dialog.showErrorBox(error.name, toErrorMessage(error))
+
+      this?.onError(error)
+    })
+
+    process.on('unhandledRejection', (reason, promise) => {
+      promise.catch((error) => {
+        if (this.dev)
+          dialog.showErrorBox(error.name, toErrorMessage(new Error(reason as string)))
+      })
+      this?.onError(new Error(reason as string))
+    })
+  }
+
+  abstract onAppStaring?: (mode: FrameworkMode) => void
   abstract onReady?: (args: ParsedArgs) => void
   abstract onBeforeReady?: (args: ParsedArgs) => void
   abstract onAfterReady?: (args: ParsedArgs) => void
   abstract onAfterQuit?: (code?: number) => void
-  abstract onBeforeQuit?: (code: number) => void
-  abstract onQuit?: (code: number) => void
+  abstract onBeforeQuit?: (e: Electron.Event) => void
+  abstract onWillQuit?: (e: Electron.Event) => void
+  abstract onQuit?: (e: Electron.Event) => void
   abstract onAfterRelaunch?: (options?: Electron.RelaunchOptions) => void
   abstract onBeforeRelaunch?: (options?: Electron.RelaunchOptions) => void
   abstract onRelaunch?: (options?: Electron.RelaunchOptions) => void
   abstract onRequestSingleLock?: (singleInstanceLock: boolean) => boolean
+  abstract onSecondAppInstance?: (e: Electron.Event, args: string[], workingDirectory: string, additionalData: unknown) => boolean
+  abstract onAppSelfStaringUp?: () => void
+  abstract onAppSelfStaringUpChange?: (status: boolean) => void
+  abstract onError?: (error: Error) => void
+
+  enableSelfStaringUp(options?: Electron.LoginItemSettingsOptions): void {
+    if (!this.hasSelfStaringUp(options)) {
+      app.setLoginItemSettings({
+        ...options,
+        openAtLogin: true,
+        args: [...options.args, `${app.getName()}Self`],
+      })
+    }
+  }
+
+  disableSelfStaringUp(options?: Electron.LoginItemSettingsOptions): void {
+    if (this.hasSelfStaringUp(options)) {
+      app.setLoginItemSettings({
+        ...options,
+        openAtLogin: false,
+        args: [...options.args, `${app.getName()}Self`],
+      })
+    }
+  }
+
+  hasSelfStaringUp(options?: Electron.LoginItemSettingsOptions): boolean {
+    return app.getLoginItemSettings({
+      ...options,
+      args: [...options.args, `${app.getName()}Self`],
+    }).openAtLogin
+  }
 
   relaunch(options?: Electron.RelaunchOptions): void {
-    app.relaunch(options)
+    this?.onBeforeRelaunch(options)
+    process.nextTick(() => app.relaunch({
+      ...(options || {}),
+      args: [...(options && options.args), `${app.getName()}Relaunch`],
+    }))
+    this?.onAfterRelaunch(options)
   }
 
   quit(): void {
-    app.quit()
+    process.nextTick(() => app.quit())
   }
 
   exit(code?: number): void {
-    app.exit(code ?? 0)
+    process.nextTick(() => app.exit(code))
   }
 }

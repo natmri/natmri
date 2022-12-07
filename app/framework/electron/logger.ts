@@ -74,7 +74,7 @@ export function log(logger: ILogger, level: LogLevel, message: string) {
 }
 
 export interface ILoggerService {
-  create(lable: string): ILogger
+  create(label: string): ILogger
 }
 
 export const ILoggerService = createDecorator<ILoggerService>('ILoggerService')
@@ -109,7 +109,7 @@ export function parseLogLevel(level: string) {
 export abstract class AbstractLogger extends Disposable {
   protected readonly _onDidChangeLogLevel = this._register(new Emitter<LogLevel>())
 
-  private lable = ''
+  private label = ''
 
   private _level: LogLevel = DEFAULT_LOGLEVEL
 
@@ -119,12 +119,12 @@ export abstract class AbstractLogger extends Disposable {
     this._level = level
   }
 
-  setLable(lable: string) {
-    this.lable = lable
+  setLabel(label: string) {
+    this.label = label
   }
 
-  getLable() {
-    return this.lable
+  getLabel() {
+    return this.label
   }
 
   getLevel(): LogLevel {
@@ -209,36 +209,36 @@ export class ConsoleMainLogger extends AbstractLogger implements ILogger {
   trace(message: string | Error, ...args: any[]): void {
     if (this.getLevel() <= LogLevel.Trace) {
       if (this.useColors)
-        console.trace(`\x1B[33m[${this.getLable()} ${now()}][Trace]\x1B[0m`, message, ...args)
+        console.trace(`\x1B[33m[${this.getLabel()} ${now()}][Trace]\x1B[0m`, message, ...args)
       else
-        console.trace(`[${this.getLable()} ${now()}]`, message, ...args)
+        console.trace(`[${this.getLabel()} ${now()}]`, message, ...args)
     }
   }
 
   debug(message: string | Error, ...args: any[]): void {
     if (this.getLevel() <= LogLevel.Debug)
-      console.debug(`\x1B[32m[${this.getLable()} ${now()}][DEBUG]\x1B[0m`, message, ...args)
+      console.debug(`\x1B[32m[${this.getLabel()} ${now()}][DEBUG]\x1B[0m`, message, ...args)
     else
       console.debug(message, ...args)
   }
 
   info(message: string | Error, ...args: any[]): void {
     if (this.getLevel() <= LogLevel.Info)
-      console.info(`\x1B[36m[${this.getLable()} ${now()}][INFO]\x1B[0m`, message, ...args)
+      console.info(`\x1B[36m[${this.getLabel()} ${now()}][INFO]\x1B[0m`, message, ...args)
     else
       console.info(message, ...args)
   }
 
   warn(message: string | Error, ...args: any[]): void {
     if (this.getLevel() <= LogLevel.Warning)
-      console.warn(`\x1B[33m[${this.getLable()} ${now()}][WARNING]x1B[0m`, message, ...args)
+      console.warn(`\x1B[33m[${this.getLabel()} ${now()}][WARNING]x1B[0m`, message, ...args)
     else
       console.warn(message, ...args)
   }
 
   error(message: string | Error, ...args: any[]): void {
     if (this.getLevel() <= LogLevel.Error)
-      console.error(`\x1B[31m[${this.getLable()} ${now()}][ERROR]\x1B[0m`, message, ...args)
+      console.error(`\x1B[31m[${this.getLabel()} ${now()}][ERROR]\x1B[0m`, message, ...args)
     else
       console.error(message, ...args)
   }
@@ -271,35 +271,35 @@ export class ConsoleLogger extends AbstractLogger implements ILogger {
 
   trace(message: string | Error, ...args: any[]): void {
     if (this.getLevel() <= LogLevel.Trace)
-      console.trace('%c %s %s', 'color: #888', `[${this.getLable()} ${now()}]`, message, ...args)
+      console.trace('%c %s %s', 'color: #888', `[${this.getLabel()} ${now()}]`, message, ...args)
     else
-      console.trace(`[${this.getLable()} ${now()}]`, message, ...args)
+      console.trace(`[${this.getLabel()} ${now()}]`, message, ...args)
   }
 
   debug(message: string | Error, ...args: any[]): void {
     if (this.getLevel() <= LogLevel.Debug)
-      console.debug('%c %s %s', 'color: #eee', `[${this.getLable()} ${now()}]`, message, ...args)
+      console.debug('%c %s %s', 'color: #eee', `[${this.getLabel()} ${now()}]`, message, ...args)
     else
       console.debug(message, ...args)
   }
 
   info(message: string | Error, ...args: any[]): void {
     if (this.getLevel() <= LogLevel.Info)
-      console.info('%c %s %s', 'color: #33f', `[${this.getLable()} ${now()}]`, message, ...args)
+      console.info('%c %s %s', 'color: #33f', `[${this.getLabel()} ${now()}]`, message, ...args)
     else
       console.info(message, ...args)
   }
 
   warn(message: string | Error, ...args: any[]): void {
     if (this.getLevel() <= LogLevel.Warning)
-      console.warn('%c %s %s', 'color: #993', `[${this.getLable()} ${now()}]`, message, ...args)
+      console.warn('%c %s %s', 'color: #993', `[${this.getLabel()} ${now()}]`, message, ...args)
     else
       console.warn(message, ...args)
   }
 
   error(message: string | Error, ...args: any[]): void {
     if (this.getLevel() <= LogLevel.Error)
-      console.error('%c %s %s', 'color: #f33', `[${this.getLable()} ${now()}]`, message, ...args)
+      console.error('%c %s %s', 'color: #f33', `[${this.getLabel()} ${now()}]`, message, ...args)
     else
       console.error(message, ...args)
   }
@@ -310,17 +310,17 @@ export class LoggerService extends Disposable implements ILoggerService {
     super()
   }
 
-  create(lable: string): ILogger {
+  create(label: string): ILogger {
     if (main()) {
       const logger = this._register(new ConsoleMainLogger())
 
-      logger.setLable(lable)
+      logger.setLabel(label)
       return logger
     }
     else {
       const logger = this._register(new ConsoleLogger())
 
-      logger.setLable(lable)
+      logger.setLabel(label)
       return logger
     }
   }
