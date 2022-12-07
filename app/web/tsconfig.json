@@ -16,17 +16,23 @@
     "types": [],
     "baseUrl": ".",
     "paths": {
-      "@starter/shared": [
-        "../../packages/shared/index.ts"
-      ],
       "#preload/common": [
-        "../compat/preloads/common.ts"
+        "../compat/preload/common.ts"
       ],
       "#preload/test1": [
-        "../compat/preloads/test1.ts"
+        "../compat/preload/test1.ts"
       ],
-      "@starter/helper": [
-        "../../packages/helper/index.ts"
+      "@app/compat-common": [
+        "../compat/common/index.ts"
+      ],
+      "@app/compat-browser": [
+        "../compat/browser/index.ts"
+      ],
+      "@app/compat-node": [
+        "../compat/node/index.ts"
+      ],
+      "@app/compat-i18n": [
+        "../compat/i18n/index.ts"
       ]
     }
   },

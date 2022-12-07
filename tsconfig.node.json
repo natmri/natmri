@@ -17,7 +17,6 @@
     "./app/web/vite.config.ts",
     "**/*.json",
     "alias.ts",
-    "packages",
     "scripts"
   ],
   "exclude": [

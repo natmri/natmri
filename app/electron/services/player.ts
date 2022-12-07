@@ -1,5 +1,5 @@
 import { createDecorator } from '@livemoe/core'
-import type { IRepository } from '@starter/shared'
+import type { IRepository } from '@app/compat-common'
 import type { IPlayerController } from '~/core/player/player'
 
 export interface IWallpaperPlayerService extends IPlayerController {

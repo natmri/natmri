@@ -1,8 +1,8 @@
 import { basename, extname, join, relative } from 'path'
 import { createCancelablePromise } from '@livemoe/utils'
-import type { IExtractOptions, IFile } from '@starter/helper'
-import { extract, pack } from '@starter/helper'
-import { IMAGE_EXTS, VIDEO_EXTS, ZIP_EXTS } from '@starter/shared'
+import type { IExtractOptions, IFile } from '@app/compat-node'
+import { extract, pack } from '@app/compat-node'
+import { IMAGE_EXTS, VIDEO_EXTS, ZIP_EXTS } from '@app/compat-common'
 import fs from 'fs-extra'
 
 export enum FileOperationErrorType {
