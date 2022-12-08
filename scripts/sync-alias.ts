@@ -15,8 +15,13 @@ const aliasKeys = Object.keys(alias)
 for (let i = 0; i < configPaths.length; i++) {
   const p = normalizeConfigPaths[i]
   const target: Record<string, string[]> = {}
-  for (const key of aliasKeys) {
-    const value = alias[key]
+  for (let key of aliasKeys) {
+    let value = alias[key]
+
+    if (fs.statSync(value).isDirectory()) {
+      key += '/*'
+      value += '/*'
+    }
 
     target[key] = [
       process.platform === 'win32' ? relative(p, value).replace(/\\/g, '/') : relative(p, value),
