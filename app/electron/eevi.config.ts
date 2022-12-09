@@ -27,6 +27,7 @@ export default defineConfig({
     alias: {
       ...alias,
       '~': resolve('./'),
+      '@app/framework': resolve(process.cwd(), 'app', './framework/electron/index.ts'),
     },
   },
   external: [...Object.keys(dependencies || {})],

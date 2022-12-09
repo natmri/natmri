@@ -1,14 +1,16 @@
 import { join } from 'path'
 import fs from 'fs'
 import { BrowserWindow, Tray, app, ipcMain, protocol, session } from 'electron'
-// import { dev } from 'eevi-is'
 import { Emitter, Event } from '@livemoe/utils'
-// import minimist from 'minimist'
 import { rootPath } from 'helper/paths'
+import { Application } from './application'
 import { resolveIconsPath, resolvePages, resolvePreload } from '~/helper/utils'
 
-// const skipArgv = dev() ? 4 : 2
-// const argv = minimist(process.argv.slice(skipArgv), { boolean: '--' })
+Application
+  .createApplication({
+
+  })
+  .catch(console.error)
 
 const getSingleInstanceLock = new Emitter<void>()
 const gotSingleInstanceLock = Event.toPromise(getSingleInstanceLock.event)
@@ -52,6 +54,8 @@ async function afterReady() {
       preload: resolvePreload('common'),
     },
   })
+
+  win.on('ready-to-show', win.show.bind(win))
 
   win.loadURL(resolvePages('main'))
 
