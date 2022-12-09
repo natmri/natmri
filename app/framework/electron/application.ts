@@ -5,7 +5,7 @@ import { app, dialog, protocol } from 'electron'
 import minimist from 'minimist'
 import { dev } from 'eevi-is'
 import { Emitter, Event } from '@livemoe/utils'
-import { toErrorMessage } from 'utils'
+import { toErrorMessage } from './utils'
 
 export type FrameworkMode = 'relaunch' | 'self' | 'normal'
 
