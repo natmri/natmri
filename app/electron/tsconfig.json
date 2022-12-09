@@ -31,6 +31,9 @@
       ],
       "@app/compat-i18n": [
         "../compat/i18n/index.ts"
+      ],
+      "@app/framework": [
+        "../framework/electron/index.ts"
       ]
     }
   },
