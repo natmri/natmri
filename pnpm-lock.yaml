@@ -23,15 +23,16 @@ specifiers:
   commitlint-config-cz: ^0.13.3
   concurrently: ^7.6.0
   consola: ^2.15.3
+  cross-env: ^7.0.3
   cz-conventional-changelog: ^3.3.0
-  eevi: ^0.5.7
+  eevi: ^0.5.8
   electron: ^19.0.17
   electron-builder: ^23.6.0
   electron-rebuild: ^3.2.9
   eslint: ^8.29.0
   esno: ^0.16.3
   fs-extra: ^11.1.0
-  happy-dom: ^8.1.0
+  happy-dom: ^7.7.2
   husky: ^8.0.2
   i18next: ^22.1.4
   json-format: ^1.0.1
@@ -81,15 +82,16 @@ devDependencies:
   commitlint-config-cz: 0.13.3
   concurrently: 7.6.0
   consola: 2.15.3
+  cross-env: 7.0.3
   cz-conventional-changelog: 3.3.0
-  eevi: 0.5.7_electron@19.1.8+vite@3.2.5
+  eevi: 0.5.8_electron@19.1.8+vite@3.2.5
   electron: 19.1.8
   electron-builder: 23.6.0
   electron-rebuild: 3.2.9
   eslint: 8.29.0
   esno: 0.16.3
   fs-extra: 11.1.0
-  happy-dom: 8.1.0
+  happy-dom: 7.8.1
   husky: 8.0.2
   json-format: 1.0.1
   lint-staged: 13.1.0
@@ -102,7 +104,7 @@ devDependencies:
   unplugin-auto-import: 0.12.0
   unplugin-vue-components: 0.22.11_vue@3.2.45
   vite: 3.2.5_@types+node@18.11.11
-  vitest: 0.25.6_happy-dom@8.1.0
+  vitest: 0.25.6_happy-dom@7.8.1
   vue-tsc: 1.0.11_typescript@4.9.3
 
 packages:
@@ -352,12 +354,12 @@ packages:
       ajv-keywords: 3.5.2_ajv@6.12.6
     dev: true
 
-  /@eevi/config/0.5.7_electron@19.1.8+vite@3.2.5:
-    resolution: {integrity: sha512-P9C4p9MAgWGbC6kFKoK365fN0uR9fHkEwqWb2nOqpD2/wDtTXXR/JzDcuCA35vrHKY0gqt6Hn7baMHnZza7DFA==}
+  /@eevi/config/0.5.8_electron@19.1.8+vite@3.2.5:
+    resolution: {integrity: sha512-kTwzJ8r1zIERoKp0xoXFCkuhWLQXu71Hz73eE5RO7J5i/7Ul1im9m1jhN+L+FprvrhJaGSQihjU5RWgO/84LhA==}
     peerDependencies:
       vite: '>=3.0.0'
     dependencies:
-      '@eevi/core': 0.5.7_electron@19.1.8+vite@3.2.5
+      '@eevi/core': 0.5.8_electron@19.1.8+vite@3.2.5
       fast-glob: 3.2.12
       unconfig: 0.3.7
       vite: 3.2.5_@types+node@18.11.11
@@ -365,14 +367,14 @@ packages:
       - electron
     dev: true
 
-  /@eevi/core/0.5.7_electron@19.1.8+vite@3.2.5:
-    resolution: {integrity: sha512-kM8iXlxkbhv9JBXm62eTc2AQbJM0vMUUsySp3aLaoKT5iJyjK39F7qNo5cD9/ouen6ILTNbQQOXCpSNqubT0YA==}
+  /@eevi/core/0.5.8_electron@19.1.8+vite@3.2.5:
+    resolution: {integrity: sha512-2Ur+nOD8T/YjzlYHQzC/XikisOoawV2VxsD70Li39mLPnCHejppsGjmLst5KpHta+XATqUIoB80Mo7ffrSnRpg==}
     peerDependencies:
       electron: '*'
       vite: '>=3.0.0'
     dependencies:
       '@anatine/esbuild-decorators': 0.2.19_esbuild@0.14.54
-      '@eevi/elexpose': 0.5.7_esbuild@0.14.54+vite@3.2.5
+      '@eevi/elexpose': 0.5.8_esbuild@0.14.54+vite@3.2.5
       consola: 2.15.3
       electron: 19.1.8
       esbuild: 0.14.54
@@ -381,8 +383,8 @@ packages:
       vite: 3.2.5_@types+node@18.11.11
     dev: true
 
-  /@eevi/elexpose/0.5.7_esbuild@0.14.54+vite@3.2.5:
-    resolution: {integrity: sha512-O9mdtHjc31H+8B8Yz+iSP2NlOe5rJfQ15A//jD+BM0MAJ4yFL7Swh4KLIq2LhVn3zOE6sRGBOlxQBMPdKWxgnw==}
+  /@eevi/elexpose/0.5.8_esbuild@0.14.54+vite@3.2.5:
+    resolution: {integrity: sha512-do+QEpsRmdo2kzi8DK78XOQgK1cBLPPah9tIRUcqNWR83OCA9uxcNeUIWCDN0cLEI5yeL5DKWknHjEACH6gg5A==}
     peerDependencies:
       esbuild: '*'
       vite: '>=3.0.0'
@@ -394,8 +396,8 @@ packages:
       vite: 3.2.5_@types+node@18.11.11
     dev: true
 
-  /@eevi/elexpose/0.5.7_vite@3.2.5:
-    resolution: {integrity: sha512-O9mdtHjc31H+8B8Yz+iSP2NlOe5rJfQ15A//jD+BM0MAJ4yFL7Swh4KLIq2LhVn3zOE6sRGBOlxQBMPdKWxgnw==}
+  /@eevi/elexpose/0.5.8_vite@3.2.5:
+    resolution: {integrity: sha512-do+QEpsRmdo2kzi8DK78XOQgK1cBLPPah9tIRUcqNWR83OCA9uxcNeUIWCDN0cLEI5yeL5DKWknHjEACH6gg5A==}
     peerDependencies:
       esbuild: '*'
       vite: '>=3.0.0'
@@ -406,8 +408,8 @@ packages:
       vite: 3.2.5_@types+node@18.11.11
     dev: true
 
-  /@eevi/vite-plugin-mpa/0.5.7_vite@3.2.5:
-    resolution: {integrity: sha512-6Gkx9GtEX6Qzy2eY4r+B2MD9RoeYjY68Ve9BklI1H5/Bju3reofol3fxTvfwQ1ZpDeldqNnlkX1b8mFS58Cu6w==}
+  /@eevi/vite-plugin-mpa/0.5.8_vite@3.2.5:
+    resolution: {integrity: sha512-aUsLhge0VYKRPC4rTBkWYq2t4f7YXqVTKXadjaXqA06yscfQhUbOxBA9WxuZWDK8JgGciqzPA2V44wQBBvXX+Q==}
     peerDependencies:
       vite: ~3.0.4
     dependencies:
@@ -2224,6 +2226,14 @@ packages:
     dev: true
     optional: true
 
+  /cross-env/7.0.3:
+    resolution: {integrity: sha512-+/HKd6EgcQCJGh2PSjZuUitQBQynKor4wrFbRg4DtAgS1aWO+gU52xpH7M9ScGgXSYmAVS9bIJ8EzuaGw0oNAw==}
+    engines: {node: '>=10.14', npm: '>=6', yarn: '>=1'}
+    hasBin: true
+    dependencies:
+      cross-spawn: 7.0.3
+    dev: true
+
   /cross-spawn/7.0.3:
     resolution: {integrity: sha512-iRDPJKUPVEND7dHPO8rkbOnPpyDygcDFtWjpeWNCgy8WP2rXcxXL8TskReQl6OrB2G7+UJrags1q15Fudc7G6w==}
     engines: {node: '>= 8'}
@@ -2526,15 +2536,15 @@ packages:
     resolution: {integrity: sha512-I88TYZWc9XiYHRQ4/3c5rjjfgkjhLyW2luGIheGERbNQ6OY7yTybanSpDXZa8y7VUP9YmDcYa+eyq4ca7iLqWA==}
     dev: true
 
-  /eevi/0.5.7_electron@19.1.8+vite@3.2.5:
-    resolution: {integrity: sha512-zawUMNz1ROlvvHaEQ0MjFGkS/YTeuD2WSKtOM3uE4lViCypPiGJGJUmFtfHvLQEfKSNts/MLH61RDQZeCaspbA==}
+  /eevi/0.5.8_electron@19.1.8+vite@3.2.5:
+    resolution: {integrity: sha512-5/e0r/A5pV4yGaLqffrWyBF+nBnnDDOqG+1BAF/QTlmOoyOXg+j6r2RmabbuLoSnQ3ZxYZlyv+3xW9OuLP+LNw==}
     peerDependencies:
       vite: ~3.0.1
     dependencies:
-      '@eevi/config': 0.5.7_electron@19.1.8+vite@3.2.5
-      '@eevi/core': 0.5.7_electron@19.1.8+vite@3.2.5
-      '@eevi/elexpose': 0.5.7_vite@3.2.5
-      '@eevi/vite-plugin-mpa': 0.5.7_vite@3.2.5
+      '@eevi/config': 0.5.8_electron@19.1.8+vite@3.2.5
+      '@eevi/core': 0.5.8_electron@19.1.8+vite@3.2.5
+      '@eevi/elexpose': 0.5.8_vite@3.2.5
+      '@eevi/vite-plugin-mpa': 0.5.8_vite@3.2.5
       vite: 3.2.5_@types+node@18.11.11
     transitivePeerDependencies:
       - electron
@@ -4020,8 +4030,8 @@ packages:
       duplexer: 0.1.2
     dev: true
 
-  /happy-dom/8.1.0:
-    resolution: {integrity: sha512-R9NVb5815gpMFsldZF0wVSHw2uSobx6yitSkCdQPda1kwfAmVw4Ut8ZspxGHXkK6OA93SznldkcvrbhKFr6JcA==}
+  /happy-dom/7.8.1:
+    resolution: {integrity: sha512-lKpeGDtA0FqS/LpAEU+5N5kKkmW5TOjZCXZDnF7YtWuvKP9iwCqpeshG9gXA/H+gX0VQ/I/OToy73+umx1NQUw==}
     dependencies:
       css.escape: 1.5.1
       he: 1.2.0
@@ -6654,7 +6664,7 @@ packages:
       fsevents: 2.3.2
     dev: true
 
-  /vitest/0.25.6_happy-dom@8.1.0:
+  /vitest/0.25.6_happy-dom@7.8.1:
     resolution: {integrity: sha512-jdPgmZ7BcDnm1+hmMPIl9BZjSy+b8Y8V0tQMsv7ECO90Qic7EZ5/+traILXLpsXgqK5KgVrUJmchevAUuKL/1w==}
     engines: {node: '>=v14.16.0'}
     hasBin: true
@@ -6683,7 +6693,7 @@ packages:
       acorn-walk: 8.2.0
       chai: 4.3.6
       debug: 4.3.4
-      happy-dom: 8.1.0
+      happy-dom: 7.8.1
       local-pkg: 0.4.2
       source-map: 0.6.1
       strip-literal: 1.0.0
