@@ -2,13 +2,16 @@
 
 Rewrite this [project](https://github.com/starknt/LiveMoe)
 
-<div style="display: flex; justify-content: center;align-items: center; flex-direction: column;">
-  <span style="font-size: 2rem; font-weight: 700;">NaTmri</span>
-  <span style="font-size: 1.1rem; font-weight: 500;">Nao Tomori</span>
-  <strong>  一款基于 Electron 的免费开源桌面壁纸软件。  </strong>
-  <br />
-  
-  ![PR Welcome](https://img.shields.io/badge/PR-welcome-brightgreen.svg?style=flat)
+<h1 align="center">NaTmri</h1>
+
+<h4 align="center">Nao Tomori</h4>
+
+<p align="center">一款基于 Electron 的免费开源桌面壁纸软件。</p>
+
+<div align="center">
+
+![PR Welcome](https://img.shields.io/badge/PR-welcome-brightgreen.svg?style=flat)
+
 </div>
 
 ## 功能
