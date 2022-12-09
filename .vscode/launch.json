@@ -13,8 +13,6 @@
       "runtimeExecutable": "${workspaceFolder}/node_modules/.bin/electron",
       "windows": {
         "name": "electron windows configuration",
-        "type": "node",
-        "request": "launch",
         "runtimeExecutable": "${workspaceFolder}/node_modules/.bin/electron.cmd"
       },
       "args": [
@@ -33,8 +31,6 @@
       "runtimeExecutable": "${workspaceFolder}/node_modules/.bin/vitest",
       "windows": {
         "name": "vitest windows configuration",
-        "type": "node",
-        "request": "launch",
         "runtimeExecutable": "${workspaceFolder}/node_modules/.bin/vitest.cmd"
       },
       "args": ["run", "unit"]
