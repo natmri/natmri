@@ -1,7 +1,7 @@
 import { join } from 'path'
 import type { IFrameApplicationConfiguration, IFrameApplicationLifecycle } from '@app/framework'
 import { FrameworkApplication } from '@app/framework'
-import { BrowserWindow, Tray, protocol, session } from 'electron'
+import { BrowserWindow, Menu, Tray, protocol, session } from 'electron'
 import type { ParsedArgs } from 'minimist'
 import fs from 'fs-extra'
 import { rootPath } from './helper/paths'
@@ -13,6 +13,7 @@ export class Application extends FrameworkApplication implements Partial<IFrameA
   }
 
   onBeforeReady(args: ParsedArgs) {
+    Menu.setApplicationMenu(null)
     // eslint-disable-next-line no-console
     console.log(args)
   }
@@ -35,7 +36,6 @@ export class Application extends FrameworkApplication implements Partial<IFrameA
     })
 
     win.on('ready-to-show', win.show.bind(win))
-
     win.loadURL(resolvePages('main'))
 
     win.webContents.openDevTools({ mode: 'detach' })

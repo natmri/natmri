@@ -1,5 +1,5 @@
 import { join } from 'path'
-import { macOS, windows } from 'eevi-is'
+import { dev, macOS, windows } from 'eevi-is'
 import { preloadsPath, rootPath } from './paths'
 
 const isMpa = () => process.env.MODE === 'mpa'
@@ -14,7 +14,7 @@ export function resolveIconsPath() {
 }
 
 export const resolvePages = (page?: string) => {
-  if (process.env.NODE_ENV === 'development')
+  if (dev() && process.env.URL.startsWith('http'))
     return isMpa() ? new URL(`pages/${page ?? 'main'}/`, process.env.URL).toString() : process.env.URL
 
   return isMpa() ? new URL(`${process.env.URL}/${page}/index.html`, `file:///${__dirname}`).toString() : new URL(process.env.URL, `file:///${__dirname}`).toString()

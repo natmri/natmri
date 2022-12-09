@@ -5,10 +5,9 @@ import { _electron as electron } from 'playwright'
 let electronApplication: ElectronApplication
 
 beforeAll(async () => {
-  process.env.PLAYWRIGHT = 'true'
+  process.env.__DEV__ = 'true'
   electronApplication = await electron.launch({
     args: [resolve(process.cwd(), 'release', 'app', 'dist', 'main.js')],
-    cwd: resolve(process.cwd(), 'release', 'app'),
     env: process.env,
   })
 })
@@ -54,5 +53,5 @@ test('Main window web content', async () => {
 
   expect(element, 'Was unable to find the root element').toBeTruthy()
 
-  expect((await element.innerHTML()).trim(), 'Window content was empty').not.equal('')
+  expect(element.getByText('0'), 'Window content was empty').toBeTruthy()
 })
