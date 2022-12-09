@@ -17,7 +17,7 @@
 
 import * as paths from 'node:path'
 import { windows } from 'eevi-is'
-import { CharCode } from 'common/char'
+import { CharCode } from './char'
 
 export interface CustomScheme {
   scheme: string
