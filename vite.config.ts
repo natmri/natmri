@@ -8,8 +8,8 @@ export default defineConfig({
   },
   test: {
     environment: 'happy-dom',
-    testTimeout: 5000 * 3,
-    hookTimeout: 10000,
+    testTimeout: 1000 * 60 * 25,
+    hookTimeout: 1000 * 10,
     globals: true,
   },
 })
