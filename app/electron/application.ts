@@ -7,7 +7,7 @@ export class Application extends FrameworkApplication {
     return new Application(options)
   }
 
-  override onBeforeReady(args: ParsedArgs) {
+  onBeforeReady(args: ParsedArgs) {
     // eslint-disable-next-line no-console
     console.log(args)
   }
