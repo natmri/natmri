@@ -72,9 +72,9 @@ export abstract class FrameworkApplication extends EventEmitter implements IFram
   }
 
   private async $framework() {
-    if (this.args['--'].includes(`${app.getName()}Self`))
+    if (this.args.includes(`${app.getName()}Self`))
       this['onAppStaring']?.('self')
-    else if (this.args['--'].includes(`${app.getName()}Relaunch`))
+    else if (this.args.includes(`${app.getName()}Relaunch`))
       this['onAppStaring']?.('relaunch')
     else
       this['onAppStaring']?.('normal')
