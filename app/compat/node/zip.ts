@@ -1,6 +1,6 @@
-import type { WriteStream } from 'fs'
-import { createWriteStream, promises } from 'fs'
-import type { Readable } from 'stream'
+import type { WriteStream } from 'node:fs'
+import { createWriteStream, promises } from 'node:fs'
+import type { Readable } from 'node:stream'
 import path from 'path'
 import type { Entry, ZipFile } from 'yauzl'
 import { open as _openZip } from 'yauzl'
@@ -74,9 +74,7 @@ async function extractEntry(
   const targetDirName = path.join(targetPath, dirName)
   if (!targetDirName.startsWith(targetPath)) {
     return Promise.reject(
-      new Error(`
-        invalid file .Error extracting ${fileName}.
-      `),
+      new Error(`Error extracting ${fileName}, invalid file.`),
     )
   }
   const targetFileName = path.join(targetPath, fileName)
@@ -146,12 +144,7 @@ function extractZip(
           reject(
             new ExtractError(
               'Incomplete',
-              new Error(
-                'incompleteExtract'
-                  + `Incomplete. Found {0} of {1} entries${
-                  extractedEntriesCount
-                  }${zipfile.entryCount}`,
-              ),
+              new Error(`Incomplete. Found ${extractedEntriesCount} of ${zipfile.entryCount} entries`),
             ),
           )
         }
