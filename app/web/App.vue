@@ -2,7 +2,7 @@
 import { sayHello } from '#preload/common'
 
 const getIconsUrl = (name: string) => {
-  return `app://icons/${name}`
+  return `natmri://icons/${name}`
 }
 </script>
 
