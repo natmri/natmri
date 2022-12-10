@@ -1,7 +1,7 @@
 /* eslint-disable dot-notation */
 import EventEmitter from 'node:events'
 import type { ParsedArgs } from 'minimist'
-import { app, dialog, protocol } from 'electron'
+import { app, dialog, protocol, session } from 'electron'
 import minimist from 'minimist'
 import { dev } from 'eevi-is'
 import { Emitter, Event } from '@livemoe/utils'
@@ -45,6 +45,7 @@ export interface IFrameApplicationProtocol {
 }
 
 export interface IFrameApplicationConfiguration {
+  preloads?: string[]
   single?: boolean
   protocols?: IFrameApplicationProtocol[]
 }
@@ -53,6 +54,7 @@ export abstract class FrameworkApplication extends EventEmitter implements IFram
   private dev = dev()
   private options: Required<IFrameApplicationConfiguration>
   protected args: ParsedArgs
+  protected sessions: Electron.Session[] = [session.defaultSession]
 
   constructor(options?: IFrameApplicationConfiguration) {
     super()
@@ -67,6 +69,7 @@ export abstract class FrameworkApplication extends EventEmitter implements IFram
 
     _options.single = options.single ?? true
     _options.protocols = options.protocols ?? []
+    _options.preloads = options.preloads ?? []
 
     this.options = _options
   }
@@ -109,6 +112,8 @@ export abstract class FrameworkApplication extends EventEmitter implements IFram
     }))
 
     protocol.registerSchemesAsPrivileged(schemes)
+    for (const s of this.sessions)
+      s.setPreloads(this.options.preloads)
   }
 
   private async $framework_ready() {
@@ -122,6 +127,13 @@ export abstract class FrameworkApplication extends EventEmitter implements IFram
   private async $framework_event() {
     app.on('second-instance', (e, argv, workingDirectory, additionalData) => {
       this['onSecondAppInstance']?.(e, argv, workingDirectory, additionalData)
+    })
+
+    app.on('session-created', (session) => {
+      if (!this.sessions.find(s => s === session)) {
+        session.setPreloads(this.options.preloads)
+        this.sessions.push(session)
+      }
     })
 
     app.on('will-quit', e => this['onWillQuit']?.(e))
