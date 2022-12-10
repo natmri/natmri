@@ -1,7 +1,7 @@
 import { join } from 'path'
 import type { IFrameApplicationConfiguration, IFrameApplicationLifecycle } from '@app/framework'
 import { FrameworkApplication } from '@app/framework'
-import { BrowserWindow, Menu, Tray, protocol, session } from 'electron'
+import { BrowserWindow, Menu, Tray, protocol } from 'electron'
 import type { ParsedArgs } from 'minimist'
 import fs from 'fs-extra'
 import { rootPath } from './helper/paths'
@@ -19,10 +19,6 @@ export class Application extends FrameworkApplication implements Partial<IFrameA
   }
 
   onReady(_: ParsedArgs): void {
-    session.defaultSession.setPreloads([
-      resolvePreload('test1'),
-    ])
-
     protocol.registerStreamProtocol('natmri', (request, cb) => {
       const url = new URL(request.url)
       cb(fs.createReadStream(join(rootPath, 'assets', url.hostname, url.pathname)))

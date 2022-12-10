@@ -1,4 +1,5 @@
 import { Application } from './application'
+import { resolvePreload } from './helper/utils'
 
 Application
   .createApplication({
@@ -14,6 +15,9 @@ Application
           corsEnabled: true,
         },
       },
+    ],
+    preloads: [
+      resolvePreload('test1'),
     ],
   })
   .catch(console.error)
