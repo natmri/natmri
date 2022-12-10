@@ -54,7 +54,7 @@ export abstract class FrameworkApplication extends EventEmitter implements IFram
   private dev = dev()
   private options: Required<IFrameApplicationConfiguration>
   protected args: ParsedArgs
-  protected sessions: Electron.Session[] = [session.defaultSession]
+  protected sessions: Electron.Session[] = []
 
   constructor(options?: IFrameApplicationConfiguration) {
     super()
@@ -112,12 +112,12 @@ export abstract class FrameworkApplication extends EventEmitter implements IFram
     }))
 
     protocol.registerSchemesAsPrivileged(schemes)
-    for (const s of this.sessions)
-      s.setPreloads(this.options.preloads)
   }
 
   private async $framework_ready() {
-
+    this.sessions = [session.defaultSession]
+    for (const s of this.sessions)
+      s.setPreloads(this.options.preloads)
   }
 
   private async $framework_after_ready() {
