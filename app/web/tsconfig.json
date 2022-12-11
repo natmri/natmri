@@ -14,7 +14,6 @@
     "suppressImplicitAnyIndexErrors": false,
     "skipLibCheck": true,
     "types": [],
-    "baseUrl": ".",
     "paths": {
       "#preload/common": [
         "../compat/preload/common.ts"

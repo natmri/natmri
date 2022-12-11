@@ -8,7 +8,6 @@
     "skipLibCheck": true,
     "esModuleInterop": true,
     "jsx": "preserve",
-    "baseUrl": ".",
     "types": [
       "eevi/eevi-is"
     ]

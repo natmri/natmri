@@ -10,7 +10,6 @@
     "emitDecoratorMetadata": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
-    "baseUrl": ".",
     "types": [
       "node",
       "eevi/eevi-is",
