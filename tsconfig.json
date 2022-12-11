@@ -11,16 +11,19 @@
     "baseUrl": ".",
     "paths": {
       "@app/compat-common": [
-        "app/compat/common/index.ts"
+        "./app/compat/common/index.ts"
       ],
       "@app/compat-browser": [
-        "app/compat/browser/index.ts"
+        "./app/compat/browser/index.ts"
       ],
       "@app/compat-node": [
-        "app/compat/node/index.ts"
+        "./app/compat/node/index.ts"
       ],
       "@app/compat-i18n": [
-        "app/compat/i18n/index.ts"
+        "./app/compat/i18n/index.ts"
+      ],
+      "@app/typings/*": [
+        "./app/compat/typings/*"
       ]
     }
   },

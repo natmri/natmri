@@ -23,9 +23,12 @@ for (let i = 0; i < configPaths.length; i++) {
       value += '/*'
     }
 
-    target[key] = [
-      process.platform === 'win32' ? relative(p, value).replace(/\\/g, '/') : relative(p, value),
-    ]
+    let path = process.platform === 'win32' ? relative(p, value).replace(/\\/g, '/') : relative(p, value)
+
+    if (!path.startsWith('.'))
+      path = `./${path}`
+
+    target[key] = [path]
   }
   r[configPaths[i]] = target
 }

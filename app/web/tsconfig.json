@@ -32,6 +32,9 @@
       ],
       "@app/compat-i18n": [
         "../compat/i18n/index.ts"
+      ],
+      "@app/typings/*": [
+        "./../compat/typings/*"
       ]
     }
   },
