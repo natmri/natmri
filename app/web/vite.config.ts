@@ -1,23 +1,22 @@
 import path from 'path'
 import { defineConfig } from 'vite'
-import vue from '@vitejs/plugin-vue'
-import unocss from 'unocss/vite'
-import autoImport from 'unplugin-auto-import/vite'
-import autoImportComponent from 'unplugin-vue-components/vite'
+import Vue from '@vitejs/plugin-vue'
+import UnoCSS from 'unocss/vite'
+import AutoImport from 'unplugin-auto-import/vite'
+import AutoImportComponent from 'unplugin-vue-components/vite'
 import { eevi, mpa } from 'eevi'
 import { alias } from '../../alias'
 
 export default defineConfig({
   clearScreen: false,
-  base: './',
   root: 'app/web',
   resolve: {
     alias,
   },
   plugins: [
-    vue({ reactivityTransform: true }),
-    unocss(),
-    autoImport({
+    Vue({ reactivityTransform: true }),
+    UnoCSS(),
+    AutoImport({
       dts: './auto-imports.d.ts',
       dirs: [
         './composable',
@@ -27,7 +26,7 @@ export default defineConfig({
         'vue/macros',
       ],
     }),
-    autoImportComponent({
+    AutoImportComponent({
       dts: './components.d.ts',
       dirs: [
         './components',
