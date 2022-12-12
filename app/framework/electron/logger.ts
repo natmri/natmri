@@ -3,7 +3,7 @@ import { createDecorator } from '@livemoe/core'
 import type { Event, IDisposable } from '@livemoe/utils'
 import { Disposable, Emitter } from '@livemoe/utils'
 import { main } from 'eevi-is'
-import { toErrorMessage } from 'utils'
+import { toErrorMessage } from './utils'
 
 export const enum LogLevel {
   Trace,
