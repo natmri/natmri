@@ -9,6 +9,7 @@ import { alias } from '../../alias'
 
 export default defineConfig({
   clearScreen: false,
+  base: './',
   root: 'app/web',
   resolve: {
     alias,
