@@ -9,7 +9,7 @@
   "license": "GPL-2.0",
   "main": "./dist/main.js",
   "dependencies": {
-    "@livemoe/tools": "^0.3.1",
+    "@livemoe/tools": "^0.3.2",
     "better-sqlite3": "^8.0.1"
   }
 }
