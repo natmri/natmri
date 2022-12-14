@@ -48,6 +48,7 @@
     "i18next": "^22.4.1",
     "minimist": "^1.2.7",
     "reflect-metadata": "^0.1.13",
+    "typeorm": "^0.3.11",
     "vue": "^3.2.45",
     "yauzl": "^2.10.0",
     "yazl": "^2.5.1"
