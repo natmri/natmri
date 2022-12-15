@@ -29,4 +29,3 @@ export function isBoolean(x: any): x is boolean {
 export function isInvalidate(x: any) {
   return !isNil(x) && !!x
 }
-

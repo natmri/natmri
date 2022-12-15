@@ -301,4 +301,3 @@ export async function buffer(zipPath: string, filePath: string): Promise<Buffer>
     stream.on('end', () => resolve(Buffer.concat(buffers)))
   })
 }
-

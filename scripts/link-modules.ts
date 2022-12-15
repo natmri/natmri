@@ -25,4 +25,3 @@ fs.lstat(srcElectronPackagePath)
   .then(v => !v && linkPackageFile())
   .catch(linkPackageFile)
   .catch(consola.error)
-

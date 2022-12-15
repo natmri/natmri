@@ -654,4 +654,3 @@ function percentDecode(str: string): string {
 
   return str.replace(_rEncodedAsHex, match => decodeURIComponentGraceful(match))
 }
-
