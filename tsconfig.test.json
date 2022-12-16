@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "target": "ESNext",
     "moduleResolution": "Node",
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
@@ -9,7 +10,6 @@
     "types": [
       "vitest/globals"
     ],
-    "baseUrl": "./",
     "paths": {
       "@app/compat-i18n": [
         "./app/compat/i18n/index.ts"
