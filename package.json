@@ -103,6 +103,9 @@
     "*.{ts, tsx, js, jsx}": [
       "eslint --fix"
     ],
+    "*.d.ts": [
+      "eslint --fix"
+    ],
     "*.json": [
       "eslint --fix"
     ],

@@ -9,9 +9,9 @@ if (!global.__dirname) {
 const r = (...paths: string[]) => resolve(__dirname, 'app', 'compat', ...paths)
 
 export const alias: Record<string, string> = {
-  '@app/compat-common': r('common', 'index.ts'),
-  '@app/compat-browser': r('browser', 'index.ts'),
-  '@app/compat-node': r('node', 'index.ts'),
-  '@app/compat-i18n': r('i18n', 'index.ts'),
   '@app/typings': r('typings'),
+  '@app/compat-common': r('common'),
+  '@app/compat-node': r('node'),
+  '@app/compat-browser': r('browser'),
+  '@app/compat-i18n': r('i18n', 'index.ts'),
 }

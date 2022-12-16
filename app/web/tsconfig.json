@@ -12,6 +12,8 @@
     "esModuleInterop": true,
     "noImplicitAny": false,
     "suppressImplicitAnyIndexErrors": false,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
     "skipLibCheck": true,
     "types": [],
     "paths": {
@@ -21,20 +23,20 @@
       "#preload/test1": [
         "../compat/preload/test1.ts"
       ],
-      "@app/compat-common": [
-        "../compat/common/index.ts"
-      ],
-      "@app/compat-browser": [
-        "../compat/browser/index.ts"
-      ],
-      "@app/compat-node": [
-        "../compat/node/index.ts"
-      ],
       "@app/compat-i18n": [
         "../compat/i18n/index.ts"
       ],
       "@app/typings/*": [
         "./../compat/typings/*"
+      ],
+      "@app/compat-common/*": [
+        "../compat/common/*"
+      ],
+      "@app/compat-node/*": [
+        "../compat/node/*"
+      ],
+      "@app/compat-browser/*": [
+        "../compat/browser/*"
       ]
     }
   },

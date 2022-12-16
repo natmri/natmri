@@ -16,18 +16,6 @@
       "electron"
     ],
     "paths": {
-      "~/*": [
-        "./*"
-      ],
-      "@app/compat-common": [
-        "../compat/common/index.ts"
-      ],
-      "@app/compat-browser": [
-        "../compat/browser/index.ts"
-      ],
-      "@app/compat-node": [
-        "../compat/node/index.ts"
-      ],
       "@app/compat-i18n": [
         "../compat/i18n/index.ts"
       ],
@@ -35,7 +23,16 @@
         "../framework/electron/index.ts"
       ],
       "@app/typings/*": [
-        "./../compat/typings/*"
+        "../compat/typings/*"
+      ],
+      "@app/compat-common/*": [
+        "../compat/common/*"
+      ],
+      "@app/compat-node/*": [
+        "../compat/node/*"
+      ],
+      "@app/compat-browser/*": [
+        "../compat/browser/*"
       ]
     }
   },

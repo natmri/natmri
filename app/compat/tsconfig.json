@@ -16,6 +16,11 @@
       "eevi/eevi-is",
       "node",
       "electron"
-    ]
+    ],
+    "paths": {
+      "@app/compat-i18n": [
+        "./i18n/index.ts"
+      ]
+    }
   }
 }
