@@ -27,6 +27,6 @@ export default defineConfig({
     alias,
   },
   external: [...Object.keys(dependencies || {})],
-  tsconfig: 'tsconfig.json',
+  tsconfig: resolve(process.cwd(), 'src', 'tsconfig.json'),
   define,
 }) as UserConfigExport
