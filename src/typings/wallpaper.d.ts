@@ -7,7 +7,7 @@ export type IWallpaperPreview = `${string}.${IWallpaperPreviewExt}`
 export type IWallpaperCustomFileExt = 'json'
 export type IWallpaperFilePath = `${string}.${IWallpaperCustomFileExt}`
 export type IWallpaperFileVer = `${number}.${number}.${number}`
-export type IWallpaperFileURI = `natmri-ws:${string}` /** schema:path custom wallpaper store protocol  */
+export type IWallpaperFileURI = `natmri-ws:${string}` /** schema:repository/path custom wallpaper store protocol  */
 
 export interface IWallpaperBroadcastClientData {
   kind: IWallpaperBroadcastClientKind

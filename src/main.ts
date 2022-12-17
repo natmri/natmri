@@ -1,8 +1,30 @@
 import { Menu, app, protocol } from 'electron'
 import { Schemas } from 'natmri/base/common/network'
 import { Application } from 'natmri/entry/electron-main/application'
+import minimist from 'minimist'
 
-app.once('ready', onReady)
+const args = parseArgs()
+const gotTheLock = app.requestSingleInstanceLock()
+
+if (!gotTheLock)
+  app.quit()
+
+app.once('ready', () => {
+  if (args.trace) {
+    const contentTracing = require('electron').contentTracing
+
+    const traceOptions = {
+      categoryFilter: args['trace-category-filter'] || '*',
+      traceOptions: args['trace-options'] || 'record-until-full,enable-sampling',
+    }
+
+    contentTracing.startRecording(traceOptions)
+      .finally(() => onReady())
+  }
+  else {
+    onReady()
+  }
+})
 
 function onReady() {
   Application
@@ -13,6 +35,7 @@ function onReady() {
     })
 }
 
+// register privileged schema
 protocol.registerSchemesAsPrivileged([
   {
     scheme: Schemas.natmri,
@@ -25,18 +48,12 @@ protocol.registerSchemesAsPrivileged([
       allowServiceWorkers: true,
     },
   },
-  {
-    scheme: Schemas.ws,
-    privileges: {
-      secure: true,
-      standard: true,
-      stream: true,
-      supportFetchAPI: true,
-      corsEnabled: true,
-      allowServiceWorkers: true,
-    },
-  },
 ])
+
+/**
+ * Disable blocking 3d api, avoid 3d wallpaper not work
+ */
+app.disableDomainBlockingFor3DAPIs()
 
 // Disable default menu (https://github.com/electron/electron/issues/35512)
 Menu.setApplicationMenu(null)
@@ -51,3 +68,12 @@ app.commandLine.appendSwitch('disable-features', 'CalculateNativeWinOcclusion')
  * `AutoDisableAccessibility` - https://github.com/microsoft/vscode/issues/162331#issue-1390744354
  */
 app.commandLine.appendSwitch('enable-features', 'AutoDisableAccessibility')
+
+function parseArgs() {
+  return minimist(process.argv, {
+    string: [
+      'user-data-dir',
+      'locale',
+    ],
+  })
+}

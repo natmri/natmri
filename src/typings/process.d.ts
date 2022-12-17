@@ -238,4 +238,9 @@ export interface Process {
    * @return the resource usage for the current process. All of these values come from the `uv_getrusage` call which returns a [`uv_rusage_t` struct][uv_rusage_t].
    */
   resourceUsage(): NodeJS.ResourceUsage;
+
+  /**
+   * A string representing the path to the resources directory.
+   */
+  resourcesPath: string
 }

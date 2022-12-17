@@ -2,7 +2,6 @@ import { Disposable, Emitter, Event } from '@livemoe/utils'
 import { BrowserView, BrowserWindow } from 'electron'
 import { dev } from 'eevi-is'
 import type { IPlayerUI, PlayerErrorEvent } from 'typings/player'
-import { resolvePreload } from '../../../helper/utils'
 
 export class PlayerUIView extends Disposable {
   private $view: BrowserView
@@ -27,7 +26,7 @@ export class PlayerUIView extends Disposable {
         enableWebSQL: false,
         devTools: dev(),
         experimentalFeatures: true,
-        preload: resolvePreload('wallpaper'),
+        // preload: resolvePreload('wallpaper'),
       },
     })
     this.$view.setBounds(bounds)

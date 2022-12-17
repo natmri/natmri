@@ -1,4 +1,4 @@
-import { basename, extname, join, relative } from 'path'
+import { basename, extname, join, relative } from 'node:path'
 import { createCancelablePromise } from '@livemoe/utils'
 import fs from 'fs-extra'
 import { IMAGE_EXTS, VIDEO_EXTS, ZIP_EXTS } from 'natmri/base/common/constants'

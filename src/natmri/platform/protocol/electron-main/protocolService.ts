@@ -6,8 +6,8 @@ import fs from 'fs-extra'
 import { Schemas } from 'natmri/base/common/network'
 import { URI } from 'natmri/base/common/uri'
 import { getMediaOrTextMime } from 'natmri/base/common/mime'
-import { ILoggerService } from './log'
-import { INativeEnvironmentService } from './environment'
+import { ILoggerService } from 'natmri/platform/log/common/log'
+import { INativeEnvironmentService } from 'natmri/platform/environment/electron-main/environmentService'
 
 export interface IProtocolService {
 

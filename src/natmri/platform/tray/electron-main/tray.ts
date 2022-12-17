@@ -1,10 +1,9 @@
 import { createDecorator } from '@livemoe/core'
 import { Disposable } from '@livemoe/utils'
 import { Menu, Tray, app, nativeImage } from 'electron'
-import type { NativeEnvironmentService } from './environment'
-import { INativeEnvironmentService } from './environment'
-import { ILifecycleService } from './lifecycle'
-import { ILoggerService } from './log'
+import { INativeEnvironmentService } from 'natmri/platform/environment/electron-main/environmentService'
+import { ILifecycleService } from 'natmri/platform/lifecycle/electron-main/lifecycleService'
+import { ILoggerService } from 'natmri/platform/log/common/log'
 
 export interface INativeTrayService {
   title: string /** MacOS only */
@@ -18,7 +17,7 @@ export class NativeTrayService extends Disposable implements INativeTrayService 
   private $tooltip = ''
 
   constructor(
-    @INativeEnvironmentService private readonly nativeEnvironemt: NativeEnvironmentService,
+    @INativeEnvironmentService private readonly nativeEnvironemt: INativeEnvironmentService,
     @ILoggerService private readonly logService: ILoggerService,
     @ILifecycleService private readonly lifecycleService: ILifecycleService,
   ) {

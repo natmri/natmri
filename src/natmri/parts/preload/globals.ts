@@ -13,6 +13,7 @@ const safeProcess: Process = {
   version: process.version,
   versions: { ...process.versions },
   platform: process.platform,
+  resourcesPath: process.resourcesPath,
   cpuUsage: (previousValue?: NodeJS.CpuUsage) => process.cpuUsage(previousValue),
   resourceUsage: () => process.resourceUsage(),
 }

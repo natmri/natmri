@@ -1,14 +1,13 @@
-import { join } from 'path'
 import { BrowserWindow, session } from 'electron'
 import { InstantiationService, ServiceCollection, SyncDescriptor } from '@livemoe/core'
 import { runWhenIdle } from '@livemoe/utils'
-import { ILoggerService, LoggerService } from './services/log'
-import { INativeTrayService, NativeTrayService } from './services/tray'
-import { ILifecycleService, LifecycleService } from './services/lifecycle'
-import { IStorageMainService, StorageMainService } from './services/storage'
-import { INativeEnvironmentService, NativeEnvironmentService } from './services/environment'
-import { IProtocolService, ProtocolService } from './services/protocol'
-import { resolvePages } from './helper/utils'
+import { ILoggerService } from 'natmri/platform/log/common/log'
+import { LoggerService } from 'natmri/platform/log/node/log'
+import { INativeTrayService, NativeTrayService } from 'natmri/platform/tray/electron-main/tray'
+import { INativeEnvironmentService, NativeEnvironmentService } from 'natmri/platform/environment/electron-main/environmentService'
+import { ILifecycleService, LifecycleService } from 'natmri/platform/lifecycle/electron-main/lifecycleService'
+import { IProtocolService, ProtocolService } from 'natmri/platform/protocol/electron-main/protocolService'
+import { join } from 'natmri/base/common/path'
 
 export class Application {
   constructor(
@@ -25,7 +24,7 @@ export class Application {
   static async createApplication() {
     const [instantianService] = this.createServices()
 
-    return instantianService.createInstance(Application)
+    return instantianService.createInstance(Application) as Application
   }
 
   private static createServices(): [InstantiationService] {
@@ -35,7 +34,6 @@ export class Application {
     services.set(ILoggerService, new SyncDescriptor(LoggerService))
     services.set(INativeTrayService, new SyncDescriptor(NativeTrayService, [], true))
     services.set(ILifecycleService, new SyncDescriptor(LifecycleService))
-    services.set(IStorageMainService, new SyncDescriptor(StorageMainService))
     services.set(IProtocolService, new SyncDescriptor(ProtocolService, [], false))
 
     return [new InstantiationService(services, true)]
@@ -58,6 +56,6 @@ export class Application {
     })
 
     win.webContents.openDevTools({ mode: 'detach' })
-    win.loadURL(resolvePages('main'))
+    win.loadURL(this.nativeEnvironment.getPagesPath('main'))
   }
 }
