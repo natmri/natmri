@@ -7,46 +7,17 @@
     "emitDecoratorMetadata": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
-    "jsx": "preserve",
-    "baseUrl": ".",
-    "paths": {
-      "@app/compat-i18n": [
-        "./app/compat/i18n/index.ts"
-      ],
-      "@app/typings/*": [
-        "./app/compat/typings/*"
-      ],
-      "@app/compat-common/*": [
-        "./app/compat/common/*"
-      ],
-      "@app/compat-node/*": [
-        "./app/compat/node/*"
-      ],
-      "@app/compat-browser/*": [
-        "./app/compat/browser/*"
-      ]
-    }
+    "jsx": "preserve"
   },
   "references": [
     {
       "path": "./tsconfig.test.json"
-    },
-    {
-      "path": "./tsconfig.node.json"
     }
-  ],
-  "include": [
-    "app/web",
-    "app/compat",
-    "app/framework",
-    "app/electron/tests",
-    "app/web/tests"
   ],
   "exclude": [
     "node_modules",
     "tests",
-    "app/web/tests",
-    "app/electron/tests",
-    "release/app"
+    "release/app",
+    "src"
   ]
 }

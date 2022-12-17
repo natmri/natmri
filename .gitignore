@@ -10,4 +10,4 @@ coverage
 # log
 *.log
 
-/app/electron/package.json
+./src/package.json

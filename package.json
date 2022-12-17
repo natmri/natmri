@@ -20,11 +20,11 @@
     "npm": ">=7.0.0"
   },
   "scripts": {
-    "dev": "vite -c ./app/web/vite.config.ts",
-    "build": "pnpm clean && vite -c ./app/web/vite.config.ts build",
+    "dev": "vite",
+    "build": "pnpm clean && vite build",
     "package": "pnpm build && esno ./scripts/make-installer.ts",
     "release": "bumpp package.json release/app/package.json --commit --push --tag",
-    "sync:alias": "esno ./scripts/sync-alias.ts ./tsconfig.json ./tsconfig.test.json ./app/electron/tsconfig.json ./app/web/tsconfig.json",
+    "sync:alias": "esno ./scripts/sync-alias.ts ./tsconfig.json ./tsconfig.test.json ./src/tsconfig.json",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "test": "cross-env NODE_ENV='development' pnpm build && vitest run --passWithNoTests",
@@ -32,8 +32,8 @@
     "test:e2e": "cross-env NODE_ENV='development' pnpm build && vitest run e2e --passWithNoTests",
     "test:watch": "vitest -u",
     "postinstall": "electron-builder install-app-deps && esno ./scripts/link-modules.ts && esno ./scripts/electron-rebuild.ts",
-    "typecheck:electron": "npx tsc --noEmit -p app/electron/tsconfig.json",
-    "typecheck:web": "vue-tsc --noEmit -p app/web/tsconfig.json",
+    "typecheck:electron": "npx tsc --noEmit -p ./src/tsconfig.json",
+    "typecheck:web": "vue-tsc --noEmit -p ./src/natmri/entry/electron-browser/tsconfig.json",
     "typecheck": "concurrently \"pnpm typecheck:electron\" \"pnpm typecheck:web\"",
     "clean": "esno scripts/clean-cli.ts",
     "prepare": "husky install",
@@ -48,7 +48,6 @@
     "i18next": "^22.4.5",
     "minimist": "^1.2.7",
     "reflect-metadata": "^0.1.13",
-    "typeorm": "^0.3.11",
     "vue": "^3.2.45",
     "yauzl": "^2.10.0",
     "yazl": "^2.5.1"

@@ -119,8 +119,8 @@
   },
   "extraResources": [
     {
-      "from": "assets",
-      "to": "assets"
+      "from": "resources",
+      "to": "resources"
     }
   ],
   "publish": [

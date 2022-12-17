@@ -5,7 +5,7 @@ import consola from 'consola'
 
 export const rootPath = process.cwd().includes('app') ? resolve(process.cwd(), '../../') : process.cwd()
 
-export const srcElectronPath = join(rootPath, 'app', 'electron')
+export const srcElectronPath = join(rootPath, 'src')
 export const srcElectronModulesPath = join(srcElectronPath, 'node_modules')
 export const srcElectronPackagePath = join(srcElectronPath, 'package.json')
 export const releasePath = join(rootPath, 'release')
