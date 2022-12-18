@@ -1,7 +1,7 @@
 import { createDecorator } from '@livemoe/core'
 import { Disposable } from '@livemoe/utils'
 import { Menu, Tray, app, nativeImage } from 'electron'
-import { INativeEnvironmentService } from 'natmri/platform/environment/electron-main/environmentService'
+import { INativeEnvironmentService } from 'natmri/platform/environment/common/environment'
 import { ILifecycleService } from 'natmri/platform/lifecycle/electron-main/lifecycleService'
 import { ILoggerService } from 'natmri/platform/log/common/log'
 

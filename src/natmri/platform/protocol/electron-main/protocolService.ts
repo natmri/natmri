@@ -7,7 +7,7 @@ import { Schemas } from 'natmri/base/common/network'
 import { URI } from 'natmri/base/common/uri'
 import { getMediaOrTextMime } from 'natmri/base/common/mime'
 import { ILoggerService } from 'natmri/platform/log/common/log'
-import { INativeEnvironmentService } from 'natmri/platform/environment/electron-main/environmentService'
+import { INativeEnvironmentService } from 'natmri/platform/environment/common/environment'
 
 export interface IProtocolService {
 
