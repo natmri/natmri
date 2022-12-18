@@ -3,7 +3,7 @@ import { InstantiationService, ServiceCollection, SyncDescriptor } from '@livemo
 import { runWhenIdle } from '@livemoe/utils'
 import { ILoggerService } from 'natmri/platform/log/common/log'
 import { LoggerService } from 'natmri/platform/log/node/log'
-import { INativeTrayService, NativeTrayService } from 'natmri/platform/tray/electron-main/tray'
+import { INativeTrayService, NativeTrayService } from 'natmri/platform/tray/electron-main/trayService'
 import { INativeEnvironmentService, NativeEnvironmentService } from 'natmri/platform/environment/electron-main/environmentService'
 import { ILifecycleService, LifecycleService } from 'natmri/platform/lifecycle/electron-main/lifecycleService'
 import { IProtocolService, ProtocolService } from 'natmri/platform/protocol/electron-main/protocolService'
@@ -17,8 +17,8 @@ export class Application {
     @INativeEnvironmentService private readonly nativeEnvironment: INativeEnvironmentService,
   ) {
     this.configurationSession()
-    runWhenIdle(() => this.startup())
     this.logService.info('[Application] initial')
+    runWhenIdle(() => this.startup())
   }
 
   static async createApplication() {
@@ -32,7 +32,7 @@ export class Application {
 
     services.set(INativeEnvironmentService, new SyncDescriptor(NativeEnvironmentService))
     services.set(ILoggerService, new SyncDescriptor(LoggerService))
-    services.set(INativeTrayService, new SyncDescriptor(NativeTrayService, [], true))
+    services.set(INativeTrayService, new SyncDescriptor(NativeTrayService, [], false))
     services.set(ILifecycleService, new SyncDescriptor(LifecycleService))
     services.set(IProtocolService, new SyncDescriptor(ProtocolService, [], false))
 

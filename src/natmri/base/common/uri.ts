@@ -1,14 +1,13 @@
 /* eslint-disable no-mixed-operators */
 
+/* ---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *-------------------------------------------------------------------------------------------- */
+
 import { windows } from 'eevi-is'
 import * as paths from './path'
 import { CharCode } from './charCode'
-
-export interface CustomScheme {
-  scheme: string
-  authority: string
-  path: string
-}
 
 const _schemePattern = /^\w[\w\d+.-]*$/
 const _singleSlashStart = /^\//

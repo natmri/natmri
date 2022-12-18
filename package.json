@@ -24,7 +24,6 @@
     "build": "pnpm clean && vite build",
     "package": "pnpm build && esno ./scripts/make-installer.ts",
     "release": "bumpp package.json release/app/package.json --commit --push --tag",
-    "sync:alias": "esno ./scripts/sync-alias.ts ./tsconfig.json ./tsconfig.test.json ./src/tsconfig.json",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "test": "cross-env NODE_ENV='development' pnpm build && vitest run --passWithNoTests",
@@ -87,8 +86,6 @@
     "rimraf": "^3.0.2",
     "typescript": "^4.8.4",
     "unocss": "^0.47.6",
-    "unplugin-auto-import": "^0.12.1",
-    "unplugin-vue-components": "^0.22.12",
     "vite": "^3.2.5",
     "vitest": "^0.25.7",
     "vue-tsc": "^1.0.13"
@@ -100,9 +97,6 @@
   },
   "lint-staged": {
     "*.{ts, tsx, js, jsx}": [
-      "eslint --fix"
-    ],
-    "*.d.ts": [
       "eslint --fix"
     ],
     "*.json": [

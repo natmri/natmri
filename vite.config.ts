@@ -18,7 +18,7 @@ export default defineConfig({
     eevi(),
     // SPA remove it and pages dir, MPA require it
     mpa({
-      template: './public/index.html',
+      template: './index.html',
       pages: [
         {
           name: 'main',
