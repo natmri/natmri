@@ -1,6 +1,6 @@
 import path from 'node:path'
 import { defineConfig } from 'vitest/config'
-import Vue from '@vitejs/plugin-vue'
+import React from '@vitejs/plugin-react-swc'
 import UnoCSS from 'unocss/vite'
 import { eevi, mpa } from 'eevi'
 import { alias } from './alias'
@@ -13,7 +13,7 @@ export default defineConfig({
     alias,
   },
   plugins: [
-    Vue({ reactivityTransform: true }),
+    React(),
     UnoCSS(),
     eevi(),
     // SPA remove it and pages dir, MPA require it
@@ -22,14 +22,14 @@ export default defineConfig({
       pages: [
         {
           name: 'main',
-          entry: './pages/main.ts',
+          entry: './pages/main.tsx',
           data: {
             title: 'Main Page',
           },
         },
         {
           name: 'other',
-          entry: './pages/other.ts',
+          entry: './pages/other.tsx',
           data: {
             title: 'Other Page',
           },
