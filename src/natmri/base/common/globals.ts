@@ -6,8 +6,8 @@ declare let safeIpcRenderer: IpcRenderer
 
 // native environment
 if (typeof global !== 'undefined' && typeof window === 'undefined') {
-  safeProcess = global.process
-  safeIpcRenderer = require('electron').ipcRenderer
+  global.safeProcess = global.process
+  global.safeIpcRenderer = require('electron').ipcRenderer
 }
 
 export const process = safeProcess

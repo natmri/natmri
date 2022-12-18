@@ -1,6 +1,6 @@
 import { Menu, app, protocol } from 'electron'
 import { Schemas } from 'natmri/base/common/network'
-import { Application } from 'natmri/entry/electron-main/application'
+import { Application } from 'natmri/browser-store/electron-main/application'
 import minimist from 'minimist'
 
 const args = parseArgs()

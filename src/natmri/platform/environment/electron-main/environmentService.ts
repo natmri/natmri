@@ -4,6 +4,7 @@ import { Disposable } from '@livemoe/utils'
 import { dev, macOS, windows } from 'eevi-is'
 import type { IRepository } from 'typings/repository'
 import { ILoggerService } from 'natmri/platform/log/common/log'
+import { URI } from 'natmri/base/common/uri'
 
 export interface INativeEnvironmentService {
   resourcePath: string
@@ -52,10 +53,12 @@ export class NativeEnvironmentService extends Disposable implements INativeEnvir
     return join(__dirname, 'preload')
   }
 
-  getPagesPath(pagename: string): string {
-    if (dev() && process.env.URL.startsWith('http'))
-      return this.isMpaMode ? new URL(`pages/${pagename ?? 'main'}/`, process.env.URL).toString() : process.env.URL
+  /**
+   * Default path: /src/${@link pagepath}
+   */
+  getPagesPath(pagepath: string): string {
+    console.log(URI.file(join(__dirname, pagepath)).toString())
 
-    return this.isMpaMode ? new URL(`pages/${pagename}/index.html`, `natmri://page/${__dirname}`).toString() : new URL(process.env.URL, `natmri://page/${__dirname}`).toString()
+    return dev() ? new URL(pagepath, process.env.URL).toString() : URI.file(join(__dirname, pagepath)).toString()
   }
 }

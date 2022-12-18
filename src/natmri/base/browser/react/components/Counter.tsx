@@ -1,4 +1,4 @@
-import { useCounter } from '../composable/useCounter'
+import { useCounter } from 'natmri/base/browser/react/hooks/useCounter'
 
 export function Counter() {
   const { count, inc } = useCounter()

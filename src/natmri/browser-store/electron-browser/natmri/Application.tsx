@@ -1,4 +1,6 @@
-import { Counter } from './components/Counter'
+import ReactDOM from 'react-dom/client'
+import { Counter } from 'natmri/base/browser/react/components/Counter'
+import 'uno.css'
 
 export function App() {
   const getIconsUrl = (name: string) => {
@@ -19,3 +21,7 @@ export function App() {
     </div>
   </>
 }
+
+const app = ReactDOM.createRoot(document.getElementById('app')!)
+
+app.render(<App />)

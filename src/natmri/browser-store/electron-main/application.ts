@@ -42,8 +42,6 @@ export class Application {
   private configurationSession() {
     session.defaultSession.setPreloads([
       join(this.nativeEnvironment.preloadPath, 'globals.js'),
-      join(this.nativeEnvironment.preloadPath, 'test1.js'),
-      join(this.nativeEnvironment.preloadPath, 'common.js'),
     ])
   }
 
@@ -56,6 +54,6 @@ export class Application {
     })
 
     win.webContents.openDevTools({ mode: 'detach' })
-    win.loadURL(this.nativeEnvironment.getPagesPath('main'))
+    win.loadURL(this.nativeEnvironment.getPagesPath('browser-store/electron-browser/natmri/index.html'))
   }
 }

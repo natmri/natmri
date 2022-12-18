@@ -1,4 +1,6 @@
 node_modules
+src/package.json
+
 .DS_Store
 dist
 build
@@ -10,4 +12,3 @@ coverage
 # log
 *.log
 
-./src/package.json
