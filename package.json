@@ -52,10 +52,11 @@
   },
   "devDependencies": {
     "@antfu/eslint-config": "^0.34.0",
+    "@eevi/elexpose": "0.6.2",
     "@types/better-sqlite3": "^7.6.3",
     "@types/fs-extra": "^9.0.13",
     "@types/minimist": "^1.2.2",
-    "@types/node": "^18.11.15",
+    "@types/node": "^18.11.17",
     "@types/node-abi": "^3.0.0",
     "@types/react": "^18.0.26",
     "@types/react-dom": "^18.0.9",
@@ -72,11 +73,11 @@
     "consola": "^2.15.3",
     "cross-env": "^7.0.3",
     "cz-conventional-changelog": "^3.3.0",
-    "eevi": "^0.5.10",
+    "eevi": "^0.6.2",
     "electron": "^21.3.3",
     "electron-builder": "^23.6.0",
     "electron-rebuild": "^3.2.9",
-    "eslint": "^8.29.0",
+    "eslint": "^8.30.0",
     "esno": "^0.16.3",
     "fs-extra": "^11.1.0",
     "happy-dom": "^8.1.0",
@@ -84,13 +85,13 @@
     "json-format": "^1.0.1",
     "lint-staged": "^13.1.0",
     "node-abi": "^3.30.0",
-    "playwright": "^1.28.1",
+    "playwright": "^1.29.0",
     "pnpm": "7.18.2",
     "rimraf": "^3.0.2",
     "typescript": "^4.8.4",
     "unocss": "^0.47.6",
-    "vite": "^4.0.1",
-    "vitest": "^0.25.7"
+    "vite": "^4.0.2",
+    "vitest": "^0.25.8"
   },
   "pnpm": {
     "overrides": {

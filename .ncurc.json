@@ -1,4 +1,4 @@
 {
   "upgrade": true,
-  "reject": ["electron", "typescript", "*vite*"]
+  "reject": ["electron", "typescript"]
 }

@@ -1,9 +1,11 @@
 import { join } from 'node:path'
 import { cwd } from 'node:process'
 import { defineConfig } from 'vitest/config'
+import { splitVendorChunkPlugin } from 'vite'
 import React from '@vitejs/plugin-react-swc'
 import UnoCSS from 'unocss/vite'
-import { eevi as ViteElectronPlugin } from 'eevi'
+import ViteElectronPlugin from 'eevi'
+import { ElectronRendererPlugin } from '@eevi/elexpose/vite'
 import { alias } from './alias'
 
 const NATMRI_ROOT = join(cwd(), 'src', 'natmri')
@@ -21,6 +23,10 @@ export default defineConfig({
     React(),
     UnoCSS(),
     ViteElectronPlugin(),
+    ElectronRendererPlugin([
+      'wallpaper',
+    ]),
+    splitVendorChunkPlugin(),
   ],
   build: {
     rollupOptions: {

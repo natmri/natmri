@@ -2,6 +2,7 @@ import { join, resolve } from 'path'
 import fs from 'fs'
 import type { UserConfigExport } from 'eevi'
 import { defineConfig } from 'eevi'
+import { ElectronPreloadPlugin } from '@eevi/elexpose/esbuild'
 import { alias } from './alias'
 
 const appPath = resolve(process.cwd(), 'release', 'app')
@@ -20,9 +21,8 @@ export default defineConfig({
   entry: './src/main.ts',
   outDir: join(appPath, 'dist'),
   preloadEntriesDir: resolve(process.cwd(), './src/natmri/parts/preload'),
-  preloadEntries: [
-    '*.ts', // eevi v0.3.3
-  ],
+  preloadEntries: ['*.ts'],
+  preloadPlugins: [ElectronPreloadPlugin()],
   resolve: {
     alias,
   },
