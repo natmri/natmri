@@ -2,7 +2,7 @@ import { BrowserWindow, session } from 'electron'
 import { InstantiationService, ServiceCollection, SyncDescriptor } from '@livemoe/core'
 import { runWhenIdle } from '@livemoe/utils'
 import { ILoggerService } from 'natmri/platform/log/common/log'
-import { LoggerService } from 'natmri/platform/log/node/log'
+import { LoggerService } from 'natmri/platform/log/node/logService'
 import { INativeTrayService, NativeTrayService } from 'natmri/platform/tray/electron-main/trayService'
 import { INativeEnvironmentService } from 'natmri/platform/environment/common/environment'
 import { NativeEnvironmentService } from 'natmri/platform/environment/electron-main/environmentService'
@@ -54,7 +54,16 @@ export class Application {
       },
     })
 
+    const win2 = new BrowserWindow({
+      webPreferences: {
+        contextIsolation: true,
+        sandbox: false,
+      },
+    })
+
     win.webContents.openDevTools({ mode: 'detach' })
+    win2.webContents.openDevTools({ mode: 'detach' })
     win.loadURL(this.nativeEnvironment.getPagesPath('browser-store/electron-browser/natmri/index.html'))
+    win2.loadURL(this.nativeEnvironment.getPagesPath('browser-store/electron-browser/settings/index.html'))
   }
 }
