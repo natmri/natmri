@@ -20,28 +20,25 @@
     "npm": ">=7.0.0"
   },
   "scripts": {
-    "dev": "vite",
     "build": "pnpm clean && vite build",
-    "package": "pnpm build && esno ./scripts/make-installer.ts",
-    "release": "bumpp package.json release/app/package.json --commit --push --tag",
+    "clean": "esno scripts/clean-cli.ts",
+    "dev": "vite",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "test": "cross-env NODE_ENV='development' pnpm build && vitest run --passWithNoTests",
-    "test:unit": "vitest run unit --passWithNoTests",
-    "test:e2e": "cross-env NODE_ENV='development' pnpm build && vitest run e2e --passWithNoTests",
-    "test:watch": "vitest -u",
+    "package": "pnpm build && esno ./scripts/make-installer.ts",
     "postinstall": "electron-builder install-app-deps && esno ./scripts/link-modules.ts && esno ./scripts/electron-rebuild.ts",
-    "typecheck": "npx tsc --noEmit -p ./src/tsconfig.json",
-    "clean": "esno scripts/clean-cli.ts",
+    "preinstall": "npx only-allow pnpm",
     "prepare": "husky install",
-    "commit": "git cz",
-    "preinstall": "npx only-allow pnpm"
+    "release": "bumpp package.json release/app/package.json --commit --push --tag",
+    "test": "cross-env NODE_ENV='development' pnpm build && vitest run --passWithNoTests",
+    "test:e2e": "cross-env NODE_ENV='development' pnpm build && vitest run e2e --passWithNoTests",
+    "test:unit": "vitest run unit --passWithNoTests",
+    "test:watch": "vitest -u",
+    "typecheck": "npx tsc --noEmit -p ./src/tsconfig.json"
   },
   "dependencies": {
     "@livemoe/core": "^0.1.0",
-    "@livemoe/ipc": "^0.1.0",
     "@livemoe/utils": "^0.1.0",
-    "chokidar": "^3.5.3",
     "i18next": "^22.4.5",
     "minimist": "^1.2.7",
     "react": "^18.2.0",
@@ -53,6 +50,7 @@
   "devDependencies": {
     "@antfu/eslint-config": "^0.34.0",
     "@eevi/elexpose": "0.6.2",
+    "@electron/rebuild": "^3.2.10",
     "@types/better-sqlite3": "^7.6.3",
     "@types/fs-extra": "^9.0.13",
     "@types/minimist": "^1.2.2",
@@ -67,16 +65,12 @@
     "@unocss/transformer-attributify-jsx": "^0.47.6",
     "@vitejs/plugin-react-swc": "^3.0.1",
     "bumpp": "^8.2.1",
-    "commitizen": "^4.2.6",
-    "commitlint-config-cz": "^0.13.3",
     "concurrently": "^7.6.0",
     "consola": "^2.15.3",
     "cross-env": "^7.0.3",
-    "cz-conventional-changelog": "^3.3.0",
     "eevi": "^0.6.2",
     "electron": "^21.3.3",
     "electron-builder": "^23.6.0",
-    "electron-rebuild": "^3.2.9",
     "eslint": "^8.30.0",
     "esno": "^0.16.3",
     "fs-extra": "^11.1.0",
@@ -95,7 +89,8 @@
   },
   "pnpm": {
     "overrides": {
-      "asar": "npm:@electron/asar@latest"
+      "asar": "npm:@electron/asar@latest",
+      "sourcemap-codec": "npm:@jridgewell/sourcemap-codec@latest"
     }
   },
   "lint-staged": {
@@ -108,46 +103,6 @@
     "*.yml": [
       "eslint --fix"
     ]
-  },
-  "config": {
-    "commitizen": {
-      "path": "node_modules/cz-conventional-changelog",
-      "types": {
-        "feat": {
-          "description": "✨  A new feature"
-        },
-        "fix": {
-          "description": "🐛  A bug fix"
-        },
-        "docs": {
-          "description": "📝  Documentation only changes"
-        },
-        "style": {
-          "description": "🌈  Changes that do not affect the meaning of the code (white-space, formatting, missing semi-colons, etc)"
-        },
-        "refactor": {
-          "description": "📦  A code change that neither fixes a bug nor adds a feature"
-        },
-        "perf": {
-          "description": "🚀  A code change that improves performance"
-        },
-        "test": {
-          "description": "✅  Adding missing tests or correcting existing tests"
-        },
-        "build": {
-          "description": "👷  Changes that affect the build system or external dependencies (example scopes: gulp, broccoli, npm)"
-        },
-        "ci": {
-          "description": "💻  Changes to our CI configuration files and scripts (example scopes: Travis, Circle, BrowserStack, SauceLabs)"
-        },
-        "chore": {
-          "description": "🎫  Other changes that don't modify src or test files"
-        },
-        "revert": {
-          "description": "⏪  Reverts a previous commit"
-        }
-      }
-    }
   },
   "build": {
     "directories": {
