@@ -32,6 +32,7 @@ export default defineConfig({
     rollupOptions: {
       input: {
         main: join(BROWSER_STORE, 'natmri', 'index.html'),
+        settings: join(BROWSER_STORE, 'settings', 'index.html'),
       },
     },
     outDir: OUT_DIR,
