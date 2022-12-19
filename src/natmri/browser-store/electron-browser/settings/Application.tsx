@@ -9,7 +9,7 @@ export function App() {
 
   return <>
     <div text-xl>
-      <h2> Natmri - Store </h2>
+      <h2> Natmri - Settings </h2>
 
       <Counter />
 
