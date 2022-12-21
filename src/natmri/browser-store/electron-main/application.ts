@@ -6,9 +6,10 @@ import { LoggerService } from 'natmri/platform/log/node/logService'
 import { INativeTrayService, NativeTrayService } from 'natmri/platform/tray/electron-main/trayService'
 import { INativeEnvironmentService } from 'natmri/platform/environment/common/environment'
 import { NativeEnvironmentService } from 'natmri/platform/environment/electron-main/environmentService'
-import { ILifecycleService, LifecycleService } from 'natmri/platform/lifecycle/electron-main/lifecycleService'
+import { ILifecycleService, LifecycleMainPhase, LifecycleService } from 'natmri/platform/lifecycle/electron-main/lifecycleService'
 import { IProtocolService, ProtocolService } from 'natmri/platform/protocol/electron-main/protocolService'
 import { join } from 'natmri/base/common/path'
+import { PowerMonitor } from 'natmri/base/electron-main/powerMonitor'
 
 export class Application {
   constructor(
@@ -16,6 +17,7 @@ export class Application {
     @ILoggerService private readonly logService: ILoggerService,
     @IProtocolService private readonly protocolService: ProtocolService,
     @INativeEnvironmentService private readonly nativeEnvironment: INativeEnvironmentService,
+    @ILifecycleService private readonly lifecycleService: ILifecycleService,
   ) {
     this.configurationSession()
     this.logService.info('[Application] initial')
@@ -65,5 +67,8 @@ export class Application {
     win2.webContents.openDevTools({ mode: 'detach' })
     win.loadURL(this.nativeEnvironment.getPagesPath('browser-store/electron-browser/natmri/index.html'))
     win2.loadURL(this.nativeEnvironment.getPagesPath('browser-store/electron-browser/settings/index.html'))
+
+    PowerMonitor.LOCK_WINDOW = win.getNativeWindowHandle().readBigInt64LE()
+    this.lifecycleService.phase = LifecycleMainPhase.Ready
   }
 }

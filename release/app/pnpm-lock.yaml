@@ -1,17 +1,17 @@
 lockfileVersion: 5.4
 
 specifiers:
-  '@livemoe/tools': ^0.3.2
+  '@livemoe/tools': ^0.4.0-beta.3
   better-sqlite3: ^8.0.1
 
 dependencies:
-  '@livemoe/tools': 0.3.2
+  '@livemoe/tools': 0.4.0-beta.3
   better-sqlite3: 8.0.1
 
 packages:
 
-  /@livemoe/tools-darwin-arm64/0.3.2:
-    resolution: {integrity: sha512-lbn00+SAN32zoNyBI4VU1rPodkV4WOQ0sYlgLVE8dLS3j756SBEWeSWuMX93RnidteEf9VnRljphDfiwgeRkUA==}
+  /@livemoe/tools-darwin-arm64/0.4.0-beta.3:
+    resolution: {integrity: sha512-5b3W8y4su4GEKJNQ3iYVwMTVKAmwEUNucs71oyJU0xJ8cY4zMUD/Y6Gf+8GGHebR5JHB8xYZDKzaWXkpsrErYQ==}
     engines: {node: '>= 10'}
     cpu: [arm64]
     os: [darwin]
@@ -19,8 +19,8 @@ packages:
     dev: false
     optional: true
 
-  /@livemoe/tools-darwin-x64/0.3.2:
-    resolution: {integrity: sha512-sroV9auyktpgamSxx0hLdm/n9tH/lOPToDkZm5iwa1M3lpOZYxA7msKzzNzzgkxP00IUng2KlJ2gBhpMcf/j6Q==}
+  /@livemoe/tools-darwin-x64/0.4.0-beta.3:
+    resolution: {integrity: sha512-Apxs08l90Js7eeZWEJYewCm6lzbMreC6uNewALp5ikUrZ0hqOBdTq6dpjwJI36E3k/ZH4GD3LbW1P4ZTIaxXdw==}
     engines: {node: '>= 10'}
     cpu: [x64]
     os: [darwin]
@@ -28,8 +28,8 @@ packages:
     dev: false
     optional: true
 
-  /@livemoe/tools-linux-arm-gnueabihf/0.3.2:
-    resolution: {integrity: sha512-cxMHbBg1maTMVbsqcW3Eb4QSKL5PTTmtzVNCsjwyBdLKly/r37Gh6a3n6ifwBuGeZ5ZJ/nKILLY8otw/+8Waog==}
+  /@livemoe/tools-linux-arm-gnueabihf/0.4.0-beta.3:
+    resolution: {integrity: sha512-p2B9KSSa5UojH3ybO/BONP5gJmNJAGGBXBt+v6R0nQIdRnxW9UUrkqgWPoN3xg/HsTdUR0m7qfA7ZZexiUOgZg==}
     engines: {node: '>= 10'}
     cpu: [arm]
     os: [linux]
@@ -37,8 +37,8 @@ packages:
     dev: false
     optional: true
 
-  /@livemoe/tools-linux-arm64-gnu/0.3.2:
-    resolution: {integrity: sha512-EQjCYFJKboiV/0bLI2qXMLV3rUBKz5CLiW45pX1UVAKlh+mKpqpOVLCH5YTB3W5rUnSTqrkN/fzOi/CAFBzXDA==}
+  /@livemoe/tools-linux-arm64-gnu/0.4.0-beta.3:
+    resolution: {integrity: sha512-WI64Sq/s0nFdD/1z88p2qtMHgCrKbxRP7vXmoE9uEe5tPurpA5NReEDKPMF97Rihrd0ctLEOl3UExyfuzLUQmg==}
     engines: {node: '>= 10'}
     cpu: [arm64]
     os: [linux]
@@ -46,8 +46,8 @@ packages:
     dev: false
     optional: true
 
-  /@livemoe/tools-linux-x64-gnu/0.3.2:
-    resolution: {integrity: sha512-tWqWoADQo0CgTPgpGnJfwnVY00fjXM0u0yZEX+isUEAmS6nVWwAgeElBHlgGimFna6Q5siqrP5ngK0VvoeaJqg==}
+  /@livemoe/tools-linux-x64-gnu/0.4.0-beta.3:
+    resolution: {integrity: sha512-1izE2CfI2NtIcQ1WsJcMVjGR/bQCsbdiUj1OTJk0dw5VuWCGhv07Z/ZVwwpq1YNFbvRR5ddMEdgzY71jtFBgVQ==}
     engines: {node: '>= 10'}
     cpu: [x64]
     os: [linux]
@@ -55,8 +55,8 @@ packages:
     dev: false
     optional: true
 
-  /@livemoe/tools-win32-arm64-msvc/0.3.2:
-    resolution: {integrity: sha512-ZATVER/VeLC+60r0Kdow/gFhs1DluVH6+kIrqK7/Odg1cGtNUfYU/6TaJcND7bpmEPmeUrg7BekRyVMTLMaE3Q==}
+  /@livemoe/tools-win32-arm64-msvc/0.4.0-beta.3:
+    resolution: {integrity: sha512-bXGX+1naaCMSYy6ShMZx/Sicv4Ay64Gh9BpjNET8bQdl/P/LeS3aB5L+5gSl23N2im2krtm6Nino85AFEqIcBA==}
     engines: {node: '>= 10'}
     cpu: [arm64]
     os: [win32]
@@ -64,8 +64,8 @@ packages:
     dev: false
     optional: true
 
-  /@livemoe/tools-win32-ia32-msvc/0.3.2:
-    resolution: {integrity: sha512-3GXJkcAK7Ft62hINyRwAlQRl0HqdMus2+cG4oMwjAC6igrdZXXOIfo/tNJEC6aJfebyvVmoC75t7+SItqbsEjw==}
+  /@livemoe/tools-win32-ia32-msvc/0.4.0-beta.3:
+    resolution: {integrity: sha512-Z59jpWjIMraKjqgMWQ4v3SJs6X5ShVrvXHzo2k+GqAXl5j7d0caj9m8Zs82eKHZsMq0nzgnsw6IdUHaeRSIhAA==}
     engines: {node: '>= 10'}
     cpu: [ia32]
     os: [win32]
@@ -73,8 +73,8 @@ packages:
     dev: false
     optional: true
 
-  /@livemoe/tools-win32-x64-msvc/0.3.2:
-    resolution: {integrity: sha512-9oBd3Un+owM+qPU/9WmSB7U8FCGwrnl6V5R2uevxt/iHItd0dWcTO5JnjjDBn1qjxa4Iw4KMjx4/9YfoUWjhow==}
+  /@livemoe/tools-win32-x64-msvc/0.4.0-beta.3:
+    resolution: {integrity: sha512-d5/OI7yEY6HDXwE5gOKow3c8tEL8ZhhbnN411Cod9HRzUWPFRdWovSj4u7c2nZhCRm01xufKICsCAQTvSbt3XQ==}
     engines: {node: '>= 10'}
     cpu: [x64]
     os: [win32]
@@ -82,18 +82,18 @@ packages:
     dev: false
     optional: true
 
-  /@livemoe/tools/0.3.2:
-    resolution: {integrity: sha512-ETvXtvSlnmsw0PCZTUiEwjmKUZxOH69E+qVwNQkdlHapbhwILI4LfyqgU11rOQFTJymEbDhv/VQThd8O29/GJw==}
+  /@livemoe/tools/0.4.0-beta.3:
+    resolution: {integrity: sha512-kFbbz+8AVXjvuqkB03qVPZdClaYEELNZ20zI9RBYnB2Jf/F8a/RvuYwg81qaDT4SMlY5Qq2dE8xbiCm1fJmL4A==}
     engines: {node: '>= 10'}
     optionalDependencies:
-      '@livemoe/tools-darwin-arm64': 0.3.2
-      '@livemoe/tools-darwin-x64': 0.3.2
-      '@livemoe/tools-linux-arm-gnueabihf': 0.3.2
-      '@livemoe/tools-linux-arm64-gnu': 0.3.2
-      '@livemoe/tools-linux-x64-gnu': 0.3.2
-      '@livemoe/tools-win32-arm64-msvc': 0.3.2
-      '@livemoe/tools-win32-ia32-msvc': 0.3.2
-      '@livemoe/tools-win32-x64-msvc': 0.3.2
+      '@livemoe/tools-darwin-arm64': 0.4.0-beta.3
+      '@livemoe/tools-darwin-x64': 0.4.0-beta.3
+      '@livemoe/tools-linux-arm-gnueabihf': 0.4.0-beta.3
+      '@livemoe/tools-linux-arm64-gnu': 0.4.0-beta.3
+      '@livemoe/tools-linux-x64-gnu': 0.4.0-beta.3
+      '@livemoe/tools-win32-arm64-msvc': 0.4.0-beta.3
+      '@livemoe/tools-win32-ia32-msvc': 0.4.0-beta.3
+      '@livemoe/tools-win32-x64-msvc': 0.4.0-beta.3
     dev: false
 
   /base64-js/1.5.1:
