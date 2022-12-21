@@ -5,8 +5,8 @@ import path from 'path'
 import type { Entry, ZipFile } from 'yauzl'
 import { open as _openZip } from 'yauzl'
 import * as yazl from 'yazl'
-import type { CancellationToken } from '@livemoe/utils'
-import { Sequencer, createCancelablePromise } from '@livemoe/utils'
+import type { CancellationToken } from 'natmri/base/common/cancellation'
+import { Sequencer, createCancelablePromise } from 'natmri/base/common/async'
 
 export interface IExtractOptions {
   overwrite?: boolean

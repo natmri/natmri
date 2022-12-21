@@ -1,4 +1,4 @@
-import { createDecorator } from '@livemoe/core'
+import { createDecorator } from 'natmri/base/common/instantiation'
 
 export interface ITrayService {
 

@@ -1,13 +1,13 @@
-import { join } from 'path'
-import { createDecorator } from '@livemoe/core'
-import { Disposable } from '@livemoe/utils'
 import { protocol } from 'electron'
-import fs from 'fs-extra'
-import { Schemas } from 'natmri/base/common/network'
-import { URI } from 'natmri/base/common/uri'
+import { createReadStream } from 'fs-extra'
+import { createDecorator } from 'natmri/base/common/instantiation'
+import { Disposable } from 'natmri/base/common/lifecycle'
 import { getMediaOrTextMime } from 'natmri/base/common/mime'
-import { ILoggerService } from 'natmri/platform/log/common/log'
+import { Schemas } from 'natmri/base/common/network'
+import { join } from 'natmri/base/common/path'
+import { URI } from 'natmri/base/common/uri'
 import { INativeEnvironmentService } from 'natmri/platform/environment/common/environment'
+import { ILoggerService } from 'natmri/platform/log/common/log'
 
 export interface IProtocolService {
 
@@ -32,13 +32,13 @@ export class ProtocolService extends Disposable implements IProtocolService {
 
       switch (uri.authority) {
         case 'assets':
-          callback(fs.createReadStream(join(this.nativeEnvironment.resourcePath, 'resources', uri.fsPath)))
+          callback(createReadStream(join(this.nativeEnvironment.resourcePath, 'resources', uri.fsPath)))
           break
         case 'page':
           {
             const filepath = join(__dirname, uri.fsPath)
             callback({
-              data: fs.createReadStream(filepath),
+              data: createReadStream(filepath),
               mimeType: getMediaOrTextMime(filepath),
             })
           }

@@ -1,4 +1,5 @@
-import { Disposable, Emitter, toDisposable } from '@livemoe/utils'
+import { Emitter } from 'natmri/base/common/event'
+import { Disposable, toDisposable } from 'natmri/base/common/lifecycle'
 
 export class BroadcastDataChannel<T, TT = T> extends Disposable {
   private broadcastChannel: BroadcastChannel

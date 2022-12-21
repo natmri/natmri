@@ -22,7 +22,7 @@
   "scripts": {
     "build": "pnpm clean && vite build",
     "clean": "esno scripts/clean-cli.ts",
-    "dev": "cross-env NATMRI_ENV='1' vite",
+    "dev": "cross-env NATMRI_DEV='1' vite",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "package": "pnpm build && esno ./scripts/make-installer.ts",
@@ -37,13 +37,10 @@
     "typecheck": "npx tsc --noEmit -p ./src/tsconfig.json"
   },
   "dependencies": {
-    "@livemoe/core": "^0.1.0",
-    "@livemoe/utils": "^0.1.0",
     "i18next": "^22.4.5",
     "minimist": "^1.2.7",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "reflect-metadata": "^0.1.13",
     "yauzl": "^2.10.0",
     "yazl": "^2.5.1"
   },
@@ -90,7 +87,8 @@
   "pnpm": {
     "overrides": {
       "asar": "npm:@electron/asar@latest",
-      "sourcemap-codec": "npm:@jridgewell/sourcemap-codec@latest"
+      "sourcemap-codec": "npm:@jridgewell/sourcemap-codec@latest",
+      "@npmcli/move-file@2.0.1": "npm:@npmcli/fs@latest"
     }
   },
   "lint-staged": {

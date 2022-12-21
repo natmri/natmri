@@ -1,15 +1,15 @@
 import { BrowserWindow, session } from 'electron'
-import { InstantiationService, ServiceCollection, SyncDescriptor } from '@livemoe/core'
-import { runWhenIdle } from '@livemoe/utils'
-import { ILoggerService } from 'natmri/platform/log/common/log'
-import { LoggerService } from 'natmri/platform/log/node/logService'
-import { INativeTrayService, NativeTrayService } from 'natmri/platform/tray/electron-main/trayService'
+import { runWhenIdle } from 'natmri/base/common/async'
+import { InstantiationService, ServiceCollection, SyncDescriptor } from 'natmri/base/common/instantiation'
+import { join } from 'natmri/base/common/path'
+import { PowerMonitor } from 'natmri/base/electron-main/powerMonitor'
 import { INativeEnvironmentService } from 'natmri/platform/environment/common/environment'
 import { NativeEnvironmentService } from 'natmri/platform/environment/electron-main/environmentService'
 import { ILifecycleService, LifecycleMainPhase, LifecycleService } from 'natmri/platform/lifecycle/electron-main/lifecycleService'
+import { ILoggerService } from 'natmri/platform/log/common/log'
+import { LoggerService } from 'natmri/platform/log/node/logService'
 import { IProtocolService, ProtocolService } from 'natmri/platform/protocol/electron-main/protocolService'
-import { join } from 'natmri/base/common/path'
-import { PowerMonitor } from 'natmri/base/electron-main/powerMonitor'
+import { INativeTrayService, NativeTrayService } from 'natmri/platform/tray/electron-main/trayService'
 
 export class Application {
   constructor(
@@ -27,7 +27,7 @@ export class Application {
   static async createApplication() {
     const [instantianService] = this.createServices()
 
-    return instantianService.createInstance(Application) as Application
+    return instantianService.createInstance(new SyncDescriptor(Application))
   }
 
   private static createServices(): [InstantiationService] {

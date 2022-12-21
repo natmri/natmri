@@ -1,5 +1,5 @@
-import { Disposable } from '@livemoe/utils'
 import { isDevelopment } from 'natmri/base/common/environment'
+import { Disposable } from 'natmri/base/common/lifecycle'
 import type { ILogger, ILoggerService } from 'natmri/platform/log/common/log'
 import { AbstractLogger, LogLevel, now } from 'natmri/platform/log/common/log'
 

@@ -1,5 +1,5 @@
-import { toDisposable } from '@livemoe/utils'
 import { setWindowWorker as embedWindow, restoreWindowWorker as restoreWindow } from '@livemoe/tools'
+import { toDisposable } from 'natmri/base/common/lifecycle'
 import { PlayerUI } from './player'
 
 export class WallpaperPlayerUI extends PlayerUI {

@@ -1,7 +1,9 @@
-import { createDecorator } from '@livemoe/core'
-import type { Event, IDisposable } from '@livemoe/utils'
-import { Disposable, Emitter } from '@livemoe/utils'
 import { toErrorMessage } from 'natmri/base/common/errors'
+import type { Event } from 'natmri/base/common/event'
+import { Emitter } from 'natmri/base/common/event'
+import { createDecorator } from 'natmri/base/common/instantiation'
+import type { IDisposable } from 'natmri/base/common/lifecycle'
+import { Disposable } from 'natmri/base/common/lifecycle'
 
 export const enum LogLevel {
   Trace,

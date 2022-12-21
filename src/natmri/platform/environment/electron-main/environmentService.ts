@@ -1,10 +1,10 @@
 import { join } from 'path'
-import { Disposable } from '@livemoe/utils'
 import { ILoggerService } from 'natmri/platform/log/common/log'
 import { URI } from 'natmri/base/common/uri'
 import type { INativeEnvironmentService, NativeParsedArgs } from 'natmri/platform/environment/common/environment'
 import minimist from 'minimist'
 import { isDevelopment, isMacintosh, isWindows } from 'natmri/base/common/environment'
+import { Disposable } from 'natmri/base/common/lifecycle'
 
 export class NativeEnvironmentService extends Disposable implements INativeEnvironmentService {
   readonly args: NativeParsedArgs = minimist(process.argv.slice(2)) as NativeParsedArgs
@@ -14,7 +14,7 @@ export class NativeEnvironmentService extends Disposable implements INativeEnvir
   ) {
     super()
 
-    this.logService.info('[NativeEnvironmentService] initial', this.args)
+    this.logService.info('[NativeEnvironmentService] initial')
   }
 
   get isMpaMode() {

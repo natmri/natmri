@@ -1,9 +1,9 @@
 import { basename, extname, join, relative } from 'node:path'
-import { createCancelablePromise } from '@livemoe/utils'
 import fs from 'fs-extra'
 import { IMAGE_EXTS, VIDEO_EXTS, ZIP_EXTS } from 'natmri/base/common/constants'
 import type { IExtractOptions, IFile } from 'natmri/base/node/zip'
 import { extract, pack } from 'natmri/base/node/zip'
+import { createCancelablePromise } from 'natmri/base/common/async'
 
 export enum FileOperationErrorType {
   NOT_FOUNT,
@@ -175,7 +175,7 @@ export async function unzip(zippath: string, targetpath: string, options?: IExtr
     throw new FileError(FileOperationErrorType.EXT_NOT_MATCH, new Error(`incorrect file extension as ${extname(zippath)}`))
 
   const cancelablePromise = createCancelablePromise((token) => {
-    return extract(zippath, targetpath, options ?? { }, token)
+    return extract(zippath, targetpath, options ?? {}, token)
   })
 
   return cancelablePromise

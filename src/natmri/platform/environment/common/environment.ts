@@ -1,4 +1,4 @@
-import { createDecorator } from '@livemoe/core'
+import { createDecorator } from 'natmri/base/common/instantiation'
 import type { IRepository } from 'typings/repository'
 
 export interface NativeParsedArgs {

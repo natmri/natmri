@@ -1,8 +1,10 @@
-import { createDecorator } from '@livemoe/core'
-import type { Event } from '@livemoe/utils'
-import { Barrier, Disposable, Emitter, timeout } from '@livemoe/utils'
 import { BrowserWindow, app } from 'electron'
+import { Barrier, timeout } from 'natmri/base/common/async'
 import { isMacintosh } from 'natmri/base/common/environment'
+import type { Event } from 'natmri/base/common/event'
+import { Emitter } from 'natmri/base/common/event'
+import { createDecorator } from 'natmri/base/common/instantiation'
+import { Disposable } from 'natmri/base/common/lifecycle'
 import { powerMonitor } from 'natmri/base/electron-main/powerMonitor'
 import { ILoggerService } from 'natmri/platform/log/common/log'
 

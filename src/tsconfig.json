@@ -14,7 +14,15 @@
     "suppressImplicitAnyIndexErrors": false,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
+    "useUnknownInCatchVariables": false,
+    "exactOptionalPropertyTypes": false,
     "skipLibCheck": true,
+    "lib": [
+      "ESNext",
+      "DOM",
+      "DOM.Iterable",
+      "WebWorker.ImportScripts"
+    ],
     "paths": {
       "natmri/*": [
         "./natmri/*"

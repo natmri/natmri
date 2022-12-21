@@ -3,13 +3,12 @@ lockfileVersion: 5.4
 overrides:
   asar: npm:@electron/asar@latest
   sourcemap-codec: npm:@jridgewell/sourcemap-codec@latest
+  '@npmcli/move-file@2.0.1': npm:@npmcli/fs@latest
 
 specifiers:
   '@antfu/eslint-config': ^0.34.0
   '@eevi/elexpose': 0.6.2
   '@electron/rebuild': ^3.2.10
-  '@livemoe/core': ^0.1.0
-  '@livemoe/utils': ^0.1.0
   '@types/better-sqlite3': ^7.6.3
   '@types/fs-extra': ^9.0.13
   '@types/minimist': ^1.2.2
@@ -44,7 +43,6 @@ specifiers:
   pnpm: 7.18.2
   react: ^18.2.0
   react-dom: ^18.2.0
-  reflect-metadata: ^0.1.13
   rimraf: ^3.0.2
   typescript: ^4.8.4
   unocss: ^0.47.6
@@ -54,13 +52,10 @@ specifiers:
   yazl: ^2.5.1
 
 dependencies:
-  '@livemoe/core': 0.1.0
-  '@livemoe/utils': 0.1.0
   i18next: 22.4.5
   minimist: 1.2.7
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
-  reflect-metadata: 0.1.13
   yauzl: 2.10.0
   yazl: 2.5.1
 
@@ -714,16 +709,6 @@ packages:
       string-argv: 0.3.1
       type-detect: 4.0.8
     dev: true
-
-  /@livemoe/core/0.1.0:
-    resolution: {integrity: sha512-TkhA8F/hz2LLEUgKIr6ufdacUFXf5FVaKQ9j7pqeZprrI6AcJ3EqkX7y4LlNlRZVTR56w7OOlYvjZYOfBNQ4Kg==}
-    dependencies:
-      '@livemoe/utils': 0.1.0
-    dev: false
-
-  /@livemoe/utils/0.1.0:
-    resolution: {integrity: sha512-wjK6qXvuZYHk29h6iRrtQS5xtzxxpEUWzOPW2TRSsbaki9NrtVnv2C1QYH2RWi0y171sPLwC747sR9hCOalVJQ==}
-    dev: false
 
   /@malept/cross-spawn-promise/1.1.1:
     resolution: {integrity: sha512-RTBGWL5FWQcg9orDOCcp4LvItNzUPcyEU9bwaeJX0rJ1IQxzucC48Y0/sQLp/g6t99IQgAlGIaesJS+gTn7tVQ==}
@@ -5170,10 +5155,6 @@ packages:
     dependencies:
       picomatch: 2.3.1
     dev: true
-
-  /reflect-metadata/0.1.13:
-    resolution: {integrity: sha512-Ts1Y/anZELhSsjMcU605fU9RE4Oi3p5ORujwbIKXfWa+0Zxs510Qrmrce5/Jowq3cHSZSJqBjypxmHarc+vEWg==}
-    dev: false
 
   /regenerator-runtime/0.13.11:
     resolution: {integrity: sha512-kY1AZVr2Ra+t+piVaJ4gxaFaReZVH40AKNo7UCX6W+dEwBo/2oZJzqfuN1qLq1oL45o56cPaTXELwrTh8Fpggg==}

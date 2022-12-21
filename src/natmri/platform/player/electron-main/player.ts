@@ -1,6 +1,7 @@
-import { Disposable, Emitter, Event } from '@livemoe/utils'
 import { BrowserView, BrowserWindow } from 'electron'
 import { isDevelopment } from 'natmri/base/common/environment'
+import { Emitter, Event } from 'natmri/base/common/event'
+import { Disposable } from 'natmri/base/common/lifecycle'
 import type { IPlayerUI, PlayerErrorEvent } from 'typings/player'
 
 export class PlayerUIView extends Disposable {
