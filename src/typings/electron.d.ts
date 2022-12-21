@@ -110,3 +110,12 @@ export interface IpcRenderer {
    */
   sendSync(channel: string, ...args: any[]): any;
 }
+
+export interface ParentPort {
+  postMessage(message: any): void
+
+  addListener(event: 'message', listener: (e: { data: any, ports: Electron.MessagePortMain }) => void): this
+  on(event: 'message', listener: (e: { data: any, ports: Electron.MessagePortMain }) => void): this
+  removeListener(event: 'message', listener: (e: { data: any, ports: Electron.MessagePortMain }) => void): this
+  removeAllListener(event: 'message'): this
+}

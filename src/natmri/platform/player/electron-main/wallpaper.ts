@@ -1,6 +1,6 @@
 import { toDisposable } from '@livemoe/utils'
-import { PlayerUI } from './player'
 import { setWindowWorker as embedWindow, restoreWindowWorker as restoreWindow } from '@livemoe/tools'
+import { PlayerUI } from './player'
 
 export class WallpaperPlayerUI extends PlayerUI {
   constructor() {

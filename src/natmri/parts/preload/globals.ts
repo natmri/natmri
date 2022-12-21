@@ -7,7 +7,12 @@ const SecureSyncChannel = new Set([
 ] as readonly string[])
 
 const safeProcess: Process = {
+  type: process.type,
   arch: process.arch,
+  sandboxed: process.sandboxed,
+  contextIsolated: process.contextIsolated,
+  mas: process.mas,
+  windowsStore: process.windowsStore,
   cwd: () => process.cwd(),
   env: { ...(process?.env ?? {}) } as any,
   version: process.version,

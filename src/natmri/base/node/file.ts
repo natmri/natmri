@@ -12,7 +12,7 @@ export enum FileOperationErrorType {
 }
 
 export class FileError extends Error {
-  readonly type: FileOperationErrorType
+  readonly type: FileOperationErrorType | undefined
   readonly cause: Error
 
   constructor(type: FileOperationErrorType | undefined, cause: Error) {
@@ -43,7 +43,7 @@ export function is(filepath: string | string[], type: 'file' | 'directory', exts
     const result: boolean[] = []
 
     for (const path of filepath)
-      result.push(this.is(path, type, exts))
+      result.push(is(path, type, exts))
 
     return result
   }

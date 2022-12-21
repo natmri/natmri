@@ -41,7 +41,7 @@ export class Lazy<T> {
         this._value = this.executor()
       }
       catch (err) {
-        this._error = err
+        this._error = err as Error
       }
       finally {
         this._didRun = true

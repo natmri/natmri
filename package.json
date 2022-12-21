@@ -22,7 +22,7 @@
   "scripts": {
     "build": "pnpm clean && vite build",
     "clean": "esno scripts/clean-cli.ts",
-    "dev": "vite",
+    "dev": "cross-env NATMRI_ENV='1' vite",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "package": "pnpm build && esno ./scripts/make-installer.ts",

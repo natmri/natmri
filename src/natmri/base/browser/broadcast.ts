@@ -1,7 +1,7 @@
 import { Disposable, Emitter, toDisposable } from '@livemoe/utils'
 
 export class BroadcastDataChannel<T, TT = T> extends Disposable {
-  private broadcastChannel: BroadcastChannel | undefined
+  private broadcastChannel: BroadcastChannel
 
   private readonly $onDidReceiveData = this._register(new Emitter<T>())
   readonly onDidReceiveData = this.$onDidReceiveData.event

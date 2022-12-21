@@ -4,12 +4,12 @@ import { WALLPAPER_BROADCAST_CHANNEL } from 'natmri/base/common/constants'
 import type { IWallpaperBroadcastClientData, IWallpaperInitialEventConfig } from 'typings/wallpaper'
 
 let broadcast: WallpaperBroadcastServer
-let video: HTMLVideoElement
+let video: HTMLVideoElement | null
 let isVideo = false
 
 class WallpaperBroadcastServer {
   private broadcast: BroadcastDataChannel<IWallpaperBroadcastClientData>
-  private initial: IWallpaperInitialEventConfig
+  private initial: IWallpaperInitialEventConfig | undefined
 
   constructor(private readonly channelName: string) {
     this.broadcast = new BroadcastDataChannel(this.channelName)
@@ -18,15 +18,15 @@ class WallpaperBroadcastServer {
   init(initial: IWallpaperInitialEventConfig) {
     this.initial = initial
 
-    if (isVideo) {
+    if (isVideo && video) {
       video.addEventListener('timeupdate', () => {
-        if (Number.isNaN(video.duration)) // no-ready
+        if (Number.isNaN(video!.duration)) // no-ready
           return
-        broadcast.progress(video.currentTime, video.duration)
+        broadcast.progress(video!.currentTime, video!.duration)
       })
 
       video.addEventListener('canplaythrough', () => {
-        video.play()
+        video!.play()
       })
     }
     else {

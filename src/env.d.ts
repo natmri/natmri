@@ -1,7 +1,7 @@
 declare global {
   namespace NodeJS {
     export interface ProcessEnv {
-      MODE: 'mpa' | 'spa'
+      NATMRI_DEV: string
       URL: string
     }
   }

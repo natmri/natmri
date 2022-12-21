@@ -5,9 +5,9 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *-------------------------------------------------------------------------------------------- */
 
-import { windows } from 'eevi-is'
 import * as paths from './path'
 import { CharCode } from './charCode'
+import { isWindows } from './environment'
 
 const _schemePattern = /^\w[\w\d+.-]*$/
 const _singleSlashStart = /^\//
@@ -300,7 +300,7 @@ export class URI implements UriComponents {
     // normalize to fwd-slashes on windows,
     // on other systems bwd-slashes are valid
     // filename character, eg /f\oo/ba\r.txt
-    if (windows())
+    if (isWindows)
       path = path.replace(/\\/g, _slash)
 
     // check for authority as used in UNC shares
@@ -344,7 +344,7 @@ export class URI implements UriComponents {
       throw new Error('[UriError]: cannot call joinPath on URI without path')
 
     let newPath: string
-    if (windows() && uri.scheme === 'file')
+    if (isWindows && uri.scheme === 'file')
       newPath = URI.file(paths.win32.join(uriToFsPath(uri, true), ...pathFragment)).path
 
     else
@@ -535,7 +535,7 @@ export function uriToFsPath(uri: URI, keepDriveLetterCasing: boolean): string {
     // other path
     value = uri.path
   }
-  if (windows())
+  if (isWindows)
     value = value.replace(/\//g, '\\')
 
   return value

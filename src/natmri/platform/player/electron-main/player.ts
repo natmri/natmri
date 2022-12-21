@@ -1,6 +1,6 @@
 import { Disposable, Emitter, Event } from '@livemoe/utils'
 import { BrowserView, BrowserWindow } from 'electron'
-import { dev } from 'eevi-is'
+import { isDevelopment } from 'natmri/base/common/environment'
 import type { IPlayerUI, PlayerErrorEvent } from 'typings/player'
 
 export class PlayerUIView extends Disposable {
@@ -24,7 +24,7 @@ export class PlayerUIView extends Disposable {
         contextIsolation: true,
         spellcheck: false,
         enableWebSQL: false,
-        devTools: dev(),
+        devTools: isDevelopment,
         experimentalFeatures: true,
         // preload: resolvePreload('wallpaper'),
       },

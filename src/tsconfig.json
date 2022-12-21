@@ -15,9 +15,6 @@
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "skipLibCheck": true,
-    "types": [
-      "eevi/eevi-is"
-    ],
     "paths": {
       "natmri/*": [
         "./natmri/*"

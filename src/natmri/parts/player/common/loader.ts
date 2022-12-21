@@ -2,7 +2,7 @@ import type { IPlayerLoader } from 'typings/player'
 import type { IRepository } from 'typings/repository'
 
 export abstract class PlayerLoader<T> implements IPlayerLoader<T> {
-  repositories: IRepository[]
+  repositories: IRepository[] = []
 
   get(name?: string): T[] {
     throw new Error(`Method not implemented.${name}`)

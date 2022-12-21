@@ -1,10 +1,10 @@
 import { join } from 'path'
 import { Disposable } from '@livemoe/utils'
-import { dev, macOS, windows } from 'eevi-is'
 import { ILoggerService } from 'natmri/platform/log/common/log'
 import { URI } from 'natmri/base/common/uri'
 import type { INativeEnvironmentService, NativeParsedArgs } from 'natmri/platform/environment/common/environment'
 import minimist from 'minimist'
+import { isDevelopment, isMacintosh, isWindows } from 'natmri/base/common/environment'
 
 export class NativeEnvironmentService extends Disposable implements INativeEnvironmentService {
   readonly args: NativeParsedArgs = minimist(process.argv.slice(2)) as NativeParsedArgs
@@ -22,7 +22,7 @@ export class NativeEnvironmentService extends Disposable implements INativeEnvir
   }
 
   get resourcePath() {
-    return dev() ? process.cwd() : process.resourcesPath
+    return isDevelopment ? process.cwd() : process.resourcesPath
   }
 
   get repositores() {
@@ -30,9 +30,9 @@ export class NativeEnvironmentService extends Disposable implements INativeEnvir
   }
 
   get platformIconPath() {
-    if (windows())
+    if (isWindows)
       return join(this.resourcePath, 'assets', 'icons', 'icon.ico')
-    if (macOS())
+    if (isMacintosh)
       return join(this.resourcePath, 'assets', 'icons', '32x32.png')
 
     return join(this.resourcePath, 'assets', 'icons', '32x32.png')
@@ -48,6 +48,6 @@ export class NativeEnvironmentService extends Disposable implements INativeEnvir
   getPagesPath(pagepath: string): string {
     console.log(URI.file(join(__dirname, pagepath)).toString())
 
-    return dev() ? new URL(pagepath, process.env.URL).toString() : URI.file(join(__dirname, pagepath)).toString()
+    return isDevelopment ? new URL(pagepath, process.env.URL).toString() : URI.file(join(__dirname, pagepath)).toString()
   }
 }

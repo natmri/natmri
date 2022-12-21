@@ -1,5 +1,5 @@
 import { Disposable } from '@livemoe/utils'
-import { dev } from 'eevi-is'
+import { isDevelopment } from 'natmri/base/common/environment'
 import type { ILogger, ILoggerService } from 'natmri/platform/log/common/log'
 import { AbstractLogger, LogLevel, now } from 'natmri/platform/log/common/log'
 
@@ -70,7 +70,7 @@ export class LoggerService extends Disposable implements ILoggerService {
   constructor() {
     super()
 
-    dev() ? this.setLevel(LogLevel.Trace) : this.setLevel(LogLevel.Error)
+    isDevelopment ? this.setLevel(LogLevel.Trace) : this.setLevel(LogLevel.Error)
   }
 
   setLevel(level: LogLevel) {

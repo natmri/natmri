@@ -1,3 +1,5 @@
+import type { ParentPort } from './electron'
+
 export interface Process {
   /**
    * The `process.cwd()` method returns the current working directory of the Node.js
@@ -243,4 +245,40 @@ export interface Process {
    * A string representing the path to the resources directory.
    */
   resourcesPath: string
+
+  /**
+   * A string representing the current process's type
+   */
+  type: "browser" | "renderer" | "worker" | "utility"
+
+  /**
+   * For Mac App Store build, this property is true, for other builds it is undefined.
+   */
+  mas?: boolean
+
+  /**
+   * When the renderer process is sandboxed, 
+   * this property is true, otherwise it is undefined.
+   */
+  sandboxed: boolean
+
+  /**
+   * A boolean that indicates whether 
+   * the current renderer context has contextIsolation enabled. 
+   * It is undefined in the main process.
+   */
+  contextIsolated?: boolean
+
+  /**
+   * If the app is running as a Windows Store app (appx), 
+   * this property is true, for otherwise it is undefined.
+   */
+  windowsStore?: boolean
+
+  /**
+   * A Electron.ParentPort property 
+   * if this is a UtilityProcess (or null otherwise) 
+   * allowing communication with the parent process.
+   */
+  parentPort?: ParentPort
 }
