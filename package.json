@@ -8,12 +8,7 @@
   "author": "starknt",
   "license": "MIT",
   "keywords": [
-    "electron",
-    "electron-builder",
-    "template",
-    "vite",
-    "vite-electron",
-    "vitest"
+    "electron"
   ],
   "engines": {
     "node": ">=16.0.0",
@@ -30,8 +25,8 @@
     "preinstall": "npx only-allow pnpm",
     "prepare": "husky install",
     "release": "bumpp package.json release/app/package.json --commit --push --tag",
-    "test": "cross-env NODE_ENV='development' pnpm build && vitest run --passWithNoTests",
-    "test:e2e": "cross-env NODE_ENV='development' pnpm build && vitest run e2e --passWithNoTests",
+    "test": "pnpm build && cross-env NATMRI_DEV='1' vitest run --passWithNoTests",
+    "test:e2e": "pnpm build && cross-env NATMRI_DEV='1' vitest run e2e --passWithNoTests",
     "test:unit": "vitest run unit --passWithNoTests",
     "test:watch": "vitest -u",
     "typecheck": "npx tsc --noEmit -p ./src/tsconfig.json"
@@ -49,7 +44,6 @@
     "@eevi/elexpose": "0.6.2",
     "@electron/rebuild": "^3.2.10",
     "@types/better-sqlite3": "^7.6.3",
-    "@types/fs-extra": "^9.0.13",
     "@types/minimist": "^1.2.2",
     "@types/node": "^18.11.17",
     "@types/node-abi": "^3.0.0",
@@ -58,8 +52,8 @@
     "@types/rimraf": "^3.0.2",
     "@types/yauzl": "^2.10.0",
     "@types/yazl": "^2.4.2",
-    "@unocss/preset-attributify": "^0.47.6",
-    "@unocss/transformer-attributify-jsx": "^0.47.6",
+    "@unocss/preset-attributify": "^0.48.0",
+    "@unocss/transformer-attributify-jsx": "^0.48.0",
     "@vitejs/plugin-react-swc": "^3.0.1",
     "bumpp": "^8.2.1",
     "concurrently": "^7.6.0",
@@ -70,25 +64,23 @@
     "electron-builder": "^23.6.0",
     "eslint": "^8.30.0",
     "esno": "^0.16.3",
-    "fs-extra": "^11.1.0",
     "happy-dom": "^8.1.0",
     "husky": "^8.0.2",
-    "json-format": "^1.0.1",
     "lint-staged": "^13.1.0",
     "node-abi": "^3.30.0",
-    "playwright": "^1.29.0",
+    "playwright": "^1.28.0",
     "pnpm": "7.18.2",
     "rimraf": "^3.0.2",
     "typescript": "^4.8.4",
-    "unocss": "^0.47.6",
-    "vite": "^4.0.2",
-    "vitest": "^0.25.8"
+    "unocss": "^0.48.0",
+    "vite": "^4.0.3",
+    "vitest": "^0.26.2"
   },
   "pnpm": {
     "overrides": {
       "asar": "npm:@electron/asar@latest",
       "sourcemap-codec": "npm:@jridgewell/sourcemap-codec@latest",
-      "@npmcli/move-file@2.0.1": "npm:@npmcli/fs@latest"
+      "@npmcli/move-file": "npm:@npmcli/fs@latest"
     }
   },
   "lint-staged": {

@@ -1,5 +1,5 @@
 import { join, sep } from 'path'
-import fs from 'fs-extra'
+import fs, { promises as fsp } from 'fs'
 import nodeAbi from 'node-abi'
 import markFiles from './markFiles.json'
 import { appModulesPath, appPackagePath, appPath, releasePath, rimraf, sequence, taskFactory } from './utils'
@@ -47,9 +47,9 @@ export const cleanNativeModule = async () => {
       if (fs.existsSync(join(binPath, `${process.platform}-${process.arch}-${abi}`)))
         tasks.push(rimraf(buildPath))
 
-      tasks.push(fs.mkdir(buildPath))
+      tasks.push(fsp.mkdir(buildPath))
       const m = module.split(sep)
-      tasks.push(fs.copyFile(join(binPath, `${process.platform}-${process.arch}-${abi}`, `${m[m.length - 1]}.node`), join(buildPath, `${m[m.length - 1]}.node`)))
+      tasks.push(fsp.copyFile(join(binPath, `${process.platform}-${process.arch}-${abi}`, `${m[m.length - 1]}.node`), join(buildPath, `${m[m.length - 1]}.node`)))
       tasks.push(rimraf(binPath))
       tasks.push(rimraf(depsPath))
 

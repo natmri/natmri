@@ -1,7 +1,6 @@
 import { join } from 'node:path'
 import { cwd } from 'node:process'
-import { defineConfig } from 'vitest/config'
-import { splitVendorChunkPlugin } from 'vite'
+import { defineConfig, splitVendorChunkPlugin } from 'vite'
 import React from '@vitejs/plugin-react-swc'
 import UnoCSS from 'unocss/vite'
 import ViteElectronPlugin from 'eevi'
@@ -37,11 +36,5 @@ export default defineConfig({
     },
     outDir: OUT_DIR,
     emptyOutDir: false,
-  },
-  test: {
-    environment: 'happy-dom',
-    testTimeout: 1000 * 60 * 25,
-    hookTimeout: 1000 * 10,
-    globals: true,
   },
 })

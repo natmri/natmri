@@ -1,5 +1,5 @@
+import { createReadStream } from 'fs'
 import { protocol } from 'electron'
-import { createReadStream } from 'fs-extra'
 import { createDecorator } from 'natmri/base/common/instantiation'
 import { Disposable } from 'natmri/base/common/lifecycle'
 import { getMediaOrTextMime } from 'natmri/base/common/mime'

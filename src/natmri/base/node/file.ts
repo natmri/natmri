@@ -1,5 +1,6 @@
 import { basename, extname, join, relative } from 'node:path'
-import fs from 'fs-extra'
+import fs from 'fs'
+import fsp from 'fs/promises'
 import { IMAGE_EXTS, VIDEO_EXTS, ZIP_EXTS } from 'natmri/base/common/constants'
 import type { IExtractOptions, IFile } from 'natmri/base/node/zip'
 import { extract, pack } from 'natmri/base/node/zip'
@@ -75,11 +76,11 @@ export function is(filepath: string | string[], type: 'file' | 'directory', exts
 }
 
 export function pathExistsSync(filepath: string) {
-  return fs.pathExistsSync(filepath)
+  return fs.existsSync(filepath)
 }
 
 export function pathExists(filepath: string) {
-  return fs.pathExists(filepath)
+  return fs.existsSync(filepath)
 }
 
 export function isVideo(filepath: string) {
@@ -135,7 +136,7 @@ export async function zip(filepath: string, zippath: string) {
       if (!pathExistsSync(zippath))
         return
 
-      return fs.unlink(zippath)
+      return fsp.unlink(zippath)
     })
 
     return pack(zippath, files)
@@ -145,7 +146,7 @@ export async function zip(filepath: string, zippath: string) {
 }
 
 export async function readdir(filepath: string): Promise<IFile[]> {
-  const directory = await fs.readdir(filepath, { withFileTypes: true })
+  const directory = await fsp.readdir(filepath, { withFileTypes: true })
   const files: IFile[] = []
 
   for (const file of directory) {
