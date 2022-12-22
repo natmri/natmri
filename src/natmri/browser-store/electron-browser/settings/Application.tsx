@@ -1,6 +1,6 @@
 import { render } from 'solid-js/web'
 import { Counter } from 'natmri/base/browser/components/Counter'
-import 'uno.css'
+import 'virtual:uno.css'
 
 export function App() {
   const getIconsUrl = (name: string) => {

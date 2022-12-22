@@ -1,7 +1,7 @@
-import { useCounter } from 'natmri/base/browser/hooks/useCounter'
+import { createCounter } from 'natmri/base/browser/primitives/createCounter'
 
 export function Counter() {
-  const { count, inc } = useCounter()
+  const { count, inc } = createCounter()
 
   return <>
     <p>{count()}</p>

@@ -1,6 +1,6 @@
 import { createSignal } from 'solid-js'
 
-export function useCounter(initial = 0) {
+export function createCounter(initial = 0) {
   const [count, setCount] = createSignal(initial)
 
   const inc = (delta?: number) => {
