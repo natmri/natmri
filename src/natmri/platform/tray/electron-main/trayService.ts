@@ -1,4 +1,5 @@
 import { Menu, Tray, app, nativeImage } from 'electron'
+import { runWhenIdle } from 'natmri/base/common/async'
 import { createDecorator } from 'natmri/base/common/instantiation'
 import { Disposable } from 'natmri/base/common/lifecycle'
 import { INativeEnvironmentService } from 'natmri/platform/environment/common/environment'
@@ -13,7 +14,7 @@ export interface INativeTrayService {
 export const INativeTrayService = createDecorator<INativeTrayService>('ITrayService')
 
 export class NativeTrayService extends Disposable implements INativeTrayService {
-  private $tray: Tray
+  private $tray: Tray | undefined
   private $tooltip = ''
 
   constructor(
@@ -27,7 +28,12 @@ export class NativeTrayService extends Disposable implements INativeTrayService 
     this.$tray.setContextMenu(Menu.buildFromTemplate([
       {
         label: 'quit',
-        click: () => app.quit(),
+        click: async () => {
+          this.$tray!.destroy()
+          this.$tray = undefined
+          await this.lifecycleService.quit()
+          runWhenIdle(() => app.quit())
+        },
       },
     ]))
 
@@ -35,16 +41,16 @@ export class NativeTrayService extends Disposable implements INativeTrayService 
   }
 
   set title(v: string) {
-    this.$tray.setTitle(v)
+    this.$tray?.setTitle(v)
   }
 
   get title() {
-    return this.$tray.getTitle()
+    return this.$tray?.getTitle() ?? ''
   }
 
   set tooltip(v: string) {
     this.$tooltip = v
-    this.$tray.setToolTip(v)
+    this.$tray?.setToolTip(v)
   }
 
   get tooltip() {

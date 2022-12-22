@@ -176,12 +176,15 @@ export class LifecycleService extends Disposable implements ILifecycleService {
   }
 
   private registerListeners(): void {
-    // shutdown
+    // OS shutdown
     powerMonitor.on('shutdown', async () => {
       this._shutdownRequested = true
 
-      // OS shutdown, try normal quit application
+      // quit request OS shutdown, try normal quit application
       await this.quit(false)
+
+      // confirm quit request
+      app.quit()
     })
 
     // before-quit: an event that is fired if application quit was

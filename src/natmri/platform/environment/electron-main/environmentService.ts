@@ -31,11 +31,11 @@ export class NativeEnvironmentService extends Disposable implements INativeEnvir
 
   get platformIconPath() {
     if (isWindows)
-      return join(this.resourcePath, 'assets', 'icons', 'icon.ico')
+      return join(this.resourcePath, 'resources', 'icons', 'icon.ico')
     if (isMacintosh)
-      return join(this.resourcePath, 'assets', 'icons', '32x32.png')
+      return join(this.resourcePath, 'resources', 'icons', '32x32.png')
 
-    return join(this.resourcePath, 'assets', 'icons', '32x32.png')
+    return join(this.resourcePath, 'resources', 'icons', '32x32.png')
   }
 
   get preloadPath() {
@@ -43,7 +43,7 @@ export class NativeEnvironmentService extends Disposable implements INativeEnvir
   }
 
   /**
-   * Default path: /src/${@link pagepath}
+   * Default path: /src/{@link pagepath pagepath}
    */
   getPagesPath(pagepath: string): string {
     console.log(URI.file(join(__dirname, pagepath)).toString())

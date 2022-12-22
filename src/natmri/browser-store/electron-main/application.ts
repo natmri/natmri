@@ -1,5 +1,6 @@
 import { BrowserWindow, session } from 'electron'
 import { runWhenIdle } from 'natmri/base/common/async'
+import { isDevelopment } from 'natmri/base/common/environment'
 import { InstantiationService, ServiceCollection, SyncDescriptor } from 'natmri/base/common/instantiation'
 import { join } from 'natmri/base/common/path'
 import { PowerMonitor } from 'natmri/base/electron-main/powerMonitor'
@@ -49,22 +50,24 @@ export class Application {
   }
 
   startup() {
-    const win = new BrowserWindow({
+    const win: BrowserWindow | undefined = new BrowserWindow({
       webPreferences: {
         contextIsolation: true,
         sandbox: false,
       },
     })
 
-    const win2 = new BrowserWindow({
+    const win2: BrowserWindow | undefined = new BrowserWindow({
       webPreferences: {
         contextIsolation: true,
         sandbox: false,
       },
     })
 
-    win.webContents.openDevTools({ mode: 'detach' })
-    win2.webContents.openDevTools({ mode: 'detach' })
+    if (isDevelopment) {
+      win.webContents.openDevTools({ mode: 'detach' })
+      win2.webContents.openDevTools({ mode: 'detach' })
+    }
     win.loadURL(this.nativeEnvironment.getPagesPath('browser-store/electron-browser/natmri/index.html'))
     win2.loadURL(this.nativeEnvironment.getPagesPath('browser-store/electron-browser/settings/index.html'))
 
