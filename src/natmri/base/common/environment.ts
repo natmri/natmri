@@ -1,4 +1,4 @@
-import { process } from './globals'
+import { process } from 'natmri/base/common/globals'
 
 export const LANGUAGE_DEFAULT = 'en'
 

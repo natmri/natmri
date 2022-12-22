@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *-------------------------------------------------------------------------------------------- */
 
-import { extname } from './path'
+import { extname } from 'natmri/base/common/path'
 
 export const Mimes = Object.freeze({
   text: 'text/plain',

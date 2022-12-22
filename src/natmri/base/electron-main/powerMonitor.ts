@@ -1,7 +1,7 @@
 import EventEmitter from 'node:events'
 import { powerMonitor as _powerMonitor } from 'electron'
 import { acquireShutdownBlock, insertWndProcHook, releaseShutdownBlock, removeWndProcHook, setMainWindowHandle } from '@livemoe/tools'
-import { isWindows } from '../common/environment'
+import { isWindows } from 'natmri/base/common/environment'
 
 type PowerMonitorEvent = 'suspend' | 'resume' | 'on-ac' | 'on-battery' | 'shutdown' | 'lock-screen' | 'unlock-screen' | 'user-did-groupe-active' | 'user-did-resign-active'
 

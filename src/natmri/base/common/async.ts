@@ -239,7 +239,7 @@ export interface ITask<T> {
  *
  * const throttler = new Throttler();
  * const letters = [];
-
+ *
  * function deliver() {
  *  const lettersToDeliver = letters;
  *  letters = [];

@@ -2,6 +2,4 @@ export const VIDEO_EXTS = ['mp4', 'avi', 'mkv', 'mov', 'wmv', 'flv', 'mpg', 'mpe
 export const IMAGE_EXTS = ['jpg', 'jpeg', 'png', 'gif', 'bmp']
 export const ZIP_EXTS = ['zip']
 
-export const FILENAME_RE = /(^|[/\\])([^/\\]+?)(?=(\.[^.]+)?$)/
-
 export const WALLPAPER_BROADCAST_CHANNEL = 'WALLPAPER_BROADCAST_CHANNEL'

@@ -308,7 +308,6 @@ export namespace Event {
   }
 
   export interface IChainableEvent<T> extends IDisposable {
-
     event: Event<T>
     map<O>(fn: (i: T) => O): IChainableEvent<O>
     forEach(fn: (i: T) => void): IChainableEvent<T>

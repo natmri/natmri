@@ -3,8 +3,8 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *-------------------------------------------------------------------------------------------- */
 
-import { Emitter, Event } from './event'
-import type { IDisposable } from './lifecycle'
+import { Emitter, Event } from 'natmri/base/common/event'
+import type { IDisposable } from 'natmri/base/common/lifecycle'
 
 export interface CancellationToken {
 

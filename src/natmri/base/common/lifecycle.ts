@@ -1,4 +1,4 @@
-import { once } from './functional'
+import { once } from 'natmri/base/common/functional'
 
 /**
  * An object that performs a cleanup operation when `.dispose()` is called.

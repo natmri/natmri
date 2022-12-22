@@ -29,7 +29,7 @@
  * USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-import { process } from './globals'
+import { process } from 'natmri/base/common/globals'
 
 const CHAR_UPPERCASE_A = 65/* A */
 const CHAR_LOWERCASE_A = 97 /* a */
@@ -45,7 +45,7 @@ class ErrorInvalidArgType extends Error {
   code: 'ERR_INVALID_ARG_TYPE'
   constructor(name: string, expected: string, actual: unknown) {
     // determiner: 'must be' or 'must not be'
-    let determiner
+    let determiner: string
     if (typeof expected === 'string' && expected.indexOf('not ') === 0) {
       determiner = 'must not be'
       expected = expected.replace(/^not /, '')
@@ -208,7 +208,7 @@ export const win32: IPath = {
     let resolvedAbsolute = false
 
     for (let i = pathSegments.length - 1; i >= -1; i--) {
-      let path
+      let path: string
       if (i >= 0) {
         path = pathSegments[i]
         validateString(path, 'path')

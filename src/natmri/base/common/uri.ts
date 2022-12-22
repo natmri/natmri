@@ -5,9 +5,9 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *-------------------------------------------------------------------------------------------- */
 
-import * as paths from './path'
-import { CharCode } from './charCode'
-import { isWindows } from './environment'
+import * as paths from 'natmri/base/common/path'
+import { CharCode } from 'natmri/base/common/charCode'
+import { isWindows } from 'natmri/base/common/environment'
 
 const _schemePattern = /^\w[\w\d+.-]*$/
 const _singleSlashStart = /^\//
