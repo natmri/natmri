@@ -1,13 +1,13 @@
-import { useCounter } from 'natmri/base/browser/react/hooks/useCounter'
+import { useCounter } from 'natmri/base/browser/hooks/useCounter'
 
 export function Counter() {
   const { count, inc } = useCounter()
 
   return <>
-    <p>{ count }</p>
+    <p>{count()}</p>
 
     <button onClick={() => inc()}>
-    点击 + 1
-  </button>
+      点击 + 1
+    </button>
   </>
 }

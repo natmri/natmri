@@ -1,6 +1,5 @@
 import { defineConfig } from 'vitest/config'
 import { splitVendorChunkPlugin } from 'vite'
-import React from '@vitejs/plugin-react-swc'
 import UnoCSS from 'unocss/vite'
 import ViteElectronPlugin from 'eevi'
 import { ElectronRendererPlugin } from '@eevi/elexpose/vite'
@@ -13,7 +12,6 @@ export default defineConfig({
     alias,
   },
   plugins: [
-    React(),
     UnoCSS(),
     ViteElectronPlugin(),
     ElectronRendererPlugin([

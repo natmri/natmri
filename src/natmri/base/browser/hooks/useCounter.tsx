@@ -1,7 +1,7 @@
-import { useState } from 'react'
+import { createSignal } from 'solid-js'
 
 export function useCounter(initial = 0) {
-  const [count, setCount] = useState(initial)
+  const [count, setCount] = createSignal(initial)
 
   const inc = (delta?: number) => {
     setCount(count => count + (delta ?? 1))
@@ -11,7 +11,7 @@ export function useCounter(initial = 0) {
     setCount(count => count - (delta ?? 1))
   }
 
-  const get = () => count
+  const get = () => count()
 
   const set = (val: number) => setCount(val)
 

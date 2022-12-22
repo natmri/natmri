@@ -1,5 +1,5 @@
-import ReactDOM from 'react-dom/client'
-import { Counter } from 'natmri/base/browser/react/components/Counter'
+import { render } from 'solid-js/web'
+import { Counter } from 'natmri/base/browser/components/Counter'
 import 'uno.css'
 
 export function App() {
@@ -24,6 +24,4 @@ export function App() {
   </>
 }
 
-const app = ReactDOM.createRoot(document.getElementById('app')!)
-
-app.render(<App />)
+render(App, document.getElementById('app')!)

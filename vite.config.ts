@@ -1,7 +1,7 @@
 import { join } from 'node:path'
 import { cwd } from 'node:process'
 import { defineConfig, splitVendorChunkPlugin } from 'vite'
-import React from '@vitejs/plugin-react-swc'
+import Solid from 'vite-plugin-solid'
 import UnoCSS from 'unocss/vite'
 import ViteElectronPlugin from 'eevi'
 import { ElectronRendererPlugin } from '@eevi/elexpose/vite'
@@ -19,7 +19,7 @@ export default defineConfig({
     alias,
   },
   plugins: [
-    React(),
+    Solid(),
     UnoCSS(),
     ViteElectronPlugin(),
     ElectronRendererPlugin([
@@ -28,6 +28,7 @@ export default defineConfig({
     splitVendorChunkPlugin(),
   ],
   build: {
+    target: 'esnext',
     rollupOptions: {
       input: {
         main: join(BROWSER_STORE, 'natmri', 'index.html'),

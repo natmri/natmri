@@ -18,12 +18,9 @@
     "composite": true
   },
   "include": [
-    "tests",
-    "app/electron/tests",
-    "app/web/tests"
+    "tests"
   ],
   "exclude": [
-    "release/app",
     "node_modules"
   ]
 }
