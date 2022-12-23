@@ -1,7 +1,7 @@
 import { Menu, app, protocol } from 'electron'
 import { Schemas } from 'natmri/base/common/network'
+import { minimist } from 'natmri/base/node/minimist'
 import { Application } from 'natmri/browser-store/electron-main/application'
-import minimist from 'minimist'
 
 const args = parseArgs()
 const gotTheLock = app.requestSingleInstanceLock()
@@ -68,6 +68,12 @@ app.commandLine.appendSwitch('disable-features', 'CalculateNativeWinOcclusion')
  * `AutoDisableAccessibility` - https://github.com/microsoft/vscode/issues/162331#issue-1390744354
  */
 app.commandLine.appendSwitch('enable-features', 'AutoDisableAccessibility')
+
+/**
+ * [DEV ENV] source map support for node
+ */
+if (process.env.NATMRI_DEV)
+  require('source-map-support').install()
 
 function parseArgs() {
   return minimist(process.argv, {

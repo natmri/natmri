@@ -2,9 +2,9 @@ import { join } from 'path'
 import { ILoggerService } from 'natmri/platform/log/common/log'
 import { URI } from 'natmri/base/common/uri'
 import type { INativeEnvironmentService, NativeParsedArgs } from 'natmri/platform/environment/common/environment'
-import minimist from 'minimist'
 import { isDevelopment, isMacintosh, isWindows } from 'natmri/base/common/environment'
 import { Disposable } from 'natmri/base/common/lifecycle'
+import { minimist } from 'natmri/base/node/minimist'
 
 export class NativeEnvironmentService extends Disposable implements INativeEnvironmentService {
   readonly args: NativeParsedArgs = minimist(process.argv.slice(2)) as NativeParsedArgs

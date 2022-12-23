@@ -10,7 +10,6 @@ specifiers:
   '@eevi/elexpose': 0.6.2
   '@electron/rebuild': ^3.2.10
   '@types/better-sqlite3': ^7.6.3
-  '@types/minimist': ^1.2.2
   '@types/node': ^18.11.17
   '@types/node-abi': ^3.0.0
   '@types/rimraf': ^3.0.2
@@ -22,7 +21,7 @@ specifiers:
   concurrently: ^7.6.0
   consola: ^2.15.3
   cross-env: ^7.0.3
-  eevi: ^0.6.2
+  eevi: ^0.6.3
   electron: ^21.3.3
   electron-builder: ^23.6.0
   eslint: ^8.30.0
@@ -31,12 +30,12 @@ specifiers:
   husky: ^8.0.2
   i18next: ^22.4.5
   lint-staged: ^13.1.0
-  minimist: ^1.2.7
   node-abi: ^3.30.0
   playwright: ^1.28.0
   pnpm: 7.18.2
   rimraf: ^3.0.2
   solid-js: 1.6.6
+  source-map-support: ^0.5.21
   typescript: ^4.8.4
   unocss: ^0.48.0
   vite: ^4.0.3
@@ -47,7 +46,6 @@ specifiers:
 
 dependencies:
   i18next: 22.4.5
-  minimist: 1.2.7
   solid-js: 1.6.6
   yauzl: 2.10.0
   yazl: 2.5.1
@@ -57,7 +55,6 @@ devDependencies:
   '@eevi/elexpose': 0.6.2_vite@4.0.3
   '@electron/rebuild': 3.2.10
   '@types/better-sqlite3': 7.6.3
-  '@types/minimist': 1.2.2
   '@types/node': 18.11.17
   '@types/node-abi': 3.0.0
   '@types/rimraf': 3.0.2
@@ -69,7 +66,7 @@ devDependencies:
   concurrently: 7.6.0
   consola: 2.15.3
   cross-env: 7.0.3
-  eevi: 0.6.2_electron@21.3.3+vite@4.0.3
+  eevi: 0.6.3_electron@21.3.3+vite@4.0.3
   electron: 21.3.3
   electron-builder: 23.6.0
   eslint: 8.30.0
@@ -81,6 +78,7 @@ devDependencies:
   playwright: 1.29.0
   pnpm: 7.18.2
   rimraf: 3.0.2
+  source-map-support: 0.5.21
   typescript: 4.9.3
   unocss: 0.48.0_vite@4.0.3
   vite: 4.0.3_@types+node@18.11.17
@@ -529,12 +527,12 @@ packages:
       ajv-keywords: 3.5.2_ajv@6.12.6
     dev: true
 
-  /@eevi/config/0.6.2_electron@21.3.3+vite@4.0.3:
-    resolution: {integrity: sha512-TZBLxmQTQRzY8ykutq5JFhdZrRotviS/VWOh+C40lEoj3MgKJsnfINVUDlLRultNYOgiosdQg9ix2BG3rs5BjA==}
+  /@eevi/config/0.6.3_electron@21.3.3+vite@4.0.3:
+    resolution: {integrity: sha512-y5YpCtLHoLVm4B5HfrZiiAWgkkn08M6Q/MQ4tbp0LYaEgH5fYf9o9CdKV3DSd+iHoOfIMBeRhZBKNImtLG0SNw==}
     peerDependencies:
       vite: '>=3.0.0'
     dependencies:
-      '@eevi/core': 0.6.2_electron@21.3.3+vite@4.0.3
+      '@eevi/core': 0.6.3_electron@21.3.3+vite@4.0.3
       fast-glob: 3.2.12
       unconfig: 0.3.7
       vite: 4.0.3_@types+node@18.11.17
@@ -542,8 +540,8 @@ packages:
       - electron
     dev: true
 
-  /@eevi/core/0.6.2_electron@21.3.3+vite@4.0.3:
-    resolution: {integrity: sha512-/AoauZtKX140fW2yxUu2w/mj1RCteo65gJFLbLq8fxk052mNWi0I8fe2wdYXibf0Z01Jd9im7T6+DYAsfnEyKw==}
+  /@eevi/core/0.6.3_electron@21.3.3+vite@4.0.3:
+    resolution: {integrity: sha512-aMrJ+eTDLJ6DRGA3Ojcs/wSynuMuPtK9loWR5kN6oHKZdScfIUBIOVma4UZxomlnM1Qwbisd8hrjj5ryR6HYrg==}
     peerDependencies:
       electron: '*'
       vite: '>=3.0.0'
@@ -1183,10 +1181,6 @@ packages:
 
   /@types/minimatch/5.1.2:
     resolution: {integrity: sha512-K0VQKziLUWkVKiRVrx4a40iPaxTUefQmjtkQofBkYRcoaaL/8rhwDWww9qWbrgicNOgnpIsMxyNIUM4+n6dUIA==}
-    dev: true
-
-  /@types/minimist/1.2.2:
-    resolution: {integrity: sha512-jhuKLIRrhvCPLqwPcx6INqmKeiA5EWrsCOPhrlFSrbrmU4ZMPjj5Ul/oLCMDO98XRUIwVm78xICz4EPCektzeQ==}
     dev: true
 
   /@types/ms/0.7.31:
@@ -2584,13 +2578,13 @@ packages:
     resolution: {integrity: sha512-I88TYZWc9XiYHRQ4/3c5rjjfgkjhLyW2luGIheGERbNQ6OY7yTybanSpDXZa8y7VUP9YmDcYa+eyq4ca7iLqWA==}
     dev: true
 
-  /eevi/0.6.2_electron@21.3.3+vite@4.0.3:
-    resolution: {integrity: sha512-fGdK9ls7NZlRGLl2gTDZYI142YGL2Jhhg+FigaS4AvbUN8t1AMI3gG8TctaYAxDtWhjXOAjVkxNYTDB/LPUE4g==}
+  /eevi/0.6.3_electron@21.3.3+vite@4.0.3:
+    resolution: {integrity: sha512-n3R0FCK0a5kSItRTODdRd2byn6rpUHBx15PoLWHbuMvn/EmxkMywGrwGtrQv+QrLzFzxokfCvoaZ84pz/+kwMg==}
     peerDependencies:
       vite: '>=3.0.0'
     dependencies:
-      '@eevi/config': 0.6.2_electron@21.3.3+vite@4.0.3
-      '@eevi/core': 0.6.2_electron@21.3.3+vite@4.0.3
+      '@eevi/config': 0.6.3_electron@21.3.3+vite@4.0.3
+      '@eevi/core': 0.6.3_electron@21.3.3+vite@4.0.3
       vite: 4.0.3_@types+node@18.11.17
     transitivePeerDependencies:
       - electron
@@ -4691,6 +4685,7 @@ packages:
 
   /minimist/1.2.7:
     resolution: {integrity: sha512-bzfL1YUZsP41gmu/qjrEk0Q6i2ix/cVeAhbCbqH9u3zYutS1cLg00qhrD0M2MVdCcx4Sc0UpP2eBWo9rotpq6g==}
+    dev: true
 
   /minipass-collect/1.0.2:
     resolution: {integrity: sha512-6T6lH0H8OG9kITm/Jm6tdooIbogG9e0tLgpY6mphXSm/A9u8Nq1ryBG+Qspiub9LjWlBPsPS3tWQ/Botq4FdxA==}

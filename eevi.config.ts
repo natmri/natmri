@@ -28,5 +28,6 @@ export default defineConfig({
   },
   external: [...Object.keys(dependencies || {})],
   tsconfig: resolve(process.cwd(), 'src', 'tsconfig.json'),
+  sourcemap: process.env.NATMRI_DEV ? 'inline' : false,
   define,
 }) as UserConfigExport
