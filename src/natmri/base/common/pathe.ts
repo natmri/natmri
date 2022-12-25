@@ -1,4 +1,4 @@
-export const FILENAME_RE = /(^|[/\\])([^/\\]+?)(?=(\.[^.]+)?$)/
+const FILENAME_RE = /(^|[/\\])([^/\\]+?)(?=(\.[^.]+)?$)/
 
 /**
  * give an filepath, returns the file name
