@@ -1,8 +1,7 @@
 import { defineConfig } from 'vitest/config'
 import { splitVendorChunkPlugin } from 'vite'
 import UnoCSS from 'unocss/vite'
-import ViteElectronPlugin from 'eevi'
-import { ElectronRendererPlugin } from '@eevi/elexpose/vite'
+import Solid from 'vite-plugin-solid'
 import { alias } from './alias'
 
 export default defineConfig({
@@ -12,11 +11,8 @@ export default defineConfig({
     alias,
   },
   plugins: [
+    Solid(),
     UnoCSS(),
-    ViteElectronPlugin(),
-    ElectronRendererPlugin([
-      'wallpaper',
-    ]),
     splitVendorChunkPlugin(),
   ],
   test: {

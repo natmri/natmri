@@ -4,7 +4,6 @@
  *-------------------------------------------------------------------------------------------- */
 
 export function once<T extends Function>(this: unknown, fn: T): T {
-  // eslint-disable-next-line @typescript-eslint/no-this-alias
   const _this = this
   let didCall = false
   let result: unknown

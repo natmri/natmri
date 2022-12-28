@@ -26,16 +26,13 @@
     "prepare": "husky install",
     "release": "bumpp package.json release/app/package.json --commit --push --tag",
     "test": "pnpm build && cross-env NATMRI_DEV='1' vitest run --passWithNoTests",
-    "test:e2e": "pnpm build && cross-env NATMRI_DEV='1' vitest run e2e --passWithNoTests",
-    "test:unit": "vitest run unit --passWithNoTests",
     "test:watch": "vitest -u",
     "typecheck": "npx tsc --noEmit -p ./src/tsconfig.json"
   },
   "dependencies": {
     "i18next": "^22.4.6",
     "solid-js": "1.6.6",
-    "yauzl": "^2.10.0",
-    "yazl": "^2.5.1"
+    "yauzl": "^2.10.0"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^0.34.0",
@@ -46,7 +43,6 @@
     "@types/node-abi": "^3.0.0",
     "@types/rimraf": "^3.0.2",
     "@types/yauzl": "^2.10.0",
-    "@types/yazl": "^2.4.2",
     "@unocss/preset-attributify": "^0.48.0",
     "@unocss/transformer-attributify-jsx": "^0.48.0",
     "bumpp": "^8.2.1",

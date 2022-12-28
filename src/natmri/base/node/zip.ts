@@ -4,7 +4,7 @@ import type { Readable } from 'node:stream'
 import path from 'path'
 import type { Entry, ZipFile } from 'yauzl'
 import { open as _openZip } from 'yauzl'
-import * as yazl from 'yazl'
+import { yazl } from 'natmri/base/node/yazlp'
 import type { CancellationToken } from 'natmri/base/common/cancellation'
 import { Sequencer, createCancelablePromise } from 'natmri/base/common/async'
 
