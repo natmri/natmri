@@ -8,6 +8,7 @@
     "dist",
     "node_modules",
     "!node_modules/.modules.yaml",
+    "!node_modules/**/.vite",
     "!node_modules/**/.pnpm",
     "!node_modules/**/.bin",
     "!node_modules/**/*.d.ts",

@@ -7,7 +7,7 @@ overrides:
 
 specifiers:
   '@antfu/eslint-config': ^0.34.0
-  '@eevi/elexpose': 0.6.2
+  '@eevi/elexpose': 0.6.3
   '@electron/rebuild': ^3.2.10
   '@types/better-sqlite3': ^7.6.3
   '@types/node': ^18.11.17
@@ -26,13 +26,13 @@ specifiers:
   electron-builder: ^23.6.0
   eslint: ^8.30.0
   esno: ^0.16.3
-  happy-dom: ^8.1.0
+  happy-dom: ^8.1.1
   husky: ^8.0.2
-  i18next: ^22.4.5
+  i18next: ^22.4.6
   lint-staged: ^13.1.0
   node-abi: ^3.30.0
-  playwright: ^1.28.0
-  pnpm: 7.18.2
+  playwright: ^1.29.1
+  pnpm: 7.20.0
   rimraf: ^3.0.2
   solid-js: 1.6.6
   source-map-support: ^0.5.21
@@ -45,14 +45,14 @@ specifiers:
   yazl: ^2.5.1
 
 dependencies:
-  i18next: 22.4.5
+  i18next: 22.4.6
   solid-js: 1.6.6
   yauzl: 2.10.0
   yazl: 2.5.1
 
 devDependencies:
   '@antfu/eslint-config': 0.34.0_f5jcydormhcqaoeadqwgqigppy
-  '@eevi/elexpose': 0.6.2_vite@4.0.3
+  '@eevi/elexpose': 0.6.3_vite@4.0.3
   '@electron/rebuild': 3.2.10
   '@types/better-sqlite3': 7.6.3
   '@types/node': 18.11.17
@@ -71,19 +71,19 @@ devDependencies:
   electron-builder: 23.6.0
   eslint: 8.30.0
   esno: 0.16.3
-  happy-dom: 8.1.0
+  happy-dom: 8.1.1
   husky: 8.0.2
   lint-staged: 13.1.0
   node-abi: 3.30.0
-  playwright: 1.29.0
-  pnpm: 7.18.2
+  playwright: 1.29.1
+  pnpm: 7.20.0
   rimraf: 3.0.2
   source-map-support: 0.5.21
   typescript: 4.9.3
   unocss: 0.48.0_vite@4.0.3
   vite: 4.0.3_@types+node@18.11.17
   vite-plugin-solid: 2.5.0_solid-js@1.6.6+vite@4.0.3
-  vitest: 0.26.2_happy-dom@8.1.0
+  vitest: 0.26.2_happy-dom@8.1.1
 
 packages:
 
@@ -554,8 +554,8 @@ packages:
       vite: 4.0.3_@types+node@18.11.17
     dev: true
 
-  /@eevi/elexpose/0.6.2_vite@4.0.3:
-    resolution: {integrity: sha512-fIFT7FZINsk+l9ps8toXD3SH8rCXKarPZhDRta+BsRpf0MNZtkmoJit/7Lt3xwTum6zgdQ++Q83DxbbKGYWjfQ==}
+  /@eevi/elexpose/0.6.3_vite@4.0.3:
+    resolution: {integrity: sha512-J7ycE946DXXq0IryE5DRbAy5FoEWQ5g3T0ZyFIovXjHGlaS+EHAkP9KAvpY9Ih/yWGlOVLUtRVSYmvCNQqSb3g==}
     peerDependencies:
       esbuild: '*'
       vite: '>=3.0.0'
@@ -3817,8 +3817,8 @@ packages:
       duplexer: 0.1.2
     dev: true
 
-  /happy-dom/8.1.0:
-    resolution: {integrity: sha512-R9NVb5815gpMFsldZF0wVSHw2uSobx6yitSkCdQPda1kwfAmVw4Ut8ZspxGHXkK6OA93SznldkcvrbhKFr6JcA==}
+  /happy-dom/8.1.1:
+    resolution: {integrity: sha512-uI8NneN2B0D+vwIhjQVKtIUYOSh/zymfj61bU/fxkoAw+Aktn0ewG6dYKyFPOvyBoFLPg3S8fsn2OqSoYCqJeQ==}
     dependencies:
       css.escape: 1.5.1
       he: 1.2.0
@@ -3957,8 +3957,8 @@ packages:
     hasBin: true
     dev: true
 
-  /i18next/22.4.5:
-    resolution: {integrity: sha512-Kc+Ow0guRetUq+kv02tj0Yof9zveROPBAmJ8UxxNODLVBRSwsM4iD0Gw3BEieOmkWemF6clU3K1fbnCuTqiN2Q==}
+  /i18next/22.4.6:
+    resolution: {integrity: sha512-9Tm1ezxWyzV+306CIDMBbYBitC1jedQyYuuLtIv7oxjp2ohh8eyxP9xytIf+2bbQfhH784IQKPSYp+Zq9+YSbw==}
     dependencies:
       '@babel/runtime': 7.20.6
     dev: false
@@ -5170,19 +5170,19 @@ packages:
       pathe: 1.0.0
     dev: true
 
-  /playwright-core/1.29.0:
-    resolution: {integrity: sha512-pboOm1m0RD6z1GtwAbEH60PYRfF87vKdzOSRw2RyO0Y0a7utrMyWN2Au1ojGvQr4umuBMODkKTv607YIRypDSQ==}
+  /playwright-core/1.29.1:
+    resolution: {integrity: sha512-20Ai3d+lMkWpI9YZYlxk8gxatfgax5STW8GaMozAHwigLiyiKQrdkt7gaoT9UQR8FIVDg6qVXs9IoZUQrDjIIg==}
     engines: {node: '>=14'}
     hasBin: true
     dev: true
 
-  /playwright/1.29.0:
-    resolution: {integrity: sha512-vtXgX3FPNcAJq1QoIVCvmiHHKOLVTZkSYEo60n+EnX5MrNznAJzGquxT8c2sv+BG3CDyLeKm351e491HnF7yjw==}
+  /playwright/1.29.1:
+    resolution: {integrity: sha512-lasC+pMqsQ2uWhNurt3YK3xo0gWlMjslYUylKbHcqF/NTjwp9KStRGO7S6wwz2f52GcSnop8XUK/GymJjdzrxw==}
     engines: {node: '>=14'}
     hasBin: true
     requiresBuild: true
     dependencies:
-      playwright-core: 1.29.0
+      playwright-core: 1.29.1
     dev: true
 
   /plist/3.0.6:
@@ -5198,8 +5198,8 @@ packages:
     engines: {node: '>=4'}
     dev: true
 
-  /pnpm/7.18.2:
-    resolution: {integrity: sha512-k3LCdsrTPqL4dVgCgjpdWHcwzhEA/YCu2ZFR/+EiFy91azuRQcWgQbYf5rPkYu5x1Dl8+2KtXKTlDcrSx5hnQw==}
+  /pnpm/7.20.0:
+    resolution: {integrity: sha512-klGp+P0sxw1f6OYwJtl0PcoYiIHVhMZdh9e2B8maUmzOGmAj0NL9jKaKPfIX4kKfyQcWeADm46Z+4CKtabZqSw==}
     engines: {node: '>=14.6'}
     hasBin: true
     dev: true
@@ -6266,7 +6266,7 @@ packages:
       vite: 4.0.3_@types+node@18.11.17
     dev: true
 
-  /vitest/0.26.2_happy-dom@8.1.0:
+  /vitest/0.26.2_happy-dom@8.1.1:
     resolution: {integrity: sha512-Jvqxh6SDy9SsuslkDjts0iDewDIdq4rveEt69YgDuAb1tVDGV0lDepVaeAFraoySWqneJmOt4TngFFNhlw7GfA==}
     engines: {node: '>=v14.16.0'}
     hasBin: true
@@ -6295,7 +6295,7 @@ packages:
       acorn-walk: 8.2.0
       chai: 4.3.7
       debug: 4.3.4
-      happy-dom: 8.1.0
+      happy-dom: 8.1.1
       local-pkg: 0.4.2
       source-map: 0.6.1
       strip-literal: 1.0.0

@@ -7,7 +7,7 @@ const SecureSyncChannel = new Set([
 ] as readonly string[])
 
 const safeProcess: Process = {
-  type: process.type,
+  type: 'sandboxed-browser',
   arch: process.arch,
   sandboxed: process.sandboxed,
   contextIsolated: process.contextIsolated,

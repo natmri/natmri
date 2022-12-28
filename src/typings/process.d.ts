@@ -249,7 +249,7 @@ export interface Process {
   /**
    * A string representing the current process's type
    */
-  type: "browser" | "renderer" | "worker" | "utility"
+  type: "browser" | "renderer" | "worker" | "utility" | "sandboxed-browser"
 
   /**
    * For Mac App Store build, this property is true, for other builds it is undefined.

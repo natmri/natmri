@@ -20,24 +20,6 @@ export interface IProcessEnvironment {
   [key: string]: string | undefined
 }
 
-/**
- * This interface is intentionally not identical to node.js
- * process because it also works in sandboxed environments
- * where the process object is implemented differently. We
- * define the properties here that we need for `platform`
- * to work and nothing else.
- */
-export interface Iprocess {
-  platform: string
-  arch: string
-  env: IProcessEnvironment
-  versions?: {
-    electron?: string
-  }
-  type?: string
-  cwd: () => string
-}
-
 export const globals: any = (typeof self === 'object' ? self : typeof global === 'object' ? global : {})
 
 const isElectronProcess = typeof process?.versions?.electron === 'string'

@@ -1,10 +1,13 @@
 {
   "extends": "@antfu",
   "rules": {
+    "no-tabs": "off",
     "no-console": "off",
+    "accessor-pairs": "off",
     "import/no-mutable-exports": "off",
     "no-template-curly-in-string": "off",
     "@typescript-eslint/no-redeclare": "off",
+    "@typescript-eslint/no-this-alias": "off",
     "@typescript-eslint/no-var-requires": "off",
     "@typescript-eslint/no-use-before-define": "off",
     "@typescript-eslint/adjacent-overload-signatures": "off"

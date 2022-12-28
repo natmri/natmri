@@ -1,6 +1,7 @@
 import type { IDisposable } from 'natmri/base/common/lifecycle'
-import { Disposable, DisposableStore, SafeDisposable, combinedDisposable } from 'natmri/base/common/lifecycle'
+import { Disposable, DisposableStore, SafeDisposable, combinedDisposable, toDisposable } from 'natmri/base/common/lifecycle'
 import { LinkedList } from 'natmri/base/common/linkedList'
+import { once } from './functional'
 
 export interface Event<T> {
   (listener: (e: T) => any, thisArgs?: any, disposables?: IDisposable[] | DisposableStore): IDisposable
@@ -607,5 +608,104 @@ export class Emitter<T> {
       return false
 
     return !this._listeners.isEmpty()
+  }
+}
+
+export class EventMultiplexer<T> implements IDisposable {
+  private readonly emitter: Emitter<T>
+  private hasListeners = false
+  private events: { event: Event<T>; listener: IDisposable | null }[] = []
+
+  constructor() {
+    this.emitter = new Emitter<T>({
+      onWillAddFirstListener: () => this.onFirstListenerAdd(),
+      onDidRemoveLastListener: () => this.onLastListenerRemove(),
+    })
+  }
+
+  get event(): Event<T> {
+    return this.emitter.event
+  }
+
+  add(event: Event<T>): IDisposable {
+    const e = { event, listener: null }
+    this.events.push(e)
+
+    if (this.hasListeners)
+      this.hook(e)
+
+    const dispose = () => {
+      if (this.hasListeners)
+        this.unhook(e)
+
+      const idx = this.events.indexOf(e)
+      this.events.splice(idx, 1)
+    }
+
+    return toDisposable(once(dispose))
+  }
+
+  private onFirstListenerAdd(): void {
+    this.hasListeners = true
+    this.events.forEach(e => this.hook(e))
+  }
+
+  private onLastListenerRemove(): void {
+    this.hasListeners = false
+    this.events.forEach(e => this.unhook(e))
+  }
+
+  private hook(e: { event: Event<T>; listener: IDisposable | null }): void {
+    e.listener = e.event(r => this.emitter.fire(r))
+  }
+
+  private unhook(e: { event: Event<T>; listener: IDisposable | null }): void {
+    if (e.listener)
+      e.listener.dispose()
+
+    e.listener = null
+  }
+
+  dispose(): void {
+    this.emitter.dispose()
+  }
+}
+
+/**
+ * A Relay is an event forwarder which functions as a replugabble event pipe.
+ * Once created, you can connect an input event to it and it will simply forward
+ * events from that input event through its own `event` property. The `input`
+ * can be changed at any point in time.
+ */
+export class Relay<T> implements IDisposable {
+  private listening = false
+  private inputEvent: Event<T> = Event.None
+  private inputEventListener: IDisposable = Disposable.None
+
+  private readonly emitter = new Emitter<T>({
+    onDidAddFirstListener: () => {
+      this.listening = true
+      this.inputEventListener = this.inputEvent(this.emitter.fire, this.emitter)
+    },
+    onDidRemoveLastListener: () => {
+      this.listening = false
+      this.inputEventListener.dispose()
+    },
+  })
+
+  readonly event: Event<T> = this.emitter.event
+
+  set input(event: Event<T>) {
+    this.inputEvent = event
+
+    if (this.listening) {
+      this.inputEventListener.dispose()
+      this.inputEventListener = event(this.emitter.fire, this.emitter)
+    }
+  }
+
+  dispose() {
+    this.inputEventListener.dispose()
+    this.emitter.dispose()
   }
 }
