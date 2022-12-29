@@ -39,7 +39,7 @@ class ElectronShutdownHandlerClass extends EventEmitter {
   }
 }
 
-export interface INodeEventEmitter {
+interface INodeEventEmitter {
   addListener(eventName: string | symbol, listener: (...args: any[]) => void): this
   on(eventName: string | symbol, listener: (...args: any[]) => void): this
   removeListener(eventName: string | symbol, listener: (...args: any[]) => void): this

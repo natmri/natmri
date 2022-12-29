@@ -46,8 +46,6 @@ export class NativeEnvironmentService extends Disposable implements INativeEnvir
    * Default path: /src/{@link pagepath pagepath}
    */
   getPagesPath(pagepath: string): string {
-    console.log(URI.file(join(__dirname, pagepath)).toString())
-
     return isDevelopment ? new URL(pagepath, process.env.URL).toString() : URI.file(join(__dirname, pagepath)).toString()
   }
 }

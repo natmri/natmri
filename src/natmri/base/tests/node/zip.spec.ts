@@ -43,15 +43,12 @@ suite('Zip', () => {
       },
     ]
 
-    const fixtures = path.join(__dirname, './fixtures')
-    const fixture = path.join(fixtures, 'extract1.zip')
+    const fixture = path.join(testDir, 'extract.zip')
 
     await pack(fixture, files)
 
     const doesExist = fs.existsSync(fixture)
     expect(doesExist).toBeTruthy()
-    if (doesExist)
-      await fsp.rm(fixture, { force: true, recursive: true })
   })
 
   test('extract should handle directories', async () => {
