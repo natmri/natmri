@@ -3,7 +3,7 @@ import { execSync } from 'child_process'
 import fs from 'fs'
 import { appModulesPath, appPackagePath, appPath, rootPath } from './utils'
 
-const { dependencies } = JSON.parse(fs.readFileSync(appPackagePath, 'utf-8'))
+const { dependencies } = JSON.parse(fs.readFileSync(appPackagePath, 'utf8'))
 
 if (Object.keys(dependencies || {}).length > 0 && fs.existsSync(appModulesPath)) {
   const electronRebuildCmd
@@ -11,7 +11,7 @@ if (Object.keys(dependencies || {}).length > 0 && fs.existsSync(appModulesPath))
       .concat(' --force --types prod --module-dir=')
       .concat(appPath)
 
-  const cmd = process.platform === 'win32' ? electronRebuildCmd.replace(/\//, '\\') : electronRebuildCmd
+  const cmd = process.platform === 'win32' ? electronRebuildCmd.replace(/\//g, '\\') : electronRebuildCmd
 
   execSync(cmd, {
     stdio: 'inherit',

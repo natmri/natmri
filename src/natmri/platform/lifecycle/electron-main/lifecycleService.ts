@@ -164,7 +164,9 @@ export class LifecycleService extends Disposable implements ILifecycleService {
   ) {
     super()
 
-    this.when(LifecycleMainPhase.Ready).then(() => this.registerListeners())
+    this.when(LifecycleMainPhase.Ready)
+      .then(() => this.registerListeners())
+      .catch(err => this.logService.error(err))
   }
 
   private resolvePendingQuitPromise(veto: boolean): void {

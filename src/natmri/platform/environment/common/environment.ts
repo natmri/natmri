@@ -28,8 +28,6 @@ export interface INativeEnvironmentService extends IEnvironmentService {
   platformIconPath: string
   preloadPath: string
 
-  isMpaMode: boolean
-
   getPagesPath(name: string): string
 }
 

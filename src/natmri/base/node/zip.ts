@@ -4,7 +4,7 @@ import type { Readable } from 'node:stream'
 import path from 'path'
 import type { Entry, ZipFile } from 'yauzl'
 import { open as _openZip } from 'yauzl'
-import { yazl } from 'natmri/base/node/yazlp'
+import * as yazl from 'natmri/base/node/yazlp'
 import type { CancellationToken } from 'natmri/base/common/cancellation'
 import { Sequencer, createCancelablePromise } from 'natmri/base/common/async'
 
@@ -268,7 +268,7 @@ export async function extract(
   if (options.overwrite) {
     promise = promise.then(zipfile =>
       promises.rm(targetPath).then(() => zipfile),
-    )
+    ).catch(err => err)
   }
 
   const zipfile_1 = await promise

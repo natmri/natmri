@@ -1,0 +1,13 @@
+.drag {
+  -webkit-app-region: drag;
+}
+
+.no-drag {
+  -webkit-app-region: no-drag;
+}
+
+
+html, body {
+  padding: 0;
+  margin: 0;
+}

@@ -16,7 +16,7 @@ export const cleanBuildProduct = async () => {
 export const cleanNativeModule = async () => {
   const tasks: Promise<void>[] = []
   let mode: 'sequence' | 'parallel' = 'sequence'
-  const { devDependencies } = JSON.parse(fs.readFileSync(appPackagePath, 'utf-8'))
+  const { devDependencies } = JSON.parse(fs.readFileSync(appPackagePath, 'utf8'))
 
   const nativeModules = fs.readdirSync(appModulesPath, { withFileTypes: true })
     .filter(d => d.isDirectory() && d.name !== '.pnpm')

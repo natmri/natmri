@@ -66,7 +66,7 @@ export class ConsoleMainLogger extends AbstractLogger implements ILogger {
   }
 }
 
-export class LoggerService extends Disposable implements ILoggerService {
+export class LoggerMainService extends Disposable implements ILoggerService {
   private $logger = this._register(new ConsoleMainLogger())
 
   constructor() {
