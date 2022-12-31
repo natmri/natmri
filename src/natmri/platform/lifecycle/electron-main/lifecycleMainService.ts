@@ -8,7 +8,7 @@ import { Disposable } from 'natmri/base/common/lifecycle'
 import { powerMonitor } from 'natmri/base/electron-main/powerMonitor'
 import { ILoggerService } from 'natmri/platform/log/common/log'
 
-export interface ILifecycleService {
+export interface ILifecycleMainService {
   /**
    * Will be true if the program was restarted (e.g. due to update)
    */
@@ -128,9 +128,9 @@ export interface ShutdownEvent {
   join(promise: Promise<void>): void
 }
 
-export const ILifecycleService = createDecorator<ILifecycleService>('ILifecycleService')
+export const ILifecycleMainService = createDecorator<ILifecycleMainService>('ILifecycleService')
 
-export class LifecycleService extends Disposable implements ILifecycleService {
+export class LifecycleMainService extends Disposable implements ILifecycleMainService {
   private static QUIT_AND_RESTART_KEY = 'lifecycle:quitAndRestart'
   private static SHUTDOWN_KEY = 'lifecycle:shutdown'
 

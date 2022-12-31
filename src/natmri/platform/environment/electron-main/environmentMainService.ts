@@ -7,8 +7,13 @@ import { Disposable } from 'natmri/base/common/lifecycle'
 import { minimist } from 'natmri/base/node/minimist'
 import { memoize } from 'natmri/base/common/decorators'
 import { Schemas } from 'natmri/base/common/network'
+import { createDecorator } from 'natmri/base/common/instantiation'
 
-export class NativeEnvironmentService extends Disposable implements INativeEnvironmentService {
+export interface INativeEnvironmentMainService extends INativeEnvironmentService {}
+
+export const INativeEnvironmentMainService = createDecorator<INativeEnvironmentMainService>('nativeEnvironmentService')
+
+export class NativeEnvironmentMainService extends Disposable implements INativeEnvironmentService {
   readonly args: NativeParsedArgs = minimist(process.argv.slice(2)) as NativeParsedArgs
 
   constructor(
