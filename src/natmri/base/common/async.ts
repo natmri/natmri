@@ -1,7 +1,7 @@
 import type { CancellationToken } from 'natmri/base/common/cancellation'
 import { CancellationTokenSource } from 'natmri/base/common/cancellation'
 import { CancellationError } from 'natmri/base/common/errors'
-import type { IDisposable } from './lifecycle'
+import type { IDisposable } from 'natmri/base/common/lifecycle'
 
 export function isThenable<T>(obj: unknown): obj is Promise<T> {
   return !!obj && typeof (obj as unknown as Promise<T>).then === 'function'
@@ -307,3 +307,64 @@ export class Sequencer {
     return this.current = this.current.then(() => promiseTask(), () => promiseTask())
   }
 }
+
+// #region
+
+export type ValueCallback<T = unknown> = (value: T | Promise<T>) => void
+
+/**
+ * Creates a promise whose resolution or rejection can be controlled imperatively.
+ */
+export class DeferredPromise<T> {
+  private completeCallback!: ValueCallback<T>
+  private errorCallback!: (err: unknown) => void
+  private rejected = false
+  private resolved = false
+
+  public get isRejected() {
+    return this.rejected
+  }
+
+  public get isResolved() {
+    return this.resolved
+  }
+
+  public get isSettled() {
+    return this.rejected || this.resolved
+  }
+
+  public readonly p: Promise<T>
+
+  constructor() {
+    this.p = new Promise<T>((resolve, reject) => {
+      this.completeCallback = resolve
+      this.errorCallback = reject
+    })
+  }
+
+  public complete(value: T) {
+    return new Promise<void>((resolve) => {
+      this.completeCallback(value)
+      this.resolved = true
+      resolve()
+    })
+  }
+
+  public error(err: unknown) {
+    return new Promise<void>((resolve) => {
+      this.errorCallback(err)
+      this.rejected = true
+      resolve()
+    })
+  }
+
+  public cancel() {
+    new Promise<void>((resolve) => {
+      this.errorCallback(new CancellationError())
+      this.rejected = true
+      resolve()
+    })
+  }
+}
+
+// #endregion
