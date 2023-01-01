@@ -14,7 +14,7 @@ const OUT_DIR = join(cwd(), 'release', 'app', 'dist')
 export default defineConfig({
   clearScreen: false,
   base: './',
-  root: NATMRI_ROOT,
+  root: join(NATMRI_ROOT, '..'), // for src
   resolve: {
     alias,
   },

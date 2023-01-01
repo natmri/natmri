@@ -1,3 +1,8 @@
+export function assert(value: unknown, message?: string | Error) {
+  if (!isUndefinedOrNull(value) && !value)
+    console.error(message)
+}
+
 export function isUndefined(obj: unknown): obj is undefined {
   return typeof obj === 'undefined'
 }
