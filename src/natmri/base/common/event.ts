@@ -1,7 +1,7 @@
-import type { IDisposable } from 'natmri/base/common/lifecycle'
 import { Disposable, DisposableStore, SafeDisposable, combinedDisposable, toDisposable } from 'natmri/base/common/lifecycle'
 import { LinkedList } from 'natmri/base/common/linkedList'
-import { once } from './functional'
+import { once } from 'natmri/base/common/functional'
+import type { IDisposable } from 'natmri/base/common/lifecycle'
 
 export interface Event<T> {
   (listener: (e: T) => any, thisArgs?: any, disposables?: IDisposable[] | DisposableStore): IDisposable

@@ -3,8 +3,8 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *-------------------------------------------------------------------------------------------- */
 
-import { VSBuffer } from './buffer'
-import type { URI, UriComponents } from './uri'
+import { VSBuffer } from 'natmri/base/common/buffer'
+import type { URI, UriComponents } from 'natmri/base/common/uri'
 
 export const enum MarshalledId {
   Regexp,
