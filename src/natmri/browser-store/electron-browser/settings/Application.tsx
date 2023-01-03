@@ -1,6 +1,6 @@
 import { render } from 'solid-js/web'
 import { Counter } from 'natmri/base/browser/components/Counter'
-import '../natmri.main.css'
+import 'natmri/base/browser/styles/natmri.reset.main.css'
 import 'virtual:uno.css'
 
 export function App() {
