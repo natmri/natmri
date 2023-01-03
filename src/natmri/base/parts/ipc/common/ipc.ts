@@ -9,7 +9,6 @@ import { createCancelablePromise, timeout } from 'natmri/base/common/async'
 import { VSBuffer } from 'natmri/base/common/buffer'
 import { CancellationToken, CancellationTokenSource } from 'natmri/base/common/cancellation'
 import { CharCode } from 'natmri/base/common/charCode'
-import { memoize } from 'natmri/base/common/decorators'
 import { CancellationError } from 'natmri/base/common/errors'
 import { Emitter, Event, EventMultiplexer, Relay } from 'natmri/base/common/event'
 import type { IDisposable } from 'natmri/base/common/lifecycle'
@@ -755,7 +754,6 @@ export class ChannelClient implements IChannelClient, IDisposable {
     handler?.(response)
   }
 
-  @memoize
   get onDidInitializePromise(): Promise<void> {
     return Event.toPromise(this.onDidInitialize)
   }
