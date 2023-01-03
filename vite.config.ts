@@ -1,6 +1,7 @@
 import { join } from 'node:path'
 import { cwd } from 'node:process'
-import { defineConfig, splitVendorChunkPlugin } from 'vite'
+import { splitVendorChunkPlugin } from 'vite'
+import { defineConfig } from 'vitest/config'
 import Solid from 'vite-plugin-solid'
 import UnoCSS from 'unocss/vite'
 import ViteElectronPlugin from 'eevi'
@@ -37,5 +38,8 @@ export default defineConfig({
     },
     outDir: OUT_DIR,
     emptyOutDir: false,
+  },
+  test: {
+    environment: 'happy-dom',
   },
 })

@@ -102,7 +102,7 @@
     "category": "Utility",
     "synopsis": "An electron template based on Vite and Esbuild.",
     "desktop": {
-      "Name": "Boilerplate",
+      "Name": "Natmri",
       "Type": "Application",
       "GenericName": "An electron template based on Vite and Esbuild."
     },

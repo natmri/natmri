@@ -31,7 +31,6 @@
   },
   "dependencies": {
     "i18next": "^22.4.6",
-    "solid-js": "1.6.6",
     "yauzl": "^2.10.0"
   },
   "devDependencies": {
@@ -58,9 +57,9 @@
     "husky": "^8.0.2",
     "lint-staged": "^13.1.0",
     "node-abi": "^3.30.0",
-    "playwright": "^1.29.1",
     "pnpm": "7.20.0",
     "rimraf": "^3.0.2",
+    "solid-js": "^1.6.6",
     "source-map-support": "^0.5.21",
     "typescript": "^4.8.4",
     "unocss": "^0.48.0",

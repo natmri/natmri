@@ -30,10 +30,9 @@ specifiers:
   i18next: ^22.4.6
   lint-staged: ^13.1.0
   node-abi: ^3.30.0
-  playwright: ^1.29.1
   pnpm: 7.20.0
   rimraf: ^3.0.2
-  solid-js: 1.6.6
+  solid-js: ^1.6.6
   source-map-support: ^0.5.21
   typescript: ^4.8.4
   unocss: ^0.48.0
@@ -44,7 +43,6 @@ specifiers:
 
 dependencies:
   i18next: 22.4.6
-  solid-js: 1.6.6
   yauzl: 2.10.0
 
 devDependencies:
@@ -71,9 +69,9 @@ devDependencies:
   husky: 8.0.2
   lint-staged: 13.1.0
   node-abi: 3.30.0
-  playwright: 1.29.1
   pnpm: 7.20.0
   rimraf: 3.0.2
+  solid-js: 1.6.6
   source-map-support: 0.5.21
   typescript: 4.9.3
   unocss: 0.48.0_vite@4.0.3
@@ -2336,6 +2334,7 @@ packages:
 
   /csstype/3.1.1:
     resolution: {integrity: sha512-DJR/VvkAvSZW9bTouZue2sSxDwdTN92uHjqeKVm+0dAqdfNykRzQ95tay8aXMBAAPpUiq4Qcug2L7neoRh2Egw==}
+    dev: true
 
   /date-fns/2.29.3:
     resolution: {integrity: sha512-dDCnyH2WnnKusqvZZ6+jA1O51Ibt8ZMRNkDZdyAyK4YfbDwa/cEmuztzG5pk6hqlp9aSBPYcjOlktquahGwGeA==}
@@ -5160,21 +5159,6 @@ packages:
       pathe: 1.0.0
     dev: true
 
-  /playwright-core/1.29.1:
-    resolution: {integrity: sha512-20Ai3d+lMkWpI9YZYlxk8gxatfgax5STW8GaMozAHwigLiyiKQrdkt7gaoT9UQR8FIVDg6qVXs9IoZUQrDjIIg==}
-    engines: {node: '>=14'}
-    hasBin: true
-    dev: true
-
-  /playwright/1.29.1:
-    resolution: {integrity: sha512-lasC+pMqsQ2uWhNurt3YK3xo0gWlMjslYUylKbHcqF/NTjwp9KStRGO7S6wwz2f52GcSnop8XUK/GymJjdzrxw==}
-    engines: {node: '>=14'}
-    hasBin: true
-    requiresBuild: true
-    dependencies:
-      playwright-core: 1.29.1
-    dev: true
-
   /plist/3.0.6:
     resolution: {integrity: sha512-WiIVYyrp8TD4w8yCvyeIr+lkmrGRd5u0VbRnU+tP/aRLxP/YadJUYOMZJ/6hIa3oUyVCsycXvtNRgd5XBJIbiA==}
     engines: {node: '>=6'}
@@ -5636,6 +5620,7 @@ packages:
     resolution: {integrity: sha512-5x33mEbPI8QLuywvFjQP4krjWDr8xiYFgZx9KCBH7b0ZzypQCHaUubob7bK6i+1u6nhaAqhWtvXS587Kb8DShA==}
     dependencies:
       csstype: 3.1.1
+    dev: true
 
   /solid-refresh/0.4.1_solid-js@1.6.6:
     resolution: {integrity: sha512-v3tD/OXQcUyXLrWjPW1dXZyeWwP7/+GQNs8YTL09GBq+5FguA6IejJWUvJDrLIA4M0ho9/5zK2e9n+uy+4488g==}
