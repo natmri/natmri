@@ -13,13 +13,13 @@ interface ProtocolCallback {
   (result: string | Electron.FilePathWithHeaders | { error: number }): void
 }
 
-export interface IProtocolService {
+export interface IProtocolMainService {
 
 }
 
-export const IProtocolService = createDecorator<IProtocolService>('IProtocolService')
+export const IProtocolMainService = createDecorator<IProtocolMainService>('protocolMainService')
 
-export class ProtocolMainService extends Disposable implements IProtocolService {
+export class ProtocolMainService extends Disposable implements IProtocolMainService {
   constructor(
     @INativeEnvironmentService private readonly nativeEnvironment: INativeEnvironmentService,
     @ILoggerService private readonly logService: ILoggerService,
@@ -28,7 +28,6 @@ export class ProtocolMainService extends Disposable implements IProtocolService 
 
     this.configurationSession()
     this.handleProtocols()
-    this.logService.info('[ProtocolService] initial')
   }
 
   private handleProtocols() {
@@ -45,7 +44,7 @@ export class ProtocolMainService extends Disposable implements IProtocolService 
 
   private configurationSession() {
     session.defaultSession.setPreloads([
-      join(this.nativeEnvironment.preloadPath, 'globals.js'),
+      join(this.nativeEnvironment.preloadPath, 'natmri/base/parts/preload/globals.js'),
     ])
   }
 

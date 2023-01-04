@@ -1,5 +1,4 @@
 import { createDecorator } from 'natmri/base/common/instantiation'
-import type { IRepository } from 'typings/repository'
 
 export interface NativeParsedArgs {
   locale?: string
@@ -23,8 +22,9 @@ export interface IEnvironmentService {
 export interface INativeEnvironmentService extends IEnvironmentService {
   args: NativeParsedArgs
 
+  appRoot: string
+
   resourcePath: string
-  repositores: IRepository[]
   platformIconPath: string
   preloadPath: string
 

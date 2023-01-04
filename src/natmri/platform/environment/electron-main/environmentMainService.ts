@@ -1,37 +1,32 @@
 import { join } from 'path'
-import { ILoggerService } from 'natmri/platform/log/common/log'
 import { URI } from 'natmri/base/common/uri'
-import type { INativeEnvironmentService, NativeParsedArgs } from 'natmri/platform/environment/common/environment'
 import { isDevelopment, isMacintosh, isWindows } from 'natmri/base/common/environment'
 import { Disposable } from 'natmri/base/common/lifecycle'
 import { minimist } from 'natmri/base/node/minimist'
 import { memoize } from 'natmri/base/common/decorators'
 import { Schemas } from 'natmri/base/common/network'
 import { createDecorator } from 'natmri/base/common/instantiation'
+import type { INativeEnvironmentService, NativeParsedArgs } from 'natmri/platform/environment/common/environment'
 
 export interface INativeEnvironmentMainService extends INativeEnvironmentService {}
 
 export const INativeEnvironmentMainService = createDecorator<INativeEnvironmentMainService>('nativeEnvironmentService')
 
 export class NativeEnvironmentMainService extends Disposable implements INativeEnvironmentService {
-  readonly args: NativeParsedArgs = minimist(process.argv.slice(2)) as NativeParsedArgs
-
   constructor(
-    @ILoggerService private readonly logService: ILoggerService,
+    readonly args: NativeParsedArgs = minimist(process.argv.slice(2)) as NativeParsedArgs,
   ) {
     super()
+  }
 
-    this.logService.info('[NativeEnvironmentService] initial')
+  @memoize
+  get appRoot() {
+    return isDevelopment ? process.cwd() : process.resourcesPath
   }
 
   @memoize
   get resourcePath() {
     return isDevelopment ? process.cwd() : process.resourcesPath
-  }
-
-  @memoize
-  get repositores() {
-    return []
   }
 
   @memoize
@@ -46,12 +41,12 @@ export class NativeEnvironmentMainService extends Disposable implements INativeE
 
   @memoize
   get preloadPath() {
-    return join(__dirname, 'preload')
+    return join(__dirname)
   }
 
-  getPagesPath(pagepath: string): string {
+  getPagesPath(path: string): string {
     return isDevelopment
-      ? new URL(pagepath, process.env.URL).toString()
-      : URI.parse(`${Schemas.natmri}://page/${pagepath}`).toString()
+      ? new URL(path, process.env.URL).toString()
+      : URI.parse(`${Schemas.natmri}://page/${path}`).toString()
   }
 }
