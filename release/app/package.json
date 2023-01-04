@@ -10,6 +10,7 @@
   "main": "./dist/main.js",
   "dependencies": {
     "@livemoe/tools": "^0.4.0-beta.3",
-    "better-sqlite3": "^8.0.1"
+    "better-sqlite3": "^8.0.1",
+    "native-is-elevated-rs": "^0.0.1-beta.5"
   }
 }
