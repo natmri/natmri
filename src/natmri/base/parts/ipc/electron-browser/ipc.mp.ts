@@ -5,9 +5,9 @@
 
 import { ipcRenderer } from 'electron'
 import { Event } from 'natmri/base/common/event'
-import type { ClientConnectionEvent } from 'natmri/base/parts/ipc/common/ipc'
 import { IPCServer } from 'natmri/base/parts/ipc/common/ipc'
 import { Protocol as MessagePortProtocol } from 'natmri/base/parts/ipc/common/ipc.mp'
+import type { ClientConnectionEvent } from 'natmri/base/parts/ipc/common/ipc'
 
 /**
  * An implementation of a `IPCServer` on top of MessagePort style IPC communication.

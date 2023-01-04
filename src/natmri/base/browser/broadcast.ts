@@ -2,7 +2,7 @@ import { Emitter } from 'natmri/base/common/event'
 import { Disposable, toDisposable } from 'natmri/base/common/lifecycle'
 
 export class BroadcastDataChannel<T, TT = T> extends Disposable {
-  private broadcastChannel: BroadcastChannel
+  private readonly broadcastChannel: BroadcastChannel
 
   private readonly $onDidReceiveData = this._register(new Emitter<T>())
   readonly onDidReceiveData = this.$onDidReceiveData.event
