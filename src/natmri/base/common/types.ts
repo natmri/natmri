@@ -3,6 +3,10 @@ export function assert(value: unknown, message?: string | Error) {
     console.error(message)
 }
 
+export function isString(obj: unknown): obj is string {
+  return typeof obj === 'string'
+}
+
 export function isUndefined(obj: unknown): obj is undefined {
   return typeof obj === 'undefined'
 }
