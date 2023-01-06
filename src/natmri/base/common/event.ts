@@ -548,8 +548,6 @@ export class Emitter<T> {
         if (firstListener && this._options?.onWillAddFirstListener)
           this._options.onWillAddFirstListener(this)
 
-        let removeMonitor: Function | undefined
-
         const listener = new Listener(callback, thisArgs)
         const removeListener = this._listeners.push(listener)
 
@@ -560,7 +558,6 @@ export class Emitter<T> {
           this._options.onDidAddListener(this, callback, thisArgs)
 
         const result = listener.subscription.set(() => {
-          removeMonitor?.()
           if (!this._disposed) {
             removeListener()
             if (this._options && this._options.onDidRemoveLastListener) {
