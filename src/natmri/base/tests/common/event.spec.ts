@@ -52,7 +52,7 @@ suite('Event utils dispose', () => {
   test('no leak with debounce-util', () => {
     const store = new DisposableStore()
     const emitter = new Emitter<number>()
-    const debounced = Event.debounce(emitter.event, l => 0, undefined, undefined, store)
+    const debounced = Event.debounce(emitter.event, _l => 0, undefined, undefined, store)
 
     let all = 0
     const leaked = debounced(n => all += n)
@@ -133,7 +133,7 @@ suite('Event', () => {
     expect(firstCount).toStrictEqual(0)
     expect(lastCount).toStrictEqual(0)
 
-    let subscription = a.event(() => { })
+    const subscription = a.event(() => { })
     expect(firstCount).toStrictEqual(1)
     expect(lastCount).toStrictEqual(0)
 
@@ -141,7 +141,7 @@ suite('Event', () => {
     expect(firstCount).toStrictEqual(1)
     expect(lastCount).toStrictEqual(1)
 
-    subscription = a.event(() => { })
+    a.event(() => { })
     expect(firstCount).toStrictEqual(2)
     expect(lastCount).toStrictEqual(1)
   })
@@ -259,7 +259,7 @@ suite('Event', () => {
 
   test('Debounce Event - leading reset', async () => {
     const emitter = new Emitter<number>()
-    const debounced = Event.debounce(emitter.event, (l, e) => l ? l + 1 : 1, 0, /* leading= */true)
+    const debounced = Event.debounce(emitter.event, (l, _e) => l ? l + 1 : 1, 0, /* leading= */true)
 
     const calls: number[] = []
     debounced(e => calls.push(e))
