@@ -1,7 +1,6 @@
 import { promisify } from 'util'
 import { join, resolve } from 'path'
 import rm from 'rimraf'
-import consola from 'consola'
 
 export const rootPath = process.cwd().includes('app') ? resolve(process.cwd(), '../../') : process.cwd()
 
@@ -19,10 +18,10 @@ const internalRimraf = promisify(rm)
 export const rimraf = async function remove(path: string): Promise<void> {
   try {
     await internalRimraf(path)
-    consola.success(`\x1B[91m Remove\x1B[0m\x1B[96m\x1B[1m ${path}\x1B[0m successfully`)
+    console.log(`\x1B[91m Remove\x1B[0m\x1B[96m\x1B[1m ${path}\x1B[0m successfully`)
   }
   catch (err) {
-    consola.error(`\x1B[91m\x1B[1m Remove ${path} failed \x1B[0m, error: ${err}`)
+    console.error(`\x1B[91m\x1B[1m Remove ${path} failed \x1B[0m, error: ${err}`)
   }
 }
 
