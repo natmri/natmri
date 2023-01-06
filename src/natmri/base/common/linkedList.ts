@@ -13,27 +13,14 @@ class Node<E> {
   }
 }
 
-interface ILinkedList<E> {
-  size: number
-
-  // methor
-  isEmpty(): boolean
-  clear(): void
-  unshift(element: E): () => void
-  push(element: E): () => void
-
-  shift(): E | undefined
-  pop(): E | undefined
-
-  [Symbol.iterator](): Iterator<E>
-}
-
-export class LinkedList<E> implements ILinkedList<E> {
+export class LinkedList<E> {
   private _first: Node<E> = Node.Undefined
   private _last: Node<E> = Node.Undefined
   private _size = 0
 
-  get size() { return this._size }
+  get size(): number {
+    return this._size
+  }
 
   // empty linkedlist check
   isEmpty(): boolean {
@@ -42,6 +29,14 @@ export class LinkedList<E> implements ILinkedList<E> {
 
   // clear linkedlist
   clear(): void {
+    let node = this._first
+    while (node !== Node.Undefined) {
+      const next = node.next
+      node.prev = Node.Undefined
+      node.next = Node.Undefined
+      node = next
+    }
+
     this._first = Node.Undefined
     this._last = Node.Undefined
     this._size = 0
@@ -59,24 +54,37 @@ export class LinkedList<E> implements ILinkedList<E> {
 
   // get an element for linkedlist for ended
   pop(): E | undefined {
-    if (this._last === Node.Undefined)
+    if (this._last === Node.Undefined) {
       return undefined
-
-    return this._remove(this._first)
+    }
+    else {
+      const res = this._last.element
+      this._remove(this._last)
+      return res
+    }
   }
 
   // get an element for linkedlist for head
   shift(): E | undefined {
-    if (this._first === Node.Undefined)
+    if (this._first === Node.Undefined) {
       return undefined
-
-    return this._remove(this._last)
+    }
+    else {
+      const res = this._first.element
+      this._remove(this._first)
+      return res
+    }
   }
 
   // insert an element
   private _insert(element: E, atTheLast = false) {
     const node = new Node(element)
-    if (!atTheLast) {
+    // insert origin node
+    if (this._first === Node.Undefined) {
+      this._first = node
+      this._last = node
+    }
+    else if (!atTheLast) {
       // unshift
       this._first.prev = node
       node.next = this._first
