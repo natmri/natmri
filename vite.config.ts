@@ -11,6 +11,7 @@ import { alias } from './alias'
 const NATMRI_ROOT = join(cwd(), 'src', 'natmri')
 const BROWSER_STORE = join(NATMRI_ROOT, 'browser-store', 'electron-browser')
 const OUT_DIR = join(cwd(), 'release', 'app', 'dist')
+const isTestEnvironment = !!process.env.NATMRI_TEST
 
 export default defineConfig({
   clearScreen: false,
@@ -20,12 +21,15 @@ export default defineConfig({
     alias,
   },
   plugins: [
-    Solid(),
-    UnoCSS(),
-    ViteElectronPlugin(),
-    ElectronRendererPlugin([
-      'wallpaper',
-    ]),
+    isTestEnvironment
+      ? []
+      : [
+          Solid(),
+          UnoCSS(),
+          ViteElectronPlugin(),
+          ElectronRendererPlugin([
+            'wallpaper',
+          ])],
     splitVendorChunkPlugin(),
   ],
   build: {
@@ -38,8 +42,5 @@ export default defineConfig({
     },
     outDir: OUT_DIR,
     emptyOutDir: false,
-  },
-  test: {
-    environment: 'happy-dom',
   },
 })
