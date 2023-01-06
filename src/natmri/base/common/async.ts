@@ -368,3 +368,76 @@ export class DeferredPromise<T> {
 }
 
 // #endregion
+
+export class RunOnceScheduler implements IDisposable {
+  protected runner: ((...args: unknown[]) => void) | null
+
+  private timeoutToken: any
+  private timeout: number
+  private timeoutHandler: () => void
+
+  constructor(runner: (...args: any[]) => void, delay: number) {
+    this.timeoutToken = -1
+    this.runner = runner
+    this.timeout = delay
+    this.timeoutHandler = this.onTimeout.bind(this)
+  }
+
+  /**
+	 * Dispose RunOnceScheduler
+	 */
+  dispose(): void {
+    this.cancel()
+    this.runner = null
+  }
+
+  /**
+	 * Cancel current scheduled runner (if any).
+	 */
+  cancel(): void {
+    if (this.isScheduled()) {
+      clearTimeout(this.timeoutToken)
+      this.timeoutToken = -1
+    }
+  }
+
+  /**
+	 * Cancel previous runner (if any) & schedule a new runner.
+	 */
+  schedule(delay = this.timeout): void {
+    this.cancel()
+    this.timeoutToken = setTimeout(this.timeoutHandler, delay)
+  }
+
+  get delay(): number {
+    return this.timeout
+  }
+
+  set delay(value: number) {
+    this.timeout = value
+  }
+
+  /**
+	 * Returns true if scheduled.
+	 */
+  isScheduled(): boolean {
+    return this.timeoutToken !== -1
+  }
+
+  flush(): void {
+    if (this.isScheduled()) {
+      this.cancel()
+      this.doRun()
+    }
+  }
+
+  private onTimeout() {
+    this.timeoutToken = -1
+    if (this.runner)
+      this.doRun()
+  }
+
+  protected doRun(): void {
+    this.runner?.()
+  }
+}
