@@ -3,14 +3,14 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *-------------------------------------------------------------------------------------------- */
 
-import type { WebContents } from 'electron'
 import { ipcMain } from 'electron'
 import { VSBuffer } from 'natmri/base/common/buffer'
 import { Emitter, Event } from 'natmri/base/common/event'
-import type { IDisposable } from 'natmri/base/common/lifecycle'
 import { toDisposable } from 'natmri/base/common/lifecycle'
 import { Protocol as ElectronProtocol } from 'natmri/base/parts/ipc/common/ipc.electron'
 import { IPCServer } from 'natmri/base/parts/ipc/common/ipc'
+import type { WebContents } from 'electron'
+import type { IDisposable } from 'natmri/base/common/lifecycle'
 import type { ClientConnectionEvent } from 'natmri/base/parts/ipc/common/ipc'
 
 interface IIPCEvent {
@@ -32,7 +32,7 @@ export class Server extends IPCServer {
   private static readonly Clients = new Map<number, IDisposable>()
 
   private static getOnDidClientConnect(): Event<ClientConnectionEvent> {
-    const onHello = Event.fromNodeEventEmitter<WebContents>(ipcMain, 'vscode:hello', ({ sender }) => sender)
+    const onHello = Event.fromNodeEventEmitter<WebContents>(ipcMain, 'vscode:hello', ({ sender }: Electron.IpcMainEvent) => sender)
 
     return Event.map(onHello, (webContents) => {
       const id = webContents.id
