@@ -10,8 +10,6 @@ let nshContent: string
 const nshFilePath = join(buildResourcePath, 'windows', 'installer.nsh')
 
 async function beforeMake() {
-  console.info('before make installer')
-
   await cleanFiles()
 
   if (fileConfiguration?.nsis?.include && fs.existsSync(nshFilePath)) {
@@ -28,9 +26,7 @@ async function beforeMake() {
 }
 
 async function doMakeInstaller(configuration: Configuration) {
-  console.info('make installer doing!')
-
-  const result = await builder.build({
+  return await builder.build({
     config: {
       ...configuration,
       copyright: `Copyright © ${new Date().getFullYear()} \$\{author\}`,
@@ -40,15 +36,11 @@ async function doMakeInstaller(configuration: Configuration) {
     },
     publish: process.env.BUILDER__PUBLISH as any,
   })
-
-  console.info('make installer done!')
-
-  return result
 }
 
 async function afterMake(result: string[]) {
   for (const r of result)
-    console.log(`\x1B[32m\x1B[1mMake ${r} successfully\x1B[0m`)
+    console.log(`\t\x1B[32m\x1B[1mMake ${r} successfully\x1B[0m`)
 
   if (nshContent)
     fs.writeFileSync(nshFilePath, nshContent)

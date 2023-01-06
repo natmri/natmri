@@ -1,5 +1,5 @@
-import { join, sep } from 'path'
-import fs, { promises as fsp } from 'fs'
+import { join, sep } from 'node:path'
+import fs, { promises as fsp } from 'node:fs'
 import nodeAbi from 'node-abi'
 import markFiles from './markFiles.json'
 import { appModulesPath, appPackagePath, appPath, releasePath, rimraf, sequence, taskFactory } from './utils'

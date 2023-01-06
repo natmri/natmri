@@ -1,5 +1,5 @@
-import { promisify } from 'util'
-import { join, resolve } from 'path'
+import { promisify } from 'node:util'
+import { join, resolve } from 'node:path'
 import rm from 'rimraf'
 
 export const rootPath = process.cwd().includes('app') ? resolve(process.cwd(), '../../') : process.cwd()

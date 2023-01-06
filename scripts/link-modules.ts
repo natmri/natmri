@@ -1,4 +1,4 @@
-import fs, { promises as fsp } from 'fs'
+import fs, { promises as fsp } from 'node:fs'
 import { appModulesPath, appPackagePath, srcElectronModulesPath, srcElectronPackagePath } from './utils'
 
 // if dependencies is {}, pnpm can't generate `node_modules`
