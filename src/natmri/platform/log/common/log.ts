@@ -74,6 +74,8 @@ export function log(logger: ILogger, level: LogLevel, message: string) {
 }
 
 export interface ILoggerService {
+  readonly _serviceBrand: undefined
+
   create(label: string): ILogger
 
   trace(message: string, ...args: any[]): void

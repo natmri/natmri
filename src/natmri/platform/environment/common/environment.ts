@@ -1,4 +1,5 @@
 import { createDecorator } from 'natmri/base/common/instantiation'
+import type { URI } from 'natmri/base/common/uri'
 
 export interface NativeParsedArgs {
   locale?: string
@@ -16,7 +17,7 @@ export interface NativeParsedArgs {
 }
 
 export interface IEnvironmentService {
-
+  readonly _serviceBrand: undefined
 }
 
 export interface INativeEnvironmentService extends IEnvironmentService {
@@ -28,7 +29,7 @@ export interface INativeEnvironmentService extends IEnvironmentService {
   platformIconPath: string
   preloadPath: string
 
-  getPagesPath(name: string): string
+  getPageURI(name: string): URI
 }
 
 export const IEnvironmentService = createDecorator<IEnvironmentService>('environmentService')

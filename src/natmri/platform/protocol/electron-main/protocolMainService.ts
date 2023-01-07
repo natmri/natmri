@@ -14,12 +14,14 @@ interface ProtocolCallback {
 }
 
 export interface IProtocolMainService {
-
+  readonly _serviceBrand: undefined
 }
 
 export const IProtocolMainService = createDecorator<IProtocolMainService>('protocolMainService')
 
 export class ProtocolMainService extends Disposable implements IProtocolMainService {
+  declare readonly _serviceBrand: undefined
+
   constructor(
     @INativeEnvironmentService private readonly nativeEnvironment: INativeEnvironmentService,
     @ILoggerService private readonly logService: ILoggerService,

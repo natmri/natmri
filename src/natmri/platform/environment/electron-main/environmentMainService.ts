@@ -13,6 +13,8 @@ export interface INativeEnvironmentMainService extends INativeEnvironmentService
 export const INativeEnvironmentMainService = createDecorator<INativeEnvironmentMainService>('nativeEnvironmentService')
 
 export class NativeEnvironmentMainService extends Disposable implements INativeEnvironmentService {
+  declare readonly _serviceBrand: undefined
+
   constructor(
     readonly args: NativeParsedArgs = minimist(process.argv.slice(2)) as NativeParsedArgs,
   ) {
@@ -44,9 +46,9 @@ export class NativeEnvironmentMainService extends Disposable implements INativeE
     return join(__dirname)
   }
 
-  getPagesPath(path: string): string {
+  getPageURI(path: string): URI {
     return isDevelopment
-      ? new URL(path, process.env.URL).toString()
-      : URI.parse(`${Schemas.natmri}://page/${path}`).toString()
+      ? URI.parse(new URL(path, process.env.URL).toString())
+      : URI.parse(`${Schemas.natmri}://page/${path}`)
   }
 }

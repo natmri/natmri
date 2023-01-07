@@ -9,6 +9,8 @@ import { powerMonitor } from 'natmri/base/electron-main/powerMonitor'
 import { ILoggerService } from 'natmri/platform/log/common/log'
 
 export interface ILifecycleMainService {
+  readonly _serviceBrand: undefined
+
   /**
    * Will be true if the program was restarted (e.g. due to update)
    */
@@ -131,6 +133,8 @@ export interface ShutdownEvent {
 export const ILifecycleMainService = createDecorator<ILifecycleMainService>('ILifecycleService')
 
 export class LifecycleMainService extends Disposable implements ILifecycleMainService {
+  declare readonly _serviceBrand: undefined
+
   private static QUIT_AND_RESTART_KEY = 'lifecycle:quitAndRestart'
   private static SHUTDOWN_KEY = 'lifecycle:shutdown'
 
