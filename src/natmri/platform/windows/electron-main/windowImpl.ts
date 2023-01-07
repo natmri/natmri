@@ -5,10 +5,11 @@ import { toErrorMessage } from 'natmri/base/common/errors'
 import { DeferredPromise, timeout } from 'natmri/base/common/async'
 import { isMacintosh, isWindows } from 'natmri/base/common/environment'
 import { ErrorReason } from 'natmri/platform/window/electron-main/window'
+import { ILoggerService } from 'natmri/platform/log/common/log'
 import type { BrowserWindowConstructorOptions } from 'electron'
 import type { CancellationToken } from 'natmri/base/common/cancellation'
-import type { ILoggerService } from 'natmri/platform/log/common/log'
-import type { INativeBaseWindowOptions, INatmriBaseWindow, IWindowErrorEvent } from 'natmri/platform/window/electron-main/window'
+import type { INativeBaseWindowOptions, INatmriWindow, IWindowErrorEvent } from 'natmri/platform/window/electron-main/window'
+import type { URI } from 'natmri/base/common/uri'
 
 export const enum ReadyState {
   None,
@@ -16,8 +17,8 @@ export const enum ReadyState {
   Ready,
 }
 
-export class NatmriBaseWindow extends Disposable implements INatmriBaseWindow {
-  protected _onDidSignalReady = this._register(new Emitter<void>())
+export class NatmriWindow extends Disposable implements INatmriWindow {
+  protected readonly _onDidSignalReady = this._register(new Emitter<void>())
   readonly onDidSignalReady = this._onDidSignalReady.event
 
   protected readonly _onDidTriggerSystemContextMenu = this._register(new Emitter<{ x: number; y: number }>())
@@ -38,7 +39,7 @@ export class NatmriBaseWindow extends Disposable implements INatmriBaseWindow {
   get win(): BrowserWindow | null { return this._win }
 
   protected _id: number
-  get id() { return this.id }
+  get id() { return this._id }
 
   protected _nativeWindowId: Buffer
   get nativeWindowId() { return this._nativeWindowId }
@@ -46,11 +47,11 @@ export class NatmriBaseWindow extends Disposable implements INatmriBaseWindow {
   protected transientIsNativeFullScreen: boolean | undefined = undefined
   protected joinNativeFullScreenTransition: DeferredPromise<void> | undefined = undefined
 
-  protected whenReadyCallbacks: { (window: INatmriBaseWindow): void }[] = []
+  protected whenReadyCallbacks: { (window: INatmriWindow): void }[] = []
 
   constructor(
     config: INativeBaseWindowOptions,
-    protected readonly logService: ILoggerService,
+    @ILoggerService private readonly logService: ILoggerService,
   ) {
     super()
 
@@ -133,8 +134,8 @@ export class NatmriBaseWindow extends Disposable implements INatmriBaseWindow {
     return this.readyState === ReadyState.Ready
   }
 
-  ready(): Promise<INatmriBaseWindow> {
-    return new Promise<INatmriBaseWindow>((resolve) => {
+  ready(): Promise<INatmriWindow> {
+    return new Promise<INatmriWindow>((resolve) => {
       if (this.isReady)
         return resolve(this)
 
@@ -288,6 +289,11 @@ export class NatmriBaseWindow extends Disposable implements INatmriBaseWindow {
       this._win.restore()
 
     this._win.focus()
+  }
+
+  loadURL(uri: URI, options?: Electron.LoadURLOptions): Promise<void> {
+    this.readyState = ReadyState.Navigating
+    return this._win.loadURL(uri.toString(true), options)
   }
 
   close(): void {

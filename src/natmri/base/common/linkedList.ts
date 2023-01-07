@@ -1,6 +1,6 @@
 // 链表节点
 class Node<E> {
-  static readonly Undefined = new Node<any>(undefined)
+  static Undefined: Node<any>
 
   element: E
   prev: Node<E>
@@ -12,6 +12,9 @@ class Node<E> {
     this.next = Node.Undefined
   }
 }
+
+// close vite complied error
+Node.Undefined = new Node<any>(undefined)
 
 export class LinkedList<E> {
   private _first: Node<E> = Node.Undefined

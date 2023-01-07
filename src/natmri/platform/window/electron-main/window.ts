@@ -1,6 +1,8 @@
 import type { BrowserWindow, Rectangle } from 'electron'
+import type { CancellationToken } from 'natmri/base/common/cancellation'
 import type { Event } from 'natmri/base/common/event'
 import type { IDisposable } from 'natmri/base/common/lifecycle'
+import type { URI } from 'natmri/base/common/uri'
 
 export const enum ErrorReason {
   UNRESPONSIVE,
@@ -285,7 +287,7 @@ export interface INativeBaseWindowOptions {
   webPreferences?: Electron.WebPreferences
 }
 
-export interface INatmriBaseWindow extends IDisposable {
+export interface INatmriWindow extends IDisposable {
   readonly onDidSignalReady: Event<void>
   readonly onDidTriggerSystemContextMenu: Event<{ x: number; y: number }>
   readonly onDidClose: Event<void>
@@ -298,7 +300,7 @@ export interface INatmriBaseWindow extends IDisposable {
   readonly win: BrowserWindow | null /** `null` after being dispose */
 
   readonly isReady: boolean
-  ready(): Promise<INatmriBaseWindow>
+  ready(): Promise<INatmriWindow>
   setReady(): void
 
   focus(options?: { force: boolean }): void
@@ -307,10 +309,12 @@ export interface INatmriBaseWindow extends IDisposable {
   getBounds(): Rectangle
 
   send(channel: string, ...args: any[]): void
-  sendWhenReady(channel: string, ...args: any[]): void
+  sendWhenReady(channel: string, token: CancellationToken, ...args: any[]): void
 
   readonly isFullScreen: boolean
   toggleFullScreen(): void
 
   isMinimized(): boolean
+
+  loadURL(uri: URI, options?: Electron.LoadURLOptions): Promise<void>
 }

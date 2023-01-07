@@ -3,11 +3,11 @@ import type { Event } from 'natmri/base/common/event'
 import type { URI } from 'natmri/base/common/uri'
 import type { IWindowErrorEvent } from 'natmri/platform/window/electron-main/window'
 
-export interface INativeBaseViewConfiguration extends Electron.WebPreferences {
+export interface INativeBaseViewOptions extends Electron.WebPreferences {
   backgroundColor?: `#${string}`
 }
 
-export interface INatmriBaseView {
+export interface INatmriView {
   readonly onDidSignalReady: Event<void>
   readonly onDidClose: Event<void>
   readonly onDidDestroy: Event<void>
@@ -17,7 +17,7 @@ export interface INatmriBaseView {
   readonly view: BrowserView | null /** null dispose */
 
   readonly isReady: boolean
-  ready(): Promise<INatmriBaseView>
+  ready(): Promise<INatmriView>
   setReady(): void
 
   setAutoResize(options: Electron.AutoResizeOptions): void
@@ -25,7 +25,7 @@ export interface INatmriBaseView {
   getBounds(): Rectangle
   setBounds(bounds: Rectangle): void
 
-  loadURL(uri: URI): void
+  loadURL(uri: URI, options?: Electron.LoadURLOptions): Promise<void>
 
   send(channel: string, ...args: any[]): void
   sendWhenReady(channel: string, ...args: any[]): void

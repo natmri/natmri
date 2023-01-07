@@ -4,14 +4,14 @@ import { Disposable } from 'natmri/base/common/lifecycle'
 import { toErrorMessage } from 'natmri/base/common/errors'
 import { ErrorReason } from 'natmri/platform/window/electron-main/window'
 import { ReadyState } from 'natmri/platform/windows/electron-main/windowImpl'
+import { ILoggerService } from 'natmri/platform/log/common/log'
 import type { URI } from 'natmri/base/common/uri'
 import type { Event } from 'natmri/base/common/event'
-import type { ILoggerService } from 'natmri/platform/log/common/log'
 import type { CancellationToken } from 'natmri/base/common/cancellation'
 import type { IWindowErrorEvent } from 'natmri/platform/window/electron-main/window'
-import type { INativeBaseViewConfiguration, INatmriBaseView } from 'natmri/platform/window/electron-main/view'
+import type { INativeBaseViewOptions, INatmriView } from 'natmri/platform/window/electron-main/view'
 
-export class NatmriBaseView extends Disposable implements INatmriBaseView {
+export class NatmriView extends Disposable implements INatmriView {
   protected _onDidSignalReady = this._register(new Emitter<void>())
   readonly onDidSignalReady: Event<void> = this._onDidSignalReady.event
 
@@ -30,11 +30,11 @@ export class NatmriBaseView extends Disposable implements INatmriBaseView {
   protected _id: number
   get id() { return this._id }
 
-  protected whenReadyCallbacks: { (window: INatmriBaseView): void }[] = []
+  protected whenReadyCallbacks: { (window: INatmriView): void }[] = []
 
   constructor(
-    config: INativeBaseViewConfiguration,
-    protected readonly logService: ILoggerService,
+    config: INativeBaseViewOptions,
+    @ILoggerService protected readonly logService: ILoggerService,
   ) {
     super()
 
@@ -71,8 +71,8 @@ export class NatmriBaseView extends Disposable implements INatmriBaseView {
     })
   }
 
-  ready(): Promise<INatmriBaseView> {
-    return new Promise<INatmriBaseView>((resolve) => {
+  ready(): Promise<INatmriView> {
+    return new Promise<INatmriView>((resolve) => {
       if (this.isReady)
         return resolve(this)
 
@@ -106,9 +106,9 @@ export class NatmriBaseView extends Disposable implements INatmriBaseView {
     return this._view.getBounds()
   }
 
-  loadURL(uri: URI): void {
+  loadURL(uri: URI, options?: Electron.LoadURLOptions): Promise<void> {
     this.readyState = ReadyState.Navigating
-    this._view.webContents.loadURL(uri.toString(true))
+    return this._view.webContents.loadURL(uri.toString(true), options)
   }
 
   sendWhenReady(channel: string, token: CancellationToken, ...args: any[]): void {
