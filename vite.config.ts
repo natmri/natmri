@@ -14,7 +14,7 @@ const OUT_DIR = join(cwd(), 'release', 'app', 'dist')
 const isTestEnvironment = !!process.env.NATMRI_TEST
 
 export default defineConfig({
-  clearScreen: false,
+  appType: 'mpa',
   base: './',
   root: join(NATMRI_ROOT, '..'), // for src
   resolve: {
