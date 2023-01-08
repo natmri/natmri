@@ -56,7 +56,7 @@ export class ProtocolMainService extends Disposable implements IProtocolMainServ
 
     switch (uri.authority) {
       case 'assets':
-        callback(createReadStream(join(this.nativeEnvironment.resourcePath, 'resources', uri.fsPath)))
+        callback(createReadStream(join(this.nativeEnvironment.resourcePath, uri.fsPath)))
         break
       case 'page':
         {
@@ -66,7 +66,6 @@ export class ProtocolMainService extends Disposable implements IProtocolMainServ
             mimeType: getMediaOrTextMime(fsPath),
           })
         }
-
         break
       default:
         callback({})

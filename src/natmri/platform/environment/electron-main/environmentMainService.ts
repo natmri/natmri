@@ -10,7 +10,7 @@ import type { INativeEnvironmentService, NativeParsedArgs } from 'natmri/platfor
 
 export interface INativeEnvironmentMainService extends INativeEnvironmentService {}
 
-export const INativeEnvironmentMainService = createDecorator<INativeEnvironmentMainService>('nativeEnvironmentService')
+export const INativeEnvironmentMainService = createDecorator<INativeEnvironmentMainService>('nativeEnvironmentMainService')
 
 export class NativeEnvironmentMainService extends Disposable implements INativeEnvironmentService {
   declare readonly _serviceBrand: undefined
@@ -28,17 +28,7 @@ export class NativeEnvironmentMainService extends Disposable implements INativeE
 
   @memoize
   get resourcePath() {
-    return isDevelopment ? process.cwd() : process.resourcesPath
-  }
-
-  @memoize
-  get platformIconPath() {
-    if (isWindows)
-      return join(this.resourcePath, 'resources', 'icons', 'icon.ico')
-    if (isMacintosh)
-      return join(this.resourcePath, 'resources', 'icons', '32x32.png')
-
-    return join(this.resourcePath, 'resources', 'icons', '32x32.png')
+    return join(this.appRoot, 'resources')
   }
 
   @memoize

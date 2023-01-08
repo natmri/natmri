@@ -26,7 +26,6 @@ export interface INativeEnvironmentService extends IEnvironmentService {
   appRoot: string
 
   resourcePath: string
-  platformIconPath: string
   preloadPath: string
 
   getPageURI(name: string): URI

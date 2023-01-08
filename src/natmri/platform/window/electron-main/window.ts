@@ -20,7 +20,7 @@ export interface INativeBaseWindowOptions {
    * Window's titleBarStyle
    * @default 'custom''
    */
-  titleBarStyle: 'custom' | 'native'
+  titleBarStyle?: 'custom' | 'native'
 
   /**
    * Window's width in pixels. Default is `800`.

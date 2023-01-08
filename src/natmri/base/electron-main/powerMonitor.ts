@@ -5,7 +5,7 @@ import { isWindows } from 'natmri/base/common/environment'
 
 type PowerMonitorEvent = 'suspend' | 'resume' | 'on-ac' | 'on-battery' | 'shutdown' | 'lock-screen' | 'unlock-screen' | 'user-did-groupe-active' | 'user-did-resign-active'
 
-class ElectronShutdownHandlerClass extends EventEmitter {
+class ElectronShutdownHandler extends EventEmitter {
   constructor() {
     super()
 
@@ -46,7 +46,7 @@ interface INodeEventEmitter {
   removeAllListener(eventName: string | symbol): this
 }
 
-const ElectronShutdownHandler = new ElectronShutdownHandlerClass()
+const electronShutdownHandler = new ElectronShutdownHandler()
 
 /**
  * Native electron not support 'shutdown' event for windows
@@ -72,11 +72,11 @@ export class PowerMonitor implements INodeEventEmitter {
       throw new Error('it should be provided LOCK_WINDOW')
 
     if (!this.wasBlockShutdown) {
-      ElectronShutdownHandler.setWindowHandle(PowerMonitor.LOCK_WINDOW)
-      ElectronShutdownHandler.blockShutdown(PowerMonitor.SHUT_DOWN_REASON)
+      electronShutdownHandler.setWindowHandle(PowerMonitor.LOCK_WINDOW)
+      electronShutdownHandler.blockShutdown(PowerMonitor.SHUT_DOWN_REASON)
 
-      ElectronShutdownHandler.on('shutdown', async () => {
-        ElectronShutdownHandler.releaseShutdown()
+      electronShutdownHandler.on('shutdown', async () => {
+        electronShutdownHandler.releaseShutdown()
         for (const func of this._shutdownListener)
           await func()
       })
@@ -102,7 +102,7 @@ export class PowerMonitor implements INodeEventEmitter {
     }
     else {
       this._shutdownListener.clear()
-      ElectronShutdownHandler.releaseShutdown()
+      electronShutdownHandler.releaseShutdown()
     }
 
     return this
