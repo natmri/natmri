@@ -83,13 +83,21 @@ export class PowerMonitor extends Disposable implements INodeEventEmitter {
   }
 
   private _on(event: PowerMonitorEvent, listener: Function) {
-    if (!this.validatedEvent(event))
+    if (event !== 'shutdown')
       _powerMonitor.on(event as any, listener)
+
+    /**
+      * If you are in a non-Windows system, you don’t need to
+      * listen to the `shutdown` event to execute the exit program,
+      * because electron can call `app.quit()` to trigger `quit` related events(e.g. `will-quit` `before-quit` etc).
+      */
+    if (!isWindows)
+      return this
 
     this.whenLockWindow()
       .then(() => {
         if (!this.wasBlockShutdown) {
-          electronShutdownHandler.setWindowHandle(PowerMonitor.LOCK_WINDOW)
+          electronShutdownHandler.setWindowHandle(this.LOCK_WINDOW!)
           electronShutdownHandler.blockShutdown(PowerMonitor.SHUT_DOWN_REASON)
 
           electronShutdownHandler.on('shutdown', async () => {
