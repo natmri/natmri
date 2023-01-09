@@ -2,6 +2,8 @@ import EventEmitter from 'node:events'
 import { powerMonitor as _powerMonitor } from 'electron'
 import { acquireShutdownBlock, insertWndProcHook, releaseShutdownBlock, removeWndProcHook, setMainWindowHandle } from '@livemoe/tools'
 import { isWindows } from 'natmri/base/common/environment'
+import { Disposable } from 'natmri/base/common/lifecycle'
+import { Emitter, Event } from 'natmri/base/common/event'
 
 type PowerMonitorEvent = 'suspend' | 'resume' | 'on-ac' | 'on-battery' | 'shutdown' | 'lock-screen' | 'unlock-screen' | 'user-did-groupe-active' | 'user-did-resign-active'
 
@@ -53,9 +55,25 @@ const electronShutdownHandler = new ElectronShutdownHandler()
  *
  * The PowerMonitor patch native electron support 'shutdown' event for windows
  */
-export class PowerMonitor implements INodeEventEmitter {
-  static LOCK_WINDOW: bigint | undefined
+export class PowerMonitor extends Disposable implements INodeEventEmitter {
+  private static _LOCK_WINDOW: bigint | undefined
   static SHUT_DOWN_REASON = '[Natmri] Please wait for some data to be saved'
+
+  set LOCK_WINDOW(window: bigint | undefined) {
+    PowerMonitor._LOCK_WINDOW = window
+    this._onLockWindowSignal.fire()
+  }
+
+  get LOCK_WINDOW(): bigint | undefined { return PowerMonitor._LOCK_WINDOW }
+
+  private readonly _onLockWindowSignal = this._register(new Emitter<void>())
+  private readonly onLockWindowSignal = this._onLockWindowSignal.event
+  private whenLockWindow() {
+    if (!PowerMonitor._LOCK_WINDOW)
+      return Event.toPromise(this.onLockWindowSignal)
+
+    return Promise.resolve()
+  }
 
   private wasBlockShutdown = false
   private _shutdownListener: Set<Function> = new Set()
@@ -68,23 +86,22 @@ export class PowerMonitor implements INodeEventEmitter {
     if (!this.validatedEvent(event))
       _powerMonitor.on(event as any, listener)
 
-    if (!PowerMonitor.LOCK_WINDOW)
-      throw new Error('it should be provided LOCK_WINDOW')
+    this.whenLockWindow()
+      .then(() => {
+        if (!this.wasBlockShutdown) {
+          electronShutdownHandler.setWindowHandle(PowerMonitor.LOCK_WINDOW)
+          electronShutdownHandler.blockShutdown(PowerMonitor.SHUT_DOWN_REASON)
 
-    if (!this.wasBlockShutdown) {
-      electronShutdownHandler.setWindowHandle(PowerMonitor.LOCK_WINDOW)
-      electronShutdownHandler.blockShutdown(PowerMonitor.SHUT_DOWN_REASON)
-
-      electronShutdownHandler.on('shutdown', async () => {
-        electronShutdownHandler.releaseShutdown()
-        for (const func of this._shutdownListener)
-          await func()
+          electronShutdownHandler.on('shutdown', async () => {
+            electronShutdownHandler.releaseShutdown()
+            for (const func of this._shutdownListener)
+              await func()
+          })
+        }
       })
 
-      this.wasBlockShutdown = true
-    }
-
     this._shutdownListener.add(listener)
+    this.wasBlockShutdown = true
 
     return this
   }
