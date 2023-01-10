@@ -34,8 +34,8 @@
     "yauzl": "^2.10.0"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^0.34.0",
-    "@eevi/elexpose": "0.6.4",
+    "@antfu/eslint-config": "^0.34.1",
+    "@eevi/elexpose": "0.6.5",
     "@electron/rebuild": "^3.2.10",
     "@types/better-sqlite3": "^7.6.3",
     "@types/node": "^18.11.18",
@@ -47,14 +47,14 @@
     "bumpp": "^8.2.1",
     "concurrently": "^7.6.0",
     "cross-env": "^7.0.3",
-    "eevi": "^0.6.4",
+    "eevi": "^0.6.5",
     "electron": "^21.3.3",
     "electron-builder": "^23.6.0",
     "eslint": "^8.31.0",
     "esno": "^0.16.3",
     "husky": "^8.0.3",
     "lint-staged": "^13.1.0",
-    "node-abi": "^3.30.0",
+    "node-abi": "^3.31.0",
     "pnpm": "7.23.0",
     "rimraf": "^3.0.2",
     "solid-js": "^1.6.8",
@@ -63,7 +63,7 @@
     "unocss": "^0.48.3",
     "vite": "^4.0.4",
     "vite-plugin-solid": "^2.5.0",
-    "vitest": "^0.26.3"
+    "vitest": "^0.27.0"
   },
   "pnpm": {
     "overrides": {
