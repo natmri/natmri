@@ -78,10 +78,6 @@ export class PowerMonitor extends Disposable implements INodeEventEmitter {
   private wasBlockShutdown = false
   private _shutdownListener: Set<Function> = new Set()
 
-  private validatedEvent(event: string) {
-    return event === 'shutdown' && isWindows
-  }
-
   private _on(event: PowerMonitorEvent, listener: Function) {
     if (event !== 'shutdown')
       _powerMonitor.on(event as any, listener)
@@ -115,18 +111,22 @@ export class PowerMonitor extends Disposable implements INodeEventEmitter {
   }
 
   private _removeListener(event: PowerMonitorEvent, listener?: Function) {
-    if (!this.validatedEvent(event)) {
+    if (event !== 'shutdown') {
       if (listener)
         _powerMonitor.removeListener(event as any, listener)
       else
         _powerMonitor.removeAllListeners(event as any)
     }
 
+    if (!isWindows)
+      return this
+
     if (listener && this._shutdownListener.has(listener)) {
       this._shutdownListener.delete(listener)
     }
     else {
       this._shutdownListener.clear()
+      removeWndProcHook()
       electronShutdownHandler.releaseShutdown()
     }
 
