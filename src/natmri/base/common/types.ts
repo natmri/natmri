@@ -29,6 +29,16 @@ export function assertType(condition: unknown, type?: string): asserts condition
 }
 
 /**
+ * Asserts that the argument passed in is neither undefined nor null.
+ */
+export function assertIsDefined<T>(arg: T | null | undefined) {
+  if (isUndefinedOrNull(arg))
+    throw new Error('Assertion Failed: argument is undefined or null')
+
+  return arg
+}
+
+/**
  * Converts null to undefined, passes all other values through.
  */
 export function withNullAsUndefined<T>(x: T | null): T | undefined {
