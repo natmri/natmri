@@ -19,6 +19,7 @@
     "!node_modules/**/{*.vcxproj,*.vcxproj.filters}",
     "!node_modules/**/build/Release/{*.lib,*.exp,*.ilk,*.pdb,*.iobj,*.ipdb}",
     "!node_modules/**/build/Release/obj",
+    "!pnpm-lock.{yaml, yml}",
     "package.json"
   ],
   "copyright": "Copyright © 2022 ${author}",
