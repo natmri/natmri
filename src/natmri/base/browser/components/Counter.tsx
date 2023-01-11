@@ -6,7 +6,7 @@ export function Counter() {
   return <>
     <p>{count()}</p>
 
-    <button onClick={() => inc()}>
+    <button nti-btn nti-btn-green text-sm onClick={() => inc()}>
       点击 + 1
     </button>
   </>
