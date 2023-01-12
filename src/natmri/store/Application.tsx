@@ -1,7 +1,4 @@
-import { render } from 'solid-js/web'
 import { Counter } from 'natmri/base/browser/components/Counter'
-import 'natmri/base/browser/styles/natmri.reset.main.css'
-import 'virtual:uno.css'
 import { createEffect } from 'solid-js'
 import { createService } from 'natmri/base/browser/primitives/createServices'
 import { INativeHostService } from 'natmri/platform/native/electron-browser/native'
@@ -20,8 +17,8 @@ export function App() {
       <div relative select-none h="[30px]">
         <div top-0 left-0 bottom-0 right-0 absolute region-drag></div>
       </div>
-      <div text-xl>
-        <h2> Natmri - Store </h2>
+      <div>
+        <h2 text-2xl font-bold p-4> Natmri - Store </h2>
 
         <Counter />
 
@@ -36,5 +33,3 @@ export function App() {
     </div>
   </>
 }
-
-render(App, document.getElementById('app')!)

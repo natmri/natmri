@@ -2,16 +2,20 @@ import { promisify } from 'node:util'
 import { join, resolve } from 'node:path'
 import rm from 'rimraf'
 
-export const rootPath = process.cwd().includes('app') ? resolve(process.cwd(), '../../') : process.cwd()
+export const rootPath = process.cwd().includes('app') ? resolve(process.cwd(), '../') : process.cwd()
 
 export const srcElectronPath = join(rootPath, 'src')
 export const srcElectronModulesPath = join(srcElectronPath, 'node_modules')
 export const srcElectronPackagePath = join(srcElectronPath, 'package.json')
-export const releasePath = join(rootPath, 'release')
-export const appPath = join(releasePath, 'app')
+export const appPath = join(rootPath, 'app')
 export const appModulesPath = join(appPath, 'node_modules')
 export const appPackagePath = join(appPath, 'package.json')
 export const buildResourcePath = join(rootPath, 'buildResources')
+export const outputPath = join(rootPath, 'out-build')
+export const outputAppPath = join(outputPath, 'app')
+export const outputDistPath = join(outputAppPath, 'dist')
+export const outputPackagePath = join(outputAppPath, 'package.json')
+export const outputModulePath = join(outputAppPath, 'node_modules')
 
 const internalRimraf = promisify(rm)
 

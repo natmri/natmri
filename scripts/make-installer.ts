@@ -1,10 +1,10 @@
-import fs from 'node:fs'
+import { existsSync, promises as fsp } from 'node:fs'
 import { join } from 'node:path'
 import type { Configuration } from 'electron-builder'
 import builder from 'electron-builder'
 import fileConfiguration from '../$electron-builder.json'
 import { cleanFiles, cleanNativeModule } from './clean'
-import { buildResourcePath } from './utils'
+import { appModulesPath, appPackagePath, buildResourcePath, outputAppPath, outputModulePath, outputPackagePath } from './utils'
 
 let nshContent: string
 const nshFilePath = join(buildResourcePath, 'windows', 'installer.nsh')
@@ -12,15 +12,23 @@ const nshFilePath = join(buildResourcePath, 'windows', 'installer.nsh')
 async function beforeMake() {
   await cleanFiles()
 
-  if (fileConfiguration?.nsis?.include && fs.existsSync(nshFilePath)) {
-    const productName = fileConfiguration.productName ?? ''
-    nshContent = fs.readFileSync(nshFilePath, 'utf-8')
-    fs.writeFileSync(nshFilePath, nshContent.slice().replace('$1', productName))
-  }
-
   const configuration: Configuration = {
     ...fileConfiguration as any,
   }
+
+  await Promise.all([
+    // copy app/package.json to out-build
+    fsp.cp(appPackagePath, outputPackagePath, { force: true }),
+    // copy app/node_module to out-build
+    fsp.cp(appModulesPath, outputModulePath, { force: true, recursive: true }),
+    async () => {
+      if (existsSync(nshFilePath)) {
+        const productName = fileConfiguration.productName ?? ''
+        nshContent = await fsp.readFile(nshFilePath, 'utf-8')
+        return fsp.writeFile(nshFilePath, nshContent.slice().replace('$1', productName))
+      }
+    },
+  ])
 
   return configuration
 }
@@ -42,8 +50,10 @@ async function afterMake(result: string[]) {
   for (const r of result)
     console.log(`\t\x1B[32m\x1B[1mMake ${r} successfully\x1B[0m`)
 
-  if (nshContent)
-    fs.writeFileSync(nshFilePath, nshContent)
+  await Promise.allSettled([
+    fsp.writeFile(nshFilePath, nshContent),
+    fsp.rm(outputAppPath, { recursive: true }),
+  ])
 }
 
 Promise.resolve()

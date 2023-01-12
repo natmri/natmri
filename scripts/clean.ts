@@ -2,12 +2,11 @@ import { join, sep } from 'node:path'
 import fs, { promises as fsp } from 'node:fs'
 import nodeAbi from 'node-abi'
 import markFiles from './markFiles.json'
-import { appModulesPath, appPackagePath, appPath, releasePath, rimraf, sequence, taskFactory } from './utils'
+import { appModulesPath, appPackagePath, appPath, rimraf, rootPath, sequence, taskFactory } from './utils'
 
 export const cleanBuildProduct = async () => {
   const tasks = taskFactory([
-    join(appPath, 'dist'),
-    join(releasePath, 'build'),
+    join(rootPath, 'out-build'),
   ])
 
   await Promise.allSettled(tasks)

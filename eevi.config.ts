@@ -5,13 +5,13 @@ import { ElectronPreloadPlugin } from '@eevi/elexpose/esbuild'
 import type { UserConfigExport } from 'eevi'
 import { alias } from './alias'
 
-const appPath = resolve(process.cwd(), 'release', 'app')
-const packagePath = resolve(appPath, 'package.json')
+const outputPath = resolve(process.cwd(), 'out-build', 'app')
+const packagePath = resolve(process.cwd(), 'app', 'package.json')
 const { dependencies } = JSON.parse(fs.readFileSync(packagePath, 'utf8') || '{}')
 
 export default defineConfig({
   entry: './src/main.ts',
-  outDir: join(appPath, 'dist'),
+  outDir: join(outputPath, 'dist'),
   preloadOutDir: './natmri',
   preloadEntries: [
     'src/natmri/base/parts/preload/*.ts',

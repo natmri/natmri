@@ -42,9 +42,6 @@
     "@types/node-abi": "^3.0.0",
     "@types/rimraf": "^3.0.2",
     "@types/yauzl": "^2.10.0",
-    "@unocss/preset-attributify": "^0.48.3",
-    "@unocss/reset": "^0.48.3",
-    "@unocss/transformer-attributify-jsx": "^0.48.3",
     "bumpp": "^8.2.1",
     "concurrently": "^7.6.0",
     "cross-env": "^7.0.3",
@@ -86,8 +83,8 @@
   },
   "build": {
     "directories": {
-      "app": "release/app",
-      "output": "release/build"
+      "app": "app",
+      "output": "out-build"
     }
   }
 }

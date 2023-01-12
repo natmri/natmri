@@ -3,11 +3,13 @@ import { createCounter } from 'natmri/base/browser/primitives/createCounter'
 export function Counter() {
   const { count, inc } = createCounter()
 
-  return <>
+  return <div flex="~ col" justify-center items-center gap-4>
     <p>{count()}</p>
 
-    <button nti-btn nti-btn-green text-sm onClick={() => inc()}>
-      点击 + 1
+    <div self-initial>
+    <button nti-btn text-sm onClick={() => inc()}>
+      Click Here
     </button>
-  </>
+    </div>
+  </div>
 }

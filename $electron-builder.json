@@ -115,9 +115,9 @@
     ]
   },
   "directories": {
-    "app": "release/app",
+    "app": "out-build/app",
     "buildResources": "buildResources",
-    "output": "release/build"
+    "output": "out-build"
   },
   "extraResources": [
     {
