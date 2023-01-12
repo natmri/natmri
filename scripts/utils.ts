@@ -5,16 +5,16 @@ import rm from 'rimraf'
 
 export const rootPath = process.cwd().includes('app') ? path.resolve(process.cwd(), '../') : process.cwd()
 
-export const srcElectronPath = path.join(rootPath, 'src')
-export const srcElectronModulesPath = path.join(srcElectronPath, 'node_modules')
-export const srcElectronPackagePath = path.join(srcElectronPath, 'package.json')
+export const srcPath = path.join(rootPath, 'src')
+export const srcModulesPath = path.join(srcPath, 'node_modules')
+export const srcPackagePath = path.join(srcPath, 'package.json')
 export const appPath = path.join(rootPath, 'app')
 export const appModulesPath = path.join(appPath, 'node_modules')
 export const appPackagePath = path.join(appPath, 'package.json')
 export const buildResourcePath = path.join(rootPath, 'buildResources')
 export const outputPath = path.join(rootPath, 'out-build')
 export const outputAppPath = path.join(outputPath, 'app')
-export const outputDistPath = path.join(outputAppPath, 'dist')
+export const outputDistPath = path.join(outputAppPath, 'out')
 export const outputPackagePath = path.join(outputAppPath, 'package.json')
 export const outputModulePath = path.join(outputAppPath, 'node_modules')
 

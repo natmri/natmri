@@ -15,19 +15,19 @@
     "npm": ">=7.0.0"
   },
   "scripts": {
-    "build": "pnpm clean && vite build",
+    "build": "nr clean && vite build",
     "clean": "esno scripts/clean-cli.ts",
     "dev": "cross-env NATMRI_DEV='1' vite",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "package": "pnpm build && esno ./scripts/make-installer.ts",
+    "package": "nr build && esno ./scripts/make-installer.ts",
     "postinstall": "electron-builder install-app-deps && esno ./scripts/link-modules.ts && esno ./scripts/electron-rebuild.ts",
     "preinstall": "npx only-allow pnpm",
     "prepare": "husky install",
-    "release": "bumpp package.json release/app/package.json --commit --push --tag",
+    "release": "bumpp package.json app/package.json --commit --push --tag",
     "test": "pnpm build && cross-env NATMRI_DEV='1' NATMRI_TEST='1' vitest run --passWithNoTests",
     "test:watch": "cross-env NATMRI_DEV='1' NATMRI_TEST='1' vitest -u",
-    "typecheck": "npx tsc --noEmit -p ./src/tsconfig.json"
+    "typecheck": "nx tsc --noEmit -p ./src/tsconfig.json"
   },
   "dependencies": {
     "i18next": "^22.4.9",
@@ -35,11 +35,11 @@
   },
   "devDependencies": {
     "@antfu/eslint-config": "^0.34.1",
+    "@antfu/ni": "^0.18.8",
     "@eevi/elexpose": "0.6.5",
     "@electron/rebuild": "^3.2.10",
     "@types/better-sqlite3": "^7.6.3",
     "@types/node": "^18.11.18",
-    "@types/node-abi": "^3.0.0",
     "@types/rimraf": "^3.0.2",
     "@types/yauzl": "^2.10.0",
     "bumpp": "^8.2.1",
@@ -52,7 +52,6 @@
     "esno": "^0.16.3",
     "husky": "^8.0.3",
     "lint-staged": "^13.1.0",
-    "node-abi": "^3.31.0",
     "pnpm": "7.23.0",
     "rimraf": "^3.0.2",
     "solid-js": "^1.6.8",
@@ -61,7 +60,8 @@
     "unocss": "^0.48.3",
     "vite": "^4.0.4",
     "vite-plugin-solid": "^2.5.0",
-    "vitest": "^0.27.0"
+    "vitest": "^0.27.0",
+    "yaml": "^2.2.1"
   },
   "pnpm": {
     "overrides": {
