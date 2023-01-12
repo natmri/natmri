@@ -1,21 +1,32 @@
 import { promisify } from 'node:util'
-import { join, resolve } from 'node:path'
+import path from 'node:path'
+import fsp from 'node:fs/promises'
 import rm from 'rimraf'
 
-export const rootPath = process.cwd().includes('app') ? resolve(process.cwd(), '../') : process.cwd()
+export const rootPath = process.cwd().includes('app') ? path.resolve(process.cwd(), '../') : process.cwd()
 
-export const srcElectronPath = join(rootPath, 'src')
-export const srcElectronModulesPath = join(srcElectronPath, 'node_modules')
-export const srcElectronPackagePath = join(srcElectronPath, 'package.json')
-export const appPath = join(rootPath, 'app')
-export const appModulesPath = join(appPath, 'node_modules')
-export const appPackagePath = join(appPath, 'package.json')
-export const buildResourcePath = join(rootPath, 'buildResources')
-export const outputPath = join(rootPath, 'out-build')
-export const outputAppPath = join(outputPath, 'app')
-export const outputDistPath = join(outputAppPath, 'dist')
-export const outputPackagePath = join(outputAppPath, 'package.json')
-export const outputModulePath = join(outputAppPath, 'node_modules')
+export const srcElectronPath = path.join(rootPath, 'src')
+export const srcElectronModulesPath = path.join(srcElectronPath, 'node_modules')
+export const srcElectronPackagePath = path.join(srcElectronPath, 'package.json')
+export const appPath = path.join(rootPath, 'app')
+export const appModulesPath = path.join(appPath, 'node_modules')
+export const appPackagePath = path.join(appPath, 'package.json')
+export const buildResourcePath = path.join(rootPath, 'buildResources')
+export const outputPath = path.join(rootPath, 'out-build')
+export const outputAppPath = path.join(outputPath, 'app')
+export const outputDistPath = path.join(outputAppPath, 'dist')
+export const outputPackagePath = path.join(outputAppPath, 'package.json')
+export const outputModulePath = path.join(outputAppPath, 'node_modules')
+
+const alias: Record<string, string> = {
+  natmri: path.join(rootPath, './src/natmri'),
+}
+
+export const resolve: {
+  alias?: Record<string, string>
+} = {
+  alias,
+}
 
 const internalRimraf = promisify(rm)
 
@@ -38,6 +49,14 @@ export function taskFactory(paths: (string | null)[]) {
   }
 
   return r
+}
+
+export async function linkModules(target: string, dest: string) {
+  await fsp.symlink(target, dest, 'junction')
+}
+
+export async function linkPackageFile(target: string, dest: string) {
+  await fsp.symlink(target, dest, 'file')
 }
 
 export async function sequence<T>(promiseFactories: Promise<T>[]): Promise<T[]> {
