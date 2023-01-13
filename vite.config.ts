@@ -5,20 +5,12 @@ import Solid from 'vite-plugin-solid'
 import UnoCSS from 'unocss/vite'
 import ViteElectronPlugin from 'eevi'
 import { ElectronRendererPlugin } from '@eevi/elexpose/vite'
-import { appModulesPath, appPackagePath, linkModules, linkPackageFile, outputDistPath as outDir, outputModulePath, outputPackagePath, resolve, srcPath } from './scripts/utils'
+import { IN_TEST, outputDistPath as outDir, resolve, setupDevelopmentEnvironment, srcPath } from './scripts/utils'
 
 const NATMRI_ROOT = join(srcPath, 'natmri')
 const NATMRI_STORE = join(NATMRI_ROOT, 'store')
-const IN_DEV = !!process.env.NATMRI_DEV
-const IN_TEST = !!process.env.NATMRI_TEST
 
-// link
-if (IN_DEV) {
-  await Promise.allSettled([
-    linkModules(appModulesPath, outputModulePath),
-    linkPackageFile(appPackagePath, outputPackagePath),
-  ])
-}
+await setupDevelopmentEnvironment()
 
 const input: Record<string, string> = {
   store: join(NATMRI_STORE, 'electron-sandbox', 'natmri-store.html'),

@@ -1,25 +1,16 @@
-import { join, sep } from 'node:path'
-import fs, { promises as fsp } from 'node:fs'
-import markFiles from './markFiles.json'
-import { appModulesPath, appPackagePath, appPath, rimraf, rootPath, sequence, taskFactory } from './utils'
+import { join } from 'node:path'
+import fs from 'node:fs'
+import type { IMarkFile } from './utils'
+import { appModulesPath, files, outputPath, rimrafTasks } from './utils'
 
 export const cleanBuildProduct = async () => {
-  const tasks = taskFactory([
-    join(rootPath, 'out-build'),
+  await rimrafTasks([
+    outputPath,
   ])
-
-  await Promise.allSettled(tasks)
 }
 
 export const cleanFiles = async () => {
-  interface IMarkFile {
-    name: string | RegExp
-    ext?: string[]
-    type?: 'dir' | 'file'
-  }
-
   const markedFiles: string[] = []
-  const files: IMarkFile[] = markFiles as IMarkFile[]
 
   const findMarkedFile = (p: string, markFile: IMarkFile): string | null => {
     if (!markFile.ext)
@@ -60,5 +51,5 @@ export const cleanFiles = async () => {
     })
   }
 
-  await Promise.allSettled(taskFactory(markedFiles))
+  await rimrafTasks(markedFiles)
 }
