@@ -36,7 +36,7 @@
   "devDependencies": {
     "@antfu/eslint-config": "^0.34.1",
     "@antfu/ni": "^0.18.8",
-    "@eevi/elexpose": "0.6.5",
+    "@eevi/elexpose": "^0.7.0-beta.1",
     "@electron/rebuild": "^3.2.10",
     "@types/better-sqlite3": "^7.6.3",
     "@types/node": "^18.11.18",
@@ -44,7 +44,7 @@
     "bumpp": "^8.2.1",
     "concurrently": "^7.6.0",
     "cross-env": "^7.0.3",
-    "eevi": "^0.7.0-beta.0",
+    "eevi": "^0.7.0-beta.1",
     "electron": "^21.3.3",
     "electron-builder": "^23.6.0",
     "eslint": "^8.31.0",

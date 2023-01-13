@@ -8,7 +8,7 @@ overrides:
 specifiers:
   '@antfu/eslint-config': ^0.34.1
   '@antfu/ni': ^0.18.8
-  '@eevi/elexpose': 0.6.5
+  '@eevi/elexpose': ^0.7.0-beta.1
   '@electron/rebuild': ^3.2.10
   '@types/better-sqlite3': ^7.6.3
   '@types/node': ^18.11.18
@@ -16,7 +16,7 @@ specifiers:
   bumpp: ^8.2.1
   concurrently: ^7.6.0
   cross-env: ^7.0.3
-  eevi: ^0.7.0-beta.0
+  eevi: ^0.7.0-beta.1
   electron: ^21.3.3
   electron-builder: ^23.6.0
   eslint: ^8.31.0
@@ -43,7 +43,7 @@ dependencies:
 devDependencies:
   '@antfu/eslint-config': 0.34.1_iukboom6ndih5an6iafl45j2fe
   '@antfu/ni': 0.18.8
-  '@eevi/elexpose': 0.6.5_vite@4.0.4
+  '@eevi/elexpose': 0.7.0-beta.1_vite@4.0.4
   '@electron/rebuild': 3.2.10
   '@types/better-sqlite3': 7.6.3
   '@types/node': 18.11.18
@@ -51,7 +51,7 @@ devDependencies:
   bumpp: 8.2.1
   concurrently: 7.6.0
   cross-env: 7.0.3
-  eevi: 0.7.0-beta.0_electron@21.3.3+vite@4.0.4
+  eevi: 0.7.0-beta.1_electron@21.3.3+vite@4.0.4
   electron: 21.3.3
   electron-builder: 23.6.0
   eslint: 8.31.0
@@ -524,12 +524,12 @@ packages:
       ajv-keywords: 3.5.2_ajv@6.12.6
     dev: true
 
-  /@eevi/config/0.7.0-beta.0_electron@21.3.3+vite@4.0.4:
-    resolution: {integrity: sha512-3GT518XLSl0L8+Ld4nmdm4LrKgXcqWTBxitIeaMZTbogDJup4ZqwXVeCi08iVSB1mKKzQbecwPSma3R5kSftVg==}
+  /@eevi/config/0.7.0-beta.1_electron@21.3.3+vite@4.0.4:
+    resolution: {integrity: sha512-qiwiwDA/vRTwsiga7z3vEBpcxk0PChi6XtlrXXM17HMiNUBjdpGk6LbVTbTr8kQLoe3DBIuXIE5JunDEX6Y0wQ==}
     peerDependencies:
       vite: '>=3.0.0'
     dependencies:
-      '@eevi/core': 0.7.0-beta.0_electron@21.3.3+vite@4.0.4
+      '@eevi/core': 0.7.0-beta.1_electron@21.3.3+vite@4.0.4
       fast-glob: 3.2.12
       unconfig: 0.3.7
       vite: 4.0.4_@types+node@18.11.18
@@ -537,8 +537,8 @@ packages:
       - electron
     dev: true
 
-  /@eevi/core/0.7.0-beta.0_electron@21.3.3+vite@4.0.4:
-    resolution: {integrity: sha512-7ZaDKNGZgHdroJ3zFdQ1XK0R0CWpfWB6VLpAgqpaR4PCcDXnVRMenYB5UFmqomIabLgpLkCCyq9v8oQuFZLOiw==}
+  /@eevi/core/0.7.0-beta.1_electron@21.3.3+vite@4.0.4:
+    resolution: {integrity: sha512-Y+NOAB+GgPoeQlbJYOybl6xV3GHK/EM8qWY5payiDKpCc889ye1+CFgdac2m280/F/ManallWVjKCeX7jkLeTQ==}
     peerDependencies:
       electron: '*'
       vite: '>=3.0.0'
@@ -551,14 +551,14 @@ packages:
       vite: 4.0.4_@types+node@18.11.18
     dev: true
 
-  /@eevi/elexpose/0.6.5_vite@4.0.4:
-    resolution: {integrity: sha512-yXGsOz5iIM9luDNibsAJBYeLerIw35aNkudMNuFAJA80L8aXjbANlAiYtgYAtGp0uuRu+/w8WyhecVBErqEzFg==}
+  /@eevi/elexpose/0.7.0-beta.1_vite@4.0.4:
+    resolution: {integrity: sha512-E8xmYrFJfVS3QnMNVHotrWzNbYyFGt9RxGBqId5p8ssCo+B92VpVHR637NlfQ1f59gkGJHRrtSdKZYza7DCFGA==}
     peerDependencies:
       esbuild: '*'
       vite: '>=3.0.0'
     dependencies:
       magic-string: 0.27.0
-      mlly: 1.0.0
+      mlly: 1.1.0
       unplugin: 1.0.1
       vite: 4.0.4_@types+node@18.11.18
     dev: true
@@ -2545,13 +2545,13 @@ packages:
     resolution: {integrity: sha512-I88TYZWc9XiYHRQ4/3c5rjjfgkjhLyW2luGIheGERbNQ6OY7yTybanSpDXZa8y7VUP9YmDcYa+eyq4ca7iLqWA==}
     dev: true
 
-  /eevi/0.7.0-beta.0_electron@21.3.3+vite@4.0.4:
-    resolution: {integrity: sha512-7suP/05ki2cO5WSmV4wIO4WRghcSHD2JZvuikegBQik4p40bc761bHO2hj/jCmFLtyurfEcm4lo3GJLBy4GRRw==}
+  /eevi/0.7.0-beta.1_electron@21.3.3+vite@4.0.4:
+    resolution: {integrity: sha512-c/RxArfsDx2coSbzL6UC4a9ddW8oBSv6rB/XJVdowxeLcLVdV7ADipGOpI8ahvHFoFO13ppB+JHHaUZI0DvVnA==}
     peerDependencies:
       vite: '>=3.0.0'
     dependencies:
-      '@eevi/config': 0.7.0-beta.0_electron@21.3.3+vite@4.0.4
-      '@eevi/core': 0.7.0-beta.0_electron@21.3.3+vite@4.0.4
+      '@eevi/config': 0.7.0-beta.1_electron@21.3.3+vite@4.0.4
+      '@eevi/core': 0.7.0-beta.1_electron@21.3.3+vite@4.0.4
       vite: 4.0.4_@types+node@18.11.18
     transitivePeerDependencies:
       - electron
@@ -4715,15 +4715,6 @@ packages:
     resolution: {integrity: sha512-vVqVZQyf3WLx2Shd0qJ9xuvqgAyKPLAiqITEtqW0oIUjzo3PePDd6fW9iFz30ef7Ysp/oiWqbhszeGWW2T6Gzw==}
     engines: {node: '>=10'}
     hasBin: true
-    dev: true
-
-  /mlly/1.0.0:
-    resolution: {integrity: sha512-QL108Hwt+u9bXdWgOI0dhzZfACovn5Aen4Xvc8Jasd9ouRH4NjnrXEiyP3nVvJo91zPlYjVRckta0Nt2zfoR6g==}
-    dependencies:
-      acorn: 8.8.1
-      pathe: 1.0.0
-      pkg-types: 1.0.1
-      ufo: 1.0.1
     dev: true
 
   /mlly/1.1.0:
