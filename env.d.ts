@@ -5,6 +5,7 @@ declare global {
     export interface ProcessEnv {
       NATMRI_DEV?: string
       NATMRI_TEST?: string
+      NATMRI_MAP?: 'external'
       BUILDER__PUBLISH?: PublishPolicy
     }
   }

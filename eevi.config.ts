@@ -13,10 +13,10 @@ export default defineConfig({
     'src/natmri/platform/wallpaper/electron-preload/wallpaper.ts',
   ],
   preloadPlugins: [ElectronPreloadPlugin()],
-  resolve,
   external: Object.keys(dependencies || {}),
+  sourcemap: process.env.NATMRI_MAP ? true : IN_DEV ? 'inline' : false,
+  resolve,
   tsconfig,
-  sourcemap: IN_DEV ? 'inline' : false,
   watch: {
     autoReload: true,
     reloadTime: 1000,

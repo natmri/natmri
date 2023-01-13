@@ -139,29 +139,6 @@ export const resolve: ResolveOptions = {
   alias,
 }
 
-export async function sequence<T>(promiseFactories: Promise<T>[]): Promise<T[]> {
-  const results: T[] = []
-  let index = 0
-  const len = promiseFactories.length
-
-  function next(): Promise<T> | null {
-    return index < len ? promiseFactories[index++] : null
-  }
-
-  async function thenHandler(result: any): Promise<any> {
-    if (result !== undefined && result !== null)
-      results.push(result)
-
-    const n = next()
-    if (n)
-      return n.then(thenHandler)
-
-    return results
-  }
-
-  return thenHandler(null)
-}
-
 export async function rimraf(path: string): Promise<void> {
   return new Promise<void>((resolve, reject) => {
     _rimraf(path, (err: Error) => {
@@ -219,7 +196,10 @@ export async function setupDevelopmentEnvironment(extraTasks: (Promise<void> | (
   if (!IN_DEV)
     return
 
-  await Promise.allSettled([
+  await fsp.mkdir(outputPath)
+  await fsp.mkdir(outputAppPath)
+
+  await Promise.all([
     linkModules(appModulesPath, outputModulePath),
     linkPackageFile(appPackagePath, outputPackagePath),
     ...extraTasks,

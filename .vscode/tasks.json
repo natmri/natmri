@@ -10,7 +10,8 @@
       ],
       "options": {
         "env": {
-          "__DEV__": "true"
+          "NATMRI_DEV": "1",
+          "NATMRI_MAP": "1"
         }
       }
     },

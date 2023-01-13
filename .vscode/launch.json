@@ -12,28 +12,17 @@
       ],
       "runtimeExecutable": "${workspaceFolder}/node_modules/.bin/electron",
       "windows": {
-        "name": "electron windows configuration",
         "runtimeExecutable": "${workspaceFolder}/node_modules/.bin/electron.cmd"
       },
       "args": [
-        "release/app/dist/main.js"
+        "out-build/app/out/main.js"
       ],
       "env": {
-        "__DEV__": "true"
+        "NATMRI_DEV": "1",
+        "NATMRI_MAP": "1"
       },
+      "sourceMaps": true,
       "preLaunchTask": "Build"
-    },
-    {
-      "name": "Unit Test",
-      "type": "node",
-      "cwd": "${workspaceFolder}",
-      "request": "launch",
-      "runtimeExecutable": "${workspaceFolder}/node_modules/.bin/vitest",
-      "windows": {
-        "name": "vitest windows configuration",
-        "runtimeExecutable": "${workspaceFolder}/node_modules/.bin/vitest.cmd"
-      },
-      "args": ["run", "unit"]
     }
   ]
 }
