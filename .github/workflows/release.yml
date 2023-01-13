@@ -62,10 +62,10 @@ jobs:
 
       - name: Install build dependencies
         if: runner.os == 'Linux'
-        #                         electron-builder                 | keyboard-layout         | keytar                      | fontmanager     | RPM on Ubuntu
+        #                         electron-builder                 | RPM on Ubuntu
         run: |
           sudo apt-get -y update
-          sudo apt-get install -y icnsutils graphicsmagick xz-utils libx11-dev libxkbfile-dev gnome-keyring libsecret-1-dev libfontconfig-dev rpm
+          sudo apt-get install -y icnsutils graphicsmagick xz-utils rpm
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
