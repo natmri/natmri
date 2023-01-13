@@ -17,8 +17,7 @@ export interface IWindowErrorEvent {
 
 export interface INativeBaseWindowOptions {
   /**
-   * Window's titleBarStyle
-   * @default 'custom''
+   * Window's titleBarStyle. Defaults is `custom`.
    */
   titleBarStyle?: 'custom' | 'native'
 
@@ -287,6 +286,29 @@ export interface INativeBaseWindowOptions {
   webPreferences?: Electron.WebPreferences
 }
 
+export const enum UnloadReason {
+
+  /**
+	 * The window is closed.
+	 */
+  CLOSE = 1,
+
+  /**
+	 * All windows unload because the application quits.
+	 */
+  QUIT,
+
+  /**
+	 * The window is reloaded.
+	 */
+  RELOAD,
+
+  /**
+	 * The window is loaded into a different workspace context.
+	 */
+  LOAD,
+}
+
 export interface INatmriWindow extends IDisposable {
   readonly onDidSignalReady: Event<void>
   readonly onDidTriggerSystemContextMenu: Event<{ x: number; y: number }>
@@ -317,4 +339,5 @@ export interface INatmriWindow extends IDisposable {
   isMinimized(): boolean
 
   loadURL(uri: URI, options?: Electron.LoadURLOptions): Promise<void>
+  reload(): void
 }

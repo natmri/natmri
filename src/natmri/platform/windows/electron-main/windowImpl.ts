@@ -186,6 +186,10 @@ export class NatmriWindow extends Disposable implements INatmriWindow {
       this.joinNativeFullScreenTransition?.complete()
       this.joinNativeFullScreenTransition = undefined
     })
+
+    this._win.on('ready-to-show', () => {
+      this.setReady()
+    })
   }
 
   sendWhenReady(channel: string, token: CancellationToken, ...args: any[]): void {
@@ -298,6 +302,10 @@ export class NatmriWindow extends Disposable implements INatmriWindow {
 
   close(): void {
     this._win?.close()
+  }
+
+  reload(): void {
+    this._win.reload()
   }
 
   override dispose(): void {
