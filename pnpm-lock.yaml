@@ -8,7 +8,7 @@ overrides:
 specifiers:
   '@antfu/eslint-config': ^0.34.1
   '@antfu/ni': ^0.18.8
-  '@eevi/elexpose': ^0.7.0-beta.1
+  '@eevi/elexpose': ^0.7.0-beta.3
   '@electron/rebuild': ^3.2.10
   '@types/better-sqlite3': ^7.6.3
   '@types/node': ^18.11.18
@@ -16,7 +16,7 @@ specifiers:
   bumpp: ^8.2.1
   concurrently: ^7.6.0
   cross-env: ^7.0.3
-  eevi: ^0.7.0-beta.1
+  eevi: ^0.7.0-beta.3
   electron: ^21.3.3
   electron-builder: ^23.6.0
   eslint: ^8.31.0
@@ -24,7 +24,7 @@ specifiers:
   husky: ^8.0.3
   i18next: ^22.4.9
   lint-staged: ^13.1.0
-  pnpm: 7.24.3
+  pnpm: 7.25.0
   rimraf: ^3.0.2
   solid-js: ^1.6.9
   source-map-support: ^0.5.21
@@ -43,7 +43,7 @@ dependencies:
 devDependencies:
   '@antfu/eslint-config': 0.34.1_iukboom6ndih5an6iafl45j2fe
   '@antfu/ni': 0.18.8
-  '@eevi/elexpose': 0.7.0-beta.1_vite@4.0.4
+  '@eevi/elexpose': 0.7.0-beta.3_vite@4.0.4
   '@electron/rebuild': 3.2.10
   '@types/better-sqlite3': 7.6.3
   '@types/node': 18.11.18
@@ -51,14 +51,14 @@ devDependencies:
   bumpp: 8.2.1
   concurrently: 7.6.0
   cross-env: 7.0.3
-  eevi: 0.7.0-beta.1_electron@21.3.3+vite@4.0.4
+  eevi: 0.7.0-beta.3_electron@21.3.3+vite@4.0.4
   electron: 21.3.3
   electron-builder: 23.6.0
   eslint: 8.31.0
   esno: 0.16.3
   husky: 8.0.3
   lint-staged: 13.1.0
-  pnpm: 7.24.3
+  pnpm: 7.25.0
   rimraf: 3.0.2
   solid-js: 1.6.9
   source-map-support: 0.5.21
@@ -524,12 +524,12 @@ packages:
       ajv-keywords: 3.5.2_ajv@6.12.6
     dev: true
 
-  /@eevi/config/0.7.0-beta.1_electron@21.3.3+vite@4.0.4:
-    resolution: {integrity: sha512-qiwiwDA/vRTwsiga7z3vEBpcxk0PChi6XtlrXXM17HMiNUBjdpGk6LbVTbTr8kQLoe3DBIuXIE5JunDEX6Y0wQ==}
+  /@eevi/config/0.7.0-beta.3_electron@21.3.3+vite@4.0.4:
+    resolution: {integrity: sha512-sVjLzf5mvumNpiHoLQ5L1YAekB0K3mHg0eyPUCPHR6qZ5dNDEwAN6QufeIzGX5LVGEeI5rVIK4XIDLKnM+dJLw==}
     peerDependencies:
       vite: '>=3.0.0'
     dependencies:
-      '@eevi/core': 0.7.0-beta.1_electron@21.3.3+vite@4.0.4
+      '@eevi/core': 0.7.0-beta.3_electron@21.3.3+vite@4.0.4
       fast-glob: 3.2.12
       unconfig: 0.3.7
       vite: 4.0.4_@types+node@18.11.18
@@ -537,8 +537,8 @@ packages:
       - electron
     dev: true
 
-  /@eevi/core/0.7.0-beta.1_electron@21.3.3+vite@4.0.4:
-    resolution: {integrity: sha512-Y+NOAB+GgPoeQlbJYOybl6xV3GHK/EM8qWY5payiDKpCc889ye1+CFgdac2m280/F/ManallWVjKCeX7jkLeTQ==}
+  /@eevi/core/0.7.0-beta.3_electron@21.3.3+vite@4.0.4:
+    resolution: {integrity: sha512-JaGseEV/OJg4X28QYrhR+uzgnIDC8GZi1zKSlZaChi/GkND2BeeBkt9tYZgxDs6RGDNJpHS+Dh1nEUPf+c3PeQ==}
     peerDependencies:
       electron: '*'
       vite: '>=3.0.0'
@@ -551,8 +551,8 @@ packages:
       vite: 4.0.4_@types+node@18.11.18
     dev: true
 
-  /@eevi/elexpose/0.7.0-beta.1_vite@4.0.4:
-    resolution: {integrity: sha512-E8xmYrFJfVS3QnMNVHotrWzNbYyFGt9RxGBqId5p8ssCo+B92VpVHR637NlfQ1f59gkGJHRrtSdKZYza7DCFGA==}
+  /@eevi/elexpose/0.7.0-beta.3_vite@4.0.4:
+    resolution: {integrity: sha512-HLWv9oCJHcYUMJYU7fDtuXwTd1FKDN+kEA054AtH4+RN7sgQ6Y7oDzDprgBJmgfz46iJ6Qd79+TrcMuc/201OQ==}
     peerDependencies:
       esbuild: '*'
       vite: '>=3.0.0'
@@ -2545,13 +2545,13 @@ packages:
     resolution: {integrity: sha512-I88TYZWc9XiYHRQ4/3c5rjjfgkjhLyW2luGIheGERbNQ6OY7yTybanSpDXZa8y7VUP9YmDcYa+eyq4ca7iLqWA==}
     dev: true
 
-  /eevi/0.7.0-beta.1_electron@21.3.3+vite@4.0.4:
-    resolution: {integrity: sha512-c/RxArfsDx2coSbzL6UC4a9ddW8oBSv6rB/XJVdowxeLcLVdV7ADipGOpI8ahvHFoFO13ppB+JHHaUZI0DvVnA==}
+  /eevi/0.7.0-beta.3_electron@21.3.3+vite@4.0.4:
+    resolution: {integrity: sha512-++218i3SaUZIdbzR5HSU8nncSkxJn8+HnJ/NXoUvbG7IhPl6PGe6+QrECqZrLs4WTQ+w0EoUpCI1QY2ue974ww==}
     peerDependencies:
       vite: '>=3.0.0'
     dependencies:
-      '@eevi/config': 0.7.0-beta.1_electron@21.3.3+vite@4.0.4
-      '@eevi/core': 0.7.0-beta.1_electron@21.3.3+vite@4.0.4
+      '@eevi/config': 0.7.0-beta.3_electron@21.3.3+vite@4.0.4
+      '@eevi/core': 0.7.0-beta.3_electron@21.3.3+vite@4.0.4
       vite: 4.0.4_@types+node@18.11.18
     transitivePeerDependencies:
       - electron
@@ -5141,8 +5141,8 @@ packages:
     engines: {node: '>=4'}
     dev: true
 
-  /pnpm/7.24.3:
-    resolution: {integrity: sha512-0fpP1l16xOY8YwsATSLodNNBa7bitV1cNY475fioVLR7Thx5tkCtdp3xIlvZYX8ZoPtedLhGn3fICC409HQSNQ==}
+  /pnpm/7.25.0:
+    resolution: {integrity: sha512-FGFQUON8kJ6ma39elJ8lyD8wPIfgp3opGJD9sX0TgIJk4zSr556qCgC8AN+3BFHe4yuRkEauf4JVLW2RKyyEcA==}
     engines: {node: '>=14.6'}
     hasBin: true
     dev: true
