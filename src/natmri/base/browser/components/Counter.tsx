@@ -7,7 +7,7 @@ export function Counter() {
     <p>{count()}</p>
 
     <div self-initial>
-    <button nti-btn text-sm onClick={() => inc()}>
+    <button n-btn text-sm onClick={() => inc()}>
       Click Here
     </button>
     </div>
