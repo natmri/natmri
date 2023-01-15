@@ -1,7 +1,6 @@
 lockfileVersion: 5.4
 
 overrides:
-  asar: npm:@electron/asar@latest
   sourcemap-codec: npm:@jridgewell/sourcemap-codec@latest
   '@npmcli/move-file': npm:@npmcli/fs@latest
 
@@ -22,7 +21,6 @@ specifiers:
   eslint: ^8.31.0
   esno: ^0.16.3
   husky: ^8.0.3
-  i18next: ^22.4.9
   lint-staged: ^13.1.0
   pnpm: 7.25.0
   rimraf: ^3.0.2
@@ -37,7 +35,6 @@ specifiers:
   yauzl: ^2.10.0
 
 dependencies:
-  i18next: 22.4.9
   yauzl: 2.10.0
 
 devDependencies:
@@ -472,13 +469,6 @@ packages:
     transitivePeerDependencies:
       - supports-color
     dev: true
-
-  /@babel/runtime/7.20.6:
-    resolution: {integrity: sha512-Q+8MqP7TiHMWzSfwiJwXCjyf4GYA4Dgw3emg/7xmwsdLJOZUp+nMqcOwOzzYheuM1rhDu8FSj2l0aoMygEuXuA==}
-    engines: {node: '>=6.9.0'}
-    dependencies:
-      regenerator-runtime: 0.13.11
-    dev: false
 
   /@babel/template/7.18.10:
     resolution: {integrity: sha512-TI+rCtooWHr3QJ27kJxfjutghu44DLnasDMwpDqCXVTal9RLp3RSYNh4NdBrRP2cQAoG9A8juOQl6P6oZG4JxA==}
@@ -3927,12 +3917,6 @@ packages:
     hasBin: true
     dev: true
 
-  /i18next/22.4.9:
-    resolution: {integrity: sha512-8gWMmUz460KJDQp/ob3MNUX84cVuDRY9PLFPnV8d+Qezz/6dkjxwOaH70xjrCNDO+JrUL25iXfAIN9wUkInNZw==}
-    dependencies:
-      '@babel/runtime': 7.20.6
-    dev: false
-
   /iconv-corefoundation/1.1.7:
     resolution: {integrity: sha512-T10qvkw0zz4wnm560lOEg0PovVqUXuOFhhHAkixw8/sycy7TJt7v/RrkEKEQnAw2viPSJu6iAkErxnzR0g8PpQ==}
     engines: {node: ^8.11.2 || >=10}
@@ -5275,10 +5259,6 @@ packages:
     dependencies:
       picomatch: 2.3.1
     dev: true
-
-  /regenerator-runtime/0.13.11:
-    resolution: {integrity: sha512-kY1AZVr2Ra+t+piVaJ4gxaFaReZVH40AKNo7UCX6W+dEwBo/2oZJzqfuN1qLq1oL45o56cPaTXELwrTh8Fpggg==}
-    dev: false
 
   /regexp-tree/0.1.24:
     resolution: {integrity: sha512-s2aEVuLhvnVJW6s/iPgEGK6R+/xngd2jNQ+xy4bXNDKxZKJH6jpPHY6kVeVv1IeLCHgswRj+Kl3ELaDjG6V1iw==}
