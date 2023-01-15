@@ -28,7 +28,7 @@ export class NativeEnvironmentMainService extends Disposable implements INativeE
 
   @memoize
   get resourcePath() {
-    return join(this.appRoot, 'resources')
+    return join(this.appRoot, 'assets')
   }
 
   @memoize
