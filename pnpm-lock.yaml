@@ -23,7 +23,7 @@ specifiers:
   husky: ^8.0.3
   lint-staged: ^13.1.0
   pnpm: 7.25.0
-  rimraf: ^4.1.1
+  rimraf: ^3.0.2
   solid-js: ^1.6.9
   source-map-support: ^0.5.21
   typescript: ^4.9.4
@@ -56,7 +56,7 @@ devDependencies:
   husky: 8.0.3
   lint-staged: 13.1.0
   pnpm: 7.25.0
-  rimraf: 4.1.1
+  rimraf: 3.0.2
   solid-js: 1.6.9
   source-map-support: 0.5.21
   typescript: 4.9.4
@@ -5348,12 +5348,6 @@ packages:
     hasBin: true
     dependencies:
       glob: 7.2.3
-    dev: true
-
-  /rimraf/4.1.1:
-    resolution: {integrity: sha512-Z4Y81w8atcvaJuJuBB88VpADRH66okZAuEm+Jtaufa+s7rZmIz+Hik2G53kGaNytE7lsfXyWktTmfVz0H9xuDg==}
-    engines: {node: '>=14'}
-    hasBin: true
     dev: true
 
   /roarr/2.15.4:
