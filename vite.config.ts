@@ -5,7 +5,7 @@ import Solid from 'vite-plugin-solid'
 import UnoCSS from 'unocss/vite'
 import ViteElectronPlugin from 'eevi'
 import { ElectronRendererPlugin } from '@eevi/elexpose/vite'
-import { IN_TEST, outputDistPath as outDir, resolve, rootPath, setupDevelopmentEnvironment, srcPath } from './scripts/utils'
+import { IS_TEST, outputDistPath as outDir, resolve, rootPath, setupDevelopmentEnvironment, srcPath } from './scripts/utils'
 
 const NATMRI_ROOT = join(srcPath, 'natmri')
 const NATMRI_STORE = join(NATMRI_ROOT, 'store')
@@ -24,7 +24,7 @@ export default defineConfig({
     stringify: true,
   },
   plugins: [
-    IN_TEST
+    IS_TEST
       ? []
       : [
           Solid(),

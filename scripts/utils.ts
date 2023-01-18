@@ -21,8 +21,8 @@ export const outputDistPath = path.join(outputAppPath, 'out')
 export const outputPackagePath = path.join(outputAppPath, 'package.json')
 export const outputModulePath = path.join(outputAppPath, 'node_modules')
 
-export const IN_DEV = !!process.env.NATMRI_DEV
-export const IN_TEST = !!process.env.NATMRI_TEST
+export const IS_DEV = !!process.env.NATMRI_DEV
+export const IS_TEST = !!process.env.NATMRI_TEST
 
 // ------------------------------------------------- //
 // ---------- Package Mate Infomation -------------- //
@@ -193,7 +193,7 @@ export async function setupPackageEnvironemt(extraTasks: (Promise<void> | (() =>
 }
 
 export async function setupDevelopmentEnvironment(extraTasks: (Promise<void> | (() => Promise<void>))[] = []) {
-  if (!IN_DEV)
+  if (!IS_DEV)
     return
 
   await fsp.mkdir(outputPath)
