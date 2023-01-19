@@ -22,7 +22,7 @@ specifiers:
   esno: ^0.16.3
   husky: ^8.0.3
   lint-staged: ^13.1.0
-  pnpm: 7.25.0
+  pnpm: 7.25.1
   rimraf: ^3.0.2
   solid-js: ^1.6.9
   source-map-support: ^0.5.21
@@ -55,7 +55,7 @@ devDependencies:
   esno: 0.16.3
   husky: 8.0.3
   lint-staged: 13.1.0
-  pnpm: 7.25.0
+  pnpm: 7.25.1
   rimraf: 3.0.2
   solid-js: 1.6.9
   source-map-support: 0.5.21
@@ -5125,8 +5125,8 @@ packages:
     engines: {node: '>=4'}
     dev: true
 
-  /pnpm/7.25.0:
-    resolution: {integrity: sha512-FGFQUON8kJ6ma39elJ8lyD8wPIfgp3opGJD9sX0TgIJk4zSr556qCgC8AN+3BFHe4yuRkEauf4JVLW2RKyyEcA==}
+  /pnpm/7.25.1:
+    resolution: {integrity: sha512-y/jlADVxyk+scBwI0ALRf8QoUMgrWyONnD1voZaPTBI+D+aIXXiFG9pMk3eLhvEfc0nK8KUnnbDDBTywd7WsMw==}
     engines: {node: '>=14.6'}
     hasBin: true
     dev: true
