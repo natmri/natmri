@@ -1,12 +1,15 @@
-import { BrowserWindow, app } from 'electron'
+import { BrowserWindow, app, ipcMain } from 'electron'
 import { Barrier, timeout } from 'natmri/base/common/async'
 import { isMacintosh } from 'natmri/base/common/environment'
-import type { Event } from 'natmri/base/common/event'
 import { Emitter } from 'natmri/base/common/event'
 import { createDecorator } from 'natmri/base/common/instantiation'
-import { Disposable } from 'natmri/base/common/lifecycle'
+import { Disposable, DisposableStore } from 'natmri/base/common/lifecycle'
+import { assertIsDefined } from 'natmri/base/common/types'
 import { powerMonitor } from 'natmri/base/electron-main/powerMonitor'
 import { ILoggerService } from 'natmri/platform/log/common/log'
+import { UnloadReason } from 'natmri/platform/window/electron-main/window'
+import type { Event } from 'natmri/base/common/event'
+import type { INatmriWindow } from 'natmri/platform/window/electron-main/window'
 
 export interface ILifecycleMainService {
   readonly _serviceBrand: undefined
@@ -42,6 +45,12 @@ export interface ILifecycleMainService {
   readonly onWillShutdown: Event<ShutdownEvent>
 
   /**
+	 * An event that fires before a window closes. This event is fired after any veto has been dealt
+	 * with so that listeners know for sure that the window will close without veto.
+	 */
+  readonly onBeforeCloseWindow: Event<INatmriWindow>
+
+  /**
    * Restart the application with optional arguments (CLI). All lifecycle event handlers are triggered.
    */
   relaunch(options?: { addArgs?: string[]; removeArgs?: string[] }): Promise<void>
@@ -70,6 +79,21 @@ export interface ILifecycleMainService {
    * has started.
    */
   when(phase: LifecycleMainPhase): Promise<void>
+
+  /**
+	 * Make a `INatmriWindow` known to the lifecycle main service.
+	 */
+  registerWindow(window: INatmriWindow): void
+
+  /**
+	 * Reload a window. All lifecycle event handlers are triggered.
+	 */
+  reload(window: INatmriWindow): Promise<void>
+
+  /**
+	 * Unload a window for the provided reason. All lifecycle event handlers are triggered.
+	 */
+  unload(window: INatmriWindow, reason: UnloadReason): Promise<boolean /* veto */>
 }
 
 export enum LifecycleMainPhase {
@@ -138,11 +162,17 @@ export class LifecycleMainService extends Disposable implements ILifecycleMainSe
   private static QUIT_AND_RESTART_KEY = 'lifecycle:quitAndRestart'
   private static SHUTDOWN_KEY = 'lifecycle:shutdown'
 
+  private readonly windowToCloseRequest = new Set<number>()
+  private windowCounter = 0
+
   private readonly _onBeforeShutdown = this._register(new Emitter<void>())
   readonly onBeforeShutdown = this._onBeforeShutdown.event
 
   private readonly _onWillShutdown = this._register(new Emitter<ShutdownEvent>())
   readonly onWillShutdown = this._onWillShutdown.event
+
+  private readonly _onBeforeCloseWindow = this._register(new Emitter<INatmriWindow>())
+  readonly onBeforeCloseWindow = this._onBeforeCloseWindow.event
 
   private _quitRequested = false
   get quitRequested(): boolean { return this._quitRequested }
@@ -160,6 +190,9 @@ export class LifecycleMainService extends Disposable implements ILifecycleMainSe
   private pendingQuitPromiseResolve: { (veto: boolean): void } | undefined = undefined
 
   private pendingWillShutdownPromise: Promise<void> | undefined = undefined
+
+  private oneTimeListenerTokenGenerator = 0
+  private readonly mapWindowIdToPendingUnload = new Map<number, Promise<boolean>>()
 
   private readonly phaseWhen = new Map<LifecycleMainPhase, Barrier>()
 
@@ -188,9 +221,6 @@ export class LifecycleMainService extends Disposable implements ILifecycleMainSe
 
       // quit request OS shutdown, try normal quit application
       await this.quit(false)
-
-      // confirm quit request
-      app.quit()
     })
 
     // before-quit: an event that is fired if application quit was
@@ -199,17 +229,17 @@ export class LifecycleMainService extends Disposable implements ILifecycleMainSe
       if (this._quitRequested)
         return
 
-      this.logService.trace('Lifecycle#app.on(before-quit)')
+      this.trace('Lifecycle#app.on(before-quit)')
       this._quitRequested = true
 
       // Emit event to indicate that we are about to shutdown
-      this.logService.trace('Lifecycle#onBeforeShutdown.fire()')
+      this.trace('Lifecycle#onBeforeShutdown.fire()')
       this._onBeforeShutdown.fire()
 
       // macOS: can run without any window open. in that case we fire
       // the onWillShutdown() event directly because there is no veto
       // to be expected.
-      if (isMacintosh && BrowserWindow.getAllWindows().length === 0)
+      if (isMacintosh && this.windowCounter === 0)
         this.fireOnWillShutdown(ShutdownReason.QUIT)
     }
     app.on('before-quit', beforeQuitListener)
@@ -235,6 +265,8 @@ export class LifecycleMainService extends Disposable implements ILifecycleMainSe
       // Prevent the quit until the shutdown promise was resolved
       e.preventDefault()
 
+      // release lock window
+      powerMonitor.removeAllListener('shutdown')
       // Start shutdown sequence
       const shutdownPromise = this.fireOnWillShutdown(this.shutdownRequested ? ShutdownReason.SHUTDOWN : ShutdownReason.QUIT)
 
@@ -278,7 +310,7 @@ export class LifecycleMainService extends Disposable implements ILifecycleMainSe
       }
     })()
 
-    return this.pendingWillShutdownPromise
+    return Promise.resolve()
   }
 
   set phase(value: LifecycleMainPhase) {
@@ -288,7 +320,7 @@ export class LifecycleMainService extends Disposable implements ILifecycleMainSe
     if (this._phase === value)
       return
 
-    this.logService.trace(`lifecycle (main): phase changed (value: ${value})`)
+    this.trace(`lifecycle (main): phase changed (value: ${value})`)
 
     this._phase = value
 
@@ -312,9 +344,148 @@ export class LifecycleMainService extends Disposable implements ILifecycleMainSe
     await barrier.wait()
   }
 
-  quit(willRestart: boolean | undefined, willshutdown?: boolean): Promise<boolean /* veto */> {
+  registerWindow(window: INatmriWindow): void {
+    const windowListeners = new DisposableStore()
+
+    // track window count
+    this.windowCounter++
+
+    // Window Before Closing: Main -> Renderer
+    const win = assertIsDefined(window.win)
+    // win.on('close', (e) => {
+    //   // The window already acknowledged to be closed
+    //   const windowId = window.id
+    //   if (this.windowToCloseRequest.has(windowId))
+    //     this.windowToCloseRequest.delete(windowId)
+
+    //   this.trace(`Lifecycle#window.on('close') - window ID ${window.id}`)
+
+    //   // Otherwise prevent unload and handle it from window
+    //   e.preventDefault()
+
+    //   this.unload(window, UnloadReason.CLOSE).then((veto) => {
+    //     if (veto) {
+    //       this.windowToCloseRequest.delete(windowId)
+    //       return
+    //     }
+
+    //     this.windowToCloseRequest.add(windowId)
+
+    //     // Fire onBeforeCloseWindow before actually closing
+    //     this.trace(`Lifecycle#onBeforeCloseWindow.fire() - window ID ${windowId}`)
+    //     this._onBeforeCloseWindow.fire(window)
+
+    //     // No veto, close window now
+    //     window.close()
+    //   })
+    // })
+
+    // Window After Closing
+    win.on('closed', () => {
+      this.trace(`Lifecycle#window.on('closed') - window ID ${window.id}`)
+
+      // update window count
+      this.windowCounter--
+
+      // clear window listeners
+      windowListeners.dispose()
+
+      // if there are no more code windows opened, fire the onWillShutdown event, unless
+      // we are on macOS where it is perfectly fine to close the last window and
+      // the application continues running (unless quit was actually requested)
+      if (this.windowCounter === 0 && (!isMacintosh || this._quitRequested))
+        this.fireOnWillShutdown(ShutdownReason.QUIT)
+    })
+  }
+
+  async reload(window: INatmriWindow): Promise<void> {
+    // Only reload when the window has not vetoed this
+    const veto = await this.unload(window, UnloadReason.RELOAD)
+    if (!veto)
+      window.reload()
+  }
+
+  unload(window: INatmriWindow, reason: UnloadReason): Promise<boolean> {
+    // Ensure there is only 1 unload running at the same time
+    const pendingUnloadPromise = this.mapWindowIdToPendingUnload.get(window.id)
+    if (pendingUnloadPromise)
+      return pendingUnloadPromise
+
+    // Start unload and remember in map until finished
+    const unloadPromise = this.doUnload(window, reason).finally(() => {
+      this.mapWindowIdToPendingUnload.delete(window.id)
+    })
+    this.mapWindowIdToPendingUnload.set(window.id, unloadPromise)
+
+    return unloadPromise
+  }
+
+  private async doUnload(window: INatmriWindow, reason: UnloadReason): Promise<boolean /* veto */> {
+    // Always allow to unload a window that is not yet ready
+    if (!window.isReady)
+      return false
+
+    this.trace(`Lifecycle#unload() - window ID ${window.id}`)
+
+    // first ask the window itself if it vetos the unload
+    const windowUnloadReason = this._quitRequested ? UnloadReason.QUIT : reason
+    const veto = await this.onBeforeUnloadWindowInRenderer(window, windowUnloadReason)
+    if (veto) {
+      this.trace(`Lifecycle#unload() - veto in renderer (window ID ${window.id})`)
+
+      return this.handleWindowUnloadVeto(veto)
+    }
+
+    // finally if there are no vetos, unload the renderer
+    await this.onWillUnloadWindowInRenderer(window, windowUnloadReason)
+
+    return false
+  }
+
+  private handleWindowUnloadVeto(veto: boolean): boolean {
+    if (!veto)
+      return false // no veto
+
+    // a veto resolves any pending quit with veto
+    this.resolvePendingQuitPromise(true /* veto */)
+
+    // a veto resets the pending quit request flag
+    this._quitRequested = false
+
+    return true // veto
+  }
+
+  private onBeforeUnloadWindowInRenderer(window: INatmriWindow, reason: UnloadReason): Promise<boolean /* veto */> {
+    return new Promise<boolean>((resolve) => {
+      const oneTimeEventToken = this.oneTimeListenerTokenGenerator++
+      const okChannel = `natmri:ok${oneTimeEventToken}`
+      const cancelChannel = `natmri:cancel${oneTimeEventToken}`
+
+      ipcMain.once(okChannel, () => {
+        resolve(false) // no veto
+      })
+
+      ipcMain.once(cancelChannel, () => {
+        resolve(true) // veto
+      })
+
+      window.send('natmri:onBeforeUnload', { okChannel, cancelChannel, reason })
+    })
+  }
+
+  private onWillUnloadWindowInRenderer(window: INatmriWindow, reason: UnloadReason): Promise<void> {
+    return new Promise<void>((resolve) => {
+      const oneTimeEventToken = this.oneTimeListenerTokenGenerator++
+      const replyChannel = `natmri:reply${oneTimeEventToken}`
+
+      ipcMain.once(replyChannel, () => resolve())
+
+      window.send('natmri:onWillUnload', { replyChannel, reason })
+    })
+  }
+
+  quit(willRestart: boolean | undefined): Promise<boolean /* veto */> {
     this.trace(`Lifecycle#quit() - begin (willRestart: ${willRestart})`)
-    this.trace(`Lifecycle#quit() - begin (willshutdown: ${willshutdown})`)
 
     if (this.pendingQuitPromise) {
       this.trace('Lifecycle#quit() - returning pending quit promise')
@@ -337,10 +508,6 @@ export class LifecycleMainService extends Disposable implements ILifecycleMainSe
     })
 
     return this.pendingQuitPromise
-  }
-
-  trace(msg: string) {
-    this.logService.trace(msg)
   }
 
   async relaunch(options?: { addArgs?: string[]; removeArgs?: string[] }): Promise<void> {
@@ -419,5 +586,9 @@ export class LifecycleMainService extends Disposable implements ILifecycleMainSe
 
     // Now exit either after 1s or all windows destroyed
     app.exit(code)
+  }
+
+  private trace(msg: string) {
+    this.logService.trace(msg)
   }
 }

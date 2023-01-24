@@ -36,7 +36,7 @@ export class ProtocolMainService extends Disposable implements IProtocolMainServ
     protocol.registerStreamProtocol(Schemas.natmri, (request, callback) => this.handleNatmriRequest(request, callback))
 
     // intercept file://
-    protocol.interceptFileProtocol('file', (request, callback) => this.handleFileRequest(request, callback))
+    // protocol.interceptFileProtocol('file', (request, callback) => this.handleFileRequest(request, callback))
 
     // Cleanup
     this._register(toDisposable(() => {
