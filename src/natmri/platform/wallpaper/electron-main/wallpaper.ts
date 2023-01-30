@@ -1,6 +1,4 @@
 import { join } from 'path'
-import { spawn } from 'child_process'
-import { constants } from 'os'
 import { screen } from 'electron'
 import { setWindowWorker as embedWindow, restoreWindowWorker as restoreWindow } from '@livemoe/tools'
 import { Disposable, toDisposable } from 'natmri/base/common/lifecycle'
@@ -9,9 +7,9 @@ import { isWindows } from 'natmri/base/common/environment'
 import { INativeEnvironmentMainService } from 'natmri/platform/environment/electron-main/environmentMainService'
 import { powerMonitor } from 'natmri/base/electron-main/powerMonitor'
 import { ILoggerService } from 'natmri/platform/log/common/log'
+import { ILifecycleMainService } from 'natmri/platform/lifecycle/electron-main/lifecycleMainService'
 import type { Display } from 'electron'
 import type { INatmriWindow } from 'natmri/platform/window/electron-main/window'
-import { ILifecycleMainService } from 'natmri/platform/lifecycle/electron-main/lifecycleMainService'
 
 export class WallpaperPlayer extends Disposable {
   private _natmri_win: INatmriWindow = null!
@@ -92,19 +90,6 @@ export class WallpaperPlayer extends Disposable {
     })
 
     this._natmri_win.win?.on('ready-to-show', () => this._natmri_win.win?.show())
-    this._natmri_win.win?.loadURL('E:\\resources\\备份\\UpupooResource\\2000031946\\index.html')
-    this.logService.info('[WallpaperPlayer]', this._natmri_win.nativeWindowId.readBigInt64LE().toString())
-    const instance = spawn('natmri-sky.exe', [`--target=${this._natmri_win.nativeWindowId.readBigInt64LE().toString()}`], {
-      cwd: join(this.environmentMainService.resourcePath, 'natmri-sky', 'windows', 'x86_64'),
-      stdio: 'inherit',
-    })
-
-    instance.on('error', err => this.logService.error(err))
-    instance.on('exit', code => this.logService.info('[WallpaperPlayer] spawn exit code: ', code))
-
-    this._register(toDisposable(() => {
-      instance.kill(constants.signals.SIGINT)
-    }))
   }
 
   override dispose(): void {

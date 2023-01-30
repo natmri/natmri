@@ -1,5 +1,4 @@
 import { Menu, app, protocol } from 'electron'
-import { randomUUID } from 'natmri/base/common/crypto'
 import { Schemas } from 'natmri/base/common/network'
 import { minimist } from 'natmri/base/node/minimist'
 import { Main } from 'natmri/store/electron-main/main'
