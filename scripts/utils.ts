@@ -140,13 +140,17 @@ export const resolve: ResolveOptions = {
 }
 
 export async function rimraf(path: string): Promise<void> {
-  try {
-    await _rimraf(path)
-    console.log(`\x1B[91m Remove\x1B[0m\x1B[96m\x1B[1m ${path}\x1B[0m successfully`)
-  }
-  catch (error) {
-    console.error(`\x1B[91m\x1B[1m Remove ${path} failed \x1B[0m, error: ${error}`)
-  }
+  return new Promise<void>((resolve, reject) => {
+    _rimraf(path, (error: any) => {
+      if (error) {
+        console.error(`\x1B[91m\x1B[1m Remove ${path} failed \x1B[0m, error: ${error}`)
+        reject(error)
+      }
+
+      console.log(`\x1B[91m Remove\x1B[0m\x1B[96m\x1B[1m ${path}\x1B[0m successfully`)
+      resolve()
+    })
+  })
 }
 
 export async function rimrafTasks(paths: string[]) {

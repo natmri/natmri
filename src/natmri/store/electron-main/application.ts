@@ -14,6 +14,7 @@ import { WindowsMainService } from 'natmri/platform/windows/electron-main/window
 import { NatmriTray } from 'natmri/platform/tray/electron-main/tray'
 import { isDevelopment } from 'natmri/base/common/environment'
 import type { ServicesAccessor } from 'natmri/base/common/instantiation'
+import { app } from 'electron'
 
 export class Application extends Disposable {
   private nativeHostMainService: INativeHostMainService | undefined
