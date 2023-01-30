@@ -1,13 +1,8 @@
 import { join } from 'node:path'
 import { defineConfig } from 'vitest/config'
-import { splitVendorChunkPlugin } from 'vite'
-import Solid from 'vite-plugin-solid'
-import UnoCSS from 'unocss/vite'
-import ViteElectronPlugin from 'eevi'
-import { ElectronRendererPlugin } from '@eevi/elexpose/vite'
-import { IS_TEST, outputDistPath as outDir, resolve, rootPath, setupDevelopmentEnvironment, srcPath } from './scripts/utils'
+import { outputDistPath as outDir, VITE_PLUGINS as plugins, resolve, srcPath as root, rootPath, setupDevelopmentEnvironment } from './scripts/utils'
 
-const NATMRI_ROOT = join(srcPath, 'natmri')
+const NATMRI_ROOT = join(root, 'natmri')
 const NATMRI_STORE = join(NATMRI_ROOT, 'store')
 
 await setupDevelopmentEnvironment()
@@ -17,24 +12,14 @@ const input: Record<string, string> = {
 }
 
 export default defineConfig({
+  cacheDir: join(rootPath, '.vite'),
   appType: 'mpa',
-  root: srcPath,
+  root,
   resolve,
   json: {
     stringify: true,
   },
-  plugins: [
-    IS_TEST
-      ? []
-      : [
-          Solid(),
-          UnoCSS(),
-          ViteElectronPlugin(),
-          ElectronRendererPlugin([
-            'wallpaper',
-          ])],
-    splitVendorChunkPlugin(),
-  ],
+  plugins,
   build: {
     target: 'esnext',
     assetsDir: 'natmri/assets',
@@ -44,5 +29,4 @@ export default defineConfig({
     outDir,
     emptyOutDir: false,
   },
-  cacheDir: join(rootPath, '.vite'),
 })
