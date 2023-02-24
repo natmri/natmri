@@ -339,7 +339,7 @@ export const win32: IPath = {
 
     return resolvedAbsolute
       ? `${resolvedDevice}\\${resolvedTail}`
-      : `${resolvedDevice}${resolvedTail}` || '.'
+      : (`${resolvedDevice}${resolvedTail}` || '.')
   },
 
   normalize(path: string): string {
@@ -726,7 +726,7 @@ export const win32: IPath = {
       // Possible device root
     }
     else if (isWindowsDeviceRoot(code) && path.charCodeAt(1) === CHAR_COLON) {
-      rootEnd = len > 2 && isPathSeparator(path.charCodeAt(2)) ? 3 : 2
+      rootEnd = (len > 2 && isPathSeparator(path.charCodeAt(2))) ? 3 : 2
       offset = rootEnd
     }
 
@@ -1478,7 +1478,7 @@ export const posix: IPath = {
     }
 
     if (end !== -1) {
-      const start = startPart === 0 && isAbsolute ? 1 : startPart
+      const start = (startPart === 0 && isAbsolute) ? 1 : startPart
       if (startDot === -1
         // We saw a non-dot character immediately before the dot
         || preDotState === 0

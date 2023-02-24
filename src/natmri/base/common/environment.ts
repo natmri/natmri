@@ -147,7 +147,7 @@ export const enum OperatingSystem {
   Macintosh = 2,
   Linux = 3,
 }
-export const OS = (_isMacintosh || _isIOS ? OperatingSystem.Macintosh : (_isWindows ? OperatingSystem.Windows : OperatingSystem.Linux))
+export const OS = ((_isMacintosh || _isIOS) ? OperatingSystem.Macintosh : (_isWindows ? OperatingSystem.Windows : OperatingSystem.Linux))
 
 let _isLittleEndian = true
 let _isLittleEndianComputed = false

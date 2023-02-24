@@ -180,7 +180,7 @@ export function minimist(args: string[], options: Options = {}): ParsedArgs {
         return
     }
 
-    const value = !flags.strings[key] && isNumber(val)
+    const value = (!flags.strings[key] && isNumber(val))
       ? Number(val)
       : val
     setKey(argv, key.split('.'), value);
@@ -305,7 +305,7 @@ export function minimist(args: string[], options: Options = {}): ParsedArgs {
     }
     else {
       if (!flags.unknownFn || flags.unknownFn(arg) !== false)
-        argv._.push(flags.strings._ || !isNumber(arg) ? arg : Number(arg) as any)
+        argv._.push((flags.strings._ || !isNumber(arg)) ? arg : Number(arg) as any)
 
       if (options.stopEarly) {
         argv._.push(...args.slice(i + 1))
