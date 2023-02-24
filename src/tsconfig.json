@@ -30,6 +30,10 @@
       "typings/*": [
         "./typings/*"
       ]
-    }
+    },
+    "typeRoots": [
+      "../node_modules/@types",
+      "../node_modules/@total-typescript"
+    ]
   }
 }
