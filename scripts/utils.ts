@@ -1,13 +1,7 @@
 import path from 'node:path'
 import fsp from 'node:fs/promises'
-import _rimraf from 'rimraf'
+import { existsSync } from 'node:fs'
 import yaml from 'yaml'
-import { splitVendorChunkPlugin } from 'vite'
-import Solid from 'vite-plugin-solid'
-import UnoCSS from 'unocss/vite'
-import ViteElectronPlugin from 'eevi'
-import { ElectronRendererPlugin } from '@eevi/elexpose/vite'
-import type { PluginOption } from 'vite'
 
 // ------------------------------------------------- //
 // -------- Common Path for Application ------------ //
@@ -30,23 +24,6 @@ export const outputModulePath = path.join(outputAppPath, 'node_modules')
 export const IS_DEV = !!process.env.NATMRI_DEV
 export const IS_TEST = !!process.env.NATMRI_TEST
 
-// ------------------------------------------------- //
-// ------------- Vite Plugin Array ----------------- //
-// ------------------------------------------------- //
-export const VITE_PLUGINS: PluginOption[] = [
-  IS_TEST
-    ? []
-    : [
-        Solid(),
-        UnoCSS(),
-        ViteElectronPlugin(),
-        ElectronRendererPlugin([
-          'wallpaper',
-        ])],
-  splitVendorChunkPlugin(),
-]
-
-// ------------------------------------------------- //
 // ---------- Package Mate Infomation -------------- //
 // ------------------------------------------------- //
 export const MATE = {
@@ -162,17 +139,17 @@ export const resolve: ResolveOptions = {
 }
 
 export async function rimraf(path: string): Promise<void> {
-  return new Promise<void>((resolve, reject) => {
-    _rimraf(path, (error: any) => {
-      if (error) {
-        console.error(`\x1B[91m\x1B[1m Remove ${path} failed \x1B[0m, error: ${error}`)
-        reject(error)
-      }
+  try {
+    if (!existsSync(path))
+      return
 
-      console.log(`\x1B[91m Remove\x1B[0m\x1B[96m\x1B[1m ${path}\x1B[0m successfully`)
-      resolve()
-    })
-  })
+    await fsp.rm(path, { recursive: true, force: true })
+
+    console.log(`\x1B[91m Remove\x1B[0m\x1B[96m\x1B[1m ${path}\x1B[0m successfully`)
+  }
+  catch (error) {
+    console.error(`\x1B[91m\x1B[1m Remove ${path} failed \x1B[0m, error: ${error}`)
+  }
 }
 
 export async function rimrafTasks(paths: string[]) {
