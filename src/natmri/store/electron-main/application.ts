@@ -1,3 +1,4 @@
+import { app } from 'electron'
 import { IInstantiationService, ServiceCollection, SyncDescriptor } from 'natmri/base/common/instantiation'
 import { Disposable } from 'natmri/base/common/lifecycle'
 import { INativeEnvironmentMainService } from 'natmri/platform/environment/electron-main/environmentMainService'
@@ -11,10 +12,9 @@ import { IWindowsMainService } from 'natmri/platform/windows/electron-main/windo
 import { RunOnceScheduler, runWhenIdle } from 'natmri/base/common/async'
 import { ProxyChannel } from 'natmri/base/parts/ipc/common/ipc'
 import { WindowsMainService } from 'natmri/platform/windows/electron-main/windowsMainService'
-import { NatmriTray } from 'natmri/platform/tray/electron-main/tray'
 import { isDevelopment } from 'natmri/base/common/environment'
 import type { ServicesAccessor } from 'natmri/base/common/instantiation'
-import { app } from 'electron'
+import { NatmriTray } from 'natmri/platform/tray/electron-main/tray'
 
 export class Application extends Disposable {
   private nativeHostMainService: INativeHostMainService | undefined
@@ -60,14 +60,6 @@ export class Application extends Disposable {
       this._register(runWhenIdle(() => this.lifecycleMainService.phase = LifecycleMainPhase.Eventually, 2500))
     }, 2500))
     eventuallyPhaseScheduler.schedule()
-
-    appInstantiationService.invokeFunction((accessor) => {
-      // appInstantiationService.createInstance(WallpaperPlayer)
-      // const windowsMainService = accessor.get(IWindowsMainService)
-      // const window = windowsMainService.getWindow()
-      // window.loadURL(this.nativeEnvironmentService.getPageURI('natmri/store/electron-sandbox/natmri-store.html'))
-      // window.win?.webContents.openDevTools({ mode: 'detach' })
-    })
   }
 
   private async initServices(): Promise<IInstantiationService> {
@@ -75,17 +67,21 @@ export class Application extends Disposable {
 
     // App updates
 
-    // Tray
-    const tray = new NatmriTray(this.nativeEnvironmentService, this.lifecycleMainService)
-    services.set(INativeTrayMainService, new SyncDescriptor(NativeTrayMainService, [tray]))
-
     // Windows manager
     services.set(IWindowsMainService, new SyncDescriptor(WindowsMainService))
 
     // Native host
     services.set(INativeHostMainService, new SyncDescriptor(NativeHostMainService))
 
-    return this.mainInstantiationService.createChild(services)
+    const appInstantiationService = this.mainInstantiationService.createChild(services)
+
+    const trayServices: readonly [INativeEnvironmentMainService, INativeHostMainService] = appInstantiationService.invokeFunction(accessor => [accessor.get(INativeEnvironmentMainService), accessor.get(INativeHostMainService)] as const)
+    // Init native tray
+    const tray = new NatmriTray(trayServices[0], trayServices[1])
+
+    services.set(INativeTrayMainService, new SyncDescriptor(NativeTrayMainService, [tray]))
+
+    return appInstantiationService
   }
 
   private async initChannels(accessor: ServicesAccessor, mainProcessElectronServer: ElectronIPCServer) {

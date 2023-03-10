@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "author": "starknt <starknt.git@qq.com>",
   "license": "GPL-2.0",
-  "main": "./out/main.js",
+  "main": "./out/background.js",
   "dependencies": {
     "@livemoe/tools": "^0.4.0-beta.4",
     "better-sqlite3": "^8.0.1",

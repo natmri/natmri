@@ -4,7 +4,7 @@ import { IS_DEV, outputDistPath as outDir, resolve, srcTsConfigPath as tsconfig 
 import { dependencies } from './app/package.json'
 
 export default defineConfig({
-  entry: './src/main.ts',
+  entry: './src/background.ts',
   outDir,
   preloadOutDir: './natmri',
   preloadEntries: [

@@ -48,22 +48,7 @@
   "win": {
     "icon": "buildResources/icons/win/icon.ico",
     "artifactName": "${productName}-win-${arch}-${version}.${ext}",
-    "target": [
-      {
-        "target": "nsis",
-        "arch": [
-          "x64",
-          "ia32"
-        ]
-      },
-      {
-        "target": "zip",
-        "arch": [
-          "x64",
-          "ia32"
-        ]
-      }
-    ]
+    "target": ["nsis", "portable"]
   },
   "mac": {
     "icon": "buildResources/icons/mac/icon.icns",
