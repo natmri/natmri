@@ -3,10 +3,13 @@
   "productName": "natmri",
   "appId": "personal.starknt.natmri",
   "asar": true,
+  "npmRebuild": false,
+  "forceCodeSigning": false,
   "asarUnpack": "**\\*.{dll, node}",
   "files": [
     "out",
     "node_modules",
+    "!**/*.ts",
     "!node_modules/**/.vite",
     "!node_modules/**/.pnpm",
     "!node_modules/**/.bin",
@@ -14,6 +17,7 @@
     "!node_modules/.modules.yaml",
     "!node_modules/**/*.{js, cjs, ts}.map",
     "!node_modules/**/{*.vcxproj,*.vcxproj.filters}",
+    "!**/*.{iml,o,hprof,orig,pyc,pyo,rbc,swp,csproj,sln,xproj}",
     "!node_modules/**/build/Release/{*.lib,*.exp,*.ilk,*.pdb,*.iobj,*.ipdb}",
     "!node_modules/**/build/Release/obj",
     "!node_modules/**/prebuilds",
@@ -23,47 +27,37 @@
   ],
   "copyright": "Copyright © 2022 ${author}",
   "dmg": {
-    "contents": [
-      {
-        "x": 150,
-        "y": 200,
-        "type": "file"
-      },
-      {
-        "x": 450,
-        "y": 200,
-        "type": "link",
-        "path": "/Applications"
-      }
-    ]
+    "icon": "buildResources/icons/icon.icns"
   },
   "nsis": {
     "oneClick": false,
-    "createStartMenuShortcut": true,
-    "perMachine": false,
+    "perMachine": true,
     "allowToChangeInstallationDirectory": true,
-    "artifactName": "${productName}_win_setup_${arch}_${version}.${ext}",
+    "deleteAppDataOnUninstall": true,
+    "artifactName": "${productName}-${version}-${os}-${arch}-Setup.${ext}",
     "include": "buildResources/windows/installer.nsh"
   },
+  "portable": {
+    "artifactName": "${productName}-portable-${version}.${ext}"
+  },
   "win": {
-    "icon": "buildResources/icons/win/icon.ico",
+    "icon": "buildResources/icons/icon.ico",
     "artifactName": "${productName}-win-${arch}-${version}.${ext}",
-    "target": ["nsis", "portable"]
+    "target": ["nsis", "portable"],
+    "publisherName": "starknt"
   },
   "mac": {
-    "icon": "buildResources/icons/mac/icon.icns",
-    "artifactName": "${productName}-mac-${arch}-${version}.${ext}",
+    "icon": "buildResources/icons/icon.icns",
+    "artifactName": "${productName}-${version}-${os}-${arch}.${ext}",
     "target": [
       {
         "target": "dmg",
-        "arch": [
-          "x64",
-          "arm64"
-        ]
+        "arch": ["x64", "arm64"]
       }
     ],
     "type": "distribution",
     "category": "public.app-category.productivity",
+    "darkModeSupport": true,
     "gatekeeperAssess": false,
     "electronLanguages": [
       "en",
@@ -82,8 +76,8 @@
     }
   },
   "linux": {
-    "icon": "buildResources/icons/png/256x256.png",
-    "artifactName": "${productName}-linux-${arch}-${version}.${ext}",
+    "icon": "buildResources/icons/icon.icns",
+    "artifactName": "${productName}-${version}-${os}-${arch}.${ext}",
     "category": "Utility",
     "synopsis": "An electron template based on Vite and Esbuild.",
     "desktop": {
@@ -112,7 +106,9 @@
   "publish": [
     {
       "provider": "github",
-      "releaseType": "release"
+      "owner": "starknt",
+      "repo": "natmri",
+      "releaseType": "draft"
     }
   ]
 }

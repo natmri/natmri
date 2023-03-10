@@ -1,13 +1,16 @@
 import type { Configuration } from 'electron-builder'
 import { build } from 'electron-builder'
 import builder from '../$electron-builder.json'
+import { devDependencies } from '../package.json'
 import { cleanFiles } from './clean'
 import { MATE, outputAppPath, rimrafTasks, setupPackageEnvironemt } from './utils'
+
+const electronVersion = devDependencies.electron.replaceAll('^', '')
 
 const config: Configuration = {
   ...(builder as Configuration),
   copyright: `Copyright © ${MATE.year}-${new Date().getFullYear()} \$\{author\}`,
-
+  electronVersion,
 }
 
 await cleanFiles()
