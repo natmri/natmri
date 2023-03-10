@@ -19,7 +19,7 @@ Rewrite this [project](https://github.com/starknt/LiveMoe)
 ### 克隆代码
 
 ```bash
-git clone git@github.com:starknt/natmri.git && cd natmri
+git clone git@github.com:natmri/natmri.git && cd natmri
 ```
 
 ### 安装依赖
