@@ -14,15 +14,6 @@ Rewrite this [project](https://github.com/starknt/LiveMoe)
 
 </div>
 
-## 功能
-
-- 控制壁纸的播放暂停
-- 改变任务栏透明度或者自定义颜色
-- 改变鼠标样式
-- 可视化壁纸选择界面
-- 可视化的设置界面
-- 快速创建壁纸
-
 ## ⌨️ 本地开发
 
 ### 克隆代码
@@ -53,7 +44,7 @@ pnpm dev
 pnpm package
 ```
 
-完成之后可以在项目的 `release/build` 目录看到编译打包好的应用文件
+完成之后可以在项目的 `out-build` 目录看到编译打包好的应用文件
 
 ## 🛠 技术栈
 
