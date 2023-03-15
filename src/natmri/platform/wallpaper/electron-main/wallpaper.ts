@@ -1,6 +1,6 @@
-import { join } from 'path'
+import { join } from 'node:path'
 import { screen } from 'electron'
-import { setWindowWorker as embedWindow, restoreWindowWorker as restoreWindow } from '@livemoe/tools'
+import { createInteractiveWindow, destroyInteractiveWindow } from '@natmri/platform'
 import { Disposable, toDisposable } from 'natmri/base/common/lifecycle'
 import { IWindowsMainService } from 'natmri/platform/windows/electron-main/windows'
 import { isWindows } from 'natmri/base/common/environment'
@@ -69,10 +69,10 @@ export class WallpaperPlayer extends Disposable {
       // windows shutdown lock window
       powerMonitor.LOCK_WINDOW = this._natmri_win.nativeWindowId.readBigInt64LE()
 
-      restoreWindow()
-      embedWindow(this._natmri_win.nativeWindowId.readBigInt64LE())
+      destroyInteractiveWindow()
+      createInteractiveWindow(this._natmri_win.win!)
       this._register(toDisposable(() => {
-        restoreWindow()
+        destroyInteractiveWindow()
       }))
 
       this.lifecycleMainService.onBeforeShutdown(() => {

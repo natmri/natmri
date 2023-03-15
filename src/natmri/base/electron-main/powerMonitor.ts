@@ -1,6 +1,6 @@
 import EventEmitter from 'node:events'
 import { powerMonitor as _powerMonitor } from 'electron'
-import { acquireShutdownBlock, insertWndProcHook, releaseShutdownBlock, removeWndProcHook, setMainWindowHandle } from '@livemoe/tools'
+import { acquireShutdownBlock, insertWndProcHook, releaseShutdownBlock, removeWndProcHook, setMainWindowHandle } from '@natmri/platform'
 import { isWindows } from 'natmri/base/common/environment'
 import { Disposable } from 'natmri/base/common/lifecycle'
 import { Emitter, Event } from 'natmri/base/common/event'
