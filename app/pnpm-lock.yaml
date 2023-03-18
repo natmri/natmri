@@ -1,19 +1,19 @@
 lockfileVersion: 5.4
 
 specifiers:
-  '@natmri/platform': 0.0.2
+  '@natmri/platform': 0.0.4
   better-sqlite3: ^8.0.1
   native-is-elevated-rs: ^0.0.1-beta.5
 
 dependencies:
-  '@natmri/platform': 0.0.2
+  '@natmri/platform': 0.0.4
   better-sqlite3: 8.0.1
   native-is-elevated-rs: 0.0.1-beta.5
 
 packages:
 
-  /@natmri/platform-napi-darwin-arm64/0.0.1:
-    resolution: {integrity: sha512-GqtfNBocMtXT16wFZR0XCGGAJg2RAgVIdjWMXWCnxu61CQp31jlusEQKCFEk8VM3STjACoLHYM4qVV0ZYUvtAA==}
+  /@natmri/platform-napi-darwin-arm64/0.0.2:
+    resolution: {integrity: sha512-Xtya2LjqQU3XinaNiCrZQENJoWA2oSLH/3tq2fpCPUp7p1aujJOGlmDwxxUbo/+9tZyVDy1h3MGB01lyyM+3yA==}
     engines: {node: '>= 10'}
     cpu: [arm64]
     os: [darwin]
@@ -21,8 +21,8 @@ packages:
     dev: false
     optional: true
 
-  /@natmri/platform-napi-darwin-x64/0.0.1:
-    resolution: {integrity: sha512-0rA2EPzu8jaJdqY1dHXdaysaE3h+0D2j4iXnCgeCKlQIlxz8qySkbPMwaFEoTOJyZuj2fMaqbaVOy5TA4PHjHA==}
+  /@natmri/platform-napi-darwin-x64/0.0.2:
+    resolution: {integrity: sha512-FwxJObzaT3B0UONROqcLl8qZtG/eP0qmkKBKOv/je9zxS4L0Jv1tl7HbVZMGxmoBddOnBFbkfilQY+xuwypfnA==}
     engines: {node: '>= 10'}
     cpu: [x64]
     os: [darwin]
@@ -30,8 +30,8 @@ packages:
     dev: false
     optional: true
 
-  /@natmri/platform-napi-linux-arm-gnueabihf/0.0.1:
-    resolution: {integrity: sha512-hUyfVy9RuMhlLqIA36XtdIdt9QYHpaau4WIgbQ1eTKD7A/GG99LNLx61CSLa7f0hJEBTBC0LK2GmRJQpGApCWw==}
+  /@natmri/platform-napi-linux-arm-gnueabihf/0.0.2:
+    resolution: {integrity: sha512-WrAEAs4aDTtPh5ujsN6AUOGqINlMpgylRFkiS6bIidLICd1/6PUQUDHagut8w0OakQJmQuI0ixem64Or7OI+Hg==}
     engines: {node: '>= 10'}
     cpu: [arm]
     os: [linux]
@@ -39,8 +39,8 @@ packages:
     dev: false
     optional: true
 
-  /@natmri/platform-napi-linux-arm64-gnu/0.0.1:
-    resolution: {integrity: sha512-IHSxWjXwy7959i+VBvt7tF8kySFI6VN9ibjU1+hTd2j93/qenHA4ULJ0D7k5kKvUlHgUkRZEtY2qzK3tX5zthQ==}
+  /@natmri/platform-napi-linux-arm64-gnu/0.0.2:
+    resolution: {integrity: sha512-F5zBDGwgcxBn4rEOuvbedQbegSOwuSxnKb3LzQxMgLAXnbeYLkGODH7/SHvq5fq/qVDIvTJnfRqQazICqwMDyQ==}
     engines: {node: '>= 10'}
     cpu: [arm64]
     os: [linux]
@@ -48,8 +48,8 @@ packages:
     dev: false
     optional: true
 
-  /@natmri/platform-napi-linux-arm64-musl/0.0.1:
-    resolution: {integrity: sha512-dfi9Gq3RQCemQ9Yzto4tOZW0DEpyX8YUQo+0+9HSElbeY+tofgxNfmvVW4tWpbVIyHcJdSUbv3BoC5mJ5T95SA==}
+  /@natmri/platform-napi-linux-arm64-musl/0.0.2:
+    resolution: {integrity: sha512-WXAzmAAKKEUTY1QPg4j6FeXZD/Q6OT5JmjCbSJtf/Q0lHJfYS/Acqk6ybPb27ChW8S3Jp1yvY2sUbOZrwOR4VA==}
     engines: {node: '>= 10'}
     cpu: [arm64]
     os: [linux]
@@ -57,8 +57,8 @@ packages:
     dev: false
     optional: true
 
-  /@natmri/platform-napi-linux-x64-gnu/0.0.1:
-    resolution: {integrity: sha512-WP5IPhFf4fSeF/n33ul/TRquOOfjFd9L+Dsg/m+5IcwzvCGEM2tz7nLN0Wj8fn0nXTFOM32rzUMEAFSEEPcDHw==}
+  /@natmri/platform-napi-linux-x64-gnu/0.0.2:
+    resolution: {integrity: sha512-Srxukk4WR5EIiBairDmNshfWhM5/Q9ikO/eKkqSrMd685D/leJZeuV9Y/L+u7ny3gfvUTM/Dtm/suvmqsn7Tdw==}
     engines: {node: '>= 10'}
     cpu: [x64]
     os: [linux]
@@ -66,8 +66,8 @@ packages:
     dev: false
     optional: true
 
-  /@natmri/platform-napi-linux-x64-musl/0.0.1:
-    resolution: {integrity: sha512-4jxtph/PCzv7OCzMRWoa5eEvUbHYG746VDmlmuCl2AvcDszf9gi0ERoBjzQzyu9I0drqH9rAe6ykE+giOANLyQ==}
+  /@natmri/platform-napi-linux-x64-musl/0.0.2:
+    resolution: {integrity: sha512-klTFYI0Xb73/D6xTiELa37mi6wAmihSsrYoz5Yq96ztqYVgYkGpkfEr1k06KD5b1Ukm9msfJnTrRxQA31D/i1g==}
     engines: {node: '>= 10'}
     cpu: [x64]
     os: [linux]
@@ -75,8 +75,8 @@ packages:
     dev: false
     optional: true
 
-  /@natmri/platform-napi-win32-arm64-msvc/0.0.1:
-    resolution: {integrity: sha512-gVgrEX+4RlTXyUXrLUlbefRx9ua1X7X69Z2G5IAoCneE1uOLpoNM6UAcx1dg8owmFtIpaSMIZYOaF2uaP2/+zw==}
+  /@natmri/platform-napi-win32-arm64-msvc/0.0.2:
+    resolution: {integrity: sha512-nzH2t2on22SCyqWRPuxOnlHCkJFrHjCEJ5cNvu4HvdLIuEGi44xnlGelso1YMZlUM5LSUxGfxB5k4fHKtPQkYA==}
     engines: {node: '>= 10'}
     cpu: [arm64]
     os: [win32]
@@ -84,8 +84,8 @@ packages:
     dev: false
     optional: true
 
-  /@natmri/platform-napi-win32-ia32-msvc/0.0.1:
-    resolution: {integrity: sha512-8aC1d1Ts0jx5FbkYlT//Wk1SWeGUC9Iul5leRf0pq4AL/lECEyVNsQluxNoIoY7gvDdbAT3M1HwjC92e+aPVdw==}
+  /@natmri/platform-napi-win32-ia32-msvc/0.0.2:
+    resolution: {integrity: sha512-/wLJ4ewRVrr+9SdHh2mR2YWj2fLEzzAHgQuKsWwV93JnonFoi3HXytUw4D4H/rpfOHCX+olmS38QpwGiEWhzXw==}
     engines: {node: '>= 10'}
     cpu: [ia32]
     os: [win32]
@@ -93,8 +93,8 @@ packages:
     dev: false
     optional: true
 
-  /@natmri/platform-napi-win32-x64-msvc/0.0.1:
-    resolution: {integrity: sha512-itRqvaiKWaDyhBEUCjv2YBq6ojJN0htvq7wSE1+SIwhA3H9D+yKRJSWa9Tn84YFj/m0oh7iJ6fYSiqpbebfJ7w==}
+  /@natmri/platform-napi-win32-x64-msvc/0.0.2:
+    resolution: {integrity: sha512-ORs/YfD98batW/jcE77W++uyDfOh9MJLsjUn6xr5QFhf4xBgf+kLwg89WfOrTqIXuKqOzJQBQVul5cCNHU/cLQ==}
     engines: {node: '>= 10'}
     cpu: [x64]
     os: [win32]
@@ -102,29 +102,29 @@ packages:
     dev: false
     optional: true
 
-  /@natmri/platform-napi/0.0.1:
-    resolution: {integrity: sha512-+b6b/fWYI1fEEHI4bwS52zcLAuFxrxai4z/42uMfIwZdw3/FiI2inMykK9kbqxdYXuLrV1dy3twh1R7qICyKXg==}
+  /@natmri/platform-napi/0.0.2:
+    resolution: {integrity: sha512-09sGGJ1fw2xRke+XrYDFwaqda1966u9b29XfiTWfrwSrHVNhWcRKKawEy9WFArqwkSNd8n/uovVT35SaKw+45A==}
     engines: {node: '>= 10'}
     optionalDependencies:
-      '@natmri/platform-napi-darwin-arm64': 0.0.1
-      '@natmri/platform-napi-darwin-x64': 0.0.1
-      '@natmri/platform-napi-linux-arm-gnueabihf': 0.0.1
-      '@natmri/platform-napi-linux-arm64-gnu': 0.0.1
-      '@natmri/platform-napi-linux-arm64-musl': 0.0.1
-      '@natmri/platform-napi-linux-x64-gnu': 0.0.1
-      '@natmri/platform-napi-linux-x64-musl': 0.0.1
-      '@natmri/platform-napi-win32-arm64-msvc': 0.0.1
-      '@natmri/platform-napi-win32-ia32-msvc': 0.0.1
-      '@natmri/platform-napi-win32-x64-msvc': 0.0.1
+      '@natmri/platform-napi-darwin-arm64': 0.0.2
+      '@natmri/platform-napi-darwin-x64': 0.0.2
+      '@natmri/platform-napi-linux-arm-gnueabihf': 0.0.2
+      '@natmri/platform-napi-linux-arm64-gnu': 0.0.2
+      '@natmri/platform-napi-linux-arm64-musl': 0.0.2
+      '@natmri/platform-napi-linux-x64-gnu': 0.0.2
+      '@natmri/platform-napi-linux-x64-musl': 0.0.2
+      '@natmri/platform-napi-win32-arm64-msvc': 0.0.2
+      '@natmri/platform-napi-win32-ia32-msvc': 0.0.2
+      '@natmri/platform-napi-win32-x64-msvc': 0.0.2
     dev: false
 
-  /@natmri/platform/0.0.2:
-    resolution: {integrity: sha512-alE5c8LhT084WEzV9EqK769zBY4DbtZy5rZGHlNLOzFw0K4nwVpbRHAqJ+P/XAuWMEJIQO/EqfwxOJPsKSVm9A==}
+  /@natmri/platform/0.0.4:
+    resolution: {integrity: sha512-UGOArp28NVxXicL3HeeXyGvrTJk+XU9Khs5oi6zjqV9vVVeVCdr4q3yP8y+NrbSwB+EukdeTZLqGhydTXsh/8w==}
     engines: {node: '>=14'}
     peerDependencies:
       electron: '>=12'
     dependencies:
-      '@natmri/platform-napi': 0.0.1
+      '@natmri/platform-napi': 0.0.2
     dev: false
 
   /base64-js/1.5.1:
