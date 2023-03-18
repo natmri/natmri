@@ -15,7 +15,7 @@
         "runtimeExecutable": "${workspaceFolder}/node_modules/.bin/electron.cmd"
       },
       "args": [
-        "out-build/app/out/main.js"
+        "out-build/app/out/background.js"
       ],
       "env": {
         "NATMRI_DEV": "1",
