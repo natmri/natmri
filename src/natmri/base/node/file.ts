@@ -1,6 +1,6 @@
 import { basename, extname, join, relative } from 'node:path'
-import fs from 'fs'
-import fsp from 'fs/promises'
+import fs from 'node:fs'
+import fsp from 'node:fs/promises'
 import { IMAGE_EXTS, VIDEO_EXTS, ZIP_EXTS } from 'natmri/base/common/constants'
 import type { IExtractOptions, IFile } from 'natmri/base/node/zip'
 import { extract, pack } from 'natmri/base/node/zip'

@@ -1,11 +1,11 @@
 import { join } from 'node:path'
-import { Tray as ElectronTray, Menu, app, nativeImage } from 'electron'
+import { Tray as ElectronTray, nativeImage } from 'electron'
 import { Disposable } from 'natmri/base/common/lifecycle'
 import { INativeEnvironmentMainService } from 'natmri/platform/environment/electron-main/environmentMainService'
-import { isMacintosh, isWindows } from 'natmri/base/common/environment'
-import { ILifecycleMainService } from 'natmri/platform/lifecycle/electron-main/lifecycleMainService'
+import { isWindows } from 'natmri/base/common/environment'
 import { Emitter } from 'natmri/base/common/event'
 import type { Event } from 'natmri/base/common/event'
+import { INativeHostMainService } from 'natmri/platform/native/electron-main/nativeHostMainService'
 
 export interface INativeNatmriTray {
   tray: ElectronTray | undefined
@@ -23,19 +23,19 @@ export class NatmriTray extends Disposable implements INativeNatmriTray {
 
   constructor(
     @INativeEnvironmentMainService private readonly nativeEnvironmentMainService: INativeEnvironmentMainService,
-    @ILifecycleMainService private readonly lifecycleMainService: ILifecycleMainService,
+    @INativeHostMainService private readonly nativeHostMainService: INativeHostMainService,
   ) {
     super()
     this._tray = new ElectronTray(nativeImage.createFromPath(this.getNativeImagePath()))
 
-    this._tray.setContextMenu(Menu.buildFromTemplate([
-      {
-        label: 'quit',
-        click: async () => {
-          await this.lifecycleMainService.quit()
-        },
-      },
-    ]))
+    // this._tray.setContextMenu(Menu.buildFromTemplate([
+    //   {
+    //     label: 'quit',
+    //     click: async () => {
+    //       await this.nativeHostMainService.quit()
+    //     },
+    //   },
+    // ]))
 
     this.registerListeners()
   }
@@ -49,10 +49,8 @@ export class NatmriTray extends Disposable implements INativeNatmriTray {
   private getNativeImagePath() {
     if (isWindows)
       return join(this.nativeEnvironmentMainService.resourcePath, 'icons', 'icon.ico')
-    if (isMacintosh)
-      return join(this.nativeEnvironmentMainService.resourcePath, 'icons', '32x32.png')
 
-    return join(this.nativeEnvironmentMainService.resourcePath, 'icons', '32x32.png')
+    return join(this.nativeEnvironmentMainService.resourcePath, 'icons', 'icon.icns')
   }
 
   private destroy() {

@@ -9,7 +9,7 @@ import { PassThrough, Transform } from 'node:stream'
 import type { ReadStream } from 'node:fs'
 import fs from 'node:fs'
 import EventEmitter from 'node:events'
-import type { TransformCallback } from 'stream'
+import type { TransformCallback } from 'node:stream'
 import zlib from 'node:zlib'
 
 // #region magic number

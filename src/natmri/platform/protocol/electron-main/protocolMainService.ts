@@ -1,4 +1,4 @@
-import { createReadStream } from 'fs'
+import { createReadStream } from 'node:fs'
 import { protocol, session } from 'electron'
 import { createDecorator } from 'natmri/base/common/instantiation'
 import { Disposable, toDisposable } from 'natmri/base/common/lifecycle'

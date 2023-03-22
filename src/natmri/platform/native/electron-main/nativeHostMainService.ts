@@ -1,4 +1,4 @@
-import { arch, cpus, freemem, loadavg, platform, release, totalmem, type } from 'os'
+import { arch, cpus, freemem, loadavg, platform, release, totalmem, type } from 'node:os'
 import { screen, shell } from 'electron'
 import { Event } from 'natmri/base/common/event'
 import { createDecorator } from 'natmri/base/common/instantiation'

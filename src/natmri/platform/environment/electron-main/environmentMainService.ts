@@ -1,6 +1,6 @@
-import { join } from 'path'
+import { join } from 'node:path'
 import { URI } from 'natmri/base/common/uri'
-import { isDevelopment, isMacintosh, isWindows } from 'natmri/base/common/environment'
+import { isDevelopment } from 'natmri/base/common/environment'
 import { Disposable } from 'natmri/base/common/lifecycle'
 import { minimist } from 'natmri/base/node/minimist'
 import { memoize } from 'natmri/base/common/decorators'

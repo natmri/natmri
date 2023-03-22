@@ -1,7 +1,7 @@
 import type { WriteStream } from 'node:fs'
 import { createWriteStream, promises } from 'node:fs'
 import type { Readable } from 'node:stream'
-import path from 'path'
+import path from 'node:path'
 import type { Entry, ZipFile } from 'yauzl'
 import { open as _openZip } from 'yauzl'
 import * as yazl from 'natmri/base/node/yazlp'

@@ -1,5 +1,5 @@
-import fs, { promises as fsp } from 'fs'
-import { tmpdir } from 'os'
+import fs, { promises as fsp } from 'node:fs'
+import { tmpdir } from 'node:os'
 import path from 'node:path'
 import { afterAll, beforeAll, expect, suite, test } from 'vitest'
 import { createCancelablePromise } from 'natmri/base/common/async'
