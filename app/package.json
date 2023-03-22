@@ -5,7 +5,7 @@
   "license": "GPL-2.0",
   "main": "./out/background.js",
   "dependencies": {
-    "@natmri/platform": "0.0.4",
+    "@natmri/platform": "0.0.7",
     "better-sqlite3": "^8.0.1",
     "native-is-elevated-rs": "^0.0.1-beta.5"
   }
