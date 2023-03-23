@@ -72,6 +72,11 @@ app.commandLine.appendSwitch('enable-features', 'AutoDisableAccessibility')
 app.commandLine.appendSwitch('--force_high_performance_gpu')
 
 /**
+ * Disable mpris feature
+ */
+app.commandLine.appendSwitch('disable-features', 'HardwareMediaKeyHandling,MediaSessionService')
+
+/**
  * [DEV ENV] source map support for node
  */
 if (process.env.NATMRI_DEV)
