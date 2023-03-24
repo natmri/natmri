@@ -1,5 +1,4 @@
 import { join } from 'node:path'
-import { screen } from 'electron'
 import { createInteractiveWindow, destroyInteractiveWindow } from '@natmri/platform'
 import { Disposable, toDisposable } from 'natmri/base/common/lifecycle'
 import { IWindowsMainService } from 'natmri/platform/windows/electron-main/windows'
@@ -8,12 +7,10 @@ import { INativeEnvironmentMainService } from 'natmri/platform/environment/elect
 import { powerMonitor } from 'natmri/base/electron-main/powerMonitor'
 import { ILoggerService } from 'natmri/platform/log/common/log'
 import { ILifecycleMainService } from 'natmri/platform/lifecycle/electron-main/lifecycleMainService'
-import type { Display } from 'electron'
 import type { INatmriWindow } from 'natmri/platform/window/electron-main/window'
 
 export class WallpaperPlayer extends Disposable {
   private _natmri_win: INatmriWindow = null!
-  private display: Display = screen.getPrimaryDisplay()
 
   constructor(
     @ILoggerService private readonly logService: ILoggerService,
@@ -23,7 +20,6 @@ export class WallpaperPlayer extends Disposable {
   ) {
     super()
 
-    const { workAreaSize } = this.display
     this._natmri_win = this.windowsMainService.getWindow({
       show: false,
       title: 'Wallpaper - Engine', // default title
@@ -31,12 +27,6 @@ export class WallpaperPlayer extends Disposable {
       skipTaskbar: true,
       x: 0,
       y: 0,
-      width: workAreaSize.width,
-      height: workAreaSize.height,
-      minWidth: workAreaSize.width,
-      minHeight: workAreaSize.height,
-      maxWidth: workAreaSize.width,
-      maxHeight: workAreaSize.height,
       frame: false,
       movable: false,
       transparent: false,
@@ -61,10 +51,6 @@ export class WallpaperPlayer extends Disposable {
       },
     })
 
-    this.lifecycleMainService.onBeforeShutdown(() => {
-      this.dispose()
-    })
-
     if (isWindows) {
       // windows shutdown lock window
       powerMonitor.LOCK_WINDOW = this._natmri_win.nativeWindowId.readBigInt64LE()
@@ -83,7 +69,12 @@ export class WallpaperPlayer extends Disposable {
       this._natmri_win.win?.setIgnoreMouseEvents(true, {
         forward: true,
       })
+      this.lifecycleMainService.onBeforeShutdown(() => {
+        this.dispose()
+      })
     }
+
+    this._natmri_win.win?.setMenu(null)
 
     this._natmri_win.win?.on('close', (e) => {
       this.logService.info('[WallpaperPlayer] window will close...', e)
