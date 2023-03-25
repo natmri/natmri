@@ -195,6 +195,9 @@ export async function setupDevelopmentEnvironment(extraTasks: (Promise<void> | (
   if (!IS_DEV)
     return
 
+  if (existsSync(outputPath) || existsSync(outputAppPath))
+    return
+
   await fsp.mkdir(outputPath)
   await fsp.mkdir(outputAppPath)
 
