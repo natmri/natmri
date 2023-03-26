@@ -12,7 +12,7 @@ export class NativeHostService extends Disposable implements INativeHostService 
 
     // @ts-expect-error: interface is implemented via proxy
     return ProxyChannel.toService<INativeHostService>(
-      mainProcessService.getChannel('nativeHost'),
+      this.mainProcessService.getChannel('nativeHost'),
     )
   }
 }
