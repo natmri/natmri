@@ -1,7 +1,7 @@
 import { Emitter } from 'natmri/base/common/event'
 import { Disposable, toDisposable } from 'natmri/base/common/lifecycle'
 
-export class BroadcastDataChannel<T, TT = T> extends Disposable {
+export class BroadcastDataChannel<T, Data = T> extends Disposable {
   private readonly broadcastChannel: BroadcastChannel
 
   private readonly $onDidReceiveData = this._register(new Emitter<T>())
@@ -27,7 +27,7 @@ export class BroadcastDataChannel<T, TT = T> extends Disposable {
    * Sends the data to other BroadcastChannel objects set up for this channel. Data can be structured objects, e.g. nested objects and arrays.
    * @param data data to broadcast
    */
-  postData(data: TT): void {
+  postData(data: Data): void {
     this.broadcastChannel.postMessage(data)
   }
 }
