@@ -38,7 +38,6 @@
     "@eevi/elexpose": "^0.7.0-beta.3",
     "@electron/rebuild": "^3.2.10",
     "@total-typescript/ts-reset": "^0.4.2",
-    "@types/better-sqlite3": "^7.6.3",
     "@types/node": "^18.15.5",
     "@types/yauzl": "^2.10.0",
     "bumpp": "^9.0.0",

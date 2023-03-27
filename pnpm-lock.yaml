@@ -10,7 +10,6 @@ specifiers:
   '@eevi/elexpose': ^0.7.0-beta.3
   '@electron/rebuild': ^3.2.10
   '@total-typescript/ts-reset': ^0.4.2
-  '@types/better-sqlite3': ^7.6.3
   '@types/node': ^18.15.5
   '@types/yauzl': ^2.10.0
   bumpp: ^9.0.0
@@ -44,7 +43,6 @@ devDependencies:
   '@eevi/elexpose': 0.7.0-beta.3_vite@4.2.1
   '@electron/rebuild': 3.2.10
   '@total-typescript/ts-reset': 0.4.2
-  '@types/better-sqlite3': 7.6.3
   '@types/node': 18.15.5
   '@types/yauzl': 2.10.0
   bumpp: 9.0.0
@@ -1356,12 +1354,6 @@ packages:
     resolution: {integrity: sha512-1kbcJ40lLB7MHsj39U4Sh1uTd2E7rLEa79kmDpI6cy+XiXsteB3POdQomoq4FxszMrO3ZYchkhYJw7A2862b3w==}
     dependencies:
       '@babel/types': 7.21.2
-    dev: true
-
-  /@types/better-sqlite3/7.6.3:
-    resolution: {integrity: sha512-YS64N9SNDT/NAvou3QNdzAu3E2om/W/0dhORimtPGLef+zSK5l1vDzfsWb4xgXOgfhtOI5ZDTRxnvRPb22AIVQ==}
-    dependencies:
-      '@types/node': 18.15.5
     dev: true
 
   /@types/cacheable-request/6.0.2:

@@ -6,7 +6,7 @@
   "main": "./out/background.js",
   "dependencies": {
     "@natmri/platform": "0.0.10",
-    "better-sqlite3": "^8.0.1",
-    "native-is-elevated-rs": "^0.0.1-beta.5"
+    "native-is-elevated-rs": "^0.0.1-beta.5",
+    "sqlite3": "^5.1.6"
   }
 }
