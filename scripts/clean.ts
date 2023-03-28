@@ -9,7 +9,7 @@ export const cleanBuildProduct = async () => {
   ])
 }
 
-export const cleanFiles = async () => {
+export async function cleanFiles() {
   const markedFiles: string[] = []
 
   const findMarkedFile = (p: string, markFile: IMarkFile): string | null => {

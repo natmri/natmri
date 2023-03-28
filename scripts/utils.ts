@@ -1,7 +1,6 @@
 import path from 'node:path'
 import fsp from 'node:fs/promises'
 import { existsSync } from 'node:fs'
-import yaml from 'yaml'
 
 // ------------------------------------------------- //
 // -------- Common Path for Application ------------ //
@@ -175,18 +174,19 @@ export async function setupPackageEnvironemt(extraTasks: (Promise<void> | (() =>
     fsp.cp(path.join(appPath, '.npmrc'), path.join(outputAppPath, '.npmrc'), { force: true }),
     // copy app/package.json to out-build
     fsp.cp(appPackagePath, outputPackagePath, { force: true }),
-    async () => {
-      // copy app/node_module to out-build
-      await fsp.cp(appModulesPath, outputModulePath, { force: true, recursive: true })
-      // rewrite virtual store dir
-      return fsp.readFile(path.join(outputModulePath, '.modules.yaml'), 'utf8')
-        .then((modulesContent) => {
-          const modules = yaml.parse(modulesContent)
-          modules.virtualStoreDir = path.join(outputModulePath, '.pnpm')
-          return modules
-        })
-        .then(modules => fsp.writeFile(path.join(outputModulePath, '.modules.yaml'), yaml.stringify(modules), 'utf8'))
-    },
+    fsp.cp(appModulesPath, outputModulePath, { force: true, recursive: true }),
+    // async () => {
+    //   // copy app/node_module to out-build
+    //   await fsp.cp(appModulesPath, outputModulePath, { force: true, recursive: true })
+    //   // rewrite virtual store dir
+    //   return fsp.readFile(path.join(outputModulePath, '.modules.yaml'), 'utf8')
+    //     .then((modulesContent) => {
+    //       const modules = yaml.parse(modulesContent)
+    //       modules.virtualStoreDir = path.join(outputModulePath, '.pnpm')
+    //       return modules
+    //     })
+    //     .then(modules => fsp.writeFile(path.join(outputModulePath, '.modules.yaml'), yaml.stringify(modules), 'utf8'))
+    // },
     ...extraTasks,
   ])
 }

@@ -8,21 +8,13 @@
   "asarUnpack": "**\\*.{dll, node}",
   "files": [
     "out",
-    "node_modules",
-    "!**/*.ts",
-    "!node_modules/**/.vite",
-    "!node_modules/**/.pnpm",
-    "!node_modules/**/.bin",
-    "!node_modules/**/*.d.ts",
-    "!node_modules/.modules.yaml",
-    "!node_modules/**/*.{js, cjs, ts}.map",
-    "!node_modules/**/{*.vcxproj,*.vcxproj.filters}",
-    "!**/*.{iml,o,hprof,orig,pyc,pyo,rbc,swp,csproj,sln,xproj}",
-    "!node_modules/**/build/Release/{*.lib,*.exp,*.ilk,*.pdb,*.iobj,*.ipdb}",
-    "!node_modules/**/build/Release/obj",
-    "!node_modules/**/prebuilds",
-    "!node_modules/**/binding.gyp",
+    "!**/*.{ts, rs}",
+    "!node_modules",
     "!pnpm-lock.{yaml, yml}",
+    "!node_modules/sqlite3",
+    "node_modules/sqlite3/lib",
+    "node_modules/sqlite3/package.json",
+    "node_modules/@natmri",
     "package.json"
   ],
   "copyright": "Copyright © 2022 ${author}",
@@ -30,6 +22,7 @@
     "icon": "buildResources/icons/icon.icns"
   },
   "nsis": {
+    "shortcutName": "NaoTomri",
     "oneClick": false,
     "perMachine": true,
     "allowToChangeInstallationDirectory": true,
@@ -89,7 +82,8 @@
       "deb",
       "AppImage",
       "rpm",
-      "tar.gz"
+      "tar.gz",
+      "pacman"
     ]
   },
   "directories": {
@@ -99,8 +93,8 @@
   },
   "extraResources": [
     {
-      "from": "resources",
-      "to": "resources"
+      "from": "assets",
+      "to": "assets"
     }
   ],
   "publish": [
