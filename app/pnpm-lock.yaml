@@ -2,12 +2,10 @@ lockfileVersion: 5.4
 
 specifiers:
   '@natmri/platform': 0.0.10
-  native-is-elevated-rs: ^0.0.1-beta.5
   sqlite3: ^5.1.6
 
 dependencies:
   '@natmri/platform': 0.0.10
-  native-is-elevated-rs: 0.0.1-beta.5
   sqlite3: 5.1.6
 
 packages:
@@ -621,82 +619,6 @@ packages:
     resolution: {integrity: sha512-6FlzubTLZG3J2a/NVCAleEhjzq5oxgHyaCU9yYXvcLsvoVaHJq/s5xXI6/XXP6tz7R9xAOtHnSO/tXtF3WRTlA==}
     dev: false
     optional: true
-
-  /native-is-elevated-rs-darwin-arm64/0.0.1-beta.5:
-    resolution: {integrity: sha512-dIlVjhzX+hlx0iUZnO8jNmDh738JYW+cRKmM1JcI6pK6HiKPB/Jhe+5xDnvh7WDwtxknKusfTxEAxkPnXPP6Nw==}
-    engines: {node: '>= 10'}
-    cpu: [arm64]
-    os: [darwin]
-    requiresBuild: true
-    dev: false
-    optional: true
-
-  /native-is-elevated-rs-darwin-x64/0.0.1-beta.5:
-    resolution: {integrity: sha512-1dtc0fP2ZrmLrZJwtYYjTSVu57GU7u8XLZnA9ZYe6XgsFdbs9y39s0n+AeASyZQqyqbYdpcuXbH/5JvJm9t7/Q==}
-    engines: {node: '>= 10'}
-    cpu: [x64]
-    os: [darwin]
-    requiresBuild: true
-    dev: false
-    optional: true
-
-  /native-is-elevated-rs-linux-arm64-gnu/0.0.1-beta.5:
-    resolution: {integrity: sha512-249ksq/XhZGHLRUW47gBa4KMqctQN8RezLW8+UCPmbzJQBxOKVF2cIjgD+6MnrtZU04XSF9+uQh4LhSN6Nt84g==}
-    engines: {node: '>= 10'}
-    cpu: [arm64]
-    os: [linux]
-    requiresBuild: true
-    dev: false
-    optional: true
-
-  /native-is-elevated-rs-linux-x64-gnu/0.0.1-beta.5:
-    resolution: {integrity: sha512-5DXErezdGbGTM9Z2e8sf/rzLC5ZgcxLeDVsRsv3fEbJ/PK45sgObjZk9AuJOhXiKRr1b7fHerKuRm4LPe4P9tg==}
-    engines: {node: '>= 10'}
-    cpu: [x64]
-    os: [linux]
-    requiresBuild: true
-    dev: false
-    optional: true
-
-  /native-is-elevated-rs-win32-arm64-msvc/0.0.1-beta.5:
-    resolution: {integrity: sha512-cTSAB6oAfOTier6HZoVwwG/HcEINB7vhZ75hBDAvr+vjgWNNFHdTRNDYwOWOULv1RisdrdfxaD9BpKJ+jzK6sw==}
-    engines: {node: '>= 10'}
-    cpu: [arm64]
-    os: [win32]
-    requiresBuild: true
-    dev: false
-    optional: true
-
-  /native-is-elevated-rs-win32-ia32-msvc/0.0.1-beta.5:
-    resolution: {integrity: sha512-2SfyCDGfRNl54VUstDh+7trajaSfiuHZGvezGKj1jZSIkc112evbWYxFo2ilPLtdNOeZ16KgO0E+RUSQSygDSQ==}
-    engines: {node: '>= 10'}
-    cpu: [ia32]
-    os: [win32]
-    requiresBuild: true
-    dev: false
-    optional: true
-
-  /native-is-elevated-rs-win32-x64-msvc/0.0.1-beta.5:
-    resolution: {integrity: sha512-fI64dAhSLrJBgd7EwDWTUIg4EgeoabNW54q9szvb+jEV36/jJEsoSAb7lMObcYTiqPc0EnN9Xrphug2S9zUlDw==}
-    engines: {node: '>= 10'}
-    cpu: [x64]
-    os: [win32]
-    requiresBuild: true
-    dev: false
-    optional: true
-
-  /native-is-elevated-rs/0.0.1-beta.5:
-    resolution: {integrity: sha512-DbQBC9FbJFGwHPCqAShzsA/sfXNuXOyDs8YLF9/0Es+do088WZR8siB1HEP5UGHrFUt+Jbi8QNEe5KgeUhFg3w==}
-    engines: {node: '>= 10'}
-    optionalDependencies:
-      native-is-elevated-rs-darwin-arm64: 0.0.1-beta.5
-      native-is-elevated-rs-darwin-x64: 0.0.1-beta.5
-      native-is-elevated-rs-linux-arm64-gnu: 0.0.1-beta.5
-      native-is-elevated-rs-linux-x64-gnu: 0.0.1-beta.5
-      native-is-elevated-rs-win32-arm64-msvc: 0.0.1-beta.5
-      native-is-elevated-rs-win32-ia32-msvc: 0.0.1-beta.5
-      native-is-elevated-rs-win32-x64-msvc: 0.0.1-beta.5
-    dev: false
 
   /negotiator/0.6.3:
     resolution: {integrity: sha512-+EUsqGPLsM+j/zdChZjsnX51g4XrHFOIXwfnCVPGlQk/k5giakcKsuxCObBRu6DSm9opw/O6slWbJdghQM4bBg==}
