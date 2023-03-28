@@ -11,7 +11,6 @@
     "!**/*.{ts, rs}",
     "!node_modules",
     "!pnpm-lock.{yaml, yml}",
-    "!node_modules/sqlite3",
     "node_modules/sqlite3/lib",
     "node_modules/sqlite3/package.json",
     "node_modules/@natmri",
@@ -22,7 +21,7 @@
     "icon": "buildResources/icons/icon.icns"
   },
   "nsis": {
-    "shortcutName": "NaoTomri",
+    "shortcutName": "NaoTomori",
     "oneClick": false,
     "perMachine": true,
     "allowToChangeInstallationDirectory": true,

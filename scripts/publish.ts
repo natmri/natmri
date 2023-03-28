@@ -19,6 +19,7 @@ const config: Configuration = {
         ]
       : [],
   ],
+  compression: process.platform === 'linux' ? 'normal' : 'maximum',
   copyright: `Copyright © ${MATE.year}-${new Date().getFullYear()} \$\{author\}`,
   electronVersion,
 }
