@@ -83,6 +83,8 @@ export interface ILoggerService {
   info(message: string, ...args: any[]): void
   warn(message: string, ...args: any[]): void
   error(message: string | Error, ...args: any[]): void
+
+  getLevel(): LogLevel
 }
 
 export const ILoggerService = createDecorator<ILoggerService>('ILoggerService')

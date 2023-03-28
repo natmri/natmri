@@ -608,6 +608,51 @@ export class Emitter<T> {
   }
 }
 
+export class PauseableEmitter<T> extends Emitter<T> {
+  private _isPaused = 0
+  protected _eventQueue = new LinkedList<T>()
+  private _mergeFn?: (input: T[]) => T
+
+  constructor(options?: EmitterOptions & { merge?: (input: T[]) => T }) {
+    super(options)
+    this._mergeFn = options?.merge
+  }
+
+  pause(): void {
+    this._isPaused++
+  }
+
+  resume(): void {
+    if (this._isPaused !== 0 && --this._isPaused === 0) {
+      if (this._mergeFn) {
+        // use the merge function to create a single composite
+        // event. make a copy in case firing pauses this emitter
+        if (this._eventQueue.size > 0) {
+          const events = Array.from(this._eventQueue)
+          this._eventQueue.clear()
+          super.fire(this._mergeFn(events))
+        }
+      }
+      else {
+        // no merging, fire each event individually and test
+        // that this emitter isn't paused halfway through
+        while (!this._isPaused && this._eventQueue.size !== 0)
+          super.fire(this._eventQueue.shift()!)
+      }
+    }
+  }
+
+  override fire(event: T): void {
+    if (this._listeners) {
+      if (this._isPaused !== 0)
+        this._eventQueue.push(event)
+
+      else
+        super.fire(event)
+    }
+  }
+}
+
 export class EventMultiplexer<T> implements IDisposable {
   private readonly emitter: Emitter<T>
   private hasListeners = false
