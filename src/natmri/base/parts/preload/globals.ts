@@ -1,5 +1,5 @@
 import { contextBridge, ipcRenderer } from 'electron'
-import type { IpcRenderer } from 'typings/electron'
+import type { IIpcMessagePort, IpcRenderer, IpcRendererEvent } from 'typings/electron'
 import type { Process } from 'typings/process'
 
 const SecureSyncChannel = new Set([
@@ -45,5 +45,24 @@ const safeIpcRenderer: IpcRenderer = {
   },
 }
 
+const ipcMessagePort: IIpcMessagePort = {
+  acquire(responseChannel: string, nonce: string) {
+    const responseListener = (e: IpcRendererEvent, responseNonce: string) => {
+      // validate that the nonce from the response is the same
+      // as when requested. and if so, use `postMessage` to
+      // send the `MessagePort` safely over, even when context
+      // isolation is enabled
+      if (nonce === responseNonce) {
+        ipcRenderer.off(responseChannel, responseListener)
+        window.postMessage(nonce, '*', e.ports)
+      }
+    }
+
+    // handle reply from main
+    ipcRenderer.on(responseChannel, responseListener)
+  },
+}
+
 contextBridge.exposeInMainWorld('safeProcess', safeProcess)
 contextBridge.exposeInMainWorld('safeIpcRenderer', safeIpcRenderer)
+contextBridge.exposeInMainWorld('safeIpcMessagePort', ipcMessagePort)

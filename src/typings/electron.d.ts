@@ -1,8 +1,12 @@
+interface IIpcMessagePort {
+  acquire(responseChannel: string, nonce: string): void
+}
+
 export interface IpcRendererEvent extends Event {
   // Docs: https://www.electronjs.org/docs/latest/api/structures/ipc-renderer-event
   // Note: API with `Transferable` intentionally commented out because you
 	// cannot transfer these when `contextIsolation: true`.
-  // ports: MessagePort[];
+  ports: MessagePort[];
   sender: IpcRenderer;
 	senderId: number;
 }
