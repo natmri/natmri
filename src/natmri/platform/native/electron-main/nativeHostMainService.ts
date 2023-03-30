@@ -8,6 +8,7 @@ import { IWindowsMainService } from 'natmri/platform/windows/electron-main/windo
 import type { Display } from 'electron'
 import type { ICommonNativeHostService, IOSProperties, IOSStatistics } from 'natmri/platform/native/common/native'
 import type { INatmriWindow } from 'natmri/platform/window/electron-main/window'
+import { isWindows } from 'natmri/base/common/environment'
 
 export interface INativeHostMainService extends ICommonNativeHostService {
 }
@@ -61,9 +62,10 @@ export class NativeHostMainService extends Disposable implements INativeHostMain
   // #endregion
 
   async isAdmin(): Promise<boolean> {
-    const isAdmin = (await import('native-is-elevated-rs')).isElevated()
+    if (isWindows)
+      return false
 
-    return isAdmin
+    return (process.getuid?.() ?? 1) === 0
   }
 
   // #region shell
