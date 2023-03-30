@@ -27,14 +27,14 @@ export class SharedProcess extends Disposable {
 
   private registerListeners() {
     // Shared process connections from workbench windows
-    ipcMain.on('vscode:createSharedProcessMessageChannel', (e, nonce: string) => this.onWindowConnection(e, nonce))
+    ipcMain.on('natmri:createSharedProcessMessageChannel', (e, nonce: string) => this.onWindowConnection(e, nonce))
 
     // Lifecycle
     this._register(this.lifecycleMainService.onWillShutdown(() => this.onWillShutdown()))
   }
 
   private async onWindowConnection(e: IpcMainEvent, nonce: string) {
-    this.logService.trace('[SharedProcess] on vscode:createSharedProcessMessageChannel')
+    this.logService.trace('[SharedProcess] on natmri:createSharedProcessMessageChannel')
 
     // release barrier if this is the first window connection
     if (!this.firstWindowConnectionBarrier.isOpen())
@@ -58,7 +58,7 @@ export class SharedProcess extends Disposable {
       return port.close()
 
     // send the port back to the requesting window
-    e.sender.postMessage('vscode:createSharedProcessMessageChannelResult', nonce, [port])
+    e.sender.postMessage('natmri:createSharedProcessMessageChannelResult', nonce, [port])
   }
 
   private onWillShutdown() {
@@ -69,7 +69,7 @@ export class SharedProcess extends Disposable {
       return
 
     // Signal exit to shared process when shutting down
-    this.sendToWindow('vscode:electron-main->shared-process=exit')
+    this.sendToWindow('natmri:electron-main->shared-process=exit')
 
     // Electron seems to crash on Windows without this setTimeout :|
     setTimeout(() => {
@@ -132,7 +132,7 @@ export class SharedProcess extends Disposable {
 
         // Wait for shared process indicating that IPC connections are accepted
         const sharedProcessIpcReady = new DeferredPromise<void>()
-        ipcMain.once('vscode:shared-process->electron-main=ipc-ready', () => sharedProcessIpcReady.complete())
+        ipcMain.once('natmri:shared-process->electron-main=ipc-ready', () => sharedProcessIpcReady.complete())
 
         await sharedProcessIpcReady.p
         this.logService.trace('[SharedProcess] IPC ready')
@@ -181,6 +181,23 @@ export class SharedProcess extends Disposable {
       // this.window.webContents.on('render-process-gone', (event, details) => this._onDidError.fire({ type: WindowError.PROCESS_GONE, details }))
       // this.window.on('unresponsive', () => this._onDidError.fire({ type: WindowError.UNRESPONSIVE }))
       // this.window.webContents.on('did-fail-load', (event, exitCode, reason) => this._onDidError.fire({ type: WindowError.LOAD, details: { reason, exitCode } }))
+    }
+  }
+
+  async toggle(): Promise<void> {
+    // wait for window to be created
+    await this.whenIpcReady
+
+    if (!this.window)
+      return // possibly disposed already
+
+    if (this.window.isVisible()) {
+      this.window.webContents.closeDevTools()
+      this.window.hide()
+    }
+    else {
+      this.window.show()
+      this.window.webContents.openDevTools()
     }
   }
 
