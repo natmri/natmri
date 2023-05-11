@@ -1,0 +1,28 @@
+{
+  "name": "@natmri/ui-kit",
+  "exports": {
+    "./vite": {
+      "types": "./dist/vite.d.ts",
+      "import": "./dist/vite.mjs"
+    }
+  },
+  "files": [
+    "dist",
+    "*.d.ts"
+  ],
+  "scripts": {
+    "stub": "unbuild --stub",
+    "build": "unbuild",
+    "prepublishOnly": "npm run build"
+  },
+  "peerDependencies": {
+    "vite": ">=3.0.0"
+  },
+  "devDependencies": {
+    "unbuild": "^1.2.1",
+    "unocss": "^0.51.12"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
