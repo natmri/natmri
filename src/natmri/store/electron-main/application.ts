@@ -1,3 +1,4 @@
+import path from 'node:path'
 import { app } from 'electron'
 import { IInstantiationService, ServiceCollection, SyncDescriptor } from 'natmri/base/common/instantiation'
 import { Disposable } from 'natmri/base/common/lifecycle'
@@ -15,6 +16,7 @@ import { WindowsMainService } from 'natmri/platform/windows/electron-main/window
 import { isDevelopment } from 'natmri/base/common/environment'
 import type { ServicesAccessor } from 'natmri/base/common/instantiation'
 import { NatmriTray } from 'natmri/platform/tray/electron-main/tray'
+import { WallpaperPlayer } from 'natmri/platform/wallpaper/electron-main/wallpaper'
 
 export class Application extends Disposable {
   private nativeHostMainService: INativeHostMainService | undefined
@@ -54,6 +56,9 @@ export class Application extends Disposable {
     await appInstantiationService.invokeFunction(accessor => this.initChannels(accessor, mainProcessElectronServer))
 
     this.lifecycleMainService.phase = LifecycleMainPhase.Ready
+
+    const player = appInstantiationService.createInstance(WallpaperPlayer)
+    player.load(path.resolve('/Users/avatar/Downloads/2000075052/index.html'))
 
     // Set lifecycle phase to `Eventually` after a short delay and when idle (min 2.5sec, max 5sec)
     const eventuallyPhaseScheduler = this._register(new RunOnceScheduler(() => {

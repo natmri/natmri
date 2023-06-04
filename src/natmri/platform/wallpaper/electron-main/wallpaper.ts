@@ -8,15 +8,20 @@ import { powerMonitor } from 'natmri/base/electron-main/powerMonitor'
 import { ILoggerService } from 'natmri/platform/log/common/log'
 import { ILifecycleMainService } from 'natmri/platform/lifecycle/electron-main/lifecycleMainService'
 import type { INatmriWindow } from 'natmri/platform/window/electron-main/window'
+import { URI } from 'natmri/base/common/uri'
+import { INativeHostMainService } from 'natmri/platform/native/electron-main/nativeHostMainService'
+import { screen } from 'electron'
 
 export class WallpaperPlayer extends Disposable {
   private _natmri_win: INatmriWindow = null!
+  private display = screen.getPrimaryDisplay()
 
   constructor(
     @ILoggerService private readonly logService: ILoggerService,
     @IWindowsMainService private readonly windowsMainService: IWindowsMainService,
     @INativeEnvironmentMainService private readonly environmentMainService: INativeEnvironmentMainService,
     @ILifecycleMainService private readonly lifecycleMainService: ILifecycleMainService,
+    @INativeHostMainService private readonly nativeHostMainService: INativeHostMainService,
   ) {
     super()
 
@@ -25,8 +30,12 @@ export class WallpaperPlayer extends Disposable {
       title: 'Wallpaper - Engine', // default title
       titleBarStyle: 'native',
       skipTaskbar: true,
-      x: 0,
-      y: 0,
+      x: this.display.workArea.x,
+      y: this.display.workArea.y,
+      width: this.display.size.width,
+      height: this.display.size.height,
+      minWidth: this.display.size.width,
+      minHeight: this.display.size.height,
       frame: false,
       movable: false,
       transparent: false,
@@ -81,6 +90,19 @@ export class WallpaperPlayer extends Disposable {
     })
 
     this._natmri_win.win?.on('ready-to-show', () => this._natmri_win.win?.show())
+
+    this.registerListener()
+  }
+
+  private registerListener() {
+    this.nativeHostMainService.onDidChangeDisplay((e) => {
+
+    })
+  }
+
+  load(p: string) {
+    const uri = URI.parse(p)
+    this._natmri_win.loadURL(uri)
   }
 
   override dispose(): void {
