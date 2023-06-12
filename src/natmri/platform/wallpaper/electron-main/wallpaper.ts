@@ -60,6 +60,8 @@ export class WallpaperPlayer extends Disposable {
       },
     })
 
+    this._natmri_win.win?.setSkipTaskbar(true)
+
     if (isWindows) {
       // windows shutdown lock window
       powerMonitor.LOCK_WINDOW = this._natmri_win.nativeWindowId.readBigInt64LE()

@@ -4,11 +4,5 @@
     <dict>
         <key>com.apple.security.cs.allow-unsigned-executable-memory</key>
         <true />
-        <key>LSUIElement</key>
-        <string>1</string>
-        <key>NSWindowSupportsAutomaticInlineTitle</key>
-        <true />
-        <key>NSWindowSupportsSwipeScrolling</key>
-        <true />
     </dict>
 </plist>

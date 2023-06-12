@@ -62,9 +62,12 @@
     "entitlements": "./buildResources/entitlements.mac.plist",
     "entitlementsInherit": "./buildResources/entitlements.mac.plist",
     "extendInfo": {
+      "LSUIElement": 1,
       "ITSAppUsesNonExemptEncryption": false,
       "CFBundleLocalizations": [],
-      "CFBundleDevelopmentRegion": "en"
+      "CFBundleDevelopmentRegion": "en",
+      "NSWindowSupportsSwipeScrolling": true,
+      "NSWindowSupportsAutomaticInlineTitle": true
     }
   },
   "linux": {

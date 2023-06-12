@@ -9,9 +9,9 @@ const gotTheLock = app.requestSingleInstanceLock()
 if (!gotTheLock)
   app.quit()
 
-app.once('ready', () => {
+app.once('ready', async () => {
   if (args.trace) {
-    const contentTracing = require('electron').contentTracing
+    const contentTracing = (await import('electron')).contentTracing
 
     const traceOptions = {
       categoryFilter: args['trace-category-filter'] || '*',
@@ -27,6 +27,9 @@ app.once('ready', () => {
 })
 
 function onReady() {
+  // Enable accessibility support
+  app.accessibilitySupportEnabled = true
+
   new Main().main()
 }
 
@@ -79,8 +82,11 @@ app.commandLine.appendSwitch('disable-features', 'HardwareMediaKeyHandling,Media
 /**
  * [DEV ENV] source map support for node
  */
-if (process.env.NATMRI_DEV)
-  require('source-map-support').install()
+if (process.env.NATMRI_DEV) {
+  (async () => {
+    (await import('source-map-support')).install()
+  })()
+}
 
 function parseArgs() {
   return minimist(process.argv, {
