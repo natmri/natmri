@@ -196,7 +196,7 @@ interface IScheduledLater extends IDisposable {
   isTriggered(): boolean
 }
 
-const timeoutDeferred = (timeout: number, fn: () => void): IScheduledLater => {
+function timeoutDeferred(timeout: number, fn: () => void): IScheduledLater {
   let scheduled = true
   const handle = setTimeout(() => {
     scheduled = false
@@ -211,7 +211,7 @@ const timeoutDeferred = (timeout: number, fn: () => void): IScheduledLater => {
   }
 }
 
-const microtaskDeferred = (fn: () => void): IScheduledLater => {
+function microtaskDeferred(fn: () => void): IScheduledLater {
   let scheduled = true
   queueMicrotask(() => {
     if (scheduled) {

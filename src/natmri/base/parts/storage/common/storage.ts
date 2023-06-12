@@ -192,7 +192,7 @@ export class Storage extends Disposable implements IStorage {
     if (isUndefinedOrNull(value))
       return fallbackValue
 
-    return parseInt(value, 10)
+    return Number.parseInt(value, 10)
   }
 
   async set(key: string, value: string | boolean | number | null | undefined): Promise<void> {

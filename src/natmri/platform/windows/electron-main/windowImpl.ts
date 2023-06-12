@@ -1,3 +1,4 @@
+import type { Buffer } from 'node:buffer'
 import { BrowserWindow, app, screen, systemPreferences } from 'electron'
 import { Emitter } from 'natmri/base/common/event'
 import { Disposable } from 'natmri/base/common/lifecycle'

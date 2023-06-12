@@ -11,6 +11,7 @@ import fs from 'node:fs'
 import EventEmitter from 'node:events'
 import type { TransformCallback } from 'node:stream'
 import zlib from 'node:zlib'
+import { Buffer } from 'node:buffer'
 
 // #region magic number
 const MAX_BUFFER_LENGTH = 0x3FFFFFFF

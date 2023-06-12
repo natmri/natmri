@@ -2,6 +2,7 @@ import type { TransformCallback } from 'node:stream'
 import { EventEmitter, PassThrough, Readable, Transform, Writable } from 'node:stream'
 import fs from 'node:fs'
 import zlib from 'node:zlib'
+import { Buffer } from 'node:buffer'
 import { cp437 } from './yazlp'
 
 export namespace yauzl {

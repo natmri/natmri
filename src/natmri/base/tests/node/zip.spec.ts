@@ -1,6 +1,7 @@
 import fs, { promises as fsp } from 'node:fs'
 import { tmpdir } from 'node:os'
 import path from 'node:path'
+import { Buffer } from 'node:buffer'
 import { afterAll, beforeAll, expect, suite, test } from 'vitest'
 import { createCancelablePromise } from 'natmri/base/common/async'
 import type { IFile } from 'natmri/base/node/zip'

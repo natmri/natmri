@@ -3,6 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *-------------------------------------------------------------------------------------------- */
 
+import type { Buffer } from 'node:buffer'
 import { ipcMain } from 'electron'
 import { VSBuffer } from 'natmri/base/common/buffer'
 import { Emitter, Event } from 'natmri/base/common/event'

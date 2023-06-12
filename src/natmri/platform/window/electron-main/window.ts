@@ -1,3 +1,4 @@
+import type { Buffer } from 'node:buffer'
 import type { BrowserWindow, Rectangle } from 'electron'
 import type { CancellationToken } from 'natmri/base/common/cancellation'
 import type { Event } from 'natmri/base/common/event'

@@ -3,7 +3,7 @@ import fs from 'node:fs'
 import type { IMarkFile } from './utils'
 import { appModulesPath, files, outputPath, rimrafTasks } from './utils'
 
-export const cleanBuildProduct = async () => {
+export async function cleanBuildProduct() {
   await rimrafTasks([
     outputPath,
   ])

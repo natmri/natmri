@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-require-imports */
 import { isWeb } from 'natmri/base/common/environment'
 
 export function randomUUID(): string {

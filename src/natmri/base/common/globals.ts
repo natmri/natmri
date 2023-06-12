@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-require-imports */
 import type { IIpcMessagePort, IpcRenderer } from 'typings/electron'
 import type { IpcRendererEvent } from 'electron'
 import type { Process } from 'typings/process'
@@ -10,8 +11,8 @@ const _globals: any = {
 }
 
 // native environment
-if (typeof global !== 'undefined' && typeof window === 'undefined' && !_globals.init) {
-  _globals.safeProcess = global.process
+if (typeof globalThis !== 'undefined' && typeof window === 'undefined' && !_globals.init) {
+  _globals.safeProcess = globalThis.process
   _globals.safeIpcRenderer = require('electron').ipcRenderer
   _globals.safeIpcMessagePort = undefined
   _globals.init = true

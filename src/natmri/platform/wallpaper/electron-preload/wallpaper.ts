@@ -1,6 +1,4 @@
-import { ipcRenderer } from 'electron'
 import { BroadcastDataChannel } from 'natmri/base/browser/broadcast'
-import { WALLPAPER_BROADCAST_CHANNEL } from 'natmri/base/common/constants'
 import type { IWallpaperBroadcastClientData, IWallpaperInitialEventConfig } from 'typings/wallpaper'
 
 let broadcast: WallpaperBroadcastServer

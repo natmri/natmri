@@ -5,29 +5,26 @@ import { Emitter, Event } from 'natmri/base/common/event'
 import { DisposableStore, isDisposable } from 'natmri/base/common/lifecycle'
 import type { IDisposable } from 'natmri/base/common/lifecycle'
 
-namespace Samples {
+export class EventCounter {
+  count = 0
 
-  export class EventCounter {
-    count = 0
-
-    reset() {
-      this.count = 0
-    }
-
-    onEvent() {
-      this.count += 1
-    }
+  reset() {
+    this.count = 0
   }
 
-  export class Document3 {
-    private readonly _onDidChange = new Emitter<string>()
+  onEvent() {
+    this.count += 1
+  }
+}
 
-    onDidChange: Event<string> = this._onDidChange.event
+export class Document3 {
+  private readonly _onDidChange = new Emitter<string>()
 
-    setText(value: string) {
-      // ...
-      this._onDidChange.fire(value)
-    }
+  onDidChange: Event<string> = this._onDidChange.event
+
+  setText(value: string) {
+    // ...
+    this._onDidChange.fire(value)
   }
 }
 
@@ -60,12 +57,12 @@ suite('Event utils dispose', () => {
 })
 
 suite('Event', () => {
-  const counter = new Samples.EventCounter()
+  const counter = new EventCounter()
 
   beforeEach(() => counter.reset())
 
   test('Emitter plain', () => {
-    const doc = new Samples.Document3()
+    const doc = new Document3()
 
     const subscription = doc.onDidChange(counter.onEvent, counter)
 
@@ -80,7 +77,7 @@ suite('Event', () => {
 
   test('Emitter, bucket', () => {
     const bucket: IDisposable[] = []
-    const doc = new Samples.Document3()
+    const doc = new Document3()
     const subscription = doc.onDidChange(counter.onEvent, counter, bucket)
 
     doc.setText('far')
@@ -101,7 +98,7 @@ suite('Event', () => {
 
   test('Emitter, store', () => {
     const bucket = new DisposableStore()
-    const doc = new Samples.Document3()
+    const doc = new Document3()
     const subscription = doc.onDidChange(counter.onEvent, counter, bucket)
 
     doc.setText('far')
@@ -188,7 +185,7 @@ suite('Event', () => {
   })
 
   test('Debounce Event', (done: () => void) => {
-    const doc = new Samples.Document3()
+    const doc = new Document3()
 
     const onDocDidChange = Event.debounce(doc.onDidChange, (prev: string[] | undefined, cur) => {
       if (!prev)
