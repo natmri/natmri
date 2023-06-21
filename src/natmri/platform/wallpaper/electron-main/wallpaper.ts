@@ -4,7 +4,6 @@ import { Disposable, toDisposable } from 'natmri/base/common/lifecycle'
 import { IWindowsMainService } from 'natmri/platform/windows/electron-main/windows'
 import { isWindows } from 'natmri/base/common/environment'
 import { INativeEnvironmentMainService } from 'natmri/platform/environment/electron-main/environmentMainService'
-import { powerMonitor } from 'natmri/base/electron-main/powerMonitor'
 import { ILoggerService } from 'natmri/platform/log/common/log'
 import { ILifecycleMainService } from 'natmri/platform/lifecycle/electron-main/lifecycleMainService'
 import type { INatmriWindow } from 'natmri/platform/window/electron-main/window'
@@ -64,8 +63,6 @@ export class WallpaperPlayer extends Disposable {
 
     if (isWindows) {
       // windows shutdown lock window
-      powerMonitor.LOCK_WINDOW = this._natmri_win.nativeWindowId.readBigInt64LE()
-
       destroyInteractiveWindow()
       createInteractiveWindow(this._natmri_win.win!)
       this._register(toDisposable(() => {
@@ -97,9 +94,11 @@ export class WallpaperPlayer extends Disposable {
   }
 
   private registerListener() {
-    this.nativeHostMainService.onDidChangeDisplay((e) => {
+    // Event.filter(this.nativeHostMainService.onDidChangeDisplay,
+    //   e => Array.isArray(e) && (e.includes('workArea') || e.includes('workAreaSize') || e.includes('scaleFactor')))
+    // ((e) => {
 
-    })
+    // })
   }
 
   load(p: string) {
@@ -108,8 +107,10 @@ export class WallpaperPlayer extends Disposable {
   }
 
   override dispose(): void {
+    console.log('WallpaperPlayer::dispose')
+
     super.dispose()
-    this._natmri_win?.close()
+    this._natmri_win.win?.destroy()
     this._natmri_win = null!
   }
 }

@@ -5,7 +5,7 @@ import { Emitter } from 'natmri/base/common/event'
 import { createDecorator } from 'natmri/base/common/instantiation'
 import { Disposable, DisposableStore } from 'natmri/base/common/lifecycle'
 import { assertIsDefined } from 'natmri/base/common/types'
-import { powerMonitor } from 'natmri/base/electron-main/powerMonitor'
+import { powerMonitor } from '@natmri/platform'
 import { ILoggerService } from 'natmri/platform/log/common/log'
 import { UnloadReason } from 'natmri/platform/window/electron-main/window'
 import type { Event } from 'natmri/base/common/event'
@@ -266,7 +266,7 @@ export class LifecycleMainService extends Disposable implements ILifecycleMainSe
       e.preventDefault()
 
       // release lock window
-      powerMonitor.removeAllListener('shutdown')
+      powerMonitor.removeAllListeners('shutdown')
       // Start shutdown sequence
       const shutdownPromise = this.fireOnWillShutdown(this.shutdownRequested ? ShutdownReason.SHUTDOWN : ShutdownReason.QUIT)
 
@@ -347,38 +347,42 @@ export class LifecycleMainService extends Disposable implements ILifecycleMainSe
   registerWindow(window: INatmriWindow): void {
     const windowListeners = new DisposableStore()
 
+    this.trace(`Lifecycle#window.registered - window ID ${window.id}`)
+
     // track window count
     this.windowCounter++
 
     // Window Before Closing: Main -> Renderer
     const win = assertIsDefined(window.win)
-    // win.on('close', (e) => {
-    //   // The window already acknowledged to be closed
-    //   const windowId = window.id
-    //   if (this.windowToCloseRequest.has(windowId))
-    //     this.windowToCloseRequest.delete(windowId)
+    win.on('close', (e) => {
+      // The window already acknowledged to be closed
+      const windowId = window.id
+      if (this.windowToCloseRequest.has(windowId))
+        this.windowToCloseRequest.delete(windowId)
 
-    //   this.trace(`Lifecycle#window.on('close') - window ID ${window.id}`)
+      this.trace(`Lifecycle#window.on('close') - window ID ${window.id}`)
 
-    //   // Otherwise prevent unload and handle it from window
-    //   e.preventDefault()
+      // Otherwise prevent unload and handle it from window
+      // e.preventDefault()
 
-    //   this.unload(window, UnloadReason.CLOSE).then((veto) => {
-    //     if (veto) {
-    //       this.windowToCloseRequest.delete(windowId)
-    //       return
-    //     }
+      window.close()
 
-    //     this.windowToCloseRequest.add(windowId)
+      // this.unload(window, UnloadReason.CLOSE).then((veto) => {
+      //   if (veto) {
+      //     this.windowToCloseRequest.delete(windowId)
+      //     return
+      //   }
 
-    //     // Fire onBeforeCloseWindow before actually closing
-    //     this.trace(`Lifecycle#onBeforeCloseWindow.fire() - window ID ${windowId}`)
-    //     this._onBeforeCloseWindow.fire(window)
+      //   this.windowToCloseRequest.add(windowId)
 
-    //     // No veto, close window now
-    //     window.close()
-    //   })
-    // })
+      //   // Fire onBeforeCloseWindow before actually closing
+      //   this.trace(`Lifecycle#onBeforeCloseWindow.fire() - window ID ${windowId}`)
+      //   this._onBeforeCloseWindow.fire(window)
+
+      //   // No veto, close window now
+      //   window.close()
+      // })
+    })
 
     // Window After Closing
     win.on('closed', () => {
