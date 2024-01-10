@@ -4,11 +4,18 @@ import { Schemas } from 'natmri/base/common/network'
 import { minimist } from 'natmri/base/node/minimist'
 import { Main } from 'natmri/store/electron-main/main'
 
+if (import.meta.env.DEV)
+  (await import('source-map-support')).install()
+
 const args = parseArgs()
 const gotTheLock = app.requestSingleInstanceLock()
 
-if (!gotTheLock)
+if (!gotTheLock) {
+  if (import.meta.env.DEV)
+    console.log('Another instance is running, quitting')
+
   app.quit()
+}
 
 app.once('ready', async () => {
   if (args.trace) {
@@ -79,12 +86,6 @@ app.commandLine.appendSwitch('--force_high_performance_gpu')
  * Disable mpris feature
  */
 app.commandLine.appendSwitch('disable-features', 'HardwareMediaKeyHandling,MediaSessionService')
-
-if (import.meta.env.DEV) {
-  (async () => {
-    (await import('source-map-support')).install()
-  })()
-}
 
 function parseArgs() {
   return minimist(process.argv, {
