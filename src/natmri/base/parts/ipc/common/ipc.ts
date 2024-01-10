@@ -41,7 +41,7 @@ export interface IServerChannel<TContext = string> {
   listen<T>(ctx: TContext, event: string, arg?: any): Event<T>
 }
 
-const enum RequestType {
+enum RequestType {
   Promise = 100,
   PromiseCancel = 101,
   EventListen = 102,
@@ -61,13 +61,13 @@ function requestTypeToStr(type: RequestType): string {
   }
 }
 
-interface IRawPromiseRequest { type: RequestType.Promise; id: number; channelName: string; name: string; arg: any }
-interface IRawPromiseCancelRequest { type: RequestType.PromiseCancel; id: number }
-interface IRawEventListenRequest { type: RequestType.EventListen; id: number; channelName: string; name: string; arg: any }
-interface IRawEventDisposeRequest { type: RequestType.EventDispose; id: number }
+interface IRawPromiseRequest { type: RequestType.Promise, id: number, channelName: string, name: string, arg: any }
+interface IRawPromiseCancelRequest { type: RequestType.PromiseCancel, id: number }
+interface IRawEventListenRequest { type: RequestType.EventListen, id: number, channelName: string, name: string, arg: any }
+interface IRawEventDisposeRequest { type: RequestType.EventDispose, id: number }
 type IRawRequest = IRawPromiseRequest | IRawPromiseCancelRequest | IRawEventListenRequest | IRawEventDisposeRequest
 
-const enum ResponseType {
+enum ResponseType {
   Initialize = 200,
   PromiseSuccess = 201,
   PromiseError = 202,
@@ -90,10 +90,10 @@ function responseTypeToStr(type: ResponseType): string {
 }
 
 interface IRawInitializeResponse { type: ResponseType.Initialize }
-interface IRawPromiseSuccessResponse { type: ResponseType.PromiseSuccess; id: number; data: any }
-interface IRawPromiseErrorResponse { type: ResponseType.PromiseError; id: number; data: { message: string; name: string; stack: string[] | undefined } }
-interface IRawPromiseErrorObjResponse { type: ResponseType.PromiseErrorObj; id: number; data: any }
-interface IRawEventFireResponse { type: ResponseType.EventFire; id: number; data: any }
+interface IRawPromiseSuccessResponse { type: ResponseType.PromiseSuccess, id: number, data: any }
+interface IRawPromiseErrorResponse { type: ResponseType.PromiseError, id: number, data: { message: string, name: string, stack: string[] | undefined } }
+interface IRawPromiseErrorObjResponse { type: ResponseType.PromiseErrorObj, id: number, data: any }
+interface IRawEventFireResponse { type: ResponseType.EventFire, id: number, data: any }
 type IRawResponse = IRawInitializeResponse | IRawPromiseSuccessResponse | IRawPromiseErrorResponse | IRawPromiseErrorObjResponse | IRawEventFireResponse
 
 interface IHandler {

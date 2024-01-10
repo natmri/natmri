@@ -15,10 +15,10 @@ import { randomUUID } from 'natmri/base/common/crypto'
  */
 export class Client extends MessagePortClient implements IDisposable {
   /**
-	 * @param clientId a way to uniquely identify this client among
-	 * other clients. this is important for routing because every
-	 * client can also be a server
-	 */
+   * @param clientId a way to uniquely identify this client among
+   * other clients. this is important for routing because every
+   * client can also be a server
+   */
   constructor(port: MessagePortMain, clientId: string) {
     super({
       addEventListener: (type, listener) => port.addListener(type, listener),
@@ -48,7 +48,7 @@ export async function connect(window: BrowserWindow): Promise<MessagePortMain> {
   // Wait until the window has returned the `MessagePort`
   // We need to filter by the `nonce` to ensure we listen
   // to the right response.
-  const onMessageChannelResult = Event.fromNodeEventEmitter<{ nonce: string; port: MessagePortMain }>(ipcMain, 'natmri:createMessageChannelResult', (e: IpcMainEvent, nonce: string) => ({ nonce, port: e.ports[0] }))
+  const onMessageChannelResult = Event.fromNodeEventEmitter<{ nonce: string, port: MessagePortMain }>(ipcMain, 'natmri:createMessageChannelResult', (e: IpcMainEvent, nonce: string) => ({ nonce, port: e.ports[0] }))
   const { port } = await Event.toPromise(Event.once(Event.filter(onMessageChannelResult, e => e.nonce === nonce)))
 
   return port

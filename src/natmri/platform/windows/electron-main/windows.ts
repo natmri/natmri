@@ -14,7 +14,7 @@ export interface IWindowsMainService {
 
   readonly onDidChangeWindowsCount: Event<IWindowsCountChangedEvent>
   readonly onDidSignalReadyWindow: Event<INatmriWindow>
-  readonly onDidTriggerSystemContextMenu: Event<{ window: INatmriWindow; x: number; y: number }>
+  readonly onDidTriggerSystemContextMenu: Event<{ window: INatmriWindow, x: number, y: number }>
   readonly onDidDestroyWindow: Event<INatmriWindow>
 
   getFocusedWindow(): INatmriWindow | undefined

@@ -1,18 +1,33 @@
 {
   "compilerOptions": {
-    "target": "ESNext",
-    "module": "ES2022",
-    "moduleResolution": "Node",
-    "experimentalDecorators": true,
-    "emitDecoratorMetadata": true,
-    "skipLibCheck": true,
-    "esModuleInterop": true,
+    "target": "esnext",
     "jsx": "preserve",
-    "resolveJsonModule": true
+    "jsxImportSource": "solid-js",
+    "lib": [
+      "ESNext",
+      "DOM",
+      "DOM.Iterable",
+      "WebWorker.ImportScripts"
+    ],
+    "experimentalDecorators": true,
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "strict": true,
+    "exactOptionalPropertyTypes": false,
+    "useUnknownInCatchVariables": false,
+    "inlineSourceMap": true,
+    "preserveConstEnums": true,
+    "suppressImplicitAnyIndexErrors": false,
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true
   },
   "exclude": [
     "node_modules",
     "tests",
-    "src"
+    "src",
+    "out",
+    "dist",
+    "eslint.config.js"
   ]
 }

@@ -2,7 +2,7 @@ import fs, { promises as fsp } from 'node:fs'
 import { tmpdir } from 'node:os'
 import path from 'node:path'
 import { Buffer } from 'node:buffer'
-import { afterAll, beforeAll, expect, suite, test } from 'vitest'
+import { afterAll, beforeAll, expect, it, suite } from 'vitest'
 import { createCancelablePromise } from 'natmri/base/common/async'
 import type { IFile } from 'natmri/base/node/zip'
 import { extract, pack } from 'natmri/base/node/zip'
@@ -25,18 +25,18 @@ function getRandomTestPath(tmpdir: string, ...segments: string[]) {
   return randomFileName
 }
 
-afterAll(() => {
-  return fsp.rm(testDir, { recursive: true, force: true })
-})
-
 beforeAll(() => {
   testDir = getRandomTestPath(tmpdir(), 'natmri', 'zip')
 
   return fsp.mkdir(testDir, { recursive: true }) as Promise<void>
 })
 
+afterAll(() => {
+  return fsp.rm(testDir, { recursive: true, force: true })
+})
+
 suite('Zip', () => {
-  test('pack', async () => {
+  it('pack', async () => {
     const files: IFile[] = [
       {
         path: './extension.txt',
@@ -52,7 +52,7 @@ suite('Zip', () => {
     expect(doesExist).toBeTruthy()
   })
 
-  test('extract should handle directories', async () => {
+  it('extract should handle directories', async () => {
     const fixtures = path.join(__dirname, './fixtures')
     const fixture = path.join(fixtures, 'extract.zip')
 

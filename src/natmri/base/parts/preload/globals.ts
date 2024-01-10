@@ -1,3 +1,4 @@
+/* eslint-disable node/prefer-global/process */
 import { contextBridge, ipcRenderer } from 'electron'
 import type { IIpcMessagePort, IpcRenderer, IpcRendererEvent } from 'typings/electron'
 import type { Process } from 'typings/process'

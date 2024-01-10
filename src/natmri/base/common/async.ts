@@ -1,3 +1,4 @@
+/* eslint-disable ts/no-use-before-define */
 import type { CancellationToken } from 'natmri/base/common/cancellation'
 import { CancellationTokenSource } from 'natmri/base/common/cancellation'
 import { CancellationError } from 'natmri/base/common/errors'
@@ -407,7 +408,7 @@ export interface ITask<T> {
  *  letters = [];
  *  return makeTheTrip(lettersToDeliver);
  * }
-
+ 
  * function onLetterReceived(l) {
  *  letters.push(l);
  *  throttler.queue(deliver);
@@ -546,16 +547,16 @@ export class RunOnceScheduler implements IDisposable {
   }
 
   /**
-	 * Dispose RunOnceScheduler
-	 */
+   * Dispose RunOnceScheduler
+   */
   dispose(): void {
     this.cancel()
     this.runner = null
   }
 
   /**
-	 * Cancel current scheduled runner (if any).
-	 */
+   * Cancel current scheduled runner (if any).
+   */
   cancel(): void {
     if (this.isScheduled()) {
       clearTimeout(this.timeoutToken)
@@ -564,8 +565,8 @@ export class RunOnceScheduler implements IDisposable {
   }
 
   /**
-	 * Cancel previous runner (if any) & schedule a new runner.
-	 */
+   * Cancel previous runner (if any) & schedule a new runner.
+   */
   schedule(delay = this.timeout): void {
     this.cancel()
     this.timeoutToken = setTimeout(this.timeoutHandler, delay)
@@ -580,8 +581,8 @@ export class RunOnceScheduler implements IDisposable {
   }
 
   /**
-	 * Returns true if scheduled.
-	 */
+   * Returns true if scheduled.
+   */
   isScheduled(): boolean {
     return this.timeoutToken !== -1
   }

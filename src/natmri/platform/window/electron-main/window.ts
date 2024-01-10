@@ -5,7 +5,7 @@ import type { Event } from 'natmri/base/common/event'
 import type { IDisposable } from 'natmri/base/common/lifecycle'
 import type { URI } from 'natmri/base/common/uri'
 
-export const enum ErrorReason {
+export enum ErrorReason {
   UNRESPONSIVE,
   PROCESS_GONE,
   LOAD,
@@ -13,7 +13,7 @@ export const enum ErrorReason {
 
 export interface IWindowErrorEvent {
   type: ErrorReason
-  details?: { reason: string; exitCode: number }
+  details?: { reason: string, exitCode: number }
 }
 
 export interface INativeBaseWindowOptions {
@@ -145,7 +145,7 @@ export interface INativeBaseWindowOptions {
    * visual effects, you can also leave it undefined so the executable's icon will be
    * used.
    */
-  icon?: (Electron.NativeImage) | (string)
+  icon?: (Electron.NativeImage) | string
   /**
    * Whether window should be shown when created. Default is `true`.
    */
@@ -287,32 +287,32 @@ export interface INativeBaseWindowOptions {
   webPreferences?: Electron.WebPreferences
 }
 
-export const enum UnloadReason {
+export enum UnloadReason {
 
   /**
-	 * The window is closed.
-	 */
+   * The window is closed.
+   */
   CLOSE = 1,
 
   /**
-	 * All windows unload because the application quits.
-	 */
+   * All windows unload because the application quits.
+   */
   QUIT,
 
   /**
-	 * The window is reloaded.
-	 */
+   * The window is reloaded.
+   */
   RELOAD,
 
   /**
-	 * The window is loaded into a different workspace context.
-	 */
+   * The window is loaded into a different workspace context.
+   */
   LOAD,
 }
 
 export interface INatmriWindow extends IDisposable {
   readonly onDidSignalReady: Event<void>
-  readonly onDidTriggerSystemContextMenu: Event<{ x: number; y: number }>
+  readonly onDidTriggerSystemContextMenu: Event<{ x: number, y: number }>
   readonly onDidClose: Event<void>
   readonly onDidDestroy: Event<void>
   readonly onDidWindowError: Event<IWindowErrorEvent>

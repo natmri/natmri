@@ -1,24 +1,19 @@
 import path from 'node:path'
 import fsp from 'node:fs/promises'
 import { existsSync } from 'node:fs'
+import process from 'node:process'
 
 // ------------------------------------------------- //
 // -------- Common Path for Application ------------ //
 // ------------------------------------------------- //
-export const rootPath = process.cwd().includes('app') ? path.resolve(process.cwd(), '../') : process.cwd()
+export const rootPath = process.cwd()
 export const srcPath = path.join(rootPath, 'src')
-export const srcModulesPath = path.join(srcPath, 'node_modules')
-export const srcPackagePath = path.join(srcPath, 'package.json')
-export const srcTsConfigPath = path.join(srcPath, 'tsconfig.json')
-export const appPath = path.join(rootPath, 'app')
-export const appModulesPath = path.join(appPath, 'node_modules')
-export const appPackagePath = path.join(appPath, 'package.json')
+export const appModulesPath = path.join(rootPath, 'node_modules')
+export const appPackagePath = path.join(rootPath, 'package.json')
 export const buildResourcePath = path.join(rootPath, 'buildResources')
-export const outputPath = path.join(rootPath, 'out-build')
+export const outputPath = path.join(rootPath, 'out')
 export const outputAppPath = path.join(outputPath, 'app')
-export const outputDistPath = path.join(outputAppPath, 'out')
-export const outputPackagePath = path.join(outputAppPath, 'package.json')
-export const outputModulePath = path.join(outputAppPath, 'node_modules')
+export const outputDistPath = path.join(outputPath, 'out-dist')
 
 export const IS_DEV = !!process.env.NATMRI_DEV
 export const IS_TEST = !!process.env.NATMRI_TEST
@@ -127,16 +122,6 @@ export const files: IMarkFile[] = [
 // ----------------------------------------------- //
 // --------- Resolve Options Information --------- //
 // ----------------------------------------------- //
-interface ResolveOptions {
-  alias?: Record<string, string>
-}
-const alias: Record<string, string> = {
-  natmri: path.join(rootPath, './src/natmri'),
-}
-export const resolve: ResolveOptions = {
-  alias,
-}
-
 export async function rimraf(path: string): Promise<void> {
   try {
     if (!existsSync(path))
@@ -166,44 +151,4 @@ export async function linkModules(target: string, dest: string) {
 
 export async function linkPackageFile(target: string, dest: string) {
   await fsp.symlink(target, dest, 'file')
-}
-
-export async function setupPackageEnvironemt(extraTasks: (Promise<void> | (() => Promise<void>))[] = []) {
-  await Promise.all([
-    // copy app/.npmrc to out-build
-    fsp.cp(path.join(appPath, '.npmrc'), path.join(outputAppPath, '.npmrc'), { force: true }),
-    // copy app/package.json to out-build
-    fsp.cp(appPackagePath, outputPackagePath, { force: true }),
-    fsp.cp(appModulesPath, outputModulePath, { force: true, recursive: true }),
-    // async () => {
-    //   // copy app/node_module to out-build
-    //   await fsp.cp(appModulesPath, outputModulePath, { force: true, recursive: true })
-    //   // rewrite virtual store dir
-    //   return fsp.readFile(path.join(outputModulePath, '.modules.yaml'), 'utf8')
-    //     .then((modulesContent) => {
-    //       const modules = yaml.parse(modulesContent)
-    //       modules.virtualStoreDir = path.join(outputModulePath, '.pnpm')
-    //       return modules
-    //     })
-    //     .then(modules => fsp.writeFile(path.join(outputModulePath, '.modules.yaml'), yaml.stringify(modules), 'utf8'))
-    // },
-    ...extraTasks,
-  ])
-}
-
-export async function setupDevelopmentEnvironment(extraTasks: (Promise<void> | (() => Promise<void>))[] = []) {
-  if (!IS_DEV)
-    return
-
-  if (existsSync(outputPath) || existsSync(outputAppPath))
-    return
-
-  await fsp.mkdir(outputPath)
-  await fsp.mkdir(outputAppPath)
-
-  await Promise.all([
-    linkModules(appModulesPath, outputModulePath),
-    linkPackageFile(appPackagePath, outputPackagePath),
-    ...extraTasks,
-  ])
 }

@@ -232,7 +232,7 @@ export const win32: IPath = {
         // to our drive. If not, default to the drive's root.
         if (path === undefined
           || (path.slice(0, 2).toLowerCase() !== resolvedDevice.toLowerCase()
-            && path.charCodeAt(2) === CHAR_BACKWARD_SLASH))
+          && path.charCodeAt(2) === CHAR_BACKWARD_SLASH))
           path = `${resolvedDevice}\\`
       }
 
@@ -334,8 +334,7 @@ export const win32: IPath = {
     // fails)
 
     // Normalize the tail path
-    resolvedTail = normalizeString(resolvedTail, !resolvedAbsolute, '\\',
-      isPathSeparator)
+    resolvedTail = normalizeString(resolvedTail, !resolvedAbsolute, '\\', isPathSeparator)
 
     return resolvedAbsolute
       ? `${resolvedDevice}\\${resolvedTail}`
@@ -444,9 +443,9 @@ export const win32: IPath = {
     return isPathSeparator(code)
       // Possible device root
       || (len > 2
-        && isWindowsDeviceRoot(code)
-        && path.charCodeAt(1) === CHAR_COLON
-        && isPathSeparator(path.charCodeAt(2)))
+      && isWindowsDeviceRoot(code)
+      && path.charCodeAt(1) === CHAR_COLON
+      && isPathSeparator(path.charCodeAt(2)))
   },
 
   join(...paths: string[]): string {
@@ -903,8 +902,8 @@ export const win32: IPath = {
       || preDotState === 0
       // The (right-most) trimmed path component is exactly '..'
       || (preDotState === 1
-        && startDot === end - 1
-        && startDot === startPart + 1))
+      && startDot === end - 1
+      && startDot === startPart + 1))
       return ''
 
     return path.slice(startDot, end)
@@ -1043,8 +1042,8 @@ export const win32: IPath = {
         || preDotState === 0
         // The (right-most) trimmed path component is exactly '..'
         || (preDotState === 1
-          && startDot === end - 1
-          && startDot === startPart + 1)) {
+        && startDot === end - 1
+        && startDot === startPart + 1)) {
         ret.base = ret.name = path.slice(startPart, end)
       }
       else {
@@ -1110,8 +1109,7 @@ export const posix: IPath = {
     // handle relative paths to be safe (might happen when process.cwd() fails)
 
     // Normalize the path
-    resolvedPath = normalizeString(resolvedPath, !resolvedAbsolute, '/',
-      isPosixPathSeparator)
+    resolvedPath = normalizeString(resolvedPath, !resolvedAbsolute, '/', isPosixPathSeparator)
 
     if (resolvedAbsolute)
       return `/${resolvedPath}`
@@ -1409,8 +1407,8 @@ export const posix: IPath = {
       || preDotState === 0
       // The (right-most) trimmed path component is exactly '..'
       || (preDotState === 1
-        && startDot === end - 1
-        && startDot === startPart + 1))
+      && startDot === end - 1
+      && startDot === startPart + 1))
       return ''
 
     return path.slice(startDot, end)
@@ -1484,8 +1482,8 @@ export const posix: IPath = {
         || preDotState === 0
         // The (right-most) trimmed path component is exactly '..'
         || (preDotState === 1
-          && startDot === end - 1
-          && startDot === startPart + 1)) {
+        && startDot === end - 1
+        && startDot === startPart + 1)) {
         ret.base = ret.name = path.slice(start, end)
       }
       else {

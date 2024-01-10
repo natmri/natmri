@@ -2,18 +2,28 @@
   "$schema": "http://json.schemastore.org/electron-builder",
   "productName": "natmri",
   "appId": "personal.starknt.natmri",
-  "asar": true,
+  "asar": false,
   "npmRebuild": false,
   "forceCodeSigning": false,
   "asarUnpack": "**\\*.{dll, node}",
   "files": [
     "out",
-    "!**/*.{ts, rs}",
-    "!node_modules",
+    "!**/node_modules/**",
     "!pnpm-lock.{yaml, yml}",
-    "node_modules/sqlite3/lib",
-    "node_modules/sqlite3/package.json",
-    "node_modules/@natmri",
+    "node_modules/sqlite3",
+    "node_modules/@natmri/platform",
+    "node_modules/@natmri/platform-napi",
+    "node_modules/@natmri/platform-napi-win32-x64-msvc",
+    "node_modules/@natmri/platform-napi-darwin-x64",
+    "node_modules/@natmri/platform-napi-linux-x64-gnu",
+    "node_modules/@natmri/platform-napi-darwin-arm64",
+    "node_modules/@natmri/platform-napi-linux-arm64-gnu",
+    "node_modules/@natmri/platform-napi-linux-arm64-musl",
+    "node_modules/@natmri/platform-napi-win32-arm64-msvc",
+    "node_modules/@natmri/platform-napi-linux-arm-gnueabihf",
+    "node_modules/@natmri/platform-napi-linux-x64-musl",
+    "node_modules/@natmri/platform-napi-win32-ia32-msvc",
+    "!**/*.{ts, rs}",
     "package.json"
   ],
   "copyright": "Copyright © 2022 ${author}",
@@ -89,9 +99,7 @@
     ]
   },
   "directories": {
-    "app": "out-build/app",
-    "buildResources": "buildResources",
-    "output": "out-build"
+    "buildResources": "buildResources"
   },
   "extraResources": [
     {

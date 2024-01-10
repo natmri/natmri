@@ -18,9 +18,9 @@ import { IPCClient } from 'natmri/base/parts/ipc/common/ipc'
 export interface MessageEvent {
 
   /**
-		* For our use we only consider `Uint8Array` a valid data transfer
-		* via message ports because our protocol implementation is buffer based.
-		*/
+   * For our use we only consider `Uint8Array` a valid data transfer
+   * via message ports because our protocol implementation is buffer based.
+   */
   data: Uint8Array
 }
 

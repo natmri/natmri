@@ -12,7 +12,7 @@ export interface Process {
    * ```
    * @since v0.1.8
    */
-  cwd(): string;
+  cwd(): string
   /**
    * The `process.env` property returns an object containing the user environment.
    * See [`environ(7)`](http://man7.org/linux/man-pages/man7/environ.7.html).
@@ -96,7 +96,7 @@ export interface Process {
    * are visible to the operating system or to native add-ons.
    * @since v0.1.27
    */
-  env: NodeJS.ProcessEnv;
+  env: NodeJS.ProcessEnv
   /**
    * The `process.version` property contains the Node.js version string.
    *
@@ -110,7 +110,7 @@ export interface Process {
    * To get the version string without the prepended _v_, use`process.versions.node`.
    * @since v0.1.3
    */
-  readonly version: string;
+  readonly version: string
   /**
    * The `process.versions` property returns an object listing the version strings of
    * Node.js and its dependencies. `process.versions.modules` indicates the current
@@ -144,7 +144,7 @@ export interface Process {
    * ```
    * @since v0.2.0
    */
-  readonly versions: NodeJS.ProcessVersions;
+  readonly versions: NodeJS.ProcessVersions
   /**
    * The operating system CPU architecture for which the Node.js binary was compiled.
    * Possible values are: `'arm'`, `'arm64'`, `'ia32'`, `'mips'`,`'mipsel'`, `'ppc'`,`'ppc64'`, `'s390'`, `'s390x'`, and `'x64'`.
@@ -156,20 +156,20 @@ export interface Process {
    * ```
    * @since v0.5.0
    */
-  readonly arch: Architecture;
+  readonly arch: Architecture
   /**
    * The `process.platform` property returns a string identifying the operating
    * system platform for which the Node.js binary was compiled.
    *
    * Currently possible values are:
    *
-   * * `'aix'`
-   * * `'darwin'`
-   * * `'freebsd'`
-   * * `'linux'`
-   * * `'openbsd'`
-   * * `'sunos'`
-   * * `'win32'`
+   * `'aix'`
+   * `'darwin'`
+   * `'freebsd'`
+   * `'linux'`
+   * `'openbsd'`
+   * `'sunos'`
+   * `'win32'`
    *
    * ```js
    * import { platform } from 'process';
@@ -181,7 +181,7 @@ export interface Process {
    * Android operating system. However, Android support in Node.js [is experimental](https://github.com/nodejs/node/blob/HEAD/BUILDING.md#androidandroid-based-devices-eg-firefox-os).
    * @since v0.1.16
    */
-  readonly platform: NodeJS.Platform;
+  readonly platform: NodeJS.Platform
   /**
    * The `process.cpuUsage()` method returns the user and system CPU time usage of
    * the current process, in an object with properties `user` and `system`, whose
@@ -208,7 +208,7 @@ export interface Process {
    * @since v6.1.0
    * @param previousValue A previous return value from calling `process.cpuUsage()`
    */
-  cpuUsage(previousValue?: NodeJS.CpuUsage): NodeJS.CpuUsage;
+  cpuUsage(previousValue?: NodeJS.CpuUsage): NodeJS.CpuUsage
   /**
    * ```js
    * import { resourceUsage } from 'process';
@@ -239,7 +239,7 @@ export interface Process {
    * @since v12.6.0
    * @return the resource usage for the current process. All of these values come from the `uv_getrusage` call which returns a [`uv_rusage_t` struct][uv_rusage_t].
    */
-  resourceUsage(): NodeJS.ResourceUsage;
+  resourceUsage(): NodeJS.ResourceUsage
 
   /**
    * A string representing the path to the resources directory.
@@ -249,7 +249,7 @@ export interface Process {
   /**
    * A string representing the current process's type
    */
-  type: "browser" | "renderer" | "worker" | "utility" | "sandboxed-browser"
+  type: 'browser' | 'renderer' | 'worker' | 'utility' | 'sandboxed-browser'
 
   /**
    * For Mac App Store build, this property is true, for other builds it is undefined.
@@ -257,27 +257,27 @@ export interface Process {
   mas?: boolean
 
   /**
-   * When the renderer process is sandboxed, 
+   * When the renderer process is sandboxed,
    * this property is true, otherwise it is undefined.
    */
   sandboxed: boolean
 
   /**
-   * A boolean that indicates whether 
-   * the current renderer context has contextIsolation enabled. 
+   * A boolean that indicates whether
+   * the current renderer context has contextIsolation enabled.
    * It is undefined in the main process.
    */
   contextIsolated?: boolean
 
   /**
-   * If the app is running as a Windows Store app (appx), 
+   * If the app is running as a Windows Store app (appx),
    * this property is true, for otherwise it is undefined.
    */
   windowsStore?: boolean
 
   /**
-   * A Electron.ParentPort property 
-   * if this is a UtilityProcess (or null otherwise) 
+   * A Electron.ParentPort property
+   * if this is a UtilityProcess (or null otherwise)
    * allowing communication with the parent process.
    */
   parentPort?: ParentPort

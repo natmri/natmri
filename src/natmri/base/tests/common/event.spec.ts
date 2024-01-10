@@ -1,4 +1,4 @@
-import { beforeEach, expect, suite, test } from 'vitest'
+import { beforeEach, expect, it, suite } from 'vitest'
 import { timeout } from 'natmri/base/common/async'
 import { errorHandler, setUnexpectedErrorHandler } from 'natmri/base/common/errors'
 import { Emitter, Event } from 'natmri/base/common/event'
@@ -29,7 +29,7 @@ export class Document3 {
 }
 
 suite('Event utils dispose', () => {
-  test('no leak with snapshot-utils', () => {
+  it('no leak with snapshot-utils', () => {
     const store = new DisposableStore()
     const emitter = new Emitter<number>()
     const evens = Event.filter(emitter.event, n => n % 2 === 0, store)
@@ -42,7 +42,7 @@ suite('Event utils dispose', () => {
     store.dispose()
   })
 
-  test('no leak with debounce-util', () => {
+  it('no leak with debounce-util', () => {
     const store = new DisposableStore()
     const emitter = new Emitter<number>()
     const debounced = Event.debounce(emitter.event, _l => 0, undefined, undefined, store)
@@ -61,7 +61,7 @@ suite('Event', () => {
 
   beforeEach(() => counter.reset())
 
-  test('Emitter plain', () => {
+  it('emitter plain', () => {
     const doc = new Document3()
 
     const subscription = doc.onDidChange(counter.onEvent, counter)
@@ -75,7 +75,7 @@ suite('Event', () => {
     expect(counter.count).toStrictEqual(2)
   })
 
-  test('Emitter, bucket', () => {
+  it('emitter, bucket', () => {
     const bucket: IDisposable[] = []
     const doc = new Document3()
     const subscription = doc.onDidChange(counter.onEvent, counter, bucket)
@@ -96,7 +96,7 @@ suite('Event', () => {
     expect(counter.count).toStrictEqual(2)
   })
 
-  test('Emitter, store', () => {
+  it('emitter, store', () => {
     const bucket = new DisposableStore()
     const doc = new Document3()
     const subscription = doc.onDidChange(counter.onEvent, counter, bucket)
@@ -115,7 +115,7 @@ suite('Event', () => {
     expect(counter.count).toStrictEqual(2)
   })
 
-  test('onFirstAdd|onLastRemove', () => {
+  it('onFirstAdd|onLastRemove', () => {
     let firstCount = 0
     let lastCount = 0
     const a = new Emitter({
@@ -139,7 +139,7 @@ suite('Event', () => {
     expect(lastCount).toStrictEqual(1)
   })
 
-  test('throwingListener', () => {
+  it('throwingListener', () => {
     const origErrorHandler = errorHandler.getUnexpectedErrorHandler()
     setUnexpectedErrorHandler(() => null)
 
@@ -161,7 +161,7 @@ suite('Event', () => {
     }
   })
 
-  test('reusing event function and context', () => {
+  it('reusing event function and context', () => {
     let counter = 0
     function listener() {
       counter += 1
@@ -184,7 +184,7 @@ suite('Event', () => {
     expect(counter).toStrictEqual(3)
   })
 
-  test('Debounce Event', (done: () => void) => {
+  it('debounce Event', (done: () => void) => {
     const doc = new Document3()
 
     const onDocDidChange = Event.debounce(doc.onDidChange, (prev: string[] | undefined, cur) => {
@@ -217,9 +217,9 @@ suite('Event', () => {
     doc.setText('3')
   })
 
-  test('Debounce Event - leading', async () => {
+  it('debounce Event - leading', async () => {
     const emitter = new Emitter<void>()
-    const debounced = Event.debounce(emitter.event, (l, e) => e, 0, /* leading= */true)
+    const debounced = Event.debounce(emitter.event, (_l, e) => e, 0, /* leading= */true)
 
     let calls = 0
     debounced(() => {
@@ -233,9 +233,9 @@ suite('Event', () => {
     expect(calls).toStrictEqual(1)
   })
 
-  test('Debounce Event - leading', async () => {
+  it('debounce Event - leading', async () => {
     const emitter = new Emitter<void>()
-    const debounced = Event.debounce(emitter.event, (l, e) => e, 0, /* leading= */true)
+    const debounced = Event.debounce(emitter.event, (_l, e) => e, 0, /* leading= */true)
 
     let calls = 0
     debounced(() => {
@@ -250,7 +250,7 @@ suite('Event', () => {
     expect(calls).toEqual(2)
   })
 
-  test('Debounce Event - leading reset', async () => {
+  it('debounce Event - leading reset', async () => {
     const emitter = new Emitter<number>()
     const debounced = Event.debounce(emitter.event, (l, _e) => l ? l + 1 : 1, 0, /* leading= */true)
 
@@ -264,7 +264,7 @@ suite('Event', () => {
     expect(calls).toStrictEqual([1, 1])
   })
 
-  test('Emitter - In Order Delivery', () => {
+  it('emitter - In Order Delivery', () => {
     const a = new Emitter<string>()
     const listener2Events: string[] = []
     a.event((event) => {
@@ -283,7 +283,7 @@ suite('Event', () => {
     expect(listener2Events).toStrictEqual(['e1', 'e2'])
   })
 
-  test('Cannot read property \'_actual\' of undefined #142204', () => {
+  it('cannot read property \'_actual\' of undefined #142204', () => {
     const e = new Emitter<number>()
     const dispo = e.event(() => { })
     dispo.dispose.call(undefined) // expectable can be).toStrictEqual(called with this

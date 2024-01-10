@@ -187,8 +187,8 @@ export class MutableDisposable<T extends IDisposable> implements IDisposable {
   }
 
   /**
-	 * Resets the stored value and disposed of the previously stored value.
-	 */
+   * Resets the stored value and disposed of the previously stored value.
+   */
   clear(): void {
     this.value = undefined
   }
@@ -200,9 +200,9 @@ export class MutableDisposable<T extends IDisposable> implements IDisposable {
   }
 
   /**
-	 * Clears the value, but does not dispose it.
-	 * The old value is returned.
-	*/
+   * Clears the value, but does not dispose it.
+   * The old value is returned.
+   */
   clearAndLeak(): T | undefined {
     const oldValue = this._value
     this._value = undefined

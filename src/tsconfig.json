@@ -1,26 +1,17 @@
 {
   "compilerOptions": {
     "target": "esnext",
-    "strict": true,
-    "module": "esnext",
-    "moduleResolution": "bundler",
     "jsx": "preserve",
     "jsxImportSource": "solid-js",
-    "inlineSourceMap": true,
-    "resolveJsonModule": true,
-    "preserveConstEnums": true,
-    "suppressImplicitAnyIndexErrors": false,
-    "experimentalDecorators": true,
-    "useUnknownInCatchVariables": false,
-    "exactOptionalPropertyTypes": false,
-    "forceConsistentCasingInFileNames": true,
-    "skipLibCheck": true,
     "lib": [
       "ESNext",
       "DOM",
       "DOM.Iterable",
       "WebWorker.ImportScripts"
     ],
+    "experimentalDecorators": true,
+    "module": "esnext",
+    "moduleResolution": "bundler",
     "paths": {
       "natmri/*": [
         "./natmri/*"
@@ -29,9 +20,18 @@
         "./typings/*"
       ]
     },
+    "resolveJsonModule": true,
     "typeRoots": [
       "../node_modules/@types",
       "../node_modules/@total-typescript"
-    ]
+    ],
+    "strict": true,
+    "exactOptionalPropertyTypes": false,
+    "useUnknownInCatchVariables": false,
+    "inlineSourceMap": true,
+    "preserveConstEnums": true,
+    "suppressImplicitAnyIndexErrors": false,
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true
   }
 }

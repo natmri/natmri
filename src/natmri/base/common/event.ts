@@ -1,3 +1,4 @@
+/* eslint-disable ts/no-use-before-define */
 import { Disposable, DisposableStore, SafeDisposable, combinedDisposable, toDisposable } from 'natmri/base/common/lifecycle'
 import { LinkedList } from 'natmri/base/common/linkedList'
 import { once } from 'natmri/base/common/functional'
@@ -19,7 +20,7 @@ export namespace Event {
    * This is useful for deferring non-critical work (eg. general UI updates) to ensure it does not block critical work
    * (eg. latency of keypress to text rendered).
    *
-   * *NOTE* that this function returns an `Event` and it MUST be called with a `DisposableStore` whenever the returned
+   * NOTE* that this function returns an `Event` and it MUST be called with a `DisposableStore` whenever the returned
    * event is accessible to "third parties", e.g the event is a public property. Otherwise a leaked listener on the
    * returned event causes this utility to leak a listener on the original event.
    *
@@ -63,7 +64,7 @@ export namespace Event {
    * Maps an event of one type into an event of another type using a mapping function, similar to how
    * `Array.prototype.map` works.
    *
-   * *NOTE* that this function returns an `Event` and it MUST be called with a `DisposableStore` whenever the returned
+   * NOTE* that this function returns an `Event` and it MUST be called with a `DisposableStore` whenever the returned
    * event is accessible to "third parties", e.g the event is a public property. Otherwise a leaked listener on the
    * returned event causes this utility to leak a listener on the original event.
    *
@@ -76,7 +77,7 @@ export namespace Event {
   }
 
   /**
-   * *NOTE* that this function returns an `Event` and it MUST be called with a `DisposableStore` whenever the returned
+   * NOTE* that this function returns an `Event` and it MUST be called with a `DisposableStore` whenever the returned
    * event is accessible to "third parties", e.g the event is a public property. Otherwise a leaked listener on the
    * returned event causes this utility to leak a listener on the original event.
    */
@@ -88,7 +89,7 @@ export namespace Event {
   }
 
   /**
-   * *NOTE* that this function returns an `Event` and it MUST be called with a `DisposableStore` whenever the returned
+   * NOTE* that this function returns an `Event` and it MUST be called with a `DisposableStore` whenever the returned
    * event is accessible to "third parties", e.g the event is a public property. Otherwise a leaked listener on the
    * returned event causes this utility to leak a listener on the original event.
    */
@@ -117,7 +118,7 @@ export namespace Event {
   }
 
   /**
-   * *NOTE* that this function returns an `Event` and it MUST be called with a `DisposableStore` whenever the returned
+   * NOTE* that this function returns an `Event` and it MUST be called with a `DisposableStore` whenever the returned
    * event is accessible to "third parties", e.g the event is a public property. Otherwise a leaked listener on the
    * returned event causes this utility to leak a listener on the original event.
    */
@@ -150,13 +151,13 @@ export namespace Event {
   }
 
   /**
-   * *NOTE* that this function returns an `Event` and it MUST be called with a `DisposableStore` whenever the returned
+   * NOTE* that this function returns an `Event` and it MUST be called with a `DisposableStore` whenever the returned
    * event is accessible to "third parties", e.g the event is a public property. Otherwise a leaked listener on the
    * returned event causes this utility to leak a listener on the original event.
    */
   export function debounce<T>(event: Event<T>, merge: (last: T | undefined, event: T) => T, delay?: number, leading?: boolean, disposable?: DisposableStore): Event<T>
   /**
-   * *NOTE* that this function returns an `Event` and it MUST be called with a `DisposableStore` whenever the returned
+   * NOTE* that this function returns an `Event` and it MUST be called with a `DisposableStore` whenever the returned
    * event is accessible to "third parties", e.g the event is a public property. Otherwise a leaked listener on the
    * returned event causes this utility to leak a listener on the original event.
    */
@@ -205,7 +206,7 @@ export namespace Event {
   /**
    * Debounces an event, firing after some delay (default=0) with an array of all event original objects.
    *
-   * *NOTE* that this function returns an `Event` and it MUST be called with a `DisposableStore` whenever the returned
+   * NOTE* that this function returns an `Event` and it MUST be called with a `DisposableStore` whenever the returned
    * event is accessible to "third parties", e.g the event is a public property. Otherwise a leaked listener on the
    * returned event causes this utility to leak a listener on the original event.
    */
@@ -220,7 +221,7 @@ export namespace Event {
   }
 
   /**
-   * *NOTE* that this function returns an `Event` and it MUST be called with a `DisposableStore` whenever the returned
+   * NOTE* that this function returns an `Event` and it MUST be called with a `DisposableStore` whenever the returned
    * event is accessible to "third parties", e.g the event is a public property. Otherwise a leaked listener on the
    * returned event causes this utility to leak a listener on the original event.
    */
@@ -239,7 +240,7 @@ export namespace Event {
   /**
    * Splits an event whose parameter is a union type into 2 separate events for each type in the union.
    *
-   * *NOTE* that this function returns an `Event` and it MUST be called with a `DisposableStore` whenever the returned
+   * NOTE* that this function returns an `Event` and it MUST be called with a `DisposableStore` whenever the returned
    * event is accessible to "third parties", e.g the event is a public property. Otherwise a leaked listener on the
    * returned event causes this utility to leak a listener on the original event.
    *
@@ -261,7 +262,7 @@ export namespace Event {
   }
 
   /**
-   * *NOTE* that this function returns an `Event` and it MUST be called with a `DisposableStore` whenever the returned
+   * NOTE* that this function returns an `Event` and it MUST be called with a `DisposableStore` whenever the returned
    * event is accessible to "third parties", e.g the event is a public property. Otherwise a leaked listener on the
    * returned event causes this utility to leak a listener on the original event.
    */
@@ -656,7 +657,7 @@ export class PauseableEmitter<T> extends Emitter<T> {
 export class EventMultiplexer<T> implements IDisposable {
   private readonly emitter: Emitter<T>
   private hasListeners = false
-  private events: { event: Event<T>; listener: IDisposable | null }[] = []
+  private events: { event: Event<T>, listener: IDisposable | null }[] = []
 
   constructor() {
     this.emitter = new Emitter<T>({
@@ -697,11 +698,11 @@ export class EventMultiplexer<T> implements IDisposable {
     this.events.forEach(e => this.unhook(e))
   }
 
-  private hook(e: { event: Event<T>; listener: IDisposable | null }): void {
+  private hook(e: { event: Event<T>, listener: IDisposable | null }): void {
     e.listener = e.event(r => this.emitter.fire(r))
   }
 
-  private unhook(e: { event: Event<T>; listener: IDisposable | null }): void {
+  private unhook(e: { event: Event<T>, listener: IDisposable | null }): void {
     if (e.listener)
       e.listener.dispose()
 

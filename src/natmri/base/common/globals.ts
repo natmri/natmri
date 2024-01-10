@@ -1,4 +1,8 @@
-/* eslint-disable @typescript-eslint/no-require-imports */
+/* eslint-disable ts/no-require-imports */
+/* eslint-disable ts/no-use-before-define */
+/* eslint-disable node/prefer-global/process */
+/* eslint-disable ts/no-var-requires */
+
 import type { IIpcMessagePort, IpcRenderer } from 'typings/electron'
 import type { IpcRendererEvent } from 'electron'
 import type { Process } from 'typings/process'

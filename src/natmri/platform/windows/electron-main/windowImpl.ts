@@ -12,7 +12,7 @@ import type { CancellationToken } from 'natmri/base/common/cancellation'
 import type { INativeBaseWindowOptions, INatmriWindow, IWindowErrorEvent } from 'natmri/platform/window/electron-main/window'
 import type { URI } from 'natmri/base/common/uri'
 
-export const enum ReadyState {
+export enum ReadyState {
   None,
   Navigating,
   Ready,
@@ -22,7 +22,7 @@ export class NatmriWindow extends Disposable implements INatmriWindow {
   protected readonly _onDidSignalReady = this._register(new Emitter<void>())
   readonly onDidSignalReady = this._onDidSignalReady.event
 
-  protected readonly _onDidTriggerSystemContextMenu = this._register(new Emitter<{ x: number; y: number }>())
+  protected readonly _onDidTriggerSystemContextMenu = this._register(new Emitter<{ x: number, y: number }>())
   readonly onDidTriggerSystemContextMenu = this._onDidTriggerSystemContextMenu.event
 
   protected readonly _onDidClose = this._register(new Emitter<void>())

@@ -11,7 +11,6 @@ export interface PlayerErrorEvent {
   url: string
 }
 
-
 /**
  * load resource form repository
  */
@@ -29,7 +28,7 @@ export interface IPlayerController {
 }
 
 export interface IPlayerUI {
-  
+
 }
 
 export interface IPlayer<T> {
@@ -37,4 +36,3 @@ export interface IPlayer<T> {
   controller: IPlayerController
   ui: WallpaperPlayerUI
 }
-

@@ -24,8 +24,8 @@ export class WindowsMainService extends Disposable implements IWindowsMainServic
   private readonly _onDidChangeWindowsCount: Emitter<IWindowsCountChangedEvent> = this._register(new Emitter<IWindowsCountChangedEvent>())
   readonly onDidChangeWindowsCount: Event<IWindowsCountChangedEvent> = this._onDidChangeWindowsCount.event
 
-  private readonly _onDidTriggerSystemContextMenu: Emitter<{ window: INatmriWindow; x: number; y: number }> = this._register(new Emitter<{ window: INatmriWindow; x: number; y: number }>())
-  readonly onDidTriggerSystemContextMenu: Event<{ window: INatmriWindow; x: number; y: number }> = this._onDidTriggerSystemContextMenu.event
+  private readonly _onDidTriggerSystemContextMenu: Emitter<{ window: INatmriWindow, x: number, y: number }> = this._register(new Emitter<{ window: INatmriWindow, x: number, y: number }>())
+  readonly onDidTriggerSystemContextMenu: Event<{ window: INatmriWindow, x: number, y: number }> = this._onDidTriggerSystemContextMenu.event
 
   private readonly _onDidDestroyWindow: Emitter<INatmriWindow> = this._register(new Emitter<INatmriWindow>())
   readonly onDidDestroyWindow: Event<INatmriWindow> = this._onDidDestroyWindow.event

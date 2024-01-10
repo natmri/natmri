@@ -16,9 +16,9 @@ import type { IApplicationProfile } from 'natmri/platform/profile/common/profile
 export interface IStorageMainOptions {
 
   /**
-	 * If enabled, storage will not persist to disk
-	 * but into memory.
-	 */
+   * If enabled, storage will not persist to disk
+   * but into memory.
+   */
   readonly useInMemoryStorage?: boolean
 }
 
@@ -29,68 +29,68 @@ export interface IStorageMainOptions {
 export interface IStorageMain extends IDisposable {
 
   /**
-	 * Emitted whenever data is updated or deleted.
-	 */
+   * Emitted whenever data is updated or deleted.
+   */
   readonly onDidChangeStorage: Event<IStorageChangeEvent>
 
   /**
-	 * Emitted when the storage is closed.
-	 */
+   * Emitted when the storage is closed.
+   */
   readonly onDidCloseStorage: Event<void>
 
   /**
-	 * Access to all cached items of this storage service.
-	 */
+   * Access to all cached items of this storage service.
+   */
   readonly items: Map<string, string>
 
   /**
-	 * Allows to join on the `init` call having completed
-	 * to be able to safely use the storage.
-	 */
+   * Allows to join on the `init` call having completed
+   * to be able to safely use the storage.
+   */
   readonly whenInit: Promise<void>
 
   /**
-	 * Provides access to the `IStorage` implementation which will be
-	 * in-memory for as long as the storage has not been initialized.
-	 */
+   * Provides access to the `IStorage` implementation which will be
+   * in-memory for as long as the storage has not been initialized.
+   */
   readonly storage: IStorage
 
   /**
-	 * The file path of the underlying storage file if any.
-	 */
+   * The file path of the underlying storage file if any.
+   */
   readonly path: string | undefined
 
   /**
-	 * Required call to ensure the service can be used.
-	 */
+   * Required call to ensure the service can be used.
+   */
   init(): Promise<void>
 
   /**
-	 * Retrieve an element stored with the given key from storage. Use
-	 * the provided defaultValue if the element is null or undefined.
-	 */
+   * Retrieve an element stored with the given key from storage. Use
+   * the provided defaultValue if the element is null or undefined.
+   */
   get(key: string, fallbackValue: string): string
   get(key: string, fallbackValue?: string): string | undefined
 
   /**
-	 * Store a string value under the given key to storage. The value will
-	 * be converted to a string.
-	 */
+   * Store a string value under the given key to storage. The value will
+   * be converted to a string.
+   */
   set(key: string, value: string | boolean | number | undefined | null): void
 
   /**
-	 * Delete an element stored under the provided key from storage.
-	 */
+   * Delete an element stored under the provided key from storage.
+   */
   delete(key: string): void
 
   /**
-	 * Whether the storage is using in-memory persistence or not.
-	 */
+   * Whether the storage is using in-memory persistence or not.
+   */
   isInMemory(): boolean
 
   /**
-	 * Close the storage connection.
-	 */
+   * Close the storage connection.
+   */
   close(): Promise<void>
 }
 

@@ -1,3 +1,4 @@
+import process from 'node:process'
 import { ipcRenderer } from 'natmri/base/common/globals'
 import { Disposable } from 'natmri/base/common/lifecycle'
 import { Server as MessagePortServer } from 'natmri/base/parts/ipc/electron-browser/ipc.mp'

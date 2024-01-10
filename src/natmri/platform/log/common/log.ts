@@ -5,7 +5,7 @@ import { createDecorator } from 'natmri/base/common/instantiation'
 import type { IDisposable } from 'natmri/base/common/lifecycle'
 import { Disposable } from 'natmri/base/common/lifecycle'
 
-export const enum LogLevel {
+export enum LogLevel {
   Trace,
   Debug,
   Info,

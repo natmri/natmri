@@ -1,3 +1,4 @@
+import process from 'node:process'
 import { Menu, app, protocol } from 'electron'
 import { Schemas } from 'natmri/base/common/network'
 import { minimist } from 'natmri/base/node/minimist'
@@ -57,16 +58,16 @@ protocol.registerSchemesAsPrivileged([
 Menu.setApplicationMenu(null)
 
 /**
-  * Following features are disabled from the runtime.
-  * `CalculateNativeWinOcclusion` - Disable native window occlusion tracker,
-  * Refs https://groups.google.com/a/chromium.org/g/embedder-dev/c/ZF3uHHyWLKw/m/VDN2hDXMAAAJ
-  */
+ * Following features are disabled from the runtime.
+ * `CalculateNativeWinOcclusion` - Disable native window occlusion tracker,
+ * Refs https://groups.google.com/a/chromium.org/g/embedder-dev/c/ZF3uHHyWLKw/m/VDN2hDXMAAAJ
+ */
 app.commandLine.appendSwitch('disable-features', 'CalculateNativeWinOcclusion')
 
 /**
-  * Following features are enabled from the runtime.
-  * `AutoDisableAccessibility` - https://github.com/microsoft/vscode/issues/162331#issue-1390744354
-  */
+ * Following features are enabled from the runtime.
+ * `AutoDisableAccessibility` - https://github.com/microsoft/vscode/issues/162331#issue-1390744354
+ */
 app.commandLine.appendSwitch('enable-features', 'AutoDisableAccessibility')
 
 /**
@@ -79,10 +80,7 @@ app.commandLine.appendSwitch('--force_high_performance_gpu')
  */
 app.commandLine.appendSwitch('disable-features', 'HardwareMediaKeyHandling,MediaSessionService')
 
-/**
- * [DEV ENV] source map support for node
- */
-if (process.env.NATMRI_DEV) {
+if (import.meta.env.DEV) {
   (async () => {
     (await import('source-map-support')).install()
   })()

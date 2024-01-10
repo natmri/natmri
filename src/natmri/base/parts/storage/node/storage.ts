@@ -1,4 +1,5 @@
 import Promises from 'node:fs/promises'
+import process from 'node:process'
 import { Event } from 'natmri/base/common/event'
 import { basename } from 'natmri/base/common/path'
 import { timeout } from 'natmri/base/common/async'
@@ -90,7 +91,7 @@ export class SQLiteStorageDatabase implements IStorageDatabase {
         })
 
         keysValuesChunks.forEach((keysValuesChunk) => {
-          this.prepare(connection, `INSERT INTO ItemTable VALUES ${new Array(keysValuesChunk.length / 2).fill('(?,?)').join(',')}`, stmt => stmt.run(keysValuesChunk), () => {
+          this.prepare(connection, `INSERT INTO ItemTable VALUES ${Array.from({ length: keysValuesChunk.length / 2 }).fill('(?,?)').join(',')}`, stmt => stmt.run(keysValuesChunk), () => {
             const keys: string[] = []
             let length = 0
             toInsert.forEach((value, key) => {
@@ -125,7 +126,7 @@ export class SQLiteStorageDatabase implements IStorageDatabase {
         })
 
         keysChunks.forEach((keysChunk) => {
-          this.prepare(connection, `DELETE FROM ItemTable WHERE key IN (${new Array(keysChunk.length).fill('?').join(',')})`, stmt => stmt.run(keysChunk), () => {
+          this.prepare(connection, `DELETE FROM ItemTable WHERE key IN (${Array.from({ length: keysChunk.length }).fill('?').join(',')})`, stmt => stmt.run(keysChunk), () => {
             const keys: string[] = []
             toDelete.forEach((key) => {
               keys.push(key)
@@ -321,9 +322,9 @@ export class SQLiteStorageDatabase implements IStorageDatabase {
     })
   }
 
-  private all(connection: IDatabaseConnection, sql: string): Promise<{ key: string; value: string }[]> {
+  private all(connection: IDatabaseConnection, sql: string): Promise<{ key: string, value: string }[]> {
     return new Promise((resolve, reject) => {
-      connection.db.all<{ key: string; value: string }>(sql, (error, rows) => {
+      connection.db.all<{ key: string, value: string }>(sql, (error, rows) => {
         if (error) {
           this.handleSQLiteError(connection, `[storage ${this.name}] all(): ${error}`)
 

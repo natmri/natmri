@@ -156,7 +156,7 @@ export namespace _util {
   export const DI_TARGET = '$di$target'
   export const DI_DEPENDENCIES = '$di$dependencies'
 
-  export function getServiceDependencies(ctor: any): { id: ServiceIdentifier<any>; index: number }[] {
+  export function getServiceDependencies(ctor: any): { id: ServiceIdentifier<any>, index: number }[] {
     return ctor[DI_DEPENDENCIES] || []
   }
 }
@@ -341,7 +341,7 @@ export class InstantiationService implements IInstantiationService {
 
       const delta = firstServiceArgPos - args.length
       if (delta > 0)
-        args = args.concat(new Array(delta))
+        args = args.concat(Array.from({ length: delta }))
 
       else
         args = args.slice(0, firstServiceArgPos)
@@ -401,7 +401,7 @@ export class InstantiationService implements IInstantiationService {
   }
 
   private _createAndCacheServiceInstance<T>(id: ServiceIdentifier<T>, desc: SyncDescriptor<T>, _trace: Trace): T {
-    interface Triple { id: ServiceIdentifier<any>; desc: SyncDescriptor<any>; _trace: Trace }
+    interface Triple { id: ServiceIdentifier<any>, desc: SyncDescriptor<any>, _trace: Trace }
     const graph = new Graph<Triple>(data => data.id.toString())
 
     let cycleCount = 0
@@ -603,7 +603,7 @@ export class Trace {
 
     function printChild(n: number, trace: Trace) {
       const res: string[] = []
-      const prefix = new Array(n + 1).join('\t')
+      const prefix = Array.from({ length: n + 1 }).join('\t')
       for (const [id, first, child] of trace._dep) {
         if (first && child) {
           causedCreation = true

@@ -2,8 +2,8 @@
 
 export interface Options {
   /**
-         * A string or array of strings argument names to always treat as strings
-         */
+   * A string or array of strings argument names to always treat as strings
+   */
   string?: string | string[] | undefined
 
   /**

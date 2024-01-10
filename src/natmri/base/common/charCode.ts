@@ -1,4 +1,4 @@
-export const enum CharCode {
+export enum CharCode {
   Null = 0,
   /**
    * The `\b` character.

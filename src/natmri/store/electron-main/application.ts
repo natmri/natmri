@@ -1,4 +1,5 @@
 import path from 'node:path'
+import process from 'node:process'
 import { app } from 'electron'
 import { IInstantiationService, ServiceCollection, SyncDescriptor } from 'natmri/base/common/instantiation'
 import { Disposable } from 'natmri/base/common/lifecycle'
@@ -58,7 +59,7 @@ export class Application extends Disposable {
     this.lifecycleMainService.phase = LifecycleMainPhase.Ready
 
     const player = appInstantiationService.createInstance(WallpaperPlayer)
-    player.load(path.resolve('/Users/avatar/Downloads/2000075052/index.html'))
+    player.load(path.resolve('/Users/avatar/Downloads/1783830818/index.html'))
 
     // Set lifecycle phase to `Eventually` after a short delay and when idle (min 2.5sec, max 5sec)
     const eventuallyPhaseScheduler = this._register(new RunOnceScheduler(() => {

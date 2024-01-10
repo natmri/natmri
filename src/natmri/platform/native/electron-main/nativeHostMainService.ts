@@ -1,3 +1,4 @@
+import process from 'node:process'
 import { arch, cpus, freemem, loadavg, platform, release, totalmem, type } from 'node:os'
 import { screen, shell } from 'electron'
 import { Event } from 'natmri/base/common/event'
@@ -43,7 +44,7 @@ export class NativeHostMainService extends Disposable implements INativeHostMain
     window?.setReady()
   }
 
-  async relaunch(options?: { addArgs?: string[] | undefined; removeArgs?: string[] | undefined } | undefined): Promise<void> {
+  async relaunch(options?: { addArgs?: string[] | undefined, removeArgs?: string[] | undefined } | undefined): Promise<void> {
     return this.lifecycleMainService.relaunch(options)
   }
 

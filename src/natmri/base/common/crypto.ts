@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-require-imports */
 import { isWeb } from 'natmri/base/common/environment'
 
 export function randomUUID(): string {
@@ -6,6 +5,7 @@ export function randomUUID(): string {
     return window.crypto.randomUUID()
 
   if (typeof require !== 'undefined' || !isWeb)
+    // eslint-disable-next-line ts/no-var-requires, ts/no-require-imports
     return require('node:crypto').webcrypto.randomUUID()
 
   return crypto.randomUUID()

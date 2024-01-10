@@ -1,4 +1,4 @@
-export const enum WallpapperCategory {
+export enum WallpapperCategory {
   Web = 0,
   Video = 1,
   Picture = 2,

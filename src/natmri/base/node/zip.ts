@@ -149,8 +149,7 @@ function extractZip(
             ),
           )
         }
-      }, reject),
-    )
+      }, reject))
     zipfile.readEntry()
     zipfile.on('entry', (entry: Entry) => {
       if (token.isCancellationRequested)

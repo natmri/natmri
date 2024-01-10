@@ -92,7 +92,7 @@ export namespace yauzl {
 
     abstract _readStreamForRange(start: number, end: number): Readable
 
-    createReadStream(options: { start: number; end: number }) {
+    createReadStream(options: { start: number, end: number }) {
       const start = options.start
       const end = options.end
       if (start === end) {
@@ -599,7 +599,7 @@ export namespace yauzl {
     crc32 = 0
     externalFileAttributes = 0
     extraFieldLength = 0
-    extraFields: Array<{ id: number; data: Buffer }> = []
+    extraFields: Array<{ id: number, data: Buffer }> = []
     fileCommentLength = 0
     fileName = ''
     fileNameLength = 0
@@ -827,7 +827,7 @@ export namespace yauzl {
 
 class Pend {
   pending = 0
-  max = Infinity
+  max = Number.POSITIVE_INFINITY
   listeners: Function[] = []
   waiting: Function[] = []
   error: Error | null = null
@@ -1004,7 +1004,7 @@ class WriteStream extends Writable {
 
     this.context.ref()
     this.start = options.start || 0
-    this.endOffset = (options.end == null) ? Infinity : +options.end
+    this.endOffset = (options.end == null) ? Number.POSITIVE_INFINITY : +options.end
     this.bytesWritten = 0
     this.pos = this.start
     this.destroyed = false

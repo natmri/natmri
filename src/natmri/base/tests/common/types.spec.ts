@@ -1,8 +1,8 @@
-import { expect, suite, test } from 'vitest'
+import { expect, it, suite } from 'vitest'
 import { isFunction, isObject } from 'natmri/base/common/types'
 
 suite('Type', () => {
-  test('isObject', () => {
+  it('isObject', () => {
     expect(isObject(undefined)).toBeFalsy()
     expect(isObject(null)).toBeFalsy()
     expect(isObject('foo')).toBeFalsy()

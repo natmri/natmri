@@ -1,3 +1,4 @@
+import process from 'node:process'
 import { BrowserWindow, app, ipcMain } from 'electron'
 import { Barrier, timeout } from 'natmri/base/common/async'
 import { isMacintosh } from 'natmri/base/common/environment'
@@ -45,15 +46,15 @@ export interface ILifecycleMainService {
   readonly onWillShutdown: Event<ShutdownEvent>
 
   /**
-	 * An event that fires before a window closes. This event is fired after any veto has been dealt
-	 * with so that listeners know for sure that the window will close without veto.
-	 */
+   * An event that fires before a window closes. This event is fired after any veto has been dealt
+   * with so that listeners know for sure that the window will close without veto.
+   */
   readonly onBeforeCloseWindow: Event<INatmriWindow>
 
   /**
    * Restart the application with optional arguments (CLI). All lifecycle event handlers are triggered.
    */
-  relaunch(options?: { addArgs?: string[]; removeArgs?: string[] }): Promise<void>
+  relaunch(options?: { addArgs?: string[], removeArgs?: string[] }): Promise<void>
 
   /**
    * Shutdown the application normally. All lifecycle event handlers are triggered.
@@ -81,18 +82,18 @@ export interface ILifecycleMainService {
   when(phase: LifecycleMainPhase): Promise<void>
 
   /**
-	 * Make a `INatmriWindow` known to the lifecycle main service.
-	 */
+   * Make a `INatmriWindow` known to the lifecycle main service.
+   */
   registerWindow(window: INatmriWindow): void
 
   /**
-	 * Reload a window. All lifecycle event handlers are triggered.
-	 */
+   * Reload a window. All lifecycle event handlers are triggered.
+   */
   reload(window: INatmriWindow): Promise<void>
 
   /**
-	 * Unload a window for the provided reason. All lifecycle event handlers are triggered.
-	 */
+   * Unload a window for the provided reason. All lifecycle event handlers are triggered.
+   */
   unload(window: INatmriWindow, reason: UnloadReason): Promise<boolean /* veto */>
 }
 
@@ -121,7 +122,7 @@ export enum LifecycleMainPhase {
   Eventually,
 }
 
-export const enum ShutdownReason {
+export enum ShutdownReason {
 
   /**
    * The application exits normally.
@@ -514,7 +515,7 @@ export class LifecycleMainService extends Disposable implements ILifecycleMainSe
     return this.pendingQuitPromise
   }
 
-  async relaunch(options?: { addArgs?: string[]; removeArgs?: string[] }): Promise<void> {
+  async relaunch(options?: { addArgs?: string[], removeArgs?: string[] }): Promise<void> {
     this.trace('Lifecycle#relaunch()')
 
     const args = process.argv.slice(1)

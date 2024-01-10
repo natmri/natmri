@@ -64,7 +64,7 @@ else {
   console.error('Unable to resolve platform.')
 }
 
-export const enum Platform {
+export enum Platform {
   Web,
   Mac,
   Linux,
@@ -143,7 +143,7 @@ export namespace Language {
  */
 export const locale = _locale
 
-export const enum OperatingSystem {
+export enum OperatingSystem {
   Windows = 1,
   Macintosh = 2,
   Linux = 3,

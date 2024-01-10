@@ -1,4 +1,5 @@
 import { join } from 'node:path'
+import process from 'node:process'
 import { URI } from 'natmri/base/common/uri'
 import { isDevelopment } from 'natmri/base/common/environment'
 import { Disposable } from 'natmri/base/common/lifecycle'
@@ -33,7 +34,7 @@ export class NativeEnvironmentMainService extends Disposable implements INativeE
 
   @memoize
   get preloadPath() {
-    return join(__dirname)
+    return join(__dirname, 'electron-sandbox')
   }
 
   getPageURI(path: string): URI {

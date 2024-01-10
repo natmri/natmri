@@ -31,7 +31,7 @@ export interface ICommonNativeHostService {
 
   // Lifecycle
   notifyReady(windowId: number | undefined): Promise<void>
-  relaunch(options?: { addArgs?: string[]; removeArgs?: string[] }): Promise<void>
+  relaunch(options?: { addArgs?: string[], removeArgs?: string[] }): Promise<void>
   closeWindow(windowId: number): Promise<void>
   quit(): Promise<void>
   exit(code: number): Promise<void>

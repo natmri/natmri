@@ -12,8 +12,8 @@ export interface INativeNatmriTray {
 }
 
 export class NatmriTray extends Disposable implements INativeNatmriTray {
-  protected readonly _onDidTriggerSystemContextMenu = this._register(new Emitter<{ x: number; y: number }>())
-  readonly onDidTriggerSystemContextMenu: Event<{ x: number; y: number }> = this._onDidTriggerSystemContextMenu.event
+  protected readonly _onDidTriggerSystemContextMenu = this._register(new Emitter<{ x: number, y: number }>())
+  readonly onDidTriggerSystemContextMenu: Event<{ x: number, y: number }> = this._onDidTriggerSystemContextMenu.event
 
   protected readonly _onDidDestroy = this._register(new Emitter<void>())
   readonly onDidDestroy: Event<void> = this._onDidDestroy.event

@@ -1,5 +1,3 @@
-/* eslint-disable no-mixed-operators */
-
 /* ---------------------------------------------------------------------------------------------
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
@@ -179,9 +177,9 @@ export class URI implements UriComponents {
    * Will handle UNC paths, normalizes windows drive letters to lower-case, and uses the
    * platform specific path separator.
    *
-   * * Will *not* validate the path for invalid characters and semantics.
-   * * Will *not* look at the scheme of this URI.
-   * * The result shall *not* be used for display purposes but for accessing a file on disk.
+   * Will *not* validate the path for invalid characters and semantics.
+   * Will *not* look at the scheme of this URI.
+   * The result shall *not* be used for display purposes but for accessing a file on disk.
    *
    *
    * The *difference* to `URI#path` is the use of the platform specific separator and the handling
@@ -204,7 +202,7 @@ export class URI implements UriComponents {
 
   // ---- modify to new -------------------------
 
-  with(change: { scheme?: string; authority?: string | null; path?: string | null; query?: string | null; fragment?: string | null }): URI {
+  with(change: { scheme?: string, authority?: string | null, path?: string | null, query?: string | null, fragment?: string | null }): URI {
     if (!change)
       return this
 
@@ -320,7 +318,7 @@ export class URI implements UriComponents {
     return new Uri('file', authority, path, _empty, _empty)
   }
 
-  static from(components: { scheme: string; authority?: string; path?: string; query?: string; fragment?: string }): URI {
+  static from(components: { scheme: string, authority?: string, path?: string, query?: string, fragment?: string }): URI {
     const result = new Uri(
       components.scheme,
       components.authority,
@@ -360,8 +358,8 @@ export class URI implements UriComponents {
    * `URI.parse` with the result of this function creates an URI which is equal
    * to this URI.
    *
-   * * The result shall *not* be used for display purposes but for externalization or transport.
-   * * The result will be encoded using the percentage encoding and encoding happens mostly
+   * The result shall *not* be used for display purposes but for externalization or transport.
+   * The result will be encoded using the percentage encoding and encoding happens mostly
    * ignore the scheme-specific encoding rules.
    *
    * @param skipEncoding Do not encode the result, default is `false`
