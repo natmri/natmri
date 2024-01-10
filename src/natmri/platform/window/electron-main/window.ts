@@ -253,15 +253,13 @@ export interface INativeBaseWindowOptions {
   thickFrame?: boolean
   /**
    * Add a type of vibrancy effect to the window, only on macOS. Can be
-   * `appearance-based`, `light`, `dark`, `titlebar`, `selection`, `menu`, `popover`,
-   * `sidebar`, `medium-light`, `ultra-dark`, `header`, `sheet`, `window`, `hud`,
-   * `fullscreen-ui`, `tooltip`, `content`, `under-window`, or `under-page`. Please
-   * note that `appearance-based`, `light`, `dark`, `medium-light`, and `ultra-dark`
-   * are deprecated and have been removed in macOS Catalina (10.15).
+   * `appearance-based`, `titlebar`, `selection`, `menu`, `popover`, `sidebar`,
+   * `header`, `sheet`, `window`, `hud`, `fullscreen-ui`, `tooltip`, `content`,
+   * `under-window`, or `under-page`.
    *
    * @platform darwin
    */
-  vibrancy?: ('appearance-based' | 'light' | 'dark' | 'titlebar' | 'selection' | 'menu' | 'popover' | 'sidebar' | 'medium-light' | 'ultra-dark' | 'header' | 'sheet' | 'window' | 'hud' | 'fullscreen-ui' | 'tooltip' | 'content' | 'under-window' | 'under-page')
+  vibrancy?: ('appearance-based' | 'titlebar' | 'selection' | 'menu' | 'popover' | 'sidebar' | 'header' | 'sheet' | 'window' | 'hud' | 'fullscreen-ui' | 'tooltip' | 'content' | 'under-window' | 'under-page')
   /**
    * Controls the behavior on macOS when option-clicking the green stoplight button
    * on the toolbar or by clicking the Window > Zoom menu item. If `true`, the window

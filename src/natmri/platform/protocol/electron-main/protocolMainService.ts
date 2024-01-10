@@ -46,7 +46,7 @@ export class ProtocolMainService extends Disposable implements IProtocolMainServ
 
   private configurationSession() {
     session.defaultSession.setPreloads([
-      join(this.nativeEnvironment.preloadPath, 'natmri/base/parts/preload/globals.js'),
+      join(this.nativeEnvironment.preloadPath, 'globals.mjs'),
     ])
   }
 

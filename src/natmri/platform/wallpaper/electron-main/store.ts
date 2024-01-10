@@ -1,19 +1,14 @@
-import { join } from 'node:path'
-import { createInteractiveWindow, destroyInteractiveWindow } from '@natmri/platform'
-import { Disposable, toDisposable } from 'natmri/base/common/lifecycle'
+import { Disposable } from 'natmri/base/common/lifecycle'
 import { IWindowsMainService } from 'natmri/platform/windows/electron-main/windows'
-import { isWindows } from 'natmri/base/common/environment'
 import { INativeEnvironmentMainService } from 'natmri/platform/environment/electron-main/environmentMainService'
 import { ILoggerService } from 'natmri/platform/log/common/log'
 import { ILifecycleMainService } from 'natmri/platform/lifecycle/electron-main/lifecycleMainService'
 import type { INatmriWindow } from 'natmri/platform/window/electron-main/window'
 import { URI } from 'natmri/base/common/uri'
 import { INativeHostMainService } from 'natmri/platform/native/electron-main/nativeHostMainService'
-import { screen } from 'electron'
 
-export class WallpaperPlayer extends Disposable {
+export class WallpaperStore extends Disposable {
   private _natmri_win: INatmriWindow = null!
-  private display = screen.getPrimaryDisplay()
 
   constructor(
     @ILoggerService private readonly logService: ILoggerService,
@@ -25,29 +20,24 @@ export class WallpaperPlayer extends Disposable {
     super()
 
     this._natmri_win = this.windowsMainService.getWindow({
-      show: false,
-      title: 'Wallpaper - Engine', // default title
+      show: true,
+      title: 'Wallpaper - Store', // default title
       titleBarStyle: 'native',
       skipTaskbar: true,
-      x: this.display.workArea.x,
-      y: this.display.workArea.y,
-      width: this.display.size.width,
-      height: this.display.size.height,
-      minWidth: this.display.size.width,
-      minHeight: this.display.size.height,
-      frame: false,
-      movable: false,
+      center: true,
+      width: 1280,
+      height: 768,
+      minWidth: 1280,
+      minHeight: 768,
       transparent: false,
       hasShadow: false,
       closable: false,
       focusable: true,
-      fullscreen: true,
       fullscreenable: true,
       resizable: false,
       roundedCorners: false,
       thickFrame: false,
       autoHideMenuBar: true,
-      type: 'desktop',
       webPreferences: {
         spellcheck: false,
         enableWebSQL: false,
@@ -56,40 +46,18 @@ export class WallpaperPlayer extends Disposable {
         disableHtmlFullscreenWindowResize: true,
         scrollBounce: true,
         sandbox: false,
-        preload: join(this.environmentMainService.preloadPath, 'wallpaper.mjs'),
       },
     })
 
-    this._natmri_win.win?.setSkipTaskbar(true)
-
-    if (isWindows) {
-      // windows shutdown lock window
-      destroyInteractiveWindow()
-      createInteractiveWindow(this._natmri_win.win!)
-      this._register(toDisposable(() => {
-        destroyInteractiveWindow()
-      }))
-
-      this.lifecycleMainService.onBeforeShutdown(() => {
-        this.dispose()
-      })
-    }
-    else {
-      this._natmri_win.win?.setIgnoreMouseEvents(true, {
-        forward: true,
-      })
-      this.lifecycleMainService.onBeforeShutdown(() => {
-        this.dispose()
-      })
-    }
-
     this._natmri_win.win?.setMenu(null)
-
     this._natmri_win.win?.on('close', (e) => {
       this.logService.info('[WallpaperPlayer] window will close...', e)
     })
 
-    this._natmri_win.win?.on('ready-to-show', () => this._natmri_win.win?.show())
+    this._natmri_win.win?.on('ready-to-show', () => {
+      this._natmri_win.win?.show()
+      this._natmri_win.win?.webContents.openDevTools({ mode: 'detach' })
+    })
 
     this.registerListener()
   }
@@ -108,8 +76,6 @@ export class WallpaperPlayer extends Disposable {
   }
 
   override dispose(): void {
-    console.log('WallpaperPlayer::dispose')
-
     super.dispose()
     this._natmri_win.win?.destroy()
     this._natmri_win = null!

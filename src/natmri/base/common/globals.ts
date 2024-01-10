@@ -1,5 +1,5 @@
 /* eslint-disable ts/no-require-imports */
-/* eslint-disable ts/no-use-before-define */
+
 /* eslint-disable node/prefer-global/process */
 /* eslint-disable ts/no-var-requires */
 
@@ -23,9 +23,8 @@ if (typeof globalThis !== 'undefined' && typeof window === 'undefined' && !_glob
 }
 
 // preload environment
-if (typeof navigator !== 'undefined' && !_globals.init) {
-  // @ts-expect-error global variable
-  _globals.safeProcess = process
+if (typeof navigator !== 'undefined' && typeof require !== 'undefined' && !_globals.init) {
+  _globals.safeProcess = require('node:process')
   const ipcRenderer = require('electron').ipcRenderer
   _globals.safeIpcRenderer = ipcRenderer
   _globals.safeIpcMessagePort = {

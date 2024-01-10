@@ -78,7 +78,14 @@ export class NatmriWindow extends Disposable implements INatmriWindow {
       this.hasWindowControlOverlay = true
     }
 
-    this._win = new BrowserWindow(options)
+    this._win = new BrowserWindow({
+      ...options,
+      webPreferences: {
+        ...options.webPreferences,
+        // ensure sandbox is not enabled, `ESM` modules can not be loaded
+        sandbox: false,
+      },
+    })
     this._id = this._win.id
     this._nativeWindowId = this._win.getNativeWindowHandle()
 
@@ -298,7 +305,7 @@ export class NatmriWindow extends Disposable implements INatmriWindow {
 
   loadURL(uri: URI, options?: Electron.LoadURLOptions): Promise<void> {
     this.readyState = ReadyState.Navigating
-    return this._win.loadURL(uri.toString(true), options)
+    return this._win.loadURL(uri.toString(), options)
   }
 
   close(): void {

@@ -1065,6 +1065,26 @@ export class StaticRouter<TContext = string> implements IClientRouter<TContext> 
  *   utility to signal this in the receiving side type
  */
 export namespace ProxyChannel {
+  type StartsWith<Source extends string, Search extends string, Result = false> =
+    Source extends `${infer SourceChar}${infer SourceRest}`
+      ? Search extends `${infer SearchChar}${infer SearchRest}`
+        ? SearchChar extends SourceChar ? StartsWith<SourceRest, SearchRest, true>
+          : Search extends '' ? Result : false
+        : Search extends '' ? Result : never
+      : never
+  type ArgumentsType<T> = T extends (...args: infer A) => any ? A : never
+  type ReturnType<T> = T extends (...args: any) => infer R ? R : never
+  type PromisifyFn<T> = ReturnType<T> extends Promise<any>
+    ? T
+    : (...args: ArgumentsType<T>) => Promise<Awaited<ReturnType<T>>>
+  type ISEvent<T> = T extends Event<any> ? T : Event<T>
+  export type ProxyService<T extends Record<string, any>> = {
+    [K in keyof T]: K extends string ? StartsWith<K, 'on'> extends true ? ISEvent<T[K]> :
+      T[K] extends (...args: any) => any
+        ? PromisifyFn<T[K]>
+        : T[K]
+      : never
+  }
 
   export interface IProxyOptions {
 

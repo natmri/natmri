@@ -2,14 +2,7 @@ interface IIpcMessagePort {
   acquire(responseChannel: string, nonce: string): void
 }
 
-export interface IpcRendererEvent extends Event {
-  // Docs: https://www.electronjs.org/docs/latest/api/structures/ipc-renderer-event
-  // Note: API with `Transferable` intentionally commented out because you
-  // cannot transfer these when `contextIsolation: true`.
-  ports: MessagePort[]
-  sender: IpcRenderer
-  senderId: number
-}
+export type IpcRendererEvent = Electron.IpcRendererEvent
 
 export interface IpcRenderer {
   // Docs: https://electronjs.org/docs/api/ipc-renderer
@@ -49,12 +42,12 @@ export interface IpcRenderer {
    * Listens to `channel`, when a new message arrives `listener` would be called with
    * `listener(event, args...)`.
    */
-  on(channel: string, listener: (event: IpcRendererEvent, ...args: any[]) => void): this
+  on(channel: string, listener: (event: Electron.IpcRendererEvent, ...args: any[]) => void): this
   /**
    * Adds a one time `listener` function for the event. This `listener` is invoked
    * only the next time a message is sent to `channel`, after which it is removed.
    */
-  once(channel: string, listener: (event: IpcRendererEvent, ...args: any[]) => void): this
+  once(channel: string, listener: (event: Electron.IpcRendererEvent, ...args: any[]) => void): this
 
   // postMessage(channel: string, message: any, transfer?: MessagePort[]): void;
 
