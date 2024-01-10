@@ -7,6 +7,8 @@ export default antfu({
     'no-console': 'off',
     'accessor-pairs': 'off',
     'import/no-mutable-exports': 'off',
+    'style/no-mixed-operators': 'off',
+    'ts/no-this-alias': 'off',
     'ts/no-namespace': 'off',
     'ts/no-redeclare': 'off',
     'ts/no-unsafe-declaration-merging': 'off',

@@ -15,6 +15,7 @@ import { randomUUID } from 'natmri/base/common/crypto'
  */
 export class Client extends MessagePortClient implements IDisposable {
   /**
+   * @param port the message port
    * @param clientId a way to uniquely identify this client among
    * other clients. this is important for routing because every
    * client can also be a server

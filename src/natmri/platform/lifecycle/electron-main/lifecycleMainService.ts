@@ -355,7 +355,7 @@ export class LifecycleMainService extends Disposable implements ILifecycleMainSe
 
     // Window Before Closing: Main -> Renderer
     const win = assertIsDefined(window.win)
-    win.on('close', (e) => {
+    win.on('close', () => {
       // The window already acknowledged to be closed
       const windowId = window.id
       if (this.windowToCloseRequest.has(windowId))

@@ -6,7 +6,7 @@
 import { VSBuffer } from 'natmri/base/common/buffer'
 import type { URI, UriComponents } from 'natmri/base/common/uri'
 
-export const enum MarshalledId {
+export enum MarshalledId {
   Regexp,
   ScmResource,
   ScmResourceGroup,

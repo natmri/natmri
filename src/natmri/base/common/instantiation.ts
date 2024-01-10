@@ -556,7 +556,7 @@ export class InstantiationService implements IInstantiationService {
 
 // #region -- tracing ---
 
-const enum TraceType {
+enum TraceType {
   None = 0,
   Creation = 1,
   Invocation = 2,

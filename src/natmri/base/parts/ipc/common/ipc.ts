@@ -48,6 +48,11 @@ enum RequestType {
   EventDispose = 103,
 }
 
+export enum RequestInitiator {
+  LocalSide = 0,
+  OtherSide = 1,
+}
+
 function requestTypeToStr(type: RequestType): string {
   switch (type) {
     case RequestType.Promise:
@@ -530,11 +535,6 @@ export class ChannelServer<TContext = string> implements IChannelServer<TContext
     dispose(this.activeRequests.values())
     this.activeRequests.clear()
   }
-}
-
-export const enum RequestInitiator {
-  LocalSide = 0,
-  OtherSide = 1,
 }
 
 export interface IIPCLogger {

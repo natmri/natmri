@@ -217,7 +217,7 @@ suite('Event', () => {
     doc.setText('3')
   })
 
-  it('debounce Event - leading', async () => {
+  it('debounce Event - leading 1', async () => {
     const emitter = new Emitter<void>()
     const debounced = Event.debounce(emitter.event, (_l, e) => e, 0, /* leading= */true)
 
@@ -233,7 +233,7 @@ suite('Event', () => {
     expect(calls).toStrictEqual(1)
   })
 
-  it('debounce Event - leading', async () => {
+  it('debounce Event - leading 2', async () => {
     const emitter = new Emitter<void>()
     const debounced = Event.debounce(emitter.event, (_l, e) => e, 0, /* leading= */true)
 

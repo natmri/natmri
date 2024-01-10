@@ -15,7 +15,7 @@ export class SharedProcessService extends Disposable {
   private readonly restoredBarrier = new Barrier()
 
   constructor(
-		@ILoggerService private readonly logService: ILoggerService,
+    @ILoggerService private readonly logService: ILoggerService,
   ) {
     super()
 

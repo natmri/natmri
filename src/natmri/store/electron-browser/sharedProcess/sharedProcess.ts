@@ -71,7 +71,7 @@ class SharedProcess extends Disposable {
     return new InstantiationService(services)
   }
 
-  private initChannels(accessor: ServicesAccessor) {
+  private initChannels(_accessor: ServicesAccessor) {
 
   }
 

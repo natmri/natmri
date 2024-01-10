@@ -242,13 +242,13 @@ function microtaskDeferred(fn: () => void): IScheduledLater {
  * to be executed and the waiting period (delay) must be passed in as arguments. Following
  * the example:
  *
- * 		const delayer = new Delayer(WAITING_PERIOD);
- * 		const letters = [];
+ *    const delayer = new Delayer(WAITING_PERIOD);
+ *    const letters = [];
  *
- * 		function letterReceived(l) {
- * 			letters.push(l);
- * 			delayer.trigger(() => { return makeTheTrip(); });
- * 		}
+ *    function letterReceived(l) {
+ *      letters.push(l);
+ *      delayer.trigger(() => { return makeTheTrip(); });
+ *    }
  */
 export class Delayer<T> implements IDisposable {
   private deferred: IScheduledLater | null
@@ -408,7 +408,7 @@ export interface ITask<T> {
  *  letters = [];
  *  return makeTheTrip(lettersToDeliver);
  * }
- 
+ *
  * function onLetterReceived(l) {
  *  letters.push(l);
  *  throttler.queue(deliver);
