@@ -1,0 +1,33 @@
+{
+  "contentrating": "Everyone",
+  "description": "素材由碧蓝航线提供，禁止商用，上传网上请标明ID。",
+  "file": "scene.json",
+  "general": {
+    "properties": {
+      "newproperty": {
+        "index": 1,
+        "order": 101,
+        "text": "New Property",
+        "type": "color",
+        "value": "1 0 0"
+      },
+      "schemecolor": {
+        "index": 0,
+        "order": 100,
+        "text": "ui_browse_properties_scheme_color",
+        "type": "color",
+        "value": "0.9176470588235294 0.3686274509803922 0.3607843137254902"
+      }
+    },
+    "supportsaudioprocessing": true
+  },
+  "preview": "preview.jpg",
+  "tags": [
+    "Game"
+  ],
+  "title": "[4K/微动态/无彩蛋版]碧蓝航线-酒匂貄-B站慕慕慕慕斯小蛋糕",
+  "type": "Scene",
+  "version": 1,
+  "visibility": "public",
+  "workshopurl": "steam://url/CommunityFilePage/2862735462"
+}

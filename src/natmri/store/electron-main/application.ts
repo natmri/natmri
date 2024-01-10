@@ -59,7 +59,7 @@ export class Application extends Disposable {
     this.lifecycleMainService.phase = LifecycleMainPhase.Ready
 
     const player = appInstantiationService.createInstance(WallpaperPlayer)
-    player.load(path.resolve('/Users/avatar/Downloads/1783830818/index.html'))
+    player.load(path.resolve('/Users/avatar/Downloads/2000087564/video.html'))
 
     // Set lifecycle phase to `Eventually` after a short delay and when idle (min 2.5sec, max 5sec)
     const eventuallyPhaseScheduler = this._register(new RunOnceScheduler(() => {

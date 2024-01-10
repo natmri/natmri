@@ -17,8 +17,7 @@ export default antfu({
   ignores: [
     'node_modules',
     'dist',
-    'release',
-    'build',
-    'out-build',
+    'out',
+    'fixtures',
   ],
 })
