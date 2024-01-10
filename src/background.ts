@@ -9,7 +9,7 @@ if (import.meta.env.DEV)
 
 const args = parseArgs()
 const gotTheLock = app.requestSingleInstanceLock()
-
+console.log(process.env.ELECTRON_RENDERER_URL)
 if (!gotTheLock) {
   if (import.meta.env.DEV)
     console.log('Another instance is running, quitting')

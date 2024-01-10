@@ -38,8 +38,9 @@ export class NativeEnvironmentMainService extends Disposable implements INativeE
   }
 
   getPageURI(path: string): URI {
+    // natmri/store/electron-sandbox/natmri-store.html
     return isDevelopment
-      ? URI.parse(new URL(path, process.env.URL).toString())
+      ? URI.parse(new URL(path, process.env.ELECTRON_RENDERER_URL).toString())
       : URI.parse(`${Schemas.natmri}://page/${path}`)
   }
 }

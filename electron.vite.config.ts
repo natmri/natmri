@@ -99,6 +99,7 @@ export default defineConfig({
   },
   renderer: {
     root: './src',
+    base: './src',
     build: {
       emptyOutDir: false,
       outDir: './out',
