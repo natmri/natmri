@@ -51,10 +51,15 @@ function createSandboxInputs(): Record<string, string> {
 export default defineConfig({
   main: {
     build: {
+      minify: 'terser',
       outDir: './out/natmri',
       emptyOutDir: false,
       rollupOptions: {
         input: './src/background.ts',
+        output: {
+          entryFileNames: '[name].mjs',
+          format: 'es',
+        },
       },
     },
     plugins: [
@@ -75,6 +80,7 @@ export default defineConfig({
   },
   preload: {
     build: {
+      minify: 'terser',
       outDir: './out/natmri/electron-sandbox',
       emptyOutDir: false,
       rollupOptions: {
@@ -101,6 +107,7 @@ export default defineConfig({
     root: './src',
     base: './src',
     build: {
+      minify: 'terser',
       emptyOutDir: false,
       outDir: './out',
       rollupOptions: {

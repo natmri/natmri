@@ -84,6 +84,7 @@ export class NatmriWindow extends Disposable implements INatmriWindow {
         ...options.webPreferences,
         // ensure sandbox is not enabled, `ESM` modules can not be loaded
         sandbox: false,
+        contextIsolation: true, // `ESM` Require it
       },
     })
     this._id = this._win.id
