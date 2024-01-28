@@ -31,10 +31,10 @@ export class WallpaperStore extends Disposable {
       minHeight: 768,
       transparent: false,
       hasShadow: false,
-      closable: false,
+      closable: true,
       focusable: true,
       fullscreenable: true,
-      resizable: false,
+      resizable: true,
       roundedCorners: false,
       thickFrame: false,
       autoHideMenuBar: true,
@@ -55,8 +55,8 @@ export class WallpaperStore extends Disposable {
     })
 
     this._natmri_win.win?.on('ready-to-show', () => {
-      this._natmri_win.win?.show()
       this._natmri_win.win?.webContents.openDevTools({ mode: 'detach' })
+      this._natmri_win.win?.show()
     })
 
     this.registerListener()

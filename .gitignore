@@ -5,6 +5,9 @@ build
 out-build
 *.local
 
+# rust
+target
+
 # coverage
 coverage
 

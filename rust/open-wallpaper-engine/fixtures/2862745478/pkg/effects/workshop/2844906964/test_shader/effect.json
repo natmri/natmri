@@ -1,0 +1,18 @@
+{
+  "dependencies":
+[
+  "materials/workshop/2844906964/effects/test_shader.json",
+  "shaders/workshop/2844906964/effects/test_shader.frag",
+  "shaders/workshop/2844906964/effects/test_shader.vert"
+],
+  "group": "localeffects",
+  "name": "Test Shader",
+  "passes":
+[
+  {
+    "material": "materials/workshop/2844906964/effects/test_shader.json"
+  }
+],
+  "replacementkey": "test_shader",
+  "version": 1
+}

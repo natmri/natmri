@@ -1,21 +1,23 @@
-import { createSignal } from 'solid-js'
+import { ref } from 'vue'
 
 export function createCounter(initial = 0) {
-  const [count, setCount] = createSignal(initial)
+  const count = ref(initial)
 
   const inc = (delta?: number) => {
-    setCount(count => count + (delta ?? 1))
+    count.value = count.value + (delta ?? 1)
   }
 
   const dec = (delta?: number) => {
-    setCount(count => count - (delta ?? 1))
+    count.value = count.value - (delta ?? 1)
   }
 
-  const get = () => count()
+  const get = () => count.value
 
-  const set = (val: number) => setCount(val)
+  const set = (val: number) => {
+    count.value = val
+  }
 
-  const reset = (val?: number) => setCount(val ?? initial)
+  const reset = (val?: number) => count.value = val ?? initial
 
   return {
     count,

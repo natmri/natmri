@@ -1,4 +1,5 @@
 import process from 'node:process'
+import path from 'node:path'
 import { app } from 'electron'
 import { IInstantiationService, ServiceCollection, SyncDescriptor } from 'natmri/base/common/instantiation'
 import { Disposable } from 'natmri/base/common/lifecycle'
@@ -17,7 +18,7 @@ import { isDevelopment } from 'natmri/base/common/environment'
 import type { ServicesAccessor } from 'natmri/base/common/instantiation'
 import { NatmriTray } from 'natmri/platform/tray/electron-main/tray'
 import { WallpaperStore } from 'natmri/platform/wallpaper/electron-main/store'
-import { URI } from 'natmri/base/common/uri'
+import { WallpaperPlayer } from 'natmri/platform/wallpaper/electron-main/wallpaper'
 
 export class Application extends Disposable {
   private nativeHostMainService: INativeHostMainService | undefined
@@ -60,8 +61,8 @@ export class Application extends Disposable {
 
     const store = appInstantiationService.createInstance(WallpaperStore)
     store.load(new URL('natmri/store/electron-sandbox/natmri-store.html', process.env.ELECTRON_RENDERER_URL).href)
-    // const player = appInstantiationService.createInstance(WallpaperPlayer)
-    // player.load(path.resolve('/Users/avatar/Downloads/2000087564/video.html'))
+    const player = appInstantiationService.createInstance(WallpaperPlayer)
+    player.load(path.resolve('/Users/avatar/Downloads/2000087564/video.html'))
 
     // Set lifecycle phase to `Eventually` after a short delay and when idle (min 2.5sec, max 5sec)
     const eventuallyPhaseScheduler = this._register(new RunOnceScheduler(() => {

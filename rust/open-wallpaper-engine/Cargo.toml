@@ -1,0 +1,26 @@
+[package]
+name = "open-wallpaper-engine"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+byteorder = "1.5.0"
+tracing = "0.1.40"
+tracing-subscriber = "0.3.18"
+serde = { version = "1", features = [ "derive" ] }
+serde_json = "1"
+vfs = "0.10.0"
+thiserror = "1"
+anyhow = "1"
+winit = { version = "*", features = [
+  "rwh_05",
+  "rwh_06"
+] }
+wgpu = { version = "*", features = [ "glsl" ] }
+tokio = { version = "*", features = [ "full" ] }
+image = { version = "*" }
+glam = "*"
+bytemuck = { version = "1.14", features = [ "derive" ] }
+derive_builder = "0.12.0"

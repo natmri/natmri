@@ -2,7 +2,7 @@
   "compilerOptions": {
     "target": "esnext",
     "jsx": "preserve",
-    "jsxImportSource": "solid-js",
+    "jsxImportSource": "vue",
     "lib": [
       "ESNext",
       "DOM",
@@ -21,10 +21,6 @@
       ]
     },
     "resolveJsonModule": true,
-    "typeRoots": [
-      "../node_modules/@types",
-      "../node_modules/@total-typescript"
-    ],
     "strict": true,
     "exactOptionalPropertyTypes": false,
     "useUnknownInCatchVariables": false,

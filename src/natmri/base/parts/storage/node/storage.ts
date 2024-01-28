@@ -1,4 +1,3 @@
-import Promises from 'node:fs/promises'
 import process from 'node:process'
 import { Event } from 'natmri/base/common/event'
 import { basename } from 'natmri/base/common/path'
@@ -6,6 +5,7 @@ import { timeout } from 'natmri/base/common/async'
 import { mapToString, setToString } from 'natmri/base/common/map'
 import type { Database, Statement } from 'sqlite3'
 import type { IStorageDatabase, IStorageItemsChangeEvent, IUpdateRequest } from 'natmri/base/parts/storage/common/storage'
+import { Promises } from 'natmri/base/node/pfs'
 
 interface IDatabaseConnection {
   readonly db: Database

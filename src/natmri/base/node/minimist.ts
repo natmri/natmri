@@ -95,9 +95,9 @@ export function minimist(args: string[], options: Options = {}): ParsedArgs {
     })
   }
 
-  const aliases: Record<string, any> = {}
+  const aliases: Record<string, any[]> = {}
 
-  function aliasIsBoolean(key) {
+  function aliasIsBoolean(key: string) {
     return aliases[key].some((x) => {
       return flags.bools[x]
     })

@@ -1,7 +1,8 @@
-import path from 'node:path'
+import path, { basename, join } from 'node:path'
 import fsp from 'node:fs/promises'
 import { existsSync } from 'node:fs'
 import process from 'node:process'
+import fg from 'fast-glob'
 
 // ------------------------------------------------- //
 // -------- Common Path for Application ------------ //
@@ -14,9 +15,6 @@ export const buildResourcePath = path.join(rootPath, 'buildResources')
 export const outputPath = path.join(rootPath, 'out')
 export const outputAppPath = path.join(outputPath, 'app')
 export const outputDistPath = path.join(outputPath, 'out-dist')
-
-export const IS_DEV = !!process.env.NATMRI_DEV
-export const IS_TEST = !!process.env.NATMRI_TEST
 
 // ---------- Package Mate Infomation -------------- //
 // ------------------------------------------------- //
@@ -143,6 +141,49 @@ export async function rimrafTasks(paths: string[]) {
     result.push(rimraf(task))
 
   return Promise.allSettled(result)
+}
+
+export function createRendererInputs(): Record<string, string> {
+  const inputs: Record<string, string> = {}
+
+  const files = fg.sync(
+    [
+      // ensure posix style path strings
+      join(join(srcPath, 'natmri', 'store'), 'electron-sandbox', '**/*.html').replaceAll('\\', '/'),
+      join(join(srcPath, 'natmri', 'store'), 'electron-browser', '**/*.html').replaceAll('\\', '/'),
+    ],
+    {
+      absolute: true,
+      onlyFiles: true,
+    },
+  )
+
+  files.forEach((file) => {
+    inputs[basename(file, '.html')] = file
+  })
+
+  return inputs
+}
+
+export function createSandboxInputs(): Record<string, string> {
+  const inputs: Record<string, string> = {}
+
+  const files = fg.sync(
+    [
+      join(srcPath, 'natmri/base/parts/preload/*.ts').replaceAll('\\', '/'),
+      join(srcPath, 'natmri/platform/wallpaper/electron-preload/wallpaper.ts').replaceAll('\\', '/'),
+    ],
+    {
+      absolute: true,
+      onlyFiles: true,
+    },
+  )
+
+  files.forEach((file) => {
+    inputs[basename(file, '.ts')] = file
+  })
+
+  return inputs
 }
 
 export async function linkModules(target: string, dest: string) {

@@ -2,7 +2,12 @@
 import type { CancellationToken } from 'natmri/base/common/cancellation'
 import { CancellationTokenSource } from 'natmri/base/common/cancellation'
 import { CancellationError } from 'natmri/base/common/errors'
+import { DisposableMap } from 'natmri/base/common/lifecycle'
 import type { IDisposable } from 'natmri/base/common/lifecycle'
+import { Emitter, Event } from 'natmri/base/common/event'
+import type { URI } from 'natmri/base/common/uri'
+import type { IExtUri } from 'natmri/base/common/resources'
+import { extUri as defaultExtUri } from 'natmri/base/common/resources'
 
 export function isThenable<T>(obj: unknown): obj is Promise<T> {
   return !!obj && typeof (obj as unknown as Promise<T>).then === 'function'
@@ -602,5 +607,218 @@ export class RunOnceScheduler implements IDisposable {
 
   protected doRun(): void {
     this.runner?.()
+  }
+}
+
+interface ILimitedTaskFactory<T> {
+  factory: ITask<Promise<T>>
+  c: (value: T | Promise<T>) => void
+  e: (error?: unknown) => void
+}
+
+export interface ILimiter<T> {
+
+  readonly size: number
+
+  queue(factory: ITask<Promise<T>>): Promise<T>
+
+  clear(): void
+}
+
+/**
+ * A helper to queue N promises and run them all with a max degree of parallelism. The helper
+ * ensures that at any time no more than M promises are running at the same time.
+ */
+export class Limiter<T> implements ILimiter<T> {
+  private _size = 0
+  private _isDisposed = false
+  private runningPromises: number
+  private readonly maxDegreeOfParalellism: number
+  private readonly outstandingPromises: ILimitedTaskFactory<T>[]
+  private readonly _onDrained: Emitter<void>
+
+  constructor(maxDegreeOfParalellism: number) {
+    this.maxDegreeOfParalellism = maxDegreeOfParalellism
+    this.outstandingPromises = []
+    this.runningPromises = 0
+    this._onDrained = new Emitter<void>()
+  }
+
+  /**
+   *
+   * @returns A promise that resolved when all work is done (onDrained) or when
+   * there is nothing to do
+   */
+  whenIdle(): Promise<void> {
+    return this.size > 0
+      ? Event.toPromise(this.onDrained)
+      : Promise.resolve()
+  }
+
+  get onDrained(): Event<void> {
+    return this._onDrained.event
+  }
+
+  get size(): number {
+    return this._size
+  }
+
+  queue(factory: ITask<Promise<T>>): Promise<T> {
+    if (this._isDisposed)
+      throw new Error('Object has been disposed')
+
+    this._size++
+
+    return new Promise<T>((c, e) => {
+      this.outstandingPromises.push({ factory, c, e })
+      this.consume()
+    })
+  }
+
+  private consume(): void {
+    while (this.outstandingPromises.length && this.runningPromises < this.maxDegreeOfParalellism) {
+      const iLimitedTask = this.outstandingPromises.shift()!
+      this.runningPromises++
+
+      const promise = iLimitedTask.factory()
+      promise.then(iLimitedTask.c, iLimitedTask.e)
+      promise.then(() => this.consumed(), () => this.consumed())
+    }
+  }
+
+  private consumed(): void {
+    if (this._isDisposed)
+      return
+
+    this.runningPromises--
+    if (--this._size === 0)
+      this._onDrained.fire()
+
+    if (this.outstandingPromises.length > 0)
+      this.consume()
+  }
+
+  clear(): void {
+    if (this._isDisposed)
+      throw new Error('Object has been disposed')
+
+    this.outstandingPromises.length = 0
+    this._size = this.runningPromises
+  }
+
+  dispose(): void {
+    this._isDisposed = true
+    this.outstandingPromises.length = 0 // stop further processing
+    this._size = 0
+    this._onDrained.dispose()
+  }
+}
+
+/**
+ * A queue is handles one promise at a time and guarantees that at any time only one promise is executing.
+ */
+export class Queue<T> extends Limiter<T> {
+  constructor() {
+    super(1)
+  }
+}
+
+/**
+ * A helper to organize queues per resource. The ResourceQueue makes sure to manage queues per resource
+ * by disposing them once the queue is empty.
+ */
+export class ResourceQueue implements IDisposable {
+  private readonly queues = new Map<string, Queue<void>>()
+
+  private readonly drainers = new Set<DeferredPromise<void>>()
+
+  private drainListeners: DisposableMap<number> | undefined = undefined
+  private drainListenerCount = 0
+
+  async whenDrained(): Promise<void> {
+    if (this.isDrained())
+      return
+
+    const promise = new DeferredPromise<void>()
+    this.drainers.add(promise)
+
+    return promise.p
+  }
+
+  private isDrained(): boolean {
+    for (const [, queue] of this.queues) {
+      if (queue.size > 0)
+        return false
+    }
+
+    return true
+  }
+
+  queueSize(resource: URI, extUri: IExtUri = defaultExtUri): number {
+    const key = extUri.getComparisonKey(resource)
+
+    return this.queues.get(key)?.size ?? 0
+  }
+
+  queueFor(resource: URI, factory: ITask<Promise<void>>, extUri: IExtUri = defaultExtUri): Promise<void> {
+    const key = extUri.getComparisonKey(resource)
+
+    let queue = this.queues.get(key)
+    if (!queue) {
+      queue = new Queue<void>()
+      const drainListenerId = this.drainListenerCount++
+      const drainListener = Event.once(queue.onDrained)(() => {
+        queue?.dispose()
+        this.queues.delete(key)
+        this.onDidQueueDrain()
+
+        this.drainListeners?.deleteAndDispose(drainListenerId)
+
+        if (this.drainListeners?.size === 0) {
+          this.drainListeners.dispose()
+          this.drainListeners = undefined
+        }
+      })
+
+      if (!this.drainListeners)
+        this.drainListeners = new DisposableMap()
+
+      this.drainListeners.set(drainListenerId, drainListener)
+
+      this.queues.set(key, queue)
+    }
+
+    return queue.queue(factory)
+  }
+
+  private onDidQueueDrain(): void {
+    if (!this.isDrained())
+      return // not done yet
+
+    this.releaseDrainers()
+  }
+
+  private releaseDrainers(): void {
+    for (const drainer of this.drainers)
+      drainer.complete()
+
+    this.drainers.clear()
+  }
+
+  dispose(): void {
+    for (const [, queue] of this.queues)
+      queue.dispose()
+
+    this.queues.clear()
+
+    // Even though we might still have pending
+    // tasks queued, after the queues have been
+    // disposed, we can no longer track them, so
+    // we release drainers to prevent hanging
+    // promises when the resource queue is being
+    // disposed.
+    this.releaseDrainers()
+
+    this.drainListeners?.dispose()
   }
 }

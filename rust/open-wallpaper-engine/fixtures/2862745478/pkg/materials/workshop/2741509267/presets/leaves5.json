@@ -1,0 +1,21 @@
+{
+  "passes":
+[
+  {
+    "blending": "translucent",
+    "combos": {},
+    "constantshadervalues":
+{
+  "ui_editor_properties_overbright": 1
+},
+    "cullmode": "nocull",
+    "depthtest": "disabled",
+    "depthwrite": "disabled",
+    "shader": "genericparticle",
+    "textures":
+[
+  "workshop/2741509267/particle/—Pngtree—single pink rose petal png_4581714"
+]
+  }
+]
+}
